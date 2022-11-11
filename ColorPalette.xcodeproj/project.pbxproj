@@ -64,9 +64,9 @@
 		E55BAD6829190B5700B3E233 /* ColorPalette */ = {
 			isa = PBXGroup;
 			children = (
+				E55BAD7D29190C0C00B3E233 /* Application */,
 				E55BAD8029190CF200B3E233 /* Coordinators */,
 				E55BAD7F29190CE600B3E233 /* Modules */,
-				E55BAD7D29190C0C00B3E233 /* Application */,
 				E55BAD7E29190C3200B3E233 /* Resources */,
 			);
 			path = ColorPalette;
