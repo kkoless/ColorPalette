@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  ColorPalette
+
+  Created by Кирилл Колесников on 11.11.2022.
+  
+*/
+
+firstOnboardingText = "First Onboarding Text";
+secondOnboardingText = "Second OnboardingText";
+thirdOnboardingText = "Third OnboardingText";
