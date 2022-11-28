@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol Coordinatable {
     var childCoordinators: [Coordinatable] { get set }
     var navigationController: UINavigationController { get set }
     func start()
+}
+
+protocol OnboardingRoutable: AnyObject {
+    func navigateToMain()
 }
 
 final class MainCoordinator: Coordinatable {
@@ -22,13 +27,18 @@ final class MainCoordinator: Coordinatable {
     }
     
     func start() {
-        navigateToOnboarding()
-    }
-}
-
-private extension MainCoordinator {
-    func navigateToOnboarding() {
-        let vc = OnboardingViewController()
+        let viewModel = OnboardingViewModel(router: self)
+        let view = OnboardingView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
 }
+
+extension MainCoordinator: OnboardingRoutable {
+    func navigateToMain() {
+        let vc = ColorDetectionViewController()
+        navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+
