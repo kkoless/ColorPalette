@@ -36,7 +36,7 @@ final class MainCoordinator: Coordinatable {
 
 extension MainCoordinator: OnboardingRoutable {
     func navigateToMain() {
-        let vc = MainViewController()
+        let vc = ColorDetectionViewController()
         navigationController.pushViewController(vc, animated: true)
     }
 }
