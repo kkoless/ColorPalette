@@ -11,6 +11,7 @@ import SwiftUI
 protocol LoginRoutable: AnyObject {
     func navigateToLoginScreen()
     func navigateToRegistrationScreen()
+    func navigateToTabBarFlow()
 }
 
 final class LoginCoordinator: Coordinatable {
@@ -48,5 +49,9 @@ extension LoginCoordinator: LoginRoutable {
         let registrationView = RegistrationView()
         let vc = UIHostingController(rootView: registrationView)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToTabBarFlow() {
+        finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }

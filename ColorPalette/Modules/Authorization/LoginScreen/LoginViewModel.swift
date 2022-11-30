@@ -36,9 +36,11 @@ final class LoginViewModel: ObservableObject {
 private extension LoginViewModel {
     func bindTap() {
         input.registerTap
-            .sink { [weak self] _ in
-                self?.router?.navigateToRegistrationScreen()
-            }
+            .sink { [weak self] _ in self?.router?.navigateToRegistrationScreen() }
+            .store(in: &cancellable)
+        
+        input.loginTap
+            .sink { [weak self] _ in self?.router?.navigateToTabBarFlow() }
             .store(in: &cancellable)
     }
 }
