@@ -8,13 +8,13 @@
 import UIKit
 import SwiftUI
 
-protocol LoginRoutable: AnyObject {
+protocol AuthorizationRoutable: AnyObject {
     func navigateToLoginScreen()
     func navigateToRegistrationScreen()
     func navigateToTabBarFlow()
 }
 
-final class LoginCoordinator: Coordinatable {
+final class AuthorizationCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
     let type: CoordinatorType = .login
@@ -37,7 +37,7 @@ final class LoginCoordinator: Coordinatable {
 #endif
 }
 
-extension LoginCoordinator: LoginRoutable {
+extension AuthorizationCoordinator: AuthorizationRoutable {
     func navigateToLoginScreen() {
         let viewModel = LoginViewModel(router: self)
         let loginView = LoginView(viewModel: viewModel)

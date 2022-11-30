@@ -63,7 +63,7 @@ private extension AppCoordinator {
     }
     
     func navigateToAuthorizationFlow() {
-        let loginCoordinator = LoginCoordinator(navigationController)
+        let loginCoordinator = AuthorizationCoordinator(navigationController)
         childCoordinators.append(loginCoordinator)
         loginCoordinator.finishDelegate = self
         loginCoordinator.start()

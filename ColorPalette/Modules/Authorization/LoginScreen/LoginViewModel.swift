@@ -9,14 +9,14 @@ import Combine
 
 final class LoginViewModel: ObservableObject {
     
-    private weak var router: LoginRoutable?
+    private weak var router: AuthorizationRoutable?
     
     let input: Input
     @Published var output: Output
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: LoginRoutable?) {
+    init(router: AuthorizationRoutable?) {
         self.router = router
         self.input = Input()
         self.output = Output()
