@@ -55,7 +55,7 @@ extension LoginView {
 
 extension LoginView {
     func loginButtonTap() {
-        
+        viewModel.input.loginTap.send()
     }
     
     func registerButtonTap() {

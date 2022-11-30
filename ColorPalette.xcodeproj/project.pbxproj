@@ -20,6 +20,12 @@
 		E55BAD892919119D00B3E233 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = E55BAD882919119D00B3E233 /* CombineMoya */; };
 		E55BAD8B2919119D00B3E233 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = E55BAD8A2919119D00B3E233 /* Moya */; };
 		E55BAD8D2919119D00B3E233 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = E55BAD8C2919119D00B3E233 /* RxMoya */; };
+		E56C0E1F293764ED00A878CB /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E1E293764ED00A878CB /* TabBarCoordinator.swift */; };
+		E56C0E23293765C700A878CB /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E22293765C700A878CB /* TabBarPage.swift */; };
+		E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E2429376CD000A878CB /* ProfileCoordinator.swift */; };
+		E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E2A29376D9D00A878CB /* GeneralCoordinator.swift */; };
+		E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E2D29376E3600A878CB /* ProfileView.swift */; };
+		E56C0E3129376E6400A878CB /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E3029376E6400A878CB /* GeneralView.swift */; };
 		E56C829E29202B1C0096EB9F /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C829D29202B1C0096EB9F /* CALayer+Extensions.swift */; };
 		E57A26AC291EA2C40027FAC8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26AB291EA2C40027FAC8 /* String+Extensions.swift */; };
 		E57A26AE291EA5C00027FAC8 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26AD291EA5C00027FAC8 /* OnboardingPageView.swift */; };
@@ -45,6 +51,12 @@
 		E55BAD7229190B5900B3E233 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E55BAD7529190B5900B3E233 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E55BAD7729190B5900B3E233 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E56C0E1E293764ED00A878CB /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		E56C0E22293765C700A878CB /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
+		E56C0E2429376CD000A878CB /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		E56C0E2A29376D9D00A878CB /* GeneralCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCoordinator.swift; sourceTree = "<group>"; };
+		E56C0E2D29376E3600A878CB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E56C0E3029376E6400A878CB /* GeneralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		E56C829D29202B1C0096EB9F /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		E57A26AB291EA2C40027FAC8 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		E57A26AD291EA5C00027FAC8 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
@@ -143,6 +155,8 @@
 		E55BAD7F29190CE600B3E233 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E56C0E2F29376E5700A878CB /* General */,
+				E56C0E2C29376E2A00A878CB /* Profile */,
 				E54E48F829348FD50078B12B /* Authorization */,
 				E57A26BB291ECAF70027FAC8 /* ColorDetection */,
 				E55BAD8329190DE300B3E233 /* Onboarding */,
@@ -153,10 +167,13 @@
 		E55BAD8029190CF200B3E233 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				E5DCBC8029365C46000C1B4E /* CoordinatorPath.swift */,
-				E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */,
-				E54E48F6293488290078B12B /* LoginCoordinator.swift */,
 				E54E48FB29349C3E0078B12B /* AppCoordinator.swift */,
+				E56C0E1E293764ED00A878CB /* TabBarCoordinator.swift */,
+				E5DCBC8029365C46000C1B4E /* CoordinatorPath.swift */,
+				E56C0E2629376D5000A878CB /* Authorization */,
+				E56C0E2729376D5D00A878CB /* Onboarding */,
+				E56C0E2929376D8C00A878CB /* General */,
+				E56C0E2829376D8200A878CB /* Profile */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -180,9 +197,74 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E56C0E20293765B200A878CB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E21293765BB00A878CB /* TabBar */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E56C0E21293765BB00A878CB /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E22293765C700A878CB /* TabBarPage.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		E56C0E2629376D5000A878CB /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				E54E48F6293488290078B12B /* LoginCoordinator.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		E56C0E2729376D5D00A878CB /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E56C0E2829376D8200A878CB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E2429376CD000A878CB /* ProfileCoordinator.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E56C0E2929376D8C00A878CB /* General */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E2A29376D9D00A878CB /* GeneralCoordinator.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		E56C0E2C29376E2A00A878CB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E2D29376E3600A878CB /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E56C0E2F29376E5700A878CB /* General */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E3029376E6400A878CB /* GeneralView.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		E57A26A9291EA2A60027FAC8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E56C0E20293765B200A878CB /* Components */,
 				E57A26AA291EA2AC0027FAC8 /* Extensions */,
 			);
 			path = Helpers;
@@ -329,21 +411,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */,
+				E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */,
 				E5DCBC8129365C46000C1B4E /* CoordinatorPath.swift in Sources */,
+				E56C0E3129376E6400A878CB /* GeneralView.swift in Sources */,
 				E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */,
 				E5C2AEAF2937416300508DF4 /* LoginView.swift in Sources */,
 				E54E48F7293488290078B12B /* LoginCoordinator.swift in Sources */,
 				E57A26AE291EA5C00027FAC8 /* OnboardingPageView.swift in Sources */,
 				E5571C4C291E5925003EBAB0 /* OnboardingView.swift in Sources */,
 				E5C2AEB12937476600508DF4 /* RegistrationView.swift in Sources */,
+				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
 				E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */,
 				E57A26AC291EA2C40027FAC8 /* String+Extensions.swift in Sources */,
 				E56C829E29202B1C0096EB9F /* CALayer+Extensions.swift in Sources */,
+				E56C0E1F293764ED00A878CB /* TabBarCoordinator.swift in Sources */,
+				E56C0E23293765C700A878CB /* TabBarPage.swift in Sources */,
 				E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */,
 				E57A26B7291EC2E50027FAC8 /* OnboardingPage.swift in Sources */,
+				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
