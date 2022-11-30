@@ -1,22 +1,22 @@
 //
-//  OnboardingViewModel.swift
+//  LoginViewModel.swift
 //  ColorPalette
 //
-//  Created by Кирилл Колесников on 11.11.2022.
+//  Created by Кирилл Колесников on 30.11.2022.
 //
 
 import Combine
 
-final class OnboardingViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
     
-    private weak var router: OnboardingRoutable?
+    private weak var router: LoginRoutable?
     
     let input: Input
     @Published var output: Output
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: OnboardingRoutable?) {
+    init(router: LoginRoutable?) {
         self.router = router
         self.input = Input()
         self.output = Output()
@@ -33,19 +33,20 @@ final class OnboardingViewModel: ObservableObject {
     
 }
 
-private extension OnboardingViewModel {
+private extension LoginViewModel {
     func bindTap() {
-        input.closeTap
+        input.registerTap
             .sink { [weak self] _ in
-                self?.router?.navigateToGeneralFlow()
+                self?.router?.navigateToRegistrationScreen()
             }
             .store(in: &cancellable)
     }
 }
 
-extension OnboardingViewModel {
+extension LoginViewModel {
     struct Input {
-        let closeTap = PassthroughSubject<Void, Never>()
+        let loginTap = PassthroughSubject<Void, Never>()
+        let registerTap = PassthroughSubject<Void, Never>()
     }
     
     struct Output {}
