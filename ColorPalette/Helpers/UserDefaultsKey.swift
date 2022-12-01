@@ -9,10 +9,5 @@ import Foundation
 
 enum UserDefaultsKey: String {
     case isOnboarding
-}
-
-extension UserDefaults {
-    func setValue(_ value: Any, forKey: UserDefaultsKey) {
-        self.setValue(value, forKey: forKey.rawValue)
-    }
+    case token
 }
