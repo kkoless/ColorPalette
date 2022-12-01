@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum UserDefaultsKey: String {
-    case isOnboarding
-}
-
 final class OnboardingService {
     static let instance: OnboardingService = .init()
     
