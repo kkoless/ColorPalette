@@ -36,6 +36,8 @@ final class AppCoordinator: Coordinatable {
     let navigationController: UINavigationController
     let type: CoordinatorType = .app
     
+    private let onboardingService = OnboardingService.instance
+    
     weak var finishDelegate: CoordinatorFinishDelegate?
     
     init(_ navigationController: UINavigationController) {
@@ -44,7 +46,11 @@ final class AppCoordinator: Coordinatable {
     }
     
     func start() {
-        navigateToOnboardingFlow()
+        if onboardingService.isOnboarding {
+            navigateToTabBarFlow()
+        } else {
+            navigateToOnboardingFlow()
+        }
     }
     
 #if DEBUG

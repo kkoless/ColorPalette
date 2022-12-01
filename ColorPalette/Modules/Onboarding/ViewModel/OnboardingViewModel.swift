@@ -14,10 +14,12 @@ final class OnboardingViewModel: ObservableObject {
     let input: Input
     @Published var output: Output
     
+    private let onboardingService: OnboardingService
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(router: OnboardingRoutable?) {
         self.router = router
+        self.onboardingService = OnboardingService.instance
         self.input = Input()
         self.output = Output()
         
@@ -37,6 +39,7 @@ private extension OnboardingViewModel {
     func bindTap() {
         input.closeTap
             .sink { [weak self] _ in
+                self?.onboardingService.isOnboarding = true
                 self?.router?.navigateToGeneralFlow()
             }
             .store(in: &cancellable)
