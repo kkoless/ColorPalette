@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */; };
+		E504B1FE2954A37E00996662 /* ImageColorDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FD2954A37E00996662 /* ImageColorDetection.swift */; };
+		E504B2002954B7C900996662 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FF2954B7C900996662 /* UIImageColors.swift */; };
+		E504B2022954C88100996662 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B2012954C88100996662 /* ImagePicker.swift */; };
 		E5056B72291914E8008C6120 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5056B71291914E8008C6120 /* SnapKit */; };
+		E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF95D2953528200534E82 /* SamplePalettesView.swift */; };
+		E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF960295353E200534E82 /* ColorPaletteCell.swift */; };
+		E50BF9632953563200534E82 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF9622953563200534E82 /* Color+Extensions.swift */; };
 		E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53D851F291E35E900E73D90 /* OnboardingPageType.swift */; };
 		E54263E929388614003334FE /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263E829388614003334FE /* OnboardingManager.swift */; };
 		E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263EA29388B0B003334FE /* UserDefaultsKey.swift */; };
@@ -39,6 +46,9 @@
 		E57A26B7291EC2E50027FAC8 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26B6291EC2E50027FAC8 /* OnboardingPage.swift */; };
 		E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26B9291EC7210027FAC8 /* OnboardingViewModel.swift */; };
 		E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */; };
+		E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE91E295413CC005DF70B /* ColorPalette.swift */; };
+		E5BAE92129541A35005DF70B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE92029541A35005DF70B /* ColorPaletteView.swift */; };
+		E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */; };
 		E5C2AEAF2937416300508DF4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2AEAE2937416300508DF4 /* LoginView.swift */; };
 		E5C2AEB12937476600508DF4 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2AEB02937476600508DF4 /* RegistrationView.swift */; };
 		E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2AEB2293749A900508DF4 /* LoginViewModel.swift */; };
@@ -46,6 +56,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		E504B1FD2954A37E00996662 /* ImageColorDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorDetection.swift; sourceTree = "<group>"; };
+		E504B1FF2954B7C900996662 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
+		E504B2012954C88100996662 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E50BF95D2953528200534E82 /* SamplePalettesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesView.swift; sourceTree = "<group>"; };
+		E50BF960295353E200534E82 /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
+		E50BF9622953563200534E82 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		E53D851F291E35E900E73D90 /* OnboardingPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageType.swift; sourceTree = "<group>"; };
 		E54263E829388614003334FE /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		E54263EA29388B0B003334FE /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -77,6 +94,9 @@
 		E57A26B6291EC2E50027FAC8 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		E57A26B9291EC7210027FAC8 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetectionViewController.swift; sourceTree = "<group>"; };
+		E5BAE91E295413CC005DF70B /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		E5BAE92029541A35005DF70B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
+		E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTypePickerView.swift; sourceTree = "<group>"; };
 		E5C2AEAE2937416300508DF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E5C2AEB02937476600508DF4 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E5C2AEB2293749A900508DF4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +118,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E504B1FC2954A35300996662 /* ImageColorDetection */ = {
+			isa = PBXGroup;
+			children = (
+				E504B1FD2954A37E00996662 /* ImageColorDetection.swift */,
+			);
+			path = ImageColorDetection;
+			sourceTree = "<group>";
+		};
+		E50BF95C2953526C00534E82 /* SamplePalettes */ = {
+			isa = PBXGroup;
+			children = (
+				E50BF95F295353C600534E82 /* Components */,
+				E50BF95D2953528200534E82 /* SamplePalettesView.swift */,
+			);
+			path = SamplePalettes;
+			sourceTree = "<group>";
+		};
+		E50BF95F295353C600534E82 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E50BF960295353E200534E82 /* ColorPaletteCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E53D851C291E358500E73D90 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +207,7 @@
 		E55BAD6829190B5700B3E233 /* ColorPalette */ = {
 			isa = PBXGroup;
 			children = (
+				E5BAE91B295413AC005DF70B /* Models */,
 				E57A26A9291EA2A60027FAC8 /* Helpers */,
 				E55BAD7D29190C0C00B3E233 /* Application */,
 				E55BAD8029190CF200B3E233 /* Coordinators */,
@@ -195,6 +241,9 @@
 		E55BAD7F29190CE600B3E233 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E504B1FC2954A35300996662 /* ImageColorDetection */,
+				E5BAE92229541DC6005DF70B /* ColorPaletteInfo */,
+				E50BF95C2953526C00534E82 /* SamplePalettes */,
 				E56C0E2F29376E5700A878CB /* General */,
 				E56C0E2C29376E2A00A878CB /* Profile */,
 				E54E48F829348FD50078B12B /* Authorization */,
@@ -241,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				E56C0E21293765BB00A878CB /* TabBar */,
+				E504B2012954C88100996662 /* ImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -317,6 +367,8 @@
 			children = (
 				E57A26AB291EA2C40027FAC8 /* String+Extensions.swift */,
 				E56C829D29202B1C0096EB9F /* CALayer+Extensions.swift */,
+				E50BF9622953563200534E82 /* Color+Extensions.swift */,
+				E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -351,6 +403,40 @@
 				E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E5BAE91B295413AC005DF70B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5BAE91D295413BD005DF70B /* Server */,
+				E5BAE91C295413B4005DF70B /* Local */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E5BAE91C295413B4005DF70B /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				E5BAE91E295413CC005DF70B /* ColorPalette.swift */,
+				E504B1FF2954B7C900996662 /* UIImageColors.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		E5BAE91D295413BD005DF70B /* Server */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		E5BAE92229541DC6005DF70B /* ColorPaletteInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E5BAE92029541A35005DF70B /* ColorPaletteView.swift */,
+				E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */,
+			);
+			path = ColorPaletteInfo;
 			sourceTree = "<group>";
 		};
 		E5C2AEAC2937401000508DF4 /* LoginScreen */ = {
@@ -452,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E504B2022954C88100996662 /* ImagePicker.swift in Sources */,
 				E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */,
 				E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */,
 				E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */,
@@ -463,16 +550,23 @@
 				E54E48F7293488290078B12B /* AuthorizationCoordinator.swift in Sources */,
 				E57A26AE291EA5C00027FAC8 /* OnboardingPageView.swift in Sources */,
 				E5571C4C291E5925003EBAB0 /* OnboardingView.swift in Sources */,
+				E50BF9632953563200534E82 /* Color+Extensions.swift in Sources */,
 				E5C2AEB12937476600508DF4 /* RegistrationView.swift in Sources */,
+				E504B2002954B7C900996662 /* UIImageColors.swift in Sources */,
 				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
+				E504B1FE2954A37E00996662 /* ImageColorDetection.swift in Sources */,
+				E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */,
+				E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */,
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
+				E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */,
 				E54263F329389CD4003334FE /* Provider.swift in Sources */,
 				E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */,
 				E57A26AC291EA2C40027FAC8 /* String+Extensions.swift in Sources */,
 				E56C829E29202B1C0096EB9F /* CALayer+Extensions.swift in Sources */,
 				E56C0E1F293764ED00A878CB /* TabBarCoordinator.swift in Sources */,
+				E5BAE92129541A35005DF70B /* ColorPaletteView.swift in Sources */,
 				E56C0E23293765C700A878CB /* TabBarPage.swift in Sources */,
 				E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */,
 				E54263EE29389820003334FE /* AuthorizationAPI.swift in Sources */,
@@ -480,7 +574,9 @@
 				E57A26B7291EC2E50027FAC8 /* OnboardingPage.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */,
+				E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */,
 				E54263E929388614003334FE /* OnboardingManager.swift in Sources */,
+				E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +733,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -669,7 +765,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

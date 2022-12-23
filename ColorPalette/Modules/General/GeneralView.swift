@@ -8,10 +8,60 @@
 import SwiftUI
 
 struct GeneralView: View {
+    weak var router: GeneralRoutable?
+    
     var body: some View {
-        Text("General")
-            .bold()
-            .font(.largeTitle)
+        VStack {
+            header
+            
+            Spacer()
+            
+            buttons
+            
+            Spacer()
+        }
+    }
+}
+
+private extension GeneralView {
+    var header: some View {
+        HStack {
+            Text("General")
+                .bold()
+                .font(.largeTitle)
+            Spacer()
+        }
+        .padding()
+    }
+    
+    var buttons: some View {
+        VStack(spacing: 20) {
+            Button(action: { navigateToSamplePalettes() }) {
+                Text("Go to sample palettes")
+            }
+            
+            Button(action: { navigateToSampleColors() }) {
+                Text("Go to sample colors")
+            }
+            
+            Button(action: { navigateToImageColorDetection() }) {
+                Text("Detect colors on image")
+            }
+        }
+    }
+}
+
+private extension GeneralView {
+    func navigateToSamplePalettes() {
+        router?.navigateToSamplePalettes()
+    }
+    
+    func navigateToSampleColors() {
+        //router?.navigateToSamplePalettes()
+    }
+    
+    func navigateToImageColorDetection() {
+        router?.navigateToImageColorDetection()
     }
 }
 

@@ -10,6 +10,10 @@ import SwiftUI
 
 protocol GeneralRoutable: AnyObject {
     func navigateToGeneralScreen()
+    func navigateToSamplePalettes()
+    func navigateToColorPalette(palette: ColorPalette)
+    
+    func navigateToImageColorDetection()
 }
 
 final class GeneralCoordinator: Coordinatable {
@@ -37,8 +41,28 @@ final class GeneralCoordinator: Coordinatable {
 
 extension GeneralCoordinator: GeneralRoutable {
     func navigateToGeneralScreen() {
-        let generalView = GeneralView()
+        var generalView = GeneralView()
+        generalView.router = self
         let vc = UIHostingController(rootView: generalView)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToSamplePalettes() {
+        var view = SamplePalettesView()
+        view.router = self
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToColorPalette(palette: ColorPalette) {
+        let view = ColorPaletteView(palette: palette)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToImageColorDetection() {
+        let view = ImageColorDetection()
+        let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
 }
