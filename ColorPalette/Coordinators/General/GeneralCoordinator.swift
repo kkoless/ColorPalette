@@ -10,7 +10,10 @@ import SwiftUI
 
 protocol GeneralRoutable: AnyObject {
     func navigateToGeneralScreen()
+    
     func navigateToSamplePalettes()
+    func navigateToSampleColors()
+    
     func navigateToColorPalette(palette: ColorPalette)
     
     func navigateToImageColorDetection()
@@ -50,6 +53,12 @@ extension GeneralCoordinator: GeneralRoutable {
     func navigateToSamplePalettes() {
         var view = SamplePalettesView()
         view.router = self
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToSampleColors() {
+        let view = SampleColorsView()
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

@@ -9,12 +9,15 @@ import SwiftUI
 
 struct SamplePalettesView: View {
     weak var router: GeneralRoutable?
-    @State private var palettes = ColorPalette.getTestPalettes(size: 20)
+    @State private var palettes = ColorPalette.getTestPalettes()
     
     var body: some View {
-        List {
+        VStack {
             header
-            cells
+            
+            List {
+                cells
+            }
         }
         .listStyle(.plain)
     }
@@ -22,9 +25,14 @@ struct SamplePalettesView: View {
 
 private extension SamplePalettesView {
     var header: some View {
-        Text("Samples")
-            .bold()
-            .font(.largeTitle)    
+        HStack {
+            Text("Sample Palettes")
+                .font(.largeTitle)
+                .bold()
+                
+            Spacer()
+        }
+        .padding()
     }
     
     var cells: some View {

@@ -12,8 +12,8 @@ struct ColorPaletteCell: View {
     
     var body: some View {
         HStack(spacing: .zero) {
-            ForEach(prepareColors(from: palette)) { color in
-                Color(color)
+            ForEach(palette.colors) { color in
+                Color(UIColor(hexString: color.hex))
             }
         }
         .frame(height: 35)
@@ -22,10 +22,8 @@ struct ColorPaletteCell: View {
     }
 }
 
-extension ColorPaletteCell: Colorable {}
-
 struct ColorPaletteCell_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPaletteCell(palette: ColorPalette.getTestPalettes(size: 5)[0])
+        ColorPaletteCell(palette: ColorPalette.getTestPalettes()[0])
     }
 }

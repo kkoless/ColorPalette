@@ -7,42 +7,19 @@
 
 import SwiftUI
 
-protocol Colorable {
-    func prepareColors(from palette: ColorPalette) -> [UIColor]
-    func getInfo(type: ColorType, color: UIColor) -> String
-}
-
-extension Colorable {
-    func prepareColors(from palette: ColorPalette) -> [UIColor] {
-        return palette.colors.map {
-            UIColor(red: $0.r, green: $0.g, blue: $0.b, alpha: $0.alpha)
-        }
-    }
-    
-    func getInfo(type: ColorType, color: UIColor) -> String {
-        switch type {
-            case .HEX: return color.hexValue
-            case .RGB: return color.rgbDescription()
-            case .HSB: return color.hsbDescription()
-            case .CMYK: return color.cmykDescription()
-        }
-    }
-}
-
 struct ColorPaletteView: View {
+    @State var selectedType: ColorType = .CMYK
+    @State var showInfo: Bool = true
     let palette: ColorPalette
-    @State var selectedType: ColorType = .RGB
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             VStack(spacing: 0) {
-                ForEach(prepareColors(from: palette)) { color in
-                    ZStack {
-                        Color(color)
-                        getColorInfo(color: color)
-                    }
+                ForEach(palette.colors) { color in
+                    getColorBlock(appColor: color)
                 }
             }
+            .onTapGesture { showInfo.toggle() }
             
             ColorTypePickerView(selectedType: $selectedType)
         }
@@ -51,17 +28,28 @@ struct ColorPaletteView: View {
 
 private extension ColorPaletteView {
     @ViewBuilder
-    func getColorInfo(color: UIColor) -> some View {
+    func getColorBlock(appColor: AppColor) -> some View {
+        let color = UIColor(hexString: appColor.hex)
+        
+        ZStack {
+            Color(color)
+            if showInfo {
+                getColorInfo(color: color)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func getColorInfo(color: UIColor) -> some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
                     Text(selectedType.rawValue)
                         .font(.title2)
                         .bold()
-                    Text(getInfo(type: selectedType, color: color))
+                    Text(color.getTypeInfo(type: selectedType, isExtended: true))
                         .font(.title3)
                 }
-                .padding()
                 .foregroundColor(.white)
                 
                 Spacer()
@@ -73,10 +61,8 @@ private extension ColorPaletteView {
     }
 }
 
-extension ColorPaletteView: Colorable {}
-
 struct ColorPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPaletteView(palette: ColorPalette.getTestPalettes(size: 1)[0])
+        ColorPaletteView(palette: ColorPalette.getTestPalettes()[0])
     }
 }

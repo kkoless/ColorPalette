@@ -17,23 +17,25 @@ struct ImageColorDetection: View {
     @State private var showPopover = false
     
     var body: some View {
-        VStack {
-            selectedImage
-                .frame(width: 300, height: 300)
-                .cornerRadius(15)
-                .shadow(radius: 40)
-                .padding()
-            
-            Spacer()
-            
-            Group {
-                palette
-                averageColorBlock
+        ScrollView {
+            VStack {
+                selectedImage
+                    .frame(width: 300, height: 300)
+                    .cornerRadius(15)
+                    .shadow(radius: 40)
+                    .padding()
+                
+                Spacer()
+                
+                Group {
+                    palette
+                    averageColorBlock
+                }
+                
+                Spacer()
+                
+                actionButtons
             }
-            
-            Spacer()
-            
-            actionButtons
         }
     }
 }
@@ -117,14 +119,9 @@ private extension ImageColorDetection {
     func generatePalette()  {
         let resColors = getColors()
             .map {
-                ColorPalette.Color(
-                    r: $0.cgColor.components?[0],
-                    g: $0.cgColor.components?[1],
-                    b: $0.cgColor.components?[2],
-                    alpha: 1)
+                AppColor(name: $0.accessibilityName,
+                         hex: $0.hexValue)
             }
-        
-        print(resColors)
         
         colorPalette = ColorPalette(colors: resColors)
     }

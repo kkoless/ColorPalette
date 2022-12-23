@@ -57,7 +57,7 @@ private extension GeneralView {
     }
     
     func navigateToSampleColors() {
-        //router?.navigateToSamplePalettes()
+        router?.navigateToSampleColors()
     }
     
     func navigateToImageColorDetection() {
