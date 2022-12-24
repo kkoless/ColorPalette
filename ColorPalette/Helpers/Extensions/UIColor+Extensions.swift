@@ -115,6 +115,42 @@ extension UIColor {
 }
 
 extension UIColor {
+    var complement: UIColor {
+        return self.withHueOffset(offset: 0.5)
+    }
+    
+    func getSplitComplementColors() -> [UIColor] {
+        return [self.withHueOffset(offset: 150 / 360),
+                self.withHueOffset(offset: 210 / 360)]
+    }
+    
+    func getTriadicColors() -> [UIColor] {
+        return [self.withHueOffset(offset: 120 / 360),
+                self.withHueOffset(offset: 240 / 360)]
+    }
+    
+    func getTetradicColors() -> [UIColor] {
+        return [self.withHueOffset(offset: 0.25),
+                self.complement,
+                self.withHueOffset(offset: 0.75)]
+    }
+    
+    func getAnalagousColors() -> [UIColor] {
+        return [self.withHueOffset(offset: -1 / 12),
+                self.withHueOffset(offset: 1 / 12)]
+    }
+    
+    private func withHueOffset(offset: CGFloat) -> UIColor {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return UIColor(hue: fmod(h + offset, 1), saturation: s, brightness: b, alpha: a)
+    }
+}
+
+extension UIColor {
     func rgbDescription(isExtended: Bool = false) -> String {
         return isExtended ? "R: \(Int(redValue))\nG: \(Int(greenValue))\nB: \(Int(blueValue))" : "R:\(Int(redValue)) G:\(Int(greenValue)) B:\(Int(blueValue))"
     }
