@@ -11,6 +11,8 @@ struct SampleColorsView: View {
     @State var searchText: String = ""
     @State var selectedType: ColorType = .RGB
     
+    weak var router: GeneralRoutable?
+    
     var body: some View {
         VStack {
             header
@@ -42,8 +44,11 @@ private extension SampleColorsView {
     }
     
     var colorsBlock: some View {
-        ForEach(getColors(searchText)) {
-            ColorInfoView(appColor: $0, type: selectedType)
+        ForEach(getColors(searchText)) { appColor in
+            ColorInfoView(appColor: appColor, type: selectedType)
+                .onTapGesture {
+                    router?.showSimilarColors(color: appColor)
+                }
         }
     }
 }
