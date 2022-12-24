@@ -18,7 +18,8 @@ protocol GeneralRoutable: AnyObject {
     
     func navigateToImageColorDetection()
     
-    func showSimilarColors(color: AppColor)
+    func navigateToSimilarColors(color: AppColor)
+    func navigateToColorInfo(color: AppColor)
 }
 
 final class GeneralCoordinator: Coordinatable {
@@ -78,7 +79,7 @@ extension GeneralCoordinator: GeneralRoutable {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showSimilarColors(color: AppColor) {
+    func navigateToSimilarColors(color: AppColor) {
         let view = SimilarColorsView(color: UIColor(hexString: color.hex))
         let vc = UIHostingController(rootView: view)
         
@@ -88,5 +89,11 @@ extension GeneralCoordinator: GeneralRoutable {
         }
          
         navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToColorInfo(color: AppColor) {
+        let view = ColorInfoView(color: color)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

@@ -50,7 +50,7 @@ private extension ColorPaletteView {
                     Text(color.getTypeInfo(type: selectedType, isExtended: true))
                         .font(.title3)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(Color(color.invertColor()))
                 
                 Spacer()
             }
