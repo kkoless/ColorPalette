@@ -77,6 +77,6 @@ private extension TabBarCoordinator {
 
 private extension TabBarCoordinator {
     func configureTabBar() {
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.backgroundColor = UIColor(named: "tabBarBackground")
     }
 }

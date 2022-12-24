@@ -45,9 +45,9 @@ private extension SampleColorsView {
     
     var colorsBlock: some View {
         ForEach(getColors(searchText)) { appColor in
-            ColorInfoView(appColor: appColor, type: selectedType)
+            ColorRowView(appColor: appColor, type: selectedType)
                 .onTapGesture {
-                    router?.showSimilarColors(color: appColor)
+                    router?.navigateToColorInfo(color: appColor)
                 }
         }
     }

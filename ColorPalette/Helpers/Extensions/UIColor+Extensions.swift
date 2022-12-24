@@ -169,6 +169,16 @@ extension UIColor {
 }
 
 extension UIColor {
+    func invertColor() -> UIColor {
+        if (redValue * 0.299 + greenValue * 0.587 + blueValue * 0.114) > 186 {
+            return UIColor(hexString: "#000000")
+        } else {
+            return UIColor(hexString: "#FFFFFF")
+        }
+    }
+}
+
+extension UIColor {
     func getTypeInfo(type: ColorType, isExtended: Bool) -> String {
         switch type {
             case .HEX: return self.hexValue
