@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol TabBarCoordinatorProtocol: Coordinatable {
     var tabBarController: UITabBarController { get set }
@@ -20,11 +21,13 @@ final class TabBarCoordinator: Coordinatable {
     let navigationController: UINavigationController
     let tabBarController: UITabBarController
     let type: CoordinatorType = .tabBar
+    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
         self.navigationController = navigationController
+        self.favoriteManager = favoriteManager
         self.tabBarController = .init()
         configureTabBar()
     }
@@ -61,12 +64,12 @@ private extension TabBarCoordinator {
         
         switch page {
             case .profile:
-                let profileCoordinator = ProfileCoordinator(navController)
+                let profileCoordinator = ProfileCoordinator(navController, favoriteManager: favoriteManager)
                 childCoordinators.append(profileCoordinator)
                 profileCoordinator.start()
                 
             case .general:
-                let generalCoordinator = GeneralCoordinator(navController)
+                let generalCoordinator = GeneralCoordinator(navController, favoriteManager: favoriteManager)
                 childCoordinators.append(generalCoordinator)
                 generalCoordinator.start()
         }

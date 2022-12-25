@@ -2,19 +2,19 @@
 //  ColorRowView.swift
 //  ColorPalette
 //
-//  Created by Кирилл Колесников on 23.12.2022.
+//  Created by Kolesnikov Kirill on 23.12.2022.
 //
 
 import SwiftUI
 
 struct ColorRowView: View {
-    private let appColor: AppColor
     private let uiColor: UIColor
+    private let colorName: String
     private let type: ColorType
     
     init(appColor: AppColor, type: ColorType) {
-        self.appColor = appColor
         self.uiColor = UIColor(hexString: appColor.hex)
+        self.colorName = appColor.name
         self.type = type
     }
     
@@ -25,7 +25,7 @@ struct ColorRowView: View {
                 .cornerRadius(10)
             
             VStack(alignment: .leading) {
-                Text(appColor.name)
+                Text(colorName)
                     .font(.headline)
                     .bold()
                 

@@ -47,6 +47,10 @@ private extension GeneralView {
             Button(action: { navigateToImageColorDetection() }) {
                 Text("Detect colors on image")
             }
+            
+            Button(action: { navigateToAddColor() }) {
+                Text("Add custom color")
+            }
         }
     }
 }
@@ -62,6 +66,10 @@ private extension GeneralView {
     
     func navigateToImageColorDetection() {
         router?.navigateToImageColorDetection()
+    }
+    
+    func navigateToAddColor() {
+        router?.navigateToAddNewColor()
     }
 }
 

@@ -17,7 +17,7 @@ protocol Coordinatable: AnyObject {
     func start()
     func finish()
     
-    init(_ navigationController: UINavigationController)
+    //init(_ navigationController: UINavigationController)
 }
 
 extension Coordinatable {
@@ -35,11 +35,13 @@ final class AppCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
     let type: CoordinatorType = .app
+    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
         self.navigationController = navigationController
+        self.favoriteManager = favoriteManager
         print("\(self) INIT")
     }
     
@@ -74,7 +76,7 @@ private extension AppCoordinator {
     }
     
     func navigateToTabBarFlow() {
-        let tabBarCoordinator = TabBarCoordinator(navigationController)
+        let tabBarCoordinator = TabBarCoordinator(navigationController, favoriteManager: favoriteManager)
         childCoordinators.append(tabBarCoordinator)
         tabBarCoordinator.finishDelegate = self
         tabBarCoordinator.start()

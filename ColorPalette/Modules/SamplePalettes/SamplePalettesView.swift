@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SamplePalettesView: View {
     weak var router: GeneralRoutable?
-    @State private var palettes = ColorPalette.getTestPalettes()
+    @State private var palettes = ColorPalette.getTestPalettes(20)
     
     var body: some View {
         VStack {
