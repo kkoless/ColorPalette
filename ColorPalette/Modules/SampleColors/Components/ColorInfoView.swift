@@ -10,17 +10,26 @@ import SwiftUI
 struct ColorInfoView: View {
     private let color: UIColor
     private let colorName: String
+    @State private var showInfo = true
     
     init(color: AppColor) {
         self.color = UIColor(hexString: color.hex)
-        self.colorName = color.name
+        self.colorName = color.name.isEmpty ? " " : color.name
+    }
+    
+    init(color: UIColor, colorName: Binding<String>) {
+        self.color = color
+        self.colorName = colorName.wrappedValue.isEmpty ? color.accessibilityName : colorName.wrappedValue
     }
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .top) {
             Color(color)
-            infoBlock
+            if showInfo {
+                infoBlock
+            }
         }
+        .onTapGesture { showInfo.toggle() }
     }
 }
 
@@ -28,10 +37,12 @@ private extension ColorInfoView {
     var infoBlock: some View {
         VStack(alignment: .leading) {
             Text(colorName)
-                .font(.title)
+                .font(.title2)
                 .bold()
-                .padding()
+                .padding([.leading, .trailing])
+                .padding(.top, 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
+            
             Group {
                 hexInfo
                 rgbInfo
@@ -47,40 +58,40 @@ private extension ColorInfoView {
     var hexInfo: some View {
         VStack(alignment: .leading) {
             Text("HEX")
-                .font(.title2)
+                .font(.headline)
                 .bold()
             Text(color.hexValue)
-                .font(.title3)
+                .font(.subheadline)
         }
     }
     
     var rgbInfo: some View {
         VStack(alignment: .leading) {
             Text("RGB")
-                .font(.title2)
+                .font(.headline)
                 .bold()
             Text(color.rgbDescription(isExtended: true))
-                .font(.title3)
+                .font(.subheadline)
         }
     }
     
     var hsvInfo: some View {
         VStack(alignment: .leading) {
             Text("HSV")
-                .font(.title2)
+                .font(.headline)
                 .bold()
             Text(color.hsvDescription(isExtended: true))
-                .font(.title3)
+                .font(.subheadline)
         }
     }
     
     var cmykInfo: some View {
         VStack(alignment: .leading) {
             Text("CMYK")
-                .font(.title2)
+                .font(.headline)
                 .bold()
             Text(color.cmykDescription(isExtended: true))
-                .font(.title3)
+                .font(.subheadline)
         }
     }
 }

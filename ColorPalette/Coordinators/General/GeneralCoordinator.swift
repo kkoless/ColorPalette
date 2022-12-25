@@ -20,17 +20,21 @@ protocol GeneralRoutable: AnyObject {
     
     func navigateToSimilarColors(color: AppColor)
     func navigateToColorInfo(color: AppColor)
+    
+    func navigateToAddNewColor()
 }
 
 final class GeneralCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
     let type: CoordinatorType = .profile
+    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
         self.navigationController = navigationController
+        self.favoriteManager = favoriteManager
         print("\(self) INIT")
     }
     
@@ -93,6 +97,12 @@ extension GeneralCoordinator: GeneralRoutable {
     
     func navigateToColorInfo(color: AppColor) {
         let view = ColorInfoView(color: color)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToAddNewColor() {
+        let view = AddNewColorView().environmentObject(favoriteManager)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

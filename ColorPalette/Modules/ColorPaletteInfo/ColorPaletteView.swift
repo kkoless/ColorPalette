@@ -63,6 +63,6 @@ private extension ColorPaletteView {
 
 struct ColorPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPaletteView(palette: ColorPalette.getTestPalettes()[0])
+        ColorPaletteView(palette: ColorPalette.getTestPalettes(20)[0])
     }
 }

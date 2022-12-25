@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
-struct AppColor: Codable, Identifiable {
+struct AppColor: Codable, Identifiable, Hashable {
     let id: UUID
     let name: String
     let hex: String
@@ -18,6 +19,11 @@ struct AppColor: Codable, Identifiable {
         self.hex = hex
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(hex.lowercased())
+        hasher.combine(name.lowercased())
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = .init()
@@ -25,12 +31,15 @@ struct AppColor: Codable, Identifiable {
         self.hex = try container.decode(String.self, forKey: .hex)
     }
     
-    static func getTestColors() -> [AppColor] {
-        return [
-            AppColor(name: "African Violet", hex: "#B284BE"),
-            AppColor(name: "Alabama Crimson", hex: "#AF002A"),
-            AppColor(name: "Buff", hex: "#F0DC82"),
-            AppColor(name: "Mustard", hex: "#FFDB58")
-        ]
+    static func getRandomColor() -> AppColor {
+        let uiColor = UIColor.random
+        return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue)
+    }
+}
+
+extension AppColor {
+    static func == (lhs: AppColor, rhs: AppColor) -> Bool {
+        return lhs.hex.lowercased() == lhs.hex.lowercased() &&
+                lhs.name.lowercased() == rhs.name.lowercased()
     }
 }

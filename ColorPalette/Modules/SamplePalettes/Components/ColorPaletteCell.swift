@@ -24,6 +24,6 @@ struct ColorPaletteCell: View {
 
 struct ColorPaletteCell_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPaletteCell(palette: ColorPalette.getTestPalettes()[0])
+        ColorPaletteCell(palette: ColorPalette.getTestPalettes(20)[0])
     }
 }
