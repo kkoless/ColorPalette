@@ -15,4 +15,5 @@ enum CoordinatorType {
     case login
     case general
     case profile
+    case favorites
 }

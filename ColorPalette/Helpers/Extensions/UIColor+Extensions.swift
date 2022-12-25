@@ -9,6 +9,16 @@ import Foundation
 import SwiftUI
 import UIKit
 
+extension Color {
+    init(_ appColor: AppColor) {
+        self.init(uiColor: UIColor(appColor))
+    }
+    
+    var uiColor: UIColor {
+        return UIColor(self)
+    }
+}
+
 extension UIColor {
     convenience init(hex: UInt, alpha: CGFloat = 1) {
         self.init(
@@ -26,6 +36,10 @@ extension UIColor {
                   blue: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
                   alpha: alpha)
         
+    }
+    
+    convenience init(_ appColor: AppColor) {
+        self.init(hexString: appColor.hex)
     }
 }
 

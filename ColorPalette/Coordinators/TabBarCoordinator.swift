@@ -21,13 +21,11 @@ final class TabBarCoordinator: Coordinatable {
     let navigationController: UINavigationController
     let tabBarController: UITabBarController
     let type: CoordinatorType = .tabBar
-    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
+    init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.favoriteManager = favoriteManager
         self.tabBarController = .init()
         configureTabBar()
     }
@@ -64,12 +62,17 @@ private extension TabBarCoordinator {
         
         switch page {
             case .profile:
-                let profileCoordinator = ProfileCoordinator(navController, favoriteManager: favoriteManager)
+                let profileCoordinator = ProfileCoordinator(navController)
                 childCoordinators.append(profileCoordinator)
                 profileCoordinator.start()
+            
+            case .favorites:
+                let favoritesCoordinator = FavoritesCoordinator(navController)
+                childCoordinators.append(favoritesCoordinator)
+                favoritesCoordinator.start()
                 
             case .general:
-                let generalCoordinator = GeneralCoordinator(navController, favoriteManager: favoriteManager)
+                let generalCoordinator = GeneralCoordinator(navController)
                 childCoordinators.append(generalCoordinator)
                 generalCoordinator.start()
         }

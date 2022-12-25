@@ -13,6 +13,11 @@ final class ColorManager {
     
     private init() {
         colors = [AppColor].parse(jsonFile: "colors") ?? []
+        print("\(self) INIT")
+    }
+    
+    deinit {
+        print("\(self) DEINIT")
     }
 }
 

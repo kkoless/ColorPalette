@@ -13,7 +13,7 @@ struct ColorPaletteCell: View {
     var body: some View {
         HStack(spacing: .zero) {
             ForEach(palette.colors) { color in
-                Color(UIColor(hexString: color.hex))
+                Color(color)
             }
         }
         .frame(height: 35)

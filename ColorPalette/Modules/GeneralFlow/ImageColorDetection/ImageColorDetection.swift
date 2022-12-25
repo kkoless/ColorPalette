@@ -118,10 +118,7 @@ private extension ImageColorDetection {
     
     func generatePalette()  {
         let resColors = getColors()
-            .map {
-                AppColor(name: $0.accessibilityName,
-                         hex: $0.hexValue)
-            }
+            .map { AppColor(uiColor: $0) }
         
         colorPalette = ColorPalette(colors: resColors)
     }

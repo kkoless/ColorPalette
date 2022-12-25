@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct SampleColorsView: View {
-    @State var searchText: String = ""
-    @State var selectedType: ColorType = .RGB
+    @State private var searchText: String = ""
+    @State private var selectedType: ColorType = .HEX
+    @Binding var showColorLibrary: Bool
     
-    weak var router: GeneralRoutable?
+    weak private var router: GeneralRoutable?
+    
+    @EnvironmentObject var templatePaletteManager: TemplatePaletteManager
+    
+    
+    init(showColorLibrary: Binding<Bool>? = nil, router: GeneralRoutable? = nil) {
+        self._showColorLibrary = showColorLibrary ?? .constant(false)
+        self.router = router
+    }
     
     var body: some View {
         VStack {
@@ -47,7 +56,11 @@ private extension SampleColorsView {
         ForEach(getColors(searchText)) { appColor in
             ColorRowView(appColor: appColor, type: selectedType)
                 .onTapGesture {
-                    router?.navigateToColorInfo(color: appColor)
+                    if showColorLibrary {
+                        templatePaletteManager.addColor(appColor)
+                        showColorLibrary.toggle()
+                    }
+                    //router?.navigateToColorInfo(color: appColor)
                 }
         }
     }
@@ -69,5 +82,6 @@ private extension SampleColorsView {
 struct SampleColorsView_Previews: PreviewProvider {
     static var previews: some View {
         SampleColorsView()
+            .environmentObject(TemplatePaletteManager())
     }
 }
