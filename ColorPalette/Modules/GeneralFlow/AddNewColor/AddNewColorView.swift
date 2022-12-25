@@ -10,10 +10,12 @@ import SwiftUI
 struct AddNewColorView: View {
     @State private var colorName = ""
     @State private var selectedColor: Color = .clear
-    @EnvironmentObject var favoriteManager: FavoriteManager
+    @Binding private var showAsPopover: Bool
     
-    private var uiColor: UIColor {
-        UIColor(selectedColor)
+    @EnvironmentObject var templatePaletteManager: TemplatePaletteManager
+    
+    init(showAsPopover: Binding<Bool>? = nil) {
+        self._showAsPopover = showAsPopover ?? .constant(false)
     }
     
     var body: some View {
@@ -21,18 +23,12 @@ struct AddNewColorView: View {
             configureBlock
             if selectedColor != .clear {
                 preview
+                buttons
             } else {
                 Spacer()
             }
         }
         .padding()
-        .toolbar {
-            Button(action: { saveColor() }) {
-                Image(systemName: "plus.circle")
-                    .resizable()
-            }
-            .disabled(selectedColor == .clear)
-        }
     }
 }
 
@@ -42,7 +38,7 @@ private extension AddNewColorView {
             TextField("Color name", text: $colorName)
                 .padding([.leading, .trailing])
                 .padding([.bottom, .top], 10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray))
+                .textFieldStyle(.plain)
             
             ColorPicker("Here you can pick...", selection: $selectedColor)
                 .font(.subheadline)
@@ -50,19 +46,45 @@ private extension AddNewColorView {
     }
     
     var preview: some View {
-        ColorInfoView(color: uiColor, colorName: $colorName)
+        ColorInfoView(color: selectedColor.uiColor, colorName: $colorName)
             .cornerRadius(10)
+    }
+    
+    var buttons: some View {
+        HStack(alignment: .center) {
+            Spacer()
+            
+            Button(action: { addColor() }) {
+                Text("Add color")
+            }
+            .disabled(selectedColor == .clear)
+            
+            Spacer()
+            
+            Button(action: { saveColor() }) {
+                Text("Save color")
+            }
+            .disabled(selectedColor == .clear)
+            
+            Spacer()
+        }
     }
 }
 
 private extension AddNewColorView {
     func saveColor() {
-        favoriteManager.addColor(newColor: AppColor(name: colorName, hex: UIColor(selectedColor).hexValue))
+        
+    }
+    
+    func addColor() {
+        templatePaletteManager.addColor(AppColor(name: colorName, hex: selectedColor.uiColor.hexValue))
+        showAsPopover.toggle()
     }
 }
 
 struct AddNewColorView_Previews: PreviewProvider {
     static var previews: some View {
         AddNewColorView()
+            .environmentObject(TemplatePaletteManager())
     }
 }

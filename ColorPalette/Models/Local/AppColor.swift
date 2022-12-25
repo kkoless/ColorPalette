@@ -8,20 +8,32 @@
 import Foundation
 import UIKit
 
-struct AppColor: Codable, Identifiable, Hashable {
+struct AppColor: Codable, Identifiable {
     let id: UUID
     let name: String
     let hex: String
     
+    static func getRandomColor() -> AppColor {
+        let uiColor = UIColor.random
+        return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue)
+    }
+    
+    static func getClear() -> AppColor {
+        return AppColor(uiColor: UIColor.clear)
+    }
+}
+
+extension AppColor {
     init(name: String, hex: String) {
         self.id = .init()
         self.name = name
         self.hex = hex
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(hex.lowercased())
-        hasher.combine(name.lowercased())
+    init(uiColor: UIColor) {
+        self.id = .init()
+        self.name = uiColor.accessibilityName
+        self.hex = uiColor.hexValue
     }
     
     init(from decoder: Decoder) throws {
@@ -30,10 +42,11 @@ struct AppColor: Codable, Identifiable, Hashable {
         self.name = try container.decode(String.self, forKey: .name)
         self.hex = try container.decode(String.self, forKey: .hex)
     }
-    
-    static func getRandomColor() -> AppColor {
-        let uiColor = UIColor.random
-        return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue)
+}
+
+extension AppColor {
+    var uiColor: UIColor {
+        return UIColor(self)
     }
 }
 

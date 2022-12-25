@@ -16,13 +16,11 @@ final class ProfileCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
     let type: CoordinatorType = .profile
-    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
+    init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.favoriteManager = favoriteManager
         print("\(self) INIT")
     }
     

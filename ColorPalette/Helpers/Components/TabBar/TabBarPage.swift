@@ -7,12 +7,15 @@
 
 enum TabBarPage: Int, CaseIterable {
     case general
+    case favorites
     case profile
     
     var iconName: String {
         switch self {
             case .general:
                 return "house"
+            case .favorites:
+                return "heart"
             case .profile:
                 return "person"
         }
@@ -22,6 +25,8 @@ enum TabBarPage: Int, CaseIterable {
         switch self {
             case .general:
                 return "General"
+            case .favorites:
+                return "Favorites"
             case .profile:
                 return "Profile"
         }

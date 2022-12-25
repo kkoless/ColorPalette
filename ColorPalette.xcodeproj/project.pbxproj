@@ -15,6 +15,8 @@
 		E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF95D2953528200534E82 /* SamplePalettesView.swift */; };
 		E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF960295353E200534E82 /* ColorPaletteCell.swift */; };
 		E50BF9632953563200534E82 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF9622953563200534E82 /* UIColor+Extensions.swift */; };
+		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
+		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53D851F291E35E900E73D90 /* OnboardingPageType.swift */; };
 		E54263E929388614003334FE /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263E829388614003334FE /* OnboardingManager.swift */; };
 		E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263EA29388B0B003334FE /* UserDefaultsKey.swift */; };
@@ -56,6 +58,10 @@
 		E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */; };
 		E57AF3AA2957222F0002FC75 /* SimilarColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */; };
 		E57AF3AC2957315B0002FC75 /* ColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3AB2957315B0002FC75 /* ColorInfoView.swift */; };
+		E5B6C70929584A77007E6158 /* CreateColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70829584A77007E6158 /* CreateColorPaletteView.swift */; };
+		E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70A2958602C007E6158 /* ColorPaletteRowView.swift */; };
+		E5B6C70E29587622007E6158 /* TemplatePaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70D29587622007E6158 /* TemplatePaletteManager.swift */; };
+		E5B6C71029587ABA007E6158 /* PaletteStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70F29587ABA007E6158 /* PaletteStorageManager.swift */; };
 		E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE91E295413CC005DF70B /* ColorPalette.swift */; };
 		E5BAE92129541A35005DF70B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE92029541A35005DF70B /* ColorPaletteView.swift */; };
 		E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */; };
@@ -75,6 +81,8 @@
 		E50BF95D2953528200534E82 /* SamplePalettesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesView.swift; sourceTree = "<group>"; };
 		E50BF960295353E200534E82 /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
 		E50BF9622953563200534E82 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E53D851F291E35E900E73D90 /* OnboardingPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageType.swift; sourceTree = "<group>"; };
 		E54263E829388614003334FE /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		E54263EA29388B0B003334FE /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -116,6 +124,10 @@
 		E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetectionViewController.swift; sourceTree = "<group>"; };
 		E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarColorsView.swift; sourceTree = "<group>"; };
 		E57AF3AB2957315B0002FC75 /* ColorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoView.swift; sourceTree = "<group>"; };
+		E5B6C70829584A77007E6158 /* CreateColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateColorPaletteView.swift; sourceTree = "<group>"; };
+		E5B6C70A2958602C007E6158 /* ColorPaletteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteRowView.swift; sourceTree = "<group>"; };
+		E5B6C70D29587622007E6158 /* TemplatePaletteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePaletteManager.swift; sourceTree = "<group>"; };
+		E5B6C70F29587ABA007E6158 /* PaletteStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStorageManager.swift; sourceTree = "<group>"; };
 		E5BAE91E295413CC005DF70B /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		E5BAE92029541A35005DF70B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTypePickerView.swift; sourceTree = "<group>"; };
@@ -167,6 +179,53 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		E52D433829588E34002B11B8 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		E52D433B29588FB2002B11B8 /* ProfileFlow */ = {
+			isa = PBXGroup;
+			children = (
+				E56C0E2C29376E2A00A878CB /* Profile */,
+			);
+			path = ProfileFlow;
+			sourceTree = "<group>";
+		};
+		E52D433C29588FE8002B11B8 /* GeneralFlow */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C70729584A63007E6158 /* CreateColorPalette */,
+				E5CF202E29575C0300143582 /* AddNewColor */,
+				E55F6F7A295597C400A8B935 /* SampleColors */,
+				E504B1FC2954A35300996662 /* ImageColorDetection */,
+				E5BAE92229541DC6005DF70B /* ColorPaletteInfo */,
+				E50BF95C2953526C00534E82 /* SamplePalettes */,
+				E56C0E2F29376E5700A878CB /* General */,
+				E57A26BB291ECAF70027FAC8 /* ColorDetection */,
+			);
+			path = GeneralFlow;
+			sourceTree = "<group>";
+		};
+		E52D433D29588FF4002B11B8 /* FavoritesFlow */ = {
+			isa = PBXGroup;
+			children = (
+				E52D433E29589002002B11B8 /* Favorites */,
+			);
+			path = FavoritesFlow;
+			sourceTree = "<group>";
+		};
+		E52D433E29589002002B11B8 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				E52D433F29589011002B11B8 /* FavoritesView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		E53D851C291E358500E73D90 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +243,7 @@
 				E54263F429389DCD003334FE /* CredentialsManager.swift */,
 				E55F6F7D29559FCF00A8B935 /* ColorManager.swift */,
 				E55031C229577BB80052F544 /* FavoriteManager.swift */,
+				E5B6C70F29587ABA007E6158 /* PaletteStorageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -205,13 +265,13 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		E54E48F829348FD50078B12B /* Authorization */ = {
+		E54E48F829348FD50078B12B /* AuthorizationFlow */ = {
 			isa = PBXGroup;
 			children = (
 				E5C2AEAC2937401000508DF4 /* LoginScreen */,
 				E5C2AEAD2937401D00508DF4 /* RegistrationScreen */,
 			);
-			path = Authorization;
+			path = AuthorizationFlow;
 			sourceTree = "<group>";
 		};
 		E55BAD5D29190B5700B3E233 = {
@@ -268,16 +328,11 @@
 		E55BAD7F29190CE600B3E233 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				E5CF202E29575C0300143582 /* AddNewColor */,
-				E55F6F7A295597C400A8B935 /* SampleColors */,
-				E504B1FC2954A35300996662 /* ImageColorDetection */,
-				E5BAE92229541DC6005DF70B /* ColorPaletteInfo */,
-				E50BF95C2953526C00534E82 /* SamplePalettes */,
-				E56C0E2F29376E5700A878CB /* General */,
-				E56C0E2C29376E2A00A878CB /* Profile */,
-				E54E48F829348FD50078B12B /* Authorization */,
-				E57A26BB291ECAF70027FAC8 /* ColorDetection */,
-				E55BAD8329190DE300B3E233 /* Onboarding */,
+				E52D433D29588FF4002B11B8 /* FavoritesFlow */,
+				E52D433C29588FE8002B11B8 /* GeneralFlow */,
+				E52D433B29588FB2002B11B8 /* ProfileFlow */,
+				E54E48F829348FD50078B12B /* AuthorizationFlow */,
+				E55BAD8329190DE300B3E233 /* OnboardingFlow */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -291,12 +346,13 @@
 				E56C0E2629376D5000A878CB /* Authorization */,
 				E56C0E2729376D5D00A878CB /* Onboarding */,
 				E56C0E2929376D8C00A878CB /* General */,
+				E52D433829588E34002B11B8 /* Favorites */,
 				E56C0E2829376D8200A878CB /* Profile */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		E55BAD8329190DE300B3E233 /* Onboarding */ = {
+		E55BAD8329190DE300B3E233 /* OnboardingFlow */ = {
 			isa = PBXGroup;
 			children = (
 				E57A26B8291EC70F0027FAC8 /* ViewModel */,
@@ -304,7 +360,7 @@
 				E53D851C291E358500E73D90 /* Components */,
 				E55BAD8429190DEF00B3E233 /* View */,
 			);
-			path = Onboarding;
+			path = OnboardingFlow;
 			sourceTree = "<group>";
 		};
 		E55BAD8429190DEF00B3E233 /* View */ = {
@@ -465,6 +521,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E5B6C70729584A63007E6158 /* CreateColorPalette */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C70829584A77007E6158 /* CreateColorPaletteView.swift */,
+				E5B6C70D29587622007E6158 /* TemplatePaletteManager.swift */,
+			);
+			path = CreateColorPalette;
+			sourceTree = "<group>";
+		};
+		E5B6C70C29586034007E6158 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C70A2958602C007E6158 /* ColorPaletteRowView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E5BAE91B295413AC005DF70B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +566,7 @@
 		E5BAE92229541DC6005DF70B /* ColorPaletteInfo */ = {
 			isa = PBXGroup;
 			children = (
+				E5B6C70C29586034007E6158 /* Components */,
 				E5BAE92029541A35005DF70B /* ColorPaletteView.swift */,
 				E5BAE92329542C54005DF70B /* ColorTypePickerView.swift */,
 			);
@@ -611,6 +685,7 @@
 				E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */,
 				E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */,
 				E55F6F892955C23700A8B935 /* Decodable+Extensions.swift in Sources */,
+				E52D434029589011002B11B8 /* FavoritesView.swift in Sources */,
 				E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */,
 				E5DCBC8129365C46000C1B4E /* AppRouter.swift in Sources */,
 				E55F6F7E29559FCF00A8B935 /* ColorManager.swift in Sources */,
@@ -632,18 +707,22 @@
 				E504B1FE2954A37E00996662 /* ImageColorDetection.swift in Sources */,
 				E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */,
 				E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */,
+				E5B6C71029587ABA007E6158 /* PaletteStorageManager.swift in Sources */,
 				E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */,
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
+				E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */,
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
 				E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */,
 				E55F6F842955AFBE00A8B935 /* ColorRowView.swift in Sources */,
 				E54263F329389CD4003334FE /* Provider.swift in Sources */,
 				E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */,
 				E57A26AC291EA2C40027FAC8 /* String+Extensions.swift in Sources */,
+				E5B6C70E29587622007E6158 /* TemplatePaletteManager.swift in Sources */,
 				E56C829E29202B1C0096EB9F /* CALayer+Extensions.swift in Sources */,
 				E56C0E1F293764ED00A878CB /* TabBarCoordinator.swift in Sources */,
 				E5BAE92129541A35005DF70B /* ColorPaletteView.swift in Sources */,
+				E5B6C70929584A77007E6158 /* CreateColorPaletteView.swift in Sources */,
 				E56C0E23293765C700A878CB /* TabBarPage.swift in Sources */,
 				E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */,
 				E54263EE29389820003334FE /* AuthorizationAPI.swift in Sources */,
@@ -651,6 +730,7 @@
 				E57A26B7291EC2E50027FAC8 /* OnboardingPage.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */,
+				E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */,
 				E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */,
 				E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */,
 				E55F6F872955B6AC00A8B935 /* SearchBarView.swift in Sources */,

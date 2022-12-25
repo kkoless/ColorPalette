@@ -9,6 +9,8 @@ import UIKit
 import SwiftUI
 
 protocol GeneralRoutable: AnyObject {
+    func pop()
+    
     func navigateToGeneralScreen()
     
     func navigateToSamplePalettes()
@@ -20,21 +22,17 @@ protocol GeneralRoutable: AnyObject {
     
     func navigateToSimilarColors(color: AppColor)
     func navigateToColorInfo(color: AppColor)
-    
-    func navigateToAddNewColor()
 }
 
 final class GeneralCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
     let type: CoordinatorType = .profile
-    var favoriteManager: FavoriteManager
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    init(_ navigationController: UINavigationController, favoriteManager: FavoriteManager) {
+    init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.favoriteManager = favoriteManager
         print("\(self) INIT")
     }
     
@@ -50,6 +48,10 @@ final class GeneralCoordinator: Coordinatable {
 }
 
 extension GeneralCoordinator: GeneralRoutable {
+    func pop() {
+        navigationController.popViewController(animated: true)
+    }
+    
     func navigateToGeneralScreen() {
         var generalView = GeneralView()
         generalView.router = self
@@ -58,15 +60,13 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToSamplePalettes() {
-        var view = SamplePalettesView()
-        view.router = self
+        let view = SamplePalettesView(router: self)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToSampleColors() {
-        var view = SampleColorsView()
-        view.router = self
+        let view = SampleColorsView(router: self)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -97,12 +97,6 @@ extension GeneralCoordinator: GeneralRoutable {
     
     func navigateToColorInfo(color: AppColor) {
         let view = ColorInfoView(color: color)
-        let vc = UIHostingController(rootView: view)
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func navigateToAddNewColor() {
-        let view = AddNewColorView().environmentObject(favoriteManager)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

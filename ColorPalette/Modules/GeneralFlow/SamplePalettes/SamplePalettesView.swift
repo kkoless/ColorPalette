@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct SamplePalettesView: View {
-    weak var router: GeneralRoutable?
     @State private var palettes = ColorPalette.getTestPalettes(20)
+    weak private var router: GeneralRoutable?
+    
+    init(router: GeneralRoutable? = nil) {
+        self.router = router
+    }
     
     var body: some View {
         VStack {

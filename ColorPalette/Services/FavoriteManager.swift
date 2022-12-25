@@ -8,25 +8,28 @@
 import Foundation
 
 final class FavoriteManager: ObservableObject {
-    @Published private(set) var items: Set<AppColor>
+    @Published private(set) var items: [AppColor]
     
-    init() {
+    static let shared = FavoriteManager()
+    
+    private init() {
         self.items = []
         print("\(self) INIT")
     }
     
+    deinit {
+        print("\(self) DEINIT")
+    }
+}
+
+extension FavoriteManager {
     func addColor(newColor: AppColor) {
-        items.insert(newColor)
-        print(items.count)
+        items.append(newColor)
     }
     
     func removeColor(color: AppColor) {
-        if items.contains(color) {
-            items.remove(color)
+        if let index = items.firstIndex(where: { $0 == color }) {
+            items.remove(at: index)
         }
-    }
-    
-    deinit {
-        print("\(self) DEINIT")
     }
 }

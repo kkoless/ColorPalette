@@ -22,10 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        var favoriteManager = FavoriteManager()
         
         let navigationController = UINavigationController()
-        coordinator = AppCoordinator(navigationController, favoriteManager: favoriteManager)
+        coordinator = AppCoordinator(navigationController)
         coordinator?.start()
         
         window.rootViewController = navigationController
