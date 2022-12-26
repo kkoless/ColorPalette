@@ -24,10 +24,12 @@ struct SampleColorsView: View {
     
     var body: some View {
         VStack {
+            navBar
+            
             header
             
             SearchBarView(searchText: $searchText)
-                .padding()
+                .padding([.leading, .trailing])
             
             ColorTypePickerView(selectedType: $selectedType)
             
@@ -38,10 +40,16 @@ struct SampleColorsView: View {
                 .padding()
             }
         }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
 private extension SampleColorsView {
+    var navBar: some View {
+        CustomNavigationBarView(backAction: { pop() })
+            .padding(.top, Consts.Constraints.top)
+    }
+    
     var header: some View {
         HStack {
             Text("Sample Colors")
@@ -49,7 +57,7 @@ private extension SampleColorsView {
                 .bold()
             Spacer()
         }
-        .padding()
+        .padding([.leading, .trailing])
     }
     
     var colorsBlock: some View {
@@ -60,7 +68,6 @@ private extension SampleColorsView {
                         templatePaletteManager.addColor(appColor)
                         showColorLibrary.toggle()
                     }
-                    //router?.navigateToColorInfo(color: appColor)
                 }
         }
     }
@@ -76,6 +83,12 @@ private extension SampleColorsView {
             return colors
                 .filter { $0.name.contains(searchText) }
         }
+    }
+}
+
+private extension SampleColorsView {
+    func pop() {
+        router?.pop()
     }
 }
 

@@ -13,6 +13,9 @@ struct CreateColorPaletteView: View {
     @State private var showColorLibrary: Bool = false
     @State private var showAddColor: Bool = false
     
+    @State private var showAlert: Bool = false
+    @State private var isSaved: Bool = false
+    
     @StateObject private var templatePaletteManager: TemplatePaletteManager = .init()
     @EnvironmentObject private var paletteStorage: PaletteStorageManager
     
@@ -23,27 +26,48 @@ struct CreateColorPaletteView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                topButtons
-                
-                Spacer()
-                
-                palettePreview
-                
-                Spacer()
-                
-                bottomButtons
-                
-                ColorTypePickerView(selectedType: $selectedType)
-                
+        VStack {
+            navBar
+            topButtons
+            
+            ScrollView {
+                VStack {
+                    palettePreview
+                    
+                    Spacer()
+                    
+                    bottomButtons
+                    
+                    ColorTypePickerView(selectedType: $selectedType)
+                    
+                }
+                .padding()
             }
-            .padding()
         }
+        .alert(Text("Are you sure?"), isPresented: $showAlert, actions: {
+            Button(role: .cancel, action: {}) {
+                Text("Stay")
+            }
+            Button(role: .destructive, action: {
+                isSaved = true
+                router?.pop()
+            }) {
+                Text("Don't save")
+            }
+        }, message: {
+            Text("Before you go, maybe you want save this template?")
+        })
+        .edgesIgnoringSafeArea(.top)
+        
     }
 }
 
 private extension CreateColorPaletteView {
+    var navBar: some View {
+        CustomNavigationBarView(backAction: { pop() })
+            .padding(.top, Consts.Constraints.top)
+    }
+    
     var topButtons: some View {
         HStack {
             Button(action: { showAddColor.toggle() }) {
@@ -86,10 +110,25 @@ private extension CreateColorPaletteView {
 }
 
 private extension CreateColorPaletteView {
+    func pop() {
+        if !isSaved {
+            showAlert.toggle()
+        } else {
+            router?.pop()
+        }
+    }
+}
+
+private extension CreateColorPaletteView {
     func savePalette() {
         let pallete = templatePaletteManager.createPalette()
         paletteStorage.addPallete(pallete)
-        router?.pop()
+        
+        isSaved = true
+        
+        if isSaved {
+            router?.pop()
+        }
     }
 }
 

@@ -54,7 +54,7 @@ private extension TabBarCoordinator {
     
     private func getTabController(_ page: TabBarPage) -> UINavigationController {
         let navController = UINavigationController()
-        navController.setNavigationBarHidden(false, animated: false)
+        navController.setNavigationBarHidden(true, animated: false)
         
         navController.tabBarItem = UITabBarItem.init(title: page.title,
                                                      image: UIImage(systemName: page.iconName),
@@ -83,6 +83,6 @@ private extension TabBarCoordinator {
 
 private extension TabBarCoordinator {
     func configureTabBar() {
-        tabBarController.tabBar.backgroundColor = UIColor(named: "tabBarBackground")
+        tabBarController.tabBar.backgroundColor = UIColor(named: "systemBackground")
     }
 }

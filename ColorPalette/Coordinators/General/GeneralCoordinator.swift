@@ -78,7 +78,7 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToImageColorDetection() {
-        let view = ImageColorDetection()
+        let view = ImageColorDetectionView(router: self)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */; };
-		E504B1FE2954A37E00996662 /* ImageColorDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FD2954A37E00996662 /* ImageColorDetection.swift */; };
+		E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */; };
 		E504B2002954B7C900996662 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FF2954B7C900996662 /* UIImageColors.swift */; };
 		E504B2022954C88100996662 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B2012954C88100996662 /* ImagePicker.swift */; };
 		E5056B72291914E8008C6120 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5056B71291914E8008C6120 /* SnapKit */; };
@@ -29,6 +29,7 @@
 		E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48FB29349C3E0078B12B /* AppCoordinator.swift */; };
 		E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55031C229577BB80052F544 /* FavoriteManager.swift */; };
 		E5571C4C291E5925003EBAB0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5571C4B291E5925003EBAB0 /* OnboardingView.swift */; };
+		E55AD0262959DB2400E60984 /* CustomNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AD0252959DB2400E60984 /* CustomNavigationBarView.swift */; };
 		E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BAD6929190B5700B3E233 /* AppDelegate.swift */; };
 		E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BAD6B29190B5800B3E233 /* SceneDelegate.swift */; };
 		E55BAD7329190B5900B3E233 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E55BAD7229190B5900B3E233 /* Assets.xcassets */; };
@@ -75,7 +76,7 @@
 
 /* Begin PBXFileReference section */
 		E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		E504B1FD2954A37E00996662 /* ImageColorDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorDetection.swift; sourceTree = "<group>"; };
+		E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorDetectionView.swift; sourceTree = "<group>"; };
 		E504B1FF2954B7C900996662 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		E504B2012954C88100996662 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E50BF95D2953528200534E82 /* SamplePalettesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesView.swift; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		E54E48FB29349C3E0078B12B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E55031C229577BB80052F544 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
 		E5571C4B291E5925003EBAB0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		E55AD0252959DB2400E60984 /* CustomNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarView.swift; sourceTree = "<group>"; };
 		E55BAD6629190B5700B3E233 /* ColorPalette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorPalette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E55BAD6929190B5700B3E233 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E55BAD6B29190B5800B3E233 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +159,7 @@
 		E504B1FC2954A35300996662 /* ImageColorDetection */ = {
 			isa = PBXGroup;
 			children = (
-				E504B1FD2954A37E00996662 /* ImageColorDetection.swift */,
+				E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */,
 			);
 			path = ImageColorDetection;
 			sourceTree = "<group>";
@@ -272,6 +274,14 @@
 				E5C2AEAD2937401D00508DF4 /* RegistrationScreen */,
 			);
 			path = AuthorizationFlow;
+			sourceTree = "<group>";
+		};
+		E55AD0242959DB0C00E60984 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				E55AD0252959DB2400E60984 /* CustomNavigationBarView.swift */,
+			);
+			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 		E55BAD5D29190B5700B3E233 = {
@@ -402,6 +412,7 @@
 		E56C0E20293765B200A878CB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E55AD0242959DB0C00E60984 /* NavigationBar */,
 				E56C0E21293765BB00A878CB /* TabBar */,
 				E504B2012954C88100996662 /* ImagePicker.swift */,
 			);
@@ -689,6 +700,7 @@
 				E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */,
 				E5DCBC8129365C46000C1B4E /* AppRouter.swift in Sources */,
 				E55F6F7E29559FCF00A8B935 /* ColorManager.swift in Sources */,
+				E55AD0262959DB2400E60984 /* CustomNavigationBarView.swift in Sources */,
 				E56C0E3129376E6400A878CB /* GeneralView.swift in Sources */,
 				E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */,
 				E5C2AEAF2937416300508DF4 /* LoginView.swift in Sources */,
@@ -704,7 +716,7 @@
 				E504B2002954B7C900996662 /* UIImageColors.swift in Sources */,
 				E57AF3AC2957315B0002FC75 /* ColorInfoView.swift in Sources */,
 				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
-				E504B1FE2954A37E00996662 /* ImageColorDetection.swift in Sources */,
+				E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */,
 				E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */,
 				E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */,
 				E5B6C71029587ABA007E6158 /* PaletteStorageManager.swift in Sources */,
