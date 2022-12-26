@@ -17,17 +17,25 @@ struct SamplePalettesView: View {
     
     var body: some View {
         VStack {
+            navBar
+            
             header
             
             List {
                 cells
             }
+            .listStyle(.plain)
         }
-        .listStyle(.plain)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
 private extension SamplePalettesView {
+    var navBar: some View {
+        CustomNavigationBarView(backAction: { pop() })
+            .padding(.top, Consts.Constraints.top)
+    }
+    
     var header: some View {
         HStack {
             Text("Sample Palettes")
@@ -36,7 +44,7 @@ private extension SamplePalettesView {
                 
             Spacer()
         }
-        .padding()
+        .padding([.leading, .trailing])
     }
     
     var cells: some View {
@@ -58,6 +66,10 @@ private extension SamplePalettesView {
 private extension SamplePalettesView {
     func navigateToColorPaletteScreen(_ selectedPalette: ColorPalette) {
         router?.navigateToColorPalette(palette: selectedPalette)
+    }
+    
+    func pop() {
+        router?.pop()
     }
 }
 

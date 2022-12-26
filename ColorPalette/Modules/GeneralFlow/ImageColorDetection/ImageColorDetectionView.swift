@@ -1,5 +1,5 @@
 //
-//  ImageColorDetection.swift
+//  ImageColorDetectionView.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 22.12.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ImageColorDetection: View {
+struct ImageColorDetectionView: View {
     @State var isSet: Bool = false
     @State var selection: UIImage = .init()
     
@@ -16,31 +16,46 @@ struct ImageColorDetection: View {
     
     @State private var showPopover = false
     
+    weak private var router: GeneralRoutable?
+    
+    init(router: GeneralRoutable? = nil) {
+        self.router = router
+    }
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                selectedImage
-                    .frame(width: 300, height: 300)
-                    .cornerRadius(15)
-                    .shadow(radius: 40)
-                    .padding()
-                
-                Spacer()
-                
-                Group {
-                    palette
-                    averageColorBlock
+        VStack {
+            navBar
+            
+            selectedImage
+                .frame(width: 300, height: 300)
+                .cornerRadius(15)
+                .shadow(radius: 20)
+                .padding()
+            
+            Spacer()
+            
+            actionButtons
+            
+            ScrollView {
+                VStack {
+                    Group {
+                        palette
+                        averageColorBlock
+                    }
                 }
-                
-                Spacer()
-                
-                actionButtons
             }
+            
         }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
-private extension ImageColorDetection {
+private extension ImageColorDetectionView {
+    var navBar: some View {
+        CustomNavigationBarView(backAction: { pop() })
+            .padding(.top, Consts.Constraints.top)
+    }
+    
     @ViewBuilder
     var selectedImage: some View {
         if isSet {
@@ -53,25 +68,22 @@ private extension ImageColorDetection {
     }
     
     var averageColorBlock: some View {
-        HStack {
-            Text("Average:")
-            averageColor
-                .frame(height: 30)
-                .cornerRadius(10)
-        }
-        .padding()
+        averageColor
+            .frame(height: 30)
+            .cornerRadius(10)
+            .padding([.leading, .trailing])
     }
     
     @ViewBuilder
     var palette: some View {
         if let palette = colorPalette {
             ColorPaletteCell(palette: palette)
-                .padding()
+                .padding([.leading, .trailing])
         }
     }
     
     var actionButtons: some View {
-        Group {
+        HStack {
             Button(action: { showPopover.toggle() }) {
                 Text("Choose image")
             }
@@ -93,7 +105,7 @@ private extension ImageColorDetection {
     }
 }
 
-private extension ImageColorDetection {
+private extension ImageColorDetectionView {
     func setAverageColor() {
         DispatchQueue.global().async {
             if let _averageColor = selection.averageColor {
@@ -124,8 +136,14 @@ private extension ImageColorDetection {
     }
 }
 
-struct ImageColorDetection_Previews: PreviewProvider {
+private extension ImageColorDetectionView {
+    func pop() {
+        router?.pop()
+    }
+}
+
+struct ImageColorDetectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageColorDetection(isSet: false, selection: UIImage())
+        ImageColorDetectionView()
     }
 }

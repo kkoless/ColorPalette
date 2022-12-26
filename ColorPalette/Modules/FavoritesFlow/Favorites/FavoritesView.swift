@@ -20,40 +20,43 @@ struct FavoritesView: View {
         VStack {
             header
             
-            List {
-                Section("Palettes") {
-                    paletteCells
+            if !paletteStorage.palettes.isEmpty {
+                List {
+                    Section("Palettes") {
+                        paletteCells
+                        addPaletteButton
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(.blue)
+                    }
                 }
+                .listStyle(.plain)
+            } else {
+                emptyState
             }
-            .listStyle(.plain)
         }
     }
 }
 
 private extension FavoritesView {
     var header: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Text("Favorites")
-                    .font(.largeTitle)
-                .bold()
-                
-                Spacer()
-            }
+        HStack {
+            Text("Favorites")
+                .font(.largeTitle)
+            .bold()
             
-            HStack {
-                Button(action: { navigateToCreatePalette() }) {
-                    Text("Add palette")
-                }
-                
-                Spacer()
-                
-                Button(action: { navigateToCreateColor() }) {
-                    Text("Add color")
-                }
+            Spacer()
+        }
+        .padding([.leading, .trailing])
+    }
+    
+    var addPaletteButton: some View {
+        Button(action: { navigateToCreatePalette() }) {
+            if paletteStorage.palettes.isEmpty {
+                Text("Add palette")
+            } else {
+                Image(systemName: "plus.circle")
             }
         }
-        .padding()
     }
     
     var paletteCells: some View {
@@ -70,6 +73,22 @@ private extension FavoritesView {
             indexSet.forEach { paletteStorage.removePalette(from: $0) }
         }
     }
+    
+    var emptyState: some View {
+        VStack(spacing: 15) {
+            Spacer()
+            Text("So empty here...")
+                .font(.headline)
+                .bold()
+                .frame(alignment: .center)
+            
+            addPaletteButton
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .padding([.leading, .trailing])
+    }
 }
 
 private extension FavoritesView {
@@ -79,10 +98,6 @@ private extension FavoritesView {
     
     func navigateToCreatePalette() {
         router?.navigateToCreatePalette()
-    }
-    
-    func navigateToCreateColor() {
-        router?.navigateToAddNewColor()
     }
 }
 

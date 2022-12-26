@@ -13,4 +13,9 @@ struct Consts {
         static let baseUrl = URL(string: "")!
         static let tokenHeader = "apiKey"
     }
+    
+    struct Constraints {
+        static let top = UIApplication.shared.windows.first?.safeAreaInsets.top
+        static let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom
+    }
 }
