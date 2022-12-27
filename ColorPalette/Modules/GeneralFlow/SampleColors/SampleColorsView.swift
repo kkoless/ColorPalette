@@ -68,5 +68,6 @@ private extension SampleColorsView {
 struct SampleColorsView_Previews: PreviewProvider {
     static var previews: some View {
         SampleColorsView()
+            .environmentObject(SampleColorsViewModel())
     }
 }

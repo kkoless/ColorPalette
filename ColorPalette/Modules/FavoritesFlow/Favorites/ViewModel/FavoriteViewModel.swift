@@ -42,10 +42,15 @@ private extension FavoriteViewModel {
             self?.output.palettes = palettes
         }
         .store(in: &cancellable)
+        
+        favoriteManager.$colors.sink { [weak self] colors in
+            self?.output.colors = colors
+        }
+        .store(in: &cancellable)
     }
     
     func bindTaps() {
-        input.addPaletteTap
+        input.createPaletteTap
             .sink { [weak self] _ in
                 self?.router?.navigateToCreatePalette()
             }
@@ -58,14 +63,23 @@ extension FavoriteViewModel {
         let paletteForDelete = output.palettes[index]
         favoriteManager.removePalette(paletteForDelete)
     }
+    
+    func removeColor(from index: Int) {
+        let colorForDelete = output.colors[index]
+        favoriteManager.removeColor(colorForDelete)
+    }
 }
 
 extension FavoriteViewModel {
     struct Input {
-        let addPaletteTap: PassthroughSubject<Void, Never> = .init()
+        let createPaletteTap: PassthroughSubject<Void, Never> = .init()
+        let choosePaletteTap: PassthroughSubject<Void, Never> = .init()
+        let createColorTap: PassthroughSubject<Void, Never> = .init()
+        let chooseColorTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
         var palettes: [ColorPalette] = []
+        var colors: [AppColor] = []
     }
 }

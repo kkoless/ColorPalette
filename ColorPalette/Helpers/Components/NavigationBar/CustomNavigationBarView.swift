@@ -10,14 +10,14 @@ import Combine
 
 struct CustomNavigationBarView: View {
     private let title: String
-    private let trailingItems: [Button<Image>]
+    private let trailingItems: [Button<AnyView>]
     private let backAction: PassthroughSubject<Void, Never>?
     
     @Environment(\.dismiss) private var dismiss: DismissAction
     
     init(backAction: PassthroughSubject<Void, Never>? = nil,
          title: String = "",
-         trailingItems: [Button<Image>] = []) {
+         trailingItems: [Button<AnyView>] = []) {
         self.backAction = backAction
         self.title = title
         self.trailingItems = trailingItems
@@ -49,6 +49,8 @@ private extension CustomNavigationBarView {
     var backButton: some View {
         Button(action: { pop() }) {
             Image(systemName: "chevron.left")
+                .resizable()
+                .frame(width: 10, height: 20)
         }
     }
     
@@ -59,7 +61,7 @@ private extension CustomNavigationBarView {
     }
     
     var trailingItemsBlock: some View {
-        HStack(spacing: 25) {
+        HStack(spacing: 35) {
             ForEach(0..<trailingItems.count) { index in
                 self.trailingItems[index]
             }
@@ -88,12 +90,18 @@ private extension CustomNavigationBarView {
 
 struct CustomNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        let buttons: [Button<Image>] = [
+        let buttons: [Button<AnyView>] = [
             Button(action: {}, label: {
                 Image(systemName: "square.and.arrow.up")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .eraseToAnyView()
             }),
             Button(action: {}, label: {
                 Image(systemName: "trash")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .eraseToAnyView()
             })
         ]
         let backTap = PassthroughSubject<Void, Never>()

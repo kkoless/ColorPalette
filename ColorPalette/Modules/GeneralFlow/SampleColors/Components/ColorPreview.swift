@@ -1,5 +1,5 @@
 //
-//  ColorInfoView.swift
+//  ColorPreview.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 24.12.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ColorInfoView: View {
+struct ColorPreview: View {
     private let color: UIColor
     private let colorName: String
     @State private var showInfo = true
@@ -33,7 +33,7 @@ struct ColorInfoView: View {
     }
 }
 
-private extension ColorInfoView {
+private extension ColorPreview {
     var infoBlock: some View {
         VStack(alignment: .leading) {
             Text(colorName)
@@ -96,9 +96,9 @@ private extension ColorInfoView {
     }
 }
 
-struct ColorInfoView_Previews: PreviewProvider {
+struct ColorPreview_Previews: PreviewProvider {
     static var previews: some View {
         let appColor = AppColor(name: "African Violet", hex: "#B284BE")
-        ColorInfoView(color: appColor)
+        ColorPreview(color: appColor)
     }
 }

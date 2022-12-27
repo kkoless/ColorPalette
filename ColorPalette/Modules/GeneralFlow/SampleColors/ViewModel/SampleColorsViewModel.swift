@@ -55,7 +55,7 @@ private extension SampleColorsViewModel {
         
         input.colorTap
             .sink { [weak self] appColor in
-                //self?.router?.navigateToColorInfo(color: appColor)
+                self?.router?.navigateToColorInfo(color: appColor)
             }
             .store(in: &cancellable)
         

@@ -8,54 +8,23 @@
 import SwiftUI
 
 struct ColorRowView: View {
-    private let uiColor: UIColor
-    private let colorName: String
-    private let type: ColorType
-    private let showInfoButton: Bool
+    let appColor: AppColor
+    let type: ColorType
     
     @EnvironmentObject private var viewModel: SampleColorsViewModel
     
-    init(appColor: AppColor, type: ColorType, showInfoButton: Bool = true) {
-        self.uiColor = UIColor(hexString: appColor.hex)
-        self.colorName = appColor.name
-        self.type = type
-        self.showInfoButton = showInfoButton
-    }
-    
     var body: some View {
         HStack() {
-            colorPreview
+            ColorBlockView(appColor: appColor, type: type)
+                .onTapGesture { previewTap() }
             
-            colorInfo
-            
-            Spacer()
-            
-            if showInfoButton {
-                infoButton
-            }
+            infoButton
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 private extension ColorRowView {
-    var colorPreview: some View {
-        Color(uiColor)
-            .frame(width: 80, height: 80)
-            .cornerRadius(10)
-    }
-    
-    var colorInfo: some View {
-        VStack(alignment: .leading) {
-            Text(colorName)
-                .font(.headline)
-                .bold()
-            
-            Text(uiColor.getTypeInfo(type: type, isExtended: false))
-                .font(.subheadline)
-        }
-    }
-    
     var infoButton: some View {
         Button(action: { infoTap() }) {
             Image(systemName: "info.circle")
@@ -68,7 +37,11 @@ private extension ColorRowView {
 
 private extension ColorRowView {
     func infoTap() {
-        viewModel.input.infoTap.send(AppColor(uiColor: uiColor))
+        viewModel.input.infoTap.send(appColor)
+    }
+    
+    func previewTap() {
+        viewModel.input.colorTap.send(appColor)
     }
 }
 

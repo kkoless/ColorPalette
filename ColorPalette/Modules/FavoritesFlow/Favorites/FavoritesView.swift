@@ -11,21 +11,16 @@ struct FavoritesView: View {
     @ObservedObject var viewModel: FavoriteViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             header
             
-            if !viewModel.output.palettes.isEmpty {
-                List {
-                    Section("Palettes") {
-                        paletteCells
-                        addPaletteButton
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(.blue)
-                    }
-                }
-                .listStyle(.plain)
-            } else {
+            addButtons
+            
+            if viewModel.output.palettes.isEmpty && viewModel.output.colors.isEmpty {
                 emptyState
+            }
+            else {
+                favoriteList
             }
         }
     }
@@ -33,24 +28,65 @@ struct FavoritesView: View {
 
 private extension FavoritesView {
     var header: some View {
-        HStack {
+        HStack(alignment: .center) {
             Text("Favorites")
                 .font(.largeTitle)
             .bold()
-            
             Spacer()
         }
         .padding([.leading, .trailing])
     }
     
-    var addPaletteButton: some View {
-        Button(action: { viewModel.input.addPaletteTap.send() }) {
-            if viewModel.output.palettes.isEmpty {
-                Text("Add palette")
-            } else {
-                Image(systemName: "plus.circle")
+    var addButtons: some View {
+        HStack {
+            paletteMenu
+            Spacer()
+            colorMenu
+        }
+        .padding()
+    }
+    
+    var paletteMenu: some View {
+        Menu {
+            Button(action: { viewModel.input.createPaletteTap.send() }) {
+                Text("Create palette")
+            }
+            Button(action: { viewModel.input.choosePaletteTap.send() }) {
+                Text("Choose from library")
+            }
+        } label: {
+            Text("Add palette")
+        }
+    }
+    
+    var colorMenu: some View {
+        Menu {
+            Button(action: { viewModel.input.createColorTap.send() }) {
+                Text("Create color")
+            }
+            Button(action: { viewModel.input.chooseColorTap.send() }) {
+                Text("Choose from library")
+            }
+        } label: {
+            Text("Add color")
+        }
+    }
+    
+    var favoriteList: some View {
+        List {
+            if !viewModel.output.palettes.isEmpty {
+                Section("Palettes") {
+                    paletteCells
+                }
+            }
+            
+            if !viewModel.output.colors.isEmpty {
+                Section("Colors") {
+                    colorCells
+                }
             }
         }
+        .listStyle(.plain)
     }
     
     var paletteCells: some View {
@@ -65,6 +101,17 @@ private extension FavoritesView {
         }
     }
     
+    var colorCells: some View {
+        ForEach(viewModel.output.colors) { color in
+            Color(color)
+                .listRowSeparator(.hidden)
+                .cornerRadius(10)
+        }
+        .onDelete { indexSet in
+            indexSet.forEach { viewModel.removeColor(from: $0) }
+        }
+    }
+    
     var emptyState: some View {
         VStack(spacing: 15) {
             Spacer()
@@ -72,9 +119,6 @@ private extension FavoritesView {
                 .font(.headline)
                 .bold()
                 .frame(alignment: .center)
-            
-            addPaletteButton
-            
             Spacer()
         }
         .frame(maxWidth: .infinity)

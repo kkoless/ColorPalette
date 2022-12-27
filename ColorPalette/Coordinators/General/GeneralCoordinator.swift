@@ -97,7 +97,8 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToColorInfo(color: AppColor) {
-        let view = ColorInfoView(color: color)
+        let view = ColorInfoView(appColor: color)
+            .environmentObject(FavoriteManager.shared)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
