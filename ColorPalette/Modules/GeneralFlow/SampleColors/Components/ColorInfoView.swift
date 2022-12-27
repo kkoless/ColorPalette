@@ -23,27 +23,17 @@ struct ColorInfoView: View {
     }
     
     var body: some View {
-        VStack {
-            navBar
-            
-            ZStack(alignment: .top) {
-                Color(color)
-                if showInfo {
-                    infoBlock
-                }
+        ZStack(alignment: .top) {
+            Color(color)
+            if showInfo {
+                infoBlock
             }
-            .onTapGesture { showInfo.toggle() }
         }
-        .edgesIgnoringSafeArea(.top)
+        .onTapGesture { showInfo.toggle() }
     }
 }
 
 private extension ColorInfoView {
-    var navBar: some View {
-        CustomNavigationBarView()
-            .padding(.top, Consts.Constraints.top)
-    }
-    
     var infoBlock: some View {
         VStack(alignment: .leading) {
             Text(colorName)

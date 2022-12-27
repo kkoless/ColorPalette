@@ -8,19 +8,13 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @EnvironmentObject private var paletteStorage: PaletteStorageManager
-    
-    weak private var router: FavoritesRoutable?
-    
-    init(router: FavoritesRoutable? = nil) {
-        self.router = router
-    }
+    @ObservedObject var viewModel: FavoriteViewModel
     
     var body: some View {
         VStack {
             header
             
-            if !paletteStorage.palettes.isEmpty {
+            if !viewModel.output.palettes.isEmpty {
                 List {
                     Section("Palettes") {
                         paletteCells
@@ -50,8 +44,8 @@ private extension FavoritesView {
     }
     
     var addPaletteButton: some View {
-        Button(action: { navigateToCreatePalette() }) {
-            if paletteStorage.palettes.isEmpty {
+        Button(action: { viewModel.input.addPaletteTap.send() }) {
+            if viewModel.output.palettes.isEmpty {
                 Text("Add palette")
             } else {
                 Image(systemName: "plus.circle")
@@ -60,17 +54,14 @@ private extension FavoritesView {
     }
     
     var paletteCells: some View {
-        ForEach(paletteStorage.palettes) { palette in
+        ForEach(viewModel.output.palettes) { palette in
             ColorPaletteCell(palette: palette)
                 .padding([.leading, .trailing])
                 .listRowSeparator(.hidden)
                 .listRowInsets(.init())
-                .onTapGesture {
-                    navigateToColorPaletteScreen(palette)
-                }
         }
         .onDelete { indexSet in
-            indexSet.forEach { paletteStorage.removePalette(from: $0) }
+            indexSet.forEach { viewModel.removePalette(from: $0) }
         }
     }
     
@@ -91,19 +82,8 @@ private extension FavoritesView {
     }
 }
 
-private extension FavoritesView {
-    func navigateToColorPaletteScreen(_ palette: ColorPalette) {
-        router?.navigateToColorPalette(palette: palette)
-    }
-    
-    func navigateToCreatePalette() {
-        router?.navigateToCreatePalette()
-    }
-}
-
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView()
-            .environmentObject(PaletteStorageManager.shared)
+        FavoritesView(viewModel: FavoriteViewModel())
     }
 }

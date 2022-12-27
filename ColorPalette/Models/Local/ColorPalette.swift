@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ColorPalette: Identifiable, Equatable {
+struct ColorPalette: Identifiable {
     let id: UUID = .init()
     let colors: [AppColor]
     
@@ -27,7 +27,12 @@ struct ColorPalette: Identifiable, Equatable {
     }
 }
 
-extension ColorPalette {
+extension ColorPalette: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(colors)
+    }
+    
     static func == (lhs: ColorPalette, rhs: ColorPalette) -> Bool {
         return lhs.id == rhs.id
     }

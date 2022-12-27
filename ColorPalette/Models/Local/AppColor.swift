@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct AppColor: Codable, Identifiable {
+struct AppColor: Identifiable {
     let id: UUID
     let name: String
     let hex: String
@@ -23,7 +23,7 @@ struct AppColor: Codable, Identifiable {
     }
 }
 
-extension AppColor {
+extension AppColor: Codable {
     init(name: String, hex: String) {
         self.id = .init()
         self.name = name
@@ -50,7 +50,11 @@ extension AppColor {
     }
 }
 
-extension AppColor {
+extension AppColor: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(hex.lowercased())
+    }
+    
     static func == (lhs: AppColor, rhs: AppColor) -> Bool {
         return lhs.hex.lowercased() == lhs.hex.lowercased() &&
                 lhs.name.lowercased() == rhs.name.lowercased()

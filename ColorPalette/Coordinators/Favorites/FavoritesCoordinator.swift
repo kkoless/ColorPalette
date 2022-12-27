@@ -46,9 +46,9 @@ extension FavoritesCoordinator: FavoritesRoutable {
     }
     
     func navigateToFavoritesScreen() {
-        let profileView = FavoritesView(router: self)
-            .environmentObject(PaletteStorageManager.shared)
-        let vc = UIHostingController(rootView: profileView)
+        let viewModel = FavoriteViewModel(router: self)
+        let favoriteView = FavoritesView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: favoriteView)
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -59,14 +59,14 @@ extension FavoritesCoordinator: FavoritesRoutable {
     }
     
     func navigateToAddNewColor() {
-        let view = AddNewColorView().environmentObject(FavoriteManager.shared)
+        let view = AddNewColorView()
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToCreatePalette() {
-        let view = CreateColorPaletteView(router: self)
-            .environmentObject(PaletteStorageManager.shared)
+        let viewModel = CreateColorPaletteViewModel(router: self)
+        let view = CreateColorPaletteView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

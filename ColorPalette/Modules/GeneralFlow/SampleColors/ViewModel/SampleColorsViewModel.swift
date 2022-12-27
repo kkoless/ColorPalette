@@ -14,7 +14,7 @@ final class SampleColorsViewModel: ObservableObject {
     
     private weak var router: GeneralRoutable?
     private let colors = ColorManager.shared.colors
-    private var anyCancellable: Set<AnyCancellable> = .init()
+    private var cancellable: Set<AnyCancellable> = .init()
     
     init(router: GeneralRoutable? = nil) {
         self.router = router
@@ -29,6 +29,9 @@ final class SampleColorsViewModel: ObservableObject {
     
     deinit {
         print("\(self) DEINIT")
+        
+        cancellable.forEach { $0.cancel() }
+        cancellable.removeAll()
     }
 }
 
@@ -40,7 +43,7 @@ private extension SampleColorsViewModel {
                     self?.output.colors = newColors
                 }
             }
-            .store(in: &anyCancellable)
+            .store(in: &cancellable)
     }
     
     func bindTaps() {
@@ -48,19 +51,19 @@ private extension SampleColorsViewModel {
             .sink { [weak self] appColor in
                 self?.router?.navigateToSimilarColors(color: appColor)
             }
-            .store(in: &anyCancellable)
+            .store(in: &cancellable)
         
         input.colorTap
             .sink { [weak self] appColor in
-                self?.router?.navigateToColorInfo(color: appColor)
+                //self?.router?.navigateToColorInfo(color: appColor)
             }
-            .store(in: &anyCancellable)
+            .store(in: &cancellable)
         
         input.popTap
             .sink { [weak self] _ in
                 self?.router?.pop()
             }
-            .store(in: &anyCancellable)
+            .store(in: &cancellable)
     }
 }
 

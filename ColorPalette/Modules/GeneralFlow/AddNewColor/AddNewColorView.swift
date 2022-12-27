@@ -46,7 +46,7 @@ private extension AddNewColorView {
     }
     
     var preview: some View {
-        selectedColor
+        ColorInfoView(color: selectedColor.uiColor, colorName: $colorName)
             .cornerRadius(10)
     }
     

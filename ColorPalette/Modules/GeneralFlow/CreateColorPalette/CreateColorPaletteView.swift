@@ -12,17 +12,7 @@ struct CreateColorPaletteView: View {
     @State private var showColorInfo: Bool = true
     @State private var showAddColor: Bool = false
     
-    @State private var showAlert: Bool = false
-    @State private var isSaved: Bool = false
-    
-    @StateObject private var templatePaletteManager: TemplatePaletteManager = .init()
-    @EnvironmentObject private var paletteStorage: PaletteStorageManager
-    
-    weak var router: FavoritesRoutable?
-    
-    init(router: FavoritesRoutable? = nil) {
-        self.router = router
-    }
+    @ObservedObject var viewModel : CreateColorPaletteViewModel
     
     var body: some View {
         VStack {
@@ -30,28 +20,18 @@ struct CreateColorPaletteView: View {
             
             topButtons
             
+            ColorTypePickerView(selectedType: $selectedType)
+            
             ScrollView {
-                VStack {
-                    palettePreview
-                    
-                    Spacer()
-                    
-                    bottomButtons
-                    
-                    ColorTypePickerView(selectedType: $selectedType)
-                    
-                }
-                .padding()
+                palettePreview
+                    .padding()
             }
         }
-        .alert(Text("Are you sure?"), isPresented: $showAlert, actions: {
-            Button(role: .cancel, action: {}) {
+        .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
+            Button(role: .cancel, action: { viewModel.input.stayAlertTap.send() }) {
                 Text("Stay")
             }
-            Button(role: .destructive, action: {
-                isSaved = true
-                router?.pop()
-            }) {
+            Button(role: .destructive, action: { viewModel.input.backAlertTap.send() }) {
                 Text("Don't save")
             }
         }, message: {
@@ -63,7 +43,7 @@ struct CreateColorPaletteView: View {
 
 private extension CreateColorPaletteView {
     var navBar: some View {
-        CustomNavigationBarView()
+        CustomNavigationBarView(backAction: viewModel.input.backTap)
             .padding(.top, Consts.Constraints.top)
     }
     
@@ -74,58 +54,38 @@ private extension CreateColorPaletteView {
             }
             .popover(isPresented: $showAddColor) {
                 AddNewColorView(showAsPopover: $showAddColor)
-                    .environmentObject(templatePaletteManager)
+                    .environmentObject(viewModel.templatePaletteManager)
             }
             
             Spacer()
+            
+            if !viewModel.output.colors.isEmpty {
+                Button(action: { savePalette() }) {
+                    Text("Save palette")
+                }
+            }
         }
         .padding()
     }
     
     var palettePreview: some View {
         VStack(spacing: 0) {
-            ForEach(templatePaletteManager.colors) { color in
+            ForEach(viewModel.output.colors) { color in
                 ColorPaletteRowView(appColor: color, type: selectedType, showInfo: showColorInfo)
             }
         }
         .cornerRadius(10)
     }
-    
-    var bottomButtons: some View {
-        Button(action: { savePalette() }) {
-            Text("Save palette")
-        }
-        .disabled(templatePaletteManager.colors.isEmpty)
-        .padding()
-    }
-}
-
-private extension CreateColorPaletteView {
-    func pop() {
-        if !isSaved {
-            showAlert.toggle()
-        } else {
-            router?.pop()
-        }
-    }
 }
 
 private extension CreateColorPaletteView {
     func savePalette() {
-        let pallete = templatePaletteManager.createPalette()
-        paletteStorage.addPallete(pallete)
-        
-        isSaved = true
-        
-        if isSaved {
-            router?.pop()
-        }
+        viewModel.input.saveTap.send()
     }
 }
 
 struct CreateColorPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateColorPaletteView()
-            .environmentObject(PaletteStorageManager.shared)
+        CreateColorPaletteView(viewModel: CreateColorPaletteViewModel())
     }
 }
