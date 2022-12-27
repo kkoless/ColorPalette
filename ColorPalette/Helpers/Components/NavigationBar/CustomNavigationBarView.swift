@@ -11,9 +11,11 @@ import Combine
 struct CustomNavigationBarView: View {
     private let title: String
     private let trailingItems: [Button<Image>]
-    private let backAction: () -> Void
+    private let backAction: PassthroughSubject<Void, Never>?
     
-    init(backAction: @escaping () -> Void,
+    @Environment(\.dismiss) private var dismiss: DismissAction
+    
+    init(backAction: PassthroughSubject<Void, Never>? = nil,
          title: String = "",
          trailingItems: [Button<Image>] = []) {
         self.backAction = backAction
@@ -45,7 +47,7 @@ struct CustomNavigationBarView: View {
 
 private extension CustomNavigationBarView {
     var backButton: some View {
-        Button(action: { self.backAction() }) {
+        Button(action: { pop() }) {
             Image(systemName: "chevron.left")
         }
     }
@@ -74,6 +76,16 @@ private extension CustomNavigationBarView {
     }
 }
 
+private extension CustomNavigationBarView {
+    func pop() {
+        if backAction == nil {
+            dismiss()
+        } else {
+            self.backAction?.send(())
+        }
+    }
+}
+
 struct CustomNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
         let buttons: [Button<Image>] = [
@@ -84,8 +96,10 @@ struct CustomNavigationBarView_Previews: PreviewProvider {
                 Image(systemName: "trash")
             })
         ]
+        let backTap = PassthroughSubject<Void, Never>()
         VStack {
-            CustomNavigationBarView(backAction: { }, trailingItems: buttons)
+            CustomNavigationBarView(backAction: backTap,
+                                    trailingItems: buttons)
             Spacer()
         }
     }

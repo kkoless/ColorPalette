@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct ImageColorDetectionView: View {
-    @State var isSet: Bool = false
-    @State var selection: UIImage = .init()
-    
-    @State var averageColor: Color = .clear
-    @State var colorPalette: ColorPalette?
-    
+    @State private var isSet: Bool = false
+    @State private var selection: UIImage = .init()
+    @State private var averageColor: Color = .clear
+    @State private var colorPalette: ColorPalette?
     @State private var showPopover = false
     
     weak private var router: GeneralRoutable?
@@ -52,7 +50,7 @@ struct ImageColorDetectionView: View {
 
 private extension ImageColorDetectionView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: { pop() })
+        CustomNavigationBarView()
             .padding(.top, Consts.Constraints.top)
     }
     
@@ -133,12 +131,6 @@ private extension ImageColorDetectionView {
             .map { AppColor(uiColor: $0) }
         
         colorPalette = ColorPalette(colors: resColors)
-    }
-}
-
-private extension ImageColorDetectionView {
-    func pop() {
-        router?.pop()
     }
 }
 
