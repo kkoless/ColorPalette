@@ -66,7 +66,8 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToSampleColors() {
-        let view = SampleColorsView(router: self)
+        let viewModel = SampleColorsViewModel(router: self)
+        let view = SampleColorsView().environmentObject(viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

@@ -10,7 +10,6 @@ import SwiftUI
 struct CreateColorPaletteView: View {
     @State private var selectedType: ColorType = .HEX
     @State private var showColorInfo: Bool = true
-    @State private var showColorLibrary: Bool = false
     @State private var showAddColor: Bool = false
     
     @State private var showAlert: Bool = false
@@ -28,6 +27,7 @@ struct CreateColorPaletteView: View {
     var body: some View {
         VStack {
             navBar
+            
             topButtons
             
             ScrollView {
@@ -58,13 +58,12 @@ struct CreateColorPaletteView: View {
             Text("Before you go, maybe you want save this template?")
         })
         .edgesIgnoringSafeArea(.top)
-        
     }
 }
 
 private extension CreateColorPaletteView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: { pop() })
+        CustomNavigationBarView()
             .padding(.top, Consts.Constraints.top)
     }
     
@@ -79,14 +78,6 @@ private extension CreateColorPaletteView {
             }
             
             Spacer()
-            
-            Button(action: { showColorLibrary.toggle() }) {
-                Text("Choose color from library")
-            }
-            .popover(isPresented: $showColorLibrary) {
-                SampleColorsView(showColorLibrary: $showColorLibrary)
-                    .environmentObject(templatePaletteManager)
-            }
         }
         .padding()
     }

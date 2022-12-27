@@ -18,6 +18,7 @@
 		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
 		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53D851F291E35E900E73D90 /* OnboardingPageType.swift */; };
+		E53E2215295AD9EC00BD5D5D /* SampleColorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53E2214295AD9EC00BD5D5D /* SampleColorsViewModel.swift */; };
 		E54263E929388614003334FE /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263E829388614003334FE /* OnboardingManager.swift */; };
 		E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263EA29388B0B003334FE /* UserDefaultsKey.swift */; };
 		E54263EE29389820003334FE /* AuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263ED29389820003334FE /* AuthorizationAPI.swift */; };
@@ -85,6 +86,7 @@
 		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E53D851F291E35E900E73D90 /* OnboardingPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageType.swift; sourceTree = "<group>"; };
+		E53E2214295AD9EC00BD5D5D /* SampleColorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleColorsViewModel.swift; sourceTree = "<group>"; };
 		E54263E829388614003334FE /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		E54263EA29388B0B003334FE /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		E54263ED29389820003334FE /* AuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationAPI.swift; sourceTree = "<group>"; };
@@ -237,6 +239,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		E53E2213295AD9DB00BD5D5D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E53E2214295AD9EC00BD5D5D /* SampleColorsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E54263E7293884CA003334FE /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +394,7 @@
 		E55F6F7A295597C400A8B935 /* SampleColors */ = {
 			isa = PBXGroup;
 			children = (
+				E53E2213295AD9DB00BD5D5D /* ViewModel */,
 				E55F6F7B295597E000A8B935 /* SampleColorsView.swift */,
 				E55F6F852955B69D00A8B935 /* Components */,
 			);
@@ -724,6 +735,7 @@
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
 				E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */,
+				E53E2215295AD9EC00BD5D5D /* SampleColorsViewModel.swift in Sources */,
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
 				E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */,
 				E55F6F842955AFBE00A8B935 /* ColorRowView.swift in Sources */,

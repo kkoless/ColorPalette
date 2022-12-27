@@ -8,7 +8,7 @@
 import Foundation
 
 final class ColorManager {
-    private(set) var colors: [AppColor]
+    let colors: [AppColor]
     static let shared = ColorManager()
     
     private init() {

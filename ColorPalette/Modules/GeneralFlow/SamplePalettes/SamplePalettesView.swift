@@ -32,7 +32,7 @@ struct SamplePalettesView: View {
 
 private extension SamplePalettesView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: { pop() })
+        CustomNavigationBarView()
             .padding(.top, Consts.Constraints.top)
     }
     
@@ -66,10 +66,6 @@ private extension SamplePalettesView {
 private extension SamplePalettesView {
     func navigateToColorPaletteScreen(_ selectedPalette: ColorPalette) {
         router?.navigateToColorPalette(palette: selectedPalette)
-    }
-    
-    func pop() {
-        router?.pop()
     }
 }
 

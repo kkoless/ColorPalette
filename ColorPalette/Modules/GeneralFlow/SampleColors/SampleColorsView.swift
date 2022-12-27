@@ -10,17 +10,8 @@ import SwiftUI
 struct SampleColorsView: View {
     @State private var searchText: String = ""
     @State private var selectedType: ColorType = .HEX
-    @Binding var showColorLibrary: Bool
     
-    weak private var router: GeneralRoutable?
-    
-    @EnvironmentObject var templatePaletteManager: TemplatePaletteManager
-    
-    
-    init(showColorLibrary: Binding<Bool>? = nil, router: GeneralRoutable? = nil) {
-        self._showColorLibrary = showColorLibrary ?? .constant(false)
-        self.router = router
-    }
+    @EnvironmentObject private var viewModel: SampleColorsViewModel
     
     var body: some View {
         VStack {
@@ -29,6 +20,9 @@ struct SampleColorsView: View {
             header
             
             SearchBarView(searchText: $searchText)
+                .onChange(of: searchText, perform: { newValue in
+                    viewModel.input.searchText.send(newValue)
+                })
                 .padding([.leading, .trailing])
             
             ColorTypePickerView(selectedType: $selectedType)
@@ -46,7 +40,7 @@ struct SampleColorsView: View {
 
 private extension SampleColorsView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: { pop() })
+        CustomNavigationBarView(backAction: viewModel.input.popTap)
             .padding(.top, Consts.Constraints.top)
     }
     
@@ -61,40 +55,18 @@ private extension SampleColorsView {
     }
     
     var colorsBlock: some View {
-        ForEach(getColors(searchText)) { appColor in
+        ForEach(viewModel.output.colors) { appColor in
             ColorRowView(appColor: appColor, type: selectedType)
+                .environmentObject(viewModel)
                 .onTapGesture {
-                    if showColorLibrary {
-                        templatePaletteManager.addColor(appColor)
-                        showColorLibrary.toggle()
-                    }
+                    viewModel.input.colorTap.send(appColor)
                 }
         }
-    }
-}
-
-private extension SampleColorsView {
-    func getColors(_ searchText: String) -> [AppColor] {
-        let colors = ColorManager.shared.colors
-        
-        if searchText.isEmpty {
-            return colors
-        } else {
-            return colors
-                .filter { $0.name.contains(searchText) }
-        }
-    }
-}
-
-private extension SampleColorsView {
-    func pop() {
-        router?.pop()
     }
 }
 
 struct SampleColorsView_Previews: PreviewProvider {
     static var previews: some View {
         SampleColorsView()
-            .environmentObject(TemplatePaletteManager())
     }
 }
