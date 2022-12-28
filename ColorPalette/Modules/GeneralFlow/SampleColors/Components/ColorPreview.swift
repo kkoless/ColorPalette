@@ -13,13 +13,8 @@ struct ColorPreview: View {
     @State private var showInfo = true
     
     init(color: AppColor) {
-        self.color = UIColor(hexString: color.hex)
-        self.colorName = color.name.isEmpty ? " " : color.name
-    }
-    
-    init(color: UIColor, colorName: Binding<String>) {
-        self.color = color
-        self.colorName = colorName.wrappedValue.isEmpty ? color.accessibilityName : colorName.wrappedValue
+        self.color = UIColor(color)
+        self.colorName = color.name.isEmpty ? self.color.accessibilityName : color.name
     }
     
     var body: some View {

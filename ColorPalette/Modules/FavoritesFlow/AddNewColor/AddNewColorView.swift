@@ -46,7 +46,8 @@ private extension AddNewColorView {
     }
     
     var preview: some View {
-        ColorPreview(color: selectedColor.uiColor, colorName: $colorName)
+        ColorInfoView(appColor: AppColor(name: colorName, hex: selectedColor.uiColor.hexValue))
+            .environmentObject(FavoriteManager.shared)
             .cornerRadius(10)
     }
     
@@ -56,13 +57,6 @@ private extension AddNewColorView {
             
             Button(action: { addColor() }) {
                 Text("Add color")
-            }
-            .disabled(selectedColor == .clear)
-            
-            Spacer()
-            
-            Button(action: { saveColor() }) {
-                Text("Save color")
             }
             .disabled(selectedColor == .clear)
             

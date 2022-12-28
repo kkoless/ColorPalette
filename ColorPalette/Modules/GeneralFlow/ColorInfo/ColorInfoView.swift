@@ -22,7 +22,8 @@ struct ColorInfoView: View {
             helpButtonsBlock
         }
         .edgesIgnoringSafeArea(.bottom)
-        .onAppear { onAppear() }
+        .onAppear { checkFavorite(color: appColor) }
+        .onChange(of: appColor) { newValue in checkFavorite(color: newValue) }
     }
 }
 
@@ -60,10 +61,10 @@ private extension ColorInfoView {
 }
 
 private extension ColorInfoView {
-    func onAppear() {
+    func checkFavorite(color: AppColor) {
         self.isFavorite = favoriteManager
             .colors
-            .contains(where: { $0 == appColor })
+            .contains(where: { $0 == color })
     }
     
     func changeFavoriteState() {
