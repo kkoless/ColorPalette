@@ -43,10 +43,6 @@ private extension GeneralView {
             Button(action: { navigateToSampleColors() }) {
                 Text("Go to sample colors")
             }
-            
-            Button(action: { navigateToImageColorDetection() }) {
-                Text("Detect colors on image")
-            }
         }
     }
 }
@@ -58,10 +54,6 @@ private extension GeneralView {
     
     func navigateToSampleColors() {
         router?.navigateToSampleColors()
-    }
-    
-    func navigateToImageColorDetection() {
-        router?.navigateToImageColorDetection()
     }
 }
 

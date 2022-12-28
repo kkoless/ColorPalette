@@ -54,6 +54,9 @@ private extension FavoritesView {
             Button(action: { viewModel.input.choosePaletteTap.send() }) {
                 Text("Choose from library")
             }
+            Button(action: { viewModel.input.generatePaletteFromImageTap.send() }) {
+                Text("Generate from image")
+            }
         } label: {
             Text("Add palette")
         }

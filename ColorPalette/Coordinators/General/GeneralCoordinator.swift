@@ -18,8 +18,6 @@ protocol GeneralRoutable: AnyObject {
     
     func navigateToColorPalette(palette: ColorPalette)
     
-    func navigateToImageColorDetection()
-    
     func navigateToSimilarColors(color: AppColor)
     func navigateToColorInfo(color: AppColor)
 }
@@ -76,12 +74,6 @@ extension GeneralCoordinator: GeneralRoutable {
         let view = ColorPaletteView(palette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
-    }
-    
-    func navigateToImageColorDetection() {
-        let view = ImageColorDetectionView(router: self)
-        let vc = UIHostingController(rootView: view)
-        navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToSimilarColors(color: AppColor) {

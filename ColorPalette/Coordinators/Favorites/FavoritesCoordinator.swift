@@ -14,6 +14,7 @@ protocol FavoritesRoutable: AnyObject {
     func navigateToColorPalette(palette: ColorPalette)
     
     func navigateToAddNewColor()
+    func navigateToImageColorDetection()
     func navigateToCreatePalette()
 }
 
@@ -60,6 +61,13 @@ extension FavoritesCoordinator: FavoritesRoutable {
     
     func navigateToAddNewColor() {
         let view = AddNewColorView()
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToImageColorDetection() {
+        let viewModel = ImageColorDetectionViewModel()
+        let view = ImageColorDetectionView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

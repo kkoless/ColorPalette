@@ -55,6 +55,12 @@ private extension FavoriteViewModel {
                 self?.router?.navigateToCreatePalette()
             }
             .store(in: &cancellable)
+        
+        input.generatePaletteFromImageTap
+            .sink { [weak self] _ in
+                self?.router?.navigateToImageColorDetection()
+            }
+            .store(in: &cancellable)
     }
 }
 
@@ -74,6 +80,7 @@ extension FavoriteViewModel {
     struct Input {
         let createPaletteTap: PassthroughSubject<Void, Never> = .init()
         let choosePaletteTap: PassthroughSubject<Void, Never> = .init()
+        let generatePaletteFromImageTap: PassthroughSubject<Void, Never> = .init()
         let createColorTap: PassthroughSubject<Void, Never> = .init()
         let chooseColorTap: PassthroughSubject<Void, Never> = .init()
     }
