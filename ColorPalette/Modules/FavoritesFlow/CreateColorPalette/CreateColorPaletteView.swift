@@ -28,10 +28,10 @@ struct CreateColorPaletteView: View {
             }
         }
         .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
-            Button(role: .cancel, action: { viewModel.input.stayAlertTap.send() }) {
+            Button(role: .cancel, action: { stayAlertTap() }) {
                 Text("Stay")
             }
-            Button(role: .destructive, action: { viewModel.input.backAlertTap.send() }) {
+            Button(role: .destructive, action: { backAlertTap() }) {
                 Text("Don't save")
             }
         }, message: {
@@ -49,18 +49,14 @@ private extension CreateColorPaletteView {
     
     var topButtons: some View {
         HStack {
-            Button(action: { showAddColor.toggle() }) {
+            Button(action: { addColorTap() }) {
                 Text("Add custom color")
-            }
-            .popover(isPresented: $showAddColor) {
-                AddNewColorView(showAsPopover: $showAddColor)
-                    .environmentObject(viewModel.templatePaletteManager)
             }
             
             Spacer()
             
             if !viewModel.output.colors.isEmpty {
-                Button(action: { savePalette() }) {
+                Button(action: { savePaletteTap() }) {
                     Text("Save palette")
                 }
             }
@@ -79,8 +75,20 @@ private extension CreateColorPaletteView {
 }
 
 private extension CreateColorPaletteView {
-    func savePalette() {
+    func savePaletteTap() {
         viewModel.input.saveTap.send()
+    }
+    
+    func addColorTap() {
+        viewModel.input.addTaps.addColorTap.send()
+    }
+    
+    func stayAlertTap() {
+        viewModel.input.alertTaps.stayTap.send()
+    }
+    
+    func backAlertTap() {
+        viewModel.input.alertTaps.backTap.send()
     }
 }
 

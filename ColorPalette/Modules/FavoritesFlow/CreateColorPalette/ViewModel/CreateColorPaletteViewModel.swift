@@ -54,15 +54,23 @@ private extension CreateColorPaletteViewModel {
             }
             .store(in: &cancellable)
         
+        input.addTaps.addColorTap
+            .sink { [weak self] _ in
+                if let manager = self?.templatePaletteManager {
+                    self?.router?.navigateToAddNewColor(templateManager: manager)
+                }
+            }
+            .store(in: &cancellable)
+        
         input.backTap
             .sink { [weak self] _ in self?.output.showSaveAlert.toggle() }
             .store(in: &cancellable)
         
-        input.stayAlertTap
+        input.alertTaps.stayTap
             .sink { [weak self] _ in self?.output.showSaveAlert.toggle() }
             .store(in: &cancellable)
         
-        input.backAlertTap
+        input.alertTaps.backTap
             .sink { [weak self] _ in self?.router?.pop() }
             .store(in: &cancellable)
     }
@@ -77,10 +85,20 @@ private extension CreateColorPaletteViewModel {
 
 extension CreateColorPaletteViewModel {
     struct Input {
-        let saveTap: PassthroughSubject<Void, Never> = .init()
         let backTap: PassthroughSubject<Void, Never> = .init()
-        let stayAlertTap: PassthroughSubject<Void, Never> = .init()
-        let backAlertTap: PassthroughSubject<Void, Never> = .init()
+        let saveTap: PassthroughSubject<Void, Never> = .init()
+        
+        let alertTaps = AlertTap()
+        let addTaps = AddTap()
+        
+        struct AddTap {
+            let addColorTap: PassthroughSubject<Void, Never> = .init()
+        }
+        
+        struct AlertTap {
+            let stayTap: PassthroughSubject<Void, Never> = .init()
+            let backTap: PassthroughSubject<Void, Never> = .init()
+        }
     }
     
     struct Output {

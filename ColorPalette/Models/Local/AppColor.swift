@@ -10,7 +10,7 @@ import UIKit
 
 struct AppColor: Identifiable {
     let id: UUID
-    let name: String
+    var name: String
     let hex: String
     
     static func getRandomColor() -> AppColor {
@@ -26,8 +26,14 @@ struct AppColor: Identifiable {
 extension AppColor: Codable {
     init(name: String, hex: String) {
         self.id = .init()
-        self.name = name
         self.hex = hex
+        
+        if name.isEmpty {
+            let uiColor = UIColor(hexString: hex)
+            self.name = uiColor.accessibilityName
+        } else {
+            self.name = name
+        }
     }
     
     init(uiColor: UIColor) {
@@ -53,10 +59,13 @@ extension AppColor {
 extension AppColor: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(hex.lowercased())
+        hasher.combine(name.lowercased())
+        hasher.combine(id)
     }
     
     static func == (lhs: AppColor, rhs: AppColor) -> Bool {
         return lhs.hex.lowercased() == lhs.hex.lowercased() &&
-                lhs.name.lowercased() == rhs.name.lowercased()
+                lhs.name.lowercased() == rhs.name.lowercased() &&
+                lhs.id == rhs.id
     }
 }

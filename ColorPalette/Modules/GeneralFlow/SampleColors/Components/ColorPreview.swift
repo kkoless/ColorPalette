@@ -13,7 +13,7 @@ struct ColorPreview: View {
     @State private var showInfo = true
     
     init(color: AppColor) {
-        self.color = UIColor(color)
+        self.color = color.uiColor
         self.colorName = color.name.isEmpty ? self.color.accessibilityName : color.name
     }
     

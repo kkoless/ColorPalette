@@ -6,17 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AddNewColorView: View {
+    @ObservedObject var viewModel: AddNewColorViewModel
+    
     @State private var colorName = ""
     @State private var selectedColor: Color = .clear
-    @Binding private var showAsPopover: Bool
-    
-    @EnvironmentObject var templatePaletteManager: TemplatePaletteManager
-    
-    init(showAsPopover: Binding<Bool>? = nil) {
-        self._showAsPopover = showAsPopover ?? .constant(false)
-    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -39,14 +35,21 @@ private extension AddNewColorView {
                 .padding([.leading, .trailing])
                 .padding([.bottom, .top], 10)
                 .textFieldStyle(.plain)
+                .onChange(of: colorName) { newValue in
+                    viewModel.input.colorName.send(newValue)
+                }
             
             ColorPicker("Here you can pick...", selection: $selectedColor)
                 .font(.subheadline)
+                .onChange(of: selectedColor) { newValue in
+                    let appColor = AppColor(uiColor: newValue.uiColor)
+                    viewModel.input.selectedColor.send(appColor)
+                }
         }
     }
     
     var preview: some View {
-        ColorInfoView(appColor: AppColor(name: colorName, hex: selectedColor.uiColor.hexValue))
+        ColorInfoView(appColor: viewModel.output.color)
             .environmentObject(FavoriteManager.shared)
             .cornerRadius(10)
     }
@@ -55,30 +58,17 @@ private extension AddNewColorView {
         HStack(alignment: .center) {
             Spacer()
             
-            Button(action: { addColor() }) {
+            Button(action: { viewModel.input.addTap.send() }) {
                 Text("Add color")
             }
-            .disabled(selectedColor == .clear)
             
             Spacer()
         }
     }
 }
 
-private extension AddNewColorView {
-    func saveColor() {
-        
-    }
-    
-    func addColor() {
-        templatePaletteManager.addColor(AppColor(name: colorName, hex: selectedColor.uiColor.hexValue))
-        showAsPopover.toggle()
-    }
-}
-
 struct AddNewColorView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewColorView()
-            .environmentObject(TemplatePaletteManager())
+        AddNewColorView(viewModel: AddNewColorViewModel(templatePaletteManager: TemplatePaletteManager()))
     }
 }

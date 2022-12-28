@@ -64,7 +64,10 @@ private extension ColorInfoView {
     func checkFavorite(color: AppColor) {
         self.isFavorite = favoriteManager
             .colors
-            .contains(where: { $0 == color })
+            .contains(where: {
+                $0.hex == color.hex &&
+                $0.name == color.name
+            })
     }
     
     func changeFavoriteState() {
