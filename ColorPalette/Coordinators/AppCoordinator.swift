@@ -17,18 +17,18 @@ protocol Coordinatable: AnyObject {
     func start()
     func finish()
     
-    //init(_ navigationController: UINavigationController)
+    init(_ navigationController: UINavigationController)
 }
 
 extension Coordinatable {
     func finish() {
         childCoordinators.removeAll()
-        finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+        finishDelegate?.coordinatorDidFinish(childCoordinator: self, next: nil)
     }
 }
 
 protocol CoordinatorFinishDelegate: AnyObject {
-    func coordinatorDidFinish(childCoordinator: Coordinatable)
+    func coordinatorDidFinish(childCoordinator: Coordinatable,  next: CoordinatorType?)
 }
 
 final class AppCoordinator: Coordinatable {
@@ -82,16 +82,20 @@ private extension AppCoordinator {
 }
 
 extension AppCoordinator: CoordinatorFinishDelegate {
-    func coordinatorDidFinish(childCoordinator: Coordinatable) {
+    func coordinatorDidFinish(childCoordinator: Coordinatable, next: CoordinatorType?) {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         
         switch childCoordinator.type {
             case .onboarding:
                 navigationController.viewControllers.removeAll()
-                navigateToAuthorizationFlow()
+                switch next {
+                    case .login: navigateToAuthorizationFlow()
+                    case .tabBar: navigateToTabBarFlow()
+                    default: return
+                }
             case .login:
                 navigationController.viewControllers.removeAll()
-                navigateToTabBarFlow()
+                if next == .tabBar { navigateToTabBarFlow() }
             default:
                 break
         }

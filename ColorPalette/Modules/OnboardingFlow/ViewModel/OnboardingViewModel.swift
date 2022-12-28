@@ -16,12 +16,14 @@ final class OnboardingViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: OnboardingRoutable?) {
+    init(router: OnboardingRoutable? = nil) {
         self.router = router
         self.input = Input()
         self.output = Output()
         
-        bindTap()
+        bindTaps()
+        
+        print("\(self) INIT")
     }
     
     deinit {
@@ -34,11 +36,18 @@ final class OnboardingViewModel: ObservableObject {
 }
 
 private extension OnboardingViewModel {
-    func bindTap() {
-        input.closeTap
+    func bindTaps() {
+        input.skipTap
             .sink { [weak self] _ in
                 OnboardingManager.shared.isOnboarding = true
                 self?.router?.navigateToGeneralFlow()
+            }
+            .store(in: &cancellable)
+        
+        input.signInTap
+            .sink { [weak self] _ in
+                OnboardingManager.shared.isOnboarding = true
+                self?.router?.navigateToAuthorizationFlow()
             }
             .store(in: &cancellable)
     }
@@ -46,8 +55,9 @@ private extension OnboardingViewModel {
 
 extension OnboardingViewModel {
     struct Input {
-        let closeTap = PassthroughSubject<Void, Never>()
+        let signInTap: PassthroughSubject<Void, Never> = .init()
+        let skipTap: PassthroughSubject<Void, Never> = .init()
     }
     
-    struct Output {}
+    struct Output { }
 }

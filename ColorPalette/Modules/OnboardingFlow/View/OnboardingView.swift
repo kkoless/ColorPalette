@@ -24,8 +24,8 @@ struct OnboardingView: View {
 private extension OnboardingView {
     @ViewBuilder var pages: some View {
         ForEach(OnboardingPageType.allCases) { pageType in
-            let model = OnboardingPage(pageType: pageType, tap: viewModel.input.closeTap)
-            OnboardingPageView(model: model)
+            OnboardingPageView(pageType: pageType)
+                .environmentObject(viewModel)
                 .tag(pageType.id)
         }
     }
@@ -33,6 +33,6 @@ private extension OnboardingView {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(viewModel: OnboardingViewModel(router: nil))
+        OnboardingView(viewModel: OnboardingViewModel())
     }
 }

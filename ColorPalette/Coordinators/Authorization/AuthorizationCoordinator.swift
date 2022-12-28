@@ -52,6 +52,6 @@ extension AuthorizationCoordinator: AuthorizationRoutable {
     }
     
     func navigateToTabBarFlow() {
-        finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+        finishDelegate?.coordinatorDidFinish(childCoordinator: self, next: .tabBar)
     }
 }

@@ -9,42 +9,62 @@ import SwiftUI
 import Combine
 
 struct OnboardingPageView: View {
-    let model: OnboardingPage
+    @EnvironmentObject var viewModel: OnboardingViewModel
+    let pageType: OnboardingPageType
     
     var body: some View {
         VStack {
             Spacer()
             mainImage
             Spacer()
-            Text(model.pageType.text)
+            Text(pageType.text)
             Spacer()
-            nextButton
+            buttons
+            Spacer()
         }
         .frame(maxWidth: .infinity)
-        .foregroundColor(Color(model.pageType.foregroundColor))
+        .foregroundColor(Color(pageType.foregroundColor))
     }
     
 }
 
 private extension OnboardingPageView {
     @ViewBuilder var mainImage: some View {
-        if let image = model.pageType.image {
+        if let image = pageType.image {
             Image(uiImage: image)
+                .padding()
         }
     }
     
-    @ViewBuilder var nextButton: some View {
-        if model.pageType.isLastPage {
-            Button("Next") { model.tap.send() }
-            Spacer()
+    @ViewBuilder var buttons: some View {
+        if pageType.isLastPage {
+            VStack(spacing: 30) {
+                Button(action: { signInTap() }) {
+                    Text("Sign In")
+                }
+                
+                Button(action: { skipTap() }) {
+                    Text("Next")
+                }
+            }
+            .padding()
         }
+    }
+}
+
+private extension OnboardingPageView {
+    func signInTap() {
+        viewModel.input.signInTap.send()
+    }
+    
+    func skipTap() {
+        viewModel.input.skipTap.send()
     }
 }
 
 struct OnboardingPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingPageView(
-            model: OnboardingPage(pageType: .thirdPage, tap: PassthroughSubject<Void, Never>())
-        )
+        OnboardingPageView(pageType: .thirdPage)
+            .environmentObject(OnboardingViewModel())
     }
 }
