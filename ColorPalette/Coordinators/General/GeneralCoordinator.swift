@@ -92,6 +92,6 @@ extension GeneralCoordinator: GeneralRoutable {
         let view = ColorInfoView(appColor: color)
             .environmentObject(FavoriteManager.shared)
         let vc = UIHostingController(rootView: view)
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.present(vc, animated: true)
     }
 }

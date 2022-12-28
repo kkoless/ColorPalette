@@ -8,32 +8,54 @@
 import SwiftUI
 
 struct ColorInfoView: View {
-    let appColor: AppColor
+    @EnvironmentObject var favoriteManager: FavoriteManager
     @State var isFavorite: Bool = false
     
-    @EnvironmentObject var favoriteManager: FavoriteManager
+    let appColor: AppColor
+    var invertedColor: Color {
+        return Color(UIColor(appColor).invertColor())
+    }
     
     var body: some View {
-        VStack {
-            navBar
+        ZStack {
             ColorPreview(color: appColor)
+            helpButtonsBlock
         }
+        .edgesIgnoringSafeArea(.bottom)
         .onAppear { onAppear() }
     }
 }
 
 private extension ColorInfoView {
-    var navBar: some View {
-        let buttons: [Button<AnyView>] = [
-            Button(action: { changeFavoriteState() }, label: {
-                Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(isFavorite ? .red : .black)
-                    .eraseToAnyView()
-            })
-        ]
-        return CustomNavigationBarView(trailingItems: buttons)
+    var helpButtonsBlock: some View {
+        GeometryReader { reader in
+            HStack(spacing: 25) {
+                copyButton
+                favoriteButton
+            }
+            .padding()
+            .frame(maxWidth: reader.size.width, alignment: .trailing)
+        }
+        .padding(.top, 15)
+        .padding(.leading, Consts.Constraints.screenWidth / 2)
+    }
+    
+    var favoriteButton: some View {
+        Button(action: { changeFavoriteState() }, label: {
+            Image(systemName: isFavorite ? "heart.fill" : "heart")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .foregroundColor(isFavorite ? .red : invertedColor)
+        })
+    }
+    
+    var copyButton: some View {
+        Button(action: { copyColorInfo() }, label: {
+            Image(systemName: "clipboard")
+                .resizable()
+                .frame(width: 20, height: 25)
+                .foregroundColor(invertedColor)
+        })
     }
 }
 
@@ -52,6 +74,10 @@ private extension ColorInfoView {
         }
         
         isFavorite.toggle()
+    }
+    
+    func copyColorInfo() {
+        UIPasteboard.general.string = appColor.hex
     }
 }
 

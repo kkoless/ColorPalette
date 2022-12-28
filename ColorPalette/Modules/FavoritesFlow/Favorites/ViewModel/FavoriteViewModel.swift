@@ -50,15 +50,36 @@ private extension FavoriteViewModel {
     }
     
     func bindTaps() {
-        input.createPaletteTap
+        bindAddTaps()
+        bindShowTaps()
+    }
+}
+
+private extension FavoriteViewModel {
+    func bindAddTaps() {
+        input.addTaps.createPaletteTap
             .sink { [weak self] _ in
                 self?.router?.navigateToCreatePalette()
             }
             .store(in: &cancellable)
         
-        input.generatePaletteFromImageTap
+        input.addTaps.generatePaletteFromImageTap
             .sink { [weak self] _ in
                 self?.router?.navigateToImageColorDetection()
+            }
+            .store(in: &cancellable)
+    }
+    
+    func bindShowTaps() {
+        input.showTaps.showColorInfoTap
+            .sink { [weak self] appColor in
+                self?.router?.navigateToColorInfo(color: appColor)
+            }
+            .store(in: &cancellable)
+        
+        input.showTaps.showPaletteInfoTap
+            .sink { [weak self] palette in
+                self?.router?.navigateToColorPalette(palette: palette)
             }
             .store(in: &cancellable)
     }
@@ -78,11 +99,21 @@ extension FavoriteViewModel {
 
 extension FavoriteViewModel {
     struct Input {
-        let createPaletteTap: PassthroughSubject<Void, Never> = .init()
-        let choosePaletteTap: PassthroughSubject<Void, Never> = .init()
-        let generatePaletteFromImageTap: PassthroughSubject<Void, Never> = .init()
-        let createColorTap: PassthroughSubject<Void, Never> = .init()
-        let chooseColorTap: PassthroughSubject<Void, Never> = .init()
+        let addTaps: AddTap = .init()
+        let showTaps: ShowTap = .init()
+        
+        struct AddTap {
+            let createPaletteTap: PassthroughSubject<Void, Never> = .init()
+            let choosePaletteTap: PassthroughSubject<Void, Never> = .init()
+            let generatePaletteFromImageTap: PassthroughSubject<Void, Never> = .init()
+            let createColorTap: PassthroughSubject<Void, Never> = .init()
+            let chooseColorTap: PassthroughSubject<Void, Never> = .init()
+        }
+        
+        struct ShowTap {
+            let showColorInfoTap: PassthroughSubject<AppColor, Never> = .init()
+            let showPaletteInfoTap: PassthroughSubject<ColorPalette, Never> = .init()
+        }
     }
     
     struct Output {

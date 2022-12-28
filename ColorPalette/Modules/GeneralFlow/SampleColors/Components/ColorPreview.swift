@@ -23,7 +23,7 @@ struct ColorPreview: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack(alignment: .topLeading) {
             Color(color)
             if showInfo {
                 infoBlock
@@ -39,9 +39,8 @@ private extension ColorPreview {
             Text(colorName)
                 .font(.title2)
                 .bold()
-                .padding([.leading, .trailing])
                 .padding(.top, 30)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: Consts.Constraints.screenWidth / 2, alignment: .leading)
             
             Group {
                 hexInfo
@@ -49,9 +48,9 @@ private extension ColorPreview {
                 hsvInfo
                 cmykInfo
             }
-            .padding([.leading, .trailing])
             .padding([.top, .bottom], 10)
         }
+        .padding([.leading, .trailing])
         .foregroundColor(Color(color.invertColor()))
     }
     

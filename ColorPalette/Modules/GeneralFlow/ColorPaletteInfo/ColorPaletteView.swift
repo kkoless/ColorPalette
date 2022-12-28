@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ColorPaletteView: View {
-    @State var selectedType: ColorType = .CMYK
+    @State var selectedType: ColorType = .HEX
     @State var showInfo: Bool = true
     let palette: ColorPalette
     

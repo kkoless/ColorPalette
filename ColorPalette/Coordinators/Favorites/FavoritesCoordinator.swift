@@ -11,7 +11,9 @@ import SwiftUI
 protocol FavoritesRoutable: AnyObject {
     func pop()
     func navigateToFavoritesScreen()
+    
     func navigateToColorPalette(palette: ColorPalette)
+    func navigateToColorInfo(color: AppColor)
     
     func navigateToAddNewColor()
     func navigateToImageColorDetection()
@@ -59,6 +61,13 @@ extension FavoritesCoordinator: FavoritesRoutable {
         navigationController.present(vc, animated: true)
     }
     
+    func navigateToColorInfo(color: AppColor) {
+        let view = ColorInfoView(appColor: color)
+            .environmentObject(FavoriteManager.shared)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
     func navigateToAddNewColor() {
         let view = AddNewColorView()
         let vc = UIHostingController(rootView: view)
@@ -66,7 +75,7 @@ extension FavoritesCoordinator: FavoritesRoutable {
     }
     
     func navigateToImageColorDetection() {
-        let viewModel = ImageColorDetectionViewModel()
+        let viewModel = ImageColorDetectionViewModel(router: self)
         let view = ImageColorDetectionView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)

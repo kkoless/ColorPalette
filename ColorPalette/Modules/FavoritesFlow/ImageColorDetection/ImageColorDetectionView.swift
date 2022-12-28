@@ -65,6 +65,9 @@ private extension ImageColorDetectionView {
         if let palette = viewModel.output.palette {
             ColorPaletteCell(palette: palette)
                 .padding([.leading, .trailing])
+                .onTapGesture {
+                    viewModel.input.showPaletteTap.send(palette)
+                }
         }
     }
     

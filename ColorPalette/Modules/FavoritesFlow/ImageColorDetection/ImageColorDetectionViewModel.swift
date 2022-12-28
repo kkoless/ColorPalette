@@ -61,6 +61,12 @@ extension ImageColorDetectionViewModel {
                 self?.favoriteManager.addPalette(palette)
             }
             .store(in: &cancellable)
+        
+        input.showPaletteTap
+            .sink { [weak self] palette in
+                self?.router?.navigateToColorPalette(palette: palette)
+            }
+            .store(in: &cancellable)
     }
 }
 
@@ -71,6 +77,7 @@ extension ImageColorDetectionViewModel {
     struct Input {
         let imageAppear: PassthroughSubject<Data?, Never> = .init()
         let addToFavoriteTap: PassthroughSubject<ColorPalette, Never> = .init()
+        let showPaletteTap: PassthroughSubject<ColorPalette, Never> = .init()
     }
     
     struct Output {

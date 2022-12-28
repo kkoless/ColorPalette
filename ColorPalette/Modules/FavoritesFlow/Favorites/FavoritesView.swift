@@ -48,13 +48,13 @@ private extension FavoritesView {
     
     var paletteMenu: some View {
         Menu {
-            Button(action: { viewModel.input.createPaletteTap.send() }) {
+            Button(action: { createPaletteTap() }) {
                 Text("Create palette")
             }
-            Button(action: { viewModel.input.choosePaletteTap.send() }) {
+            Button(action: { choosePaletteTap() }) {
                 Text("Choose from library")
             }
-            Button(action: { viewModel.input.generatePaletteFromImageTap.send() }) {
+            Button(action: { generatePaletteFromImageTap() }) {
                 Text("Generate from image")
             }
         } label: {
@@ -64,10 +64,10 @@ private extension FavoritesView {
     
     var colorMenu: some View {
         Menu {
-            Button(action: { viewModel.input.createColorTap.send() }) {
+            Button(action: { createColorTap() }) {
                 Text("Create color")
             }
-            Button(action: { viewModel.input.chooseColorTap.send() }) {
+            Button(action: { chooseColorTap() }) {
                 Text("Choose from library")
             }
         } label: {
@@ -98,6 +98,7 @@ private extension FavoritesView {
                 .padding([.leading, .trailing])
                 .listRowSeparator(.hidden)
                 .listRowInsets(.init())
+                .onTapGesture { showPaletteInfoTap(palette) }
         }
         .onDelete { indexSet in
             indexSet.forEach { viewModel.removePalette(from: $0) }
@@ -109,6 +110,7 @@ private extension FavoritesView {
             Color(color)
                 .listRowSeparator(.hidden)
                 .cornerRadius(10)
+                .onTapGesture { showColorInfoTap(color) }
         }
         .onDelete { indexSet in
             indexSet.forEach { viewModel.removeColor(from: $0) }
@@ -126,6 +128,36 @@ private extension FavoritesView {
         }
         .frame(maxWidth: .infinity)
         .padding([.leading, .trailing])
+    }
+}
+
+private extension FavoritesView {
+    func createColorTap() {
+        viewModel.input.addTaps.createColorTap.send()
+    }
+    
+    func chooseColorTap() {
+        viewModel.input.addTaps.chooseColorTap.send()
+    }
+    
+    func createPaletteTap() {
+        viewModel.input.addTaps.createPaletteTap.send()
+    }
+    
+    func choosePaletteTap() {
+        viewModel.input.addTaps.choosePaletteTap.send()
+    }
+    
+    func generatePaletteFromImageTap() {
+        viewModel.input.addTaps.generatePaletteFromImageTap.send()
+    }
+    
+    func showColorInfoTap(_ appColor: AppColor) {
+        viewModel.input.showTaps.showColorInfoTap.send(appColor)
+    }
+    
+    func showPaletteInfoTap(_ palette: ColorPalette) {
+        viewModel.input.showTaps.showPaletteInfoTap.send(palette)
     }
 }
 
