@@ -8,9 +8,14 @@
 import Foundation
 
 struct ColorPalette: Identifiable {
-    let id: UUID = .init()
     let colors: [AppColor]
     
+    var id: Int {
+        self.hashValue
+    }
+}
+
+extension ColorPalette {
     static func getTestPalettes(_ size: UInt) -> [ColorPalette] {
         var result = [ColorPalette]()
         
@@ -29,12 +34,21 @@ struct ColorPalette: Identifiable {
 
 extension ColorPalette: Hashable {
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
         hasher.combine(colors)
     }
     
     static func == (lhs: ColorPalette, rhs: ColorPalette) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension ColorPalette: Codable {
+    func getData() -> Data {
+        do { return try JSONEncoder().encode(colors) }
+        catch {
+            print("Unable to encode \(error)")
+            return Data()
+        }
     }
 }
 

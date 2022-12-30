@@ -9,10 +9,37 @@ import Foundation
 import UIKit
 
 struct AppColor: Identifiable {
-    let id: UUID
-    var name: String
+    let name: String
     let hex: String
     
+    var id: Int {
+        self.hashValue
+    }
+    
+    var uiColor: UIColor {
+        return UIColor(self)
+    }
+    
+    init(name: String, hex: String) {
+        self.hex = hex
+        self.name = name.isEmpty ? UIColor(hexString: hex).accessibilityName : name
+    }
+}
+
+extension AppColor: Codable {
+    init(uiColor: UIColor) {
+        self.name = uiColor.accessibilityName
+        self.hex = uiColor.hexValue
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.hex = try container.decode(String.self, forKey: .hex)
+    }
+}
+
+extension AppColor {
     static func getRandomColor() -> AppColor {
         let uiColor = UIColor.random
         return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue)
@@ -23,49 +50,13 @@ struct AppColor: Identifiable {
     }
 }
 
-extension AppColor: Codable {
-    init(name: String, hex: String) {
-        self.id = .init()
-        self.hex = hex
-        
-        if name.isEmpty {
-            let uiColor = UIColor(hexString: hex)
-            self.name = uiColor.accessibilityName
-        } else {
-            self.name = name
-        }
-    }
-    
-    init(uiColor: UIColor) {
-        self.id = .init()
-        self.name = uiColor.accessibilityName
-        self.hex = uiColor.hexValue
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = .init()
-        self.name = try container.decode(String.self, forKey: .name)
-        self.hex = try container.decode(String.self, forKey: .hex)
-    }
-}
-
-extension AppColor {
-    var uiColor: UIColor {
-        return UIColor(self)
-    }
-}
-
 extension AppColor: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(hex.lowercased())
         hasher.combine(name.lowercased())
-        hasher.combine(id)
     }
     
     static func == (lhs: AppColor, rhs: AppColor) -> Bool {
-        return lhs.hex.lowercased() == lhs.hex.lowercased() &&
-                lhs.name.lowercased() == rhs.name.lowercased() &&
-                lhs.id == rhs.id
+        return lhs.id == rhs.id
     }
 }

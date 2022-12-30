@@ -40,6 +40,7 @@ private extension OnboardingViewModel {
         input.skipTap
             .sink { [weak self] _ in
                 OnboardingManager.shared.isOnboarding = true
+                CredentialsManager.shared.isGuest = true
                 self?.router?.navigateToGeneralFlow()
             }
             .store(in: &cancellable)

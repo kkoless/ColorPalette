@@ -40,7 +40,10 @@ private extension LoginViewModel {
             .store(in: &cancellable)
         
         input.loginTap
-            .sink { [weak self] _ in self?.router?.navigateToTabBarFlow() }
+            .sink { [weak self] _ in
+                CredentialsManager.shared.isGuest = false
+                self?.router?.navigateToTabBarFlow()
+            }
             .store(in: &cancellable)
     }
 }
