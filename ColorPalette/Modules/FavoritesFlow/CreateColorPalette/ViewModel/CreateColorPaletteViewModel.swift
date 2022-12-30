@@ -76,6 +76,16 @@ private extension CreateColorPaletteViewModel {
     }
 }
 
+extension CreateColorPaletteViewModel {
+    func removeColor(from index: Int) {
+        templatePaletteManager.deleteColor(output.colors[index])
+    }
+    
+    func replaceColors(fromOffsets: IndexSet, toOffset: Int) {
+        templatePaletteManager.replaceColors(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
+}
+
 private extension CreateColorPaletteViewModel {
     func savePalette() {
         let palette = templatePaletteManager.createPalette()
@@ -85,24 +95,26 @@ private extension CreateColorPaletteViewModel {
 
 extension CreateColorPaletteViewModel {
     struct Input {
-        let backTap: PassthroughSubject<Void, Never> = .init()
-        let saveTap: PassthroughSubject<Void, Never> = .init()
-        
         let alertTaps = AlertTap()
         let addTaps = AddTap()
         
-        struct AddTap {
-            let addColorTap: PassthroughSubject<Void, Never> = .init()
-        }
-        
-        struct AlertTap {
-            let stayTap: PassthroughSubject<Void, Never> = .init()
-            let backTap: PassthroughSubject<Void, Never> = .init()
-        }
+        let backTap: PassthroughSubject<Void, Never> = .init()
+        let saveTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
         var colors: [AppColor] = []
         var showSaveAlert: Bool = false
+    }
+}
+
+extension CreateColorPaletteViewModel.Input {
+    struct AddTap {
+        let addColorTap: PassthroughSubject<Void, Never> = .init()
+    }
+    
+    struct AlertTap {
+        let stayTap: PassthroughSubject<Void, Never> = .init()
+        let backTap: PassthroughSubject<Void, Never> = .init()
     }
 }

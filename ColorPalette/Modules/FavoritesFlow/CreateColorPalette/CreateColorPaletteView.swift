@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct CreateColorPaletteView: View {
-    @State private var selectedType: ColorType = .HEX
-    @State private var showColorInfo: Bool = true
-    @State private var showAddColor: Bool = false
-    
     @ObservedObject var viewModel : CreateColorPaletteViewModel
     
     var body: some View {
@@ -20,12 +16,8 @@ struct CreateColorPaletteView: View {
             
             topButtons
             
-            ColorTypePickerView(selectedType: $selectedType)
-            
-            ScrollView {
-                palettePreview
-                    .padding()
-            }
+            palettePreview
+                .padding()
         }
         .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
             Button(role: .cancel, action: { stayAlertTap() }) {
@@ -65,12 +57,22 @@ private extension CreateColorPaletteView {
     }
     
     var palettePreview: some View {
-        VStack(spacing: 0) {
+        List {
             ForEach(viewModel.output.colors) { color in
-                ColorPaletteRowView(appColor: color, type: selectedType, showInfo: showColorInfo)
+                Color(color)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                    .cornerRadius(10)
             }
+            .onDelete { indexSet in
+                indexSet.forEach { viewModel.removeColor(from: $0) }
+            }
+            .onMove(perform: { indexSet, index in
+                viewModel.replaceColors(fromOffsets: indexSet, toOffset: index)
+            })
+            .frame(height: 60)
         }
-        .cornerRadius(10)
+        .listStyle(.plain)
     }
 }
 

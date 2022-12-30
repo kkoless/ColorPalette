@@ -34,4 +34,8 @@ extension TemplatePaletteManager {
     func createPalette() -> ColorPalette {
         ColorPalette(colors: colors)
     }
+    
+    func replaceColors(fromOffsets: IndexSet, toOffset: Int) {
+        colors.move(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
 }
