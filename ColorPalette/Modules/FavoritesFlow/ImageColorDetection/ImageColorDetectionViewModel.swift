@@ -22,9 +22,10 @@ final class ImageColorDetectionViewModel: ObservableObject {
         self.manager = ImageColorDetectionManager()
         self.favoriteManager = FavoriteManager.shared
         self.input = Input()
-        self.output = Output()
+        self.output = Output(isLimit: self.favoriteManager.isPalettesLimit)
         self.router = router
         
+        bindFavoriteManager()
         bindDetection()
         bindTaps()
         
@@ -40,6 +41,12 @@ final class ImageColorDetectionViewModel: ObservableObject {
 }
 
 extension ImageColorDetectionViewModel {
+    func bindFavoriteManager() {
+        favoriteManager.$isPalettesLimit
+            .sink { [weak self] flag in self?.output.isLimit = flag }
+            .store(in: &cancellable)
+    }
+    
     func bindDetection() {
         input.imageAppear
             .sink { [weak self] imageData in
@@ -49,9 +56,7 @@ extension ImageColorDetectionViewModel {
             .store(in: &cancellable)
         
         manager.$palette
-            .sink { [weak self] palette in
-                self?.output.palette = palette
-            }
+            .sink { [weak self] palette in self?.output.palette = palette }
             .store(in: &cancellable)
     }
     
@@ -81,6 +86,7 @@ extension ImageColorDetectionViewModel {
     }
     
     struct Output {
-        var palette: ColorPalette? = nil
+        var palette: ColorPalette?
+        var isLimit: Bool
     }
 }

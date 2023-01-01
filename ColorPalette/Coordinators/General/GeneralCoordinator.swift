@@ -58,7 +58,8 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToSamplePalettes() {
-        let view = SamplePalettesView(router: self)
+        let viewModel = SamplePalettesViewModel(router: self)
+        let view = SamplePalettesView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

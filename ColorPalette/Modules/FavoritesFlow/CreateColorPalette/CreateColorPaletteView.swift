@@ -44,6 +44,7 @@ private extension CreateColorPaletteView {
             Button(action: { addColorTap() }) {
                 Text("Add custom color")
             }
+            .disabled(viewModel.output.isLimit)
             
             Spacer()
             

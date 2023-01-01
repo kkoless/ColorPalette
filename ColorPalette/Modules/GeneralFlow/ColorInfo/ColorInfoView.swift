@@ -73,11 +73,14 @@ private extension ColorInfoView {
     func changeFavoriteState() {
         if isFavorite {
             favoriteManager.removeColor(appColor)
-        } else {
-            favoriteManager.addColor(appColor)
+            isFavorite.toggle()
         }
-        
-        isFavorite.toggle()
+        else {
+            if !favoriteManager.isColorsLimit {
+                favoriteManager.addColor(appColor)
+                isFavorite.toggle()
+            }
+        }
     }
     
     func copyColorInfo() {

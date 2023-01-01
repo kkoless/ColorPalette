@@ -41,7 +41,7 @@ private extension LoginViewModel {
         
         input.loginTap
             .sink { [weak self] _ in
-                CredentialsManager.shared.isGuest = false
+                ProfileManager.shared.fetchProfile()
                 self?.router?.navigateToTabBarFlow()
             }
             .store(in: &cancellable)

@@ -86,6 +86,7 @@ private extension ImageColorDetectionView {
             Text("Add palette to favorite")
         }
         .padding()
+        .disabled(viewModel.output.isLimit)
     }
 }
 

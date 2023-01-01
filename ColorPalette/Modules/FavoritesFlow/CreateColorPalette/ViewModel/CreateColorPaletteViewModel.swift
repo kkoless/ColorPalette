@@ -22,7 +22,8 @@ final class CreateColorPaletteViewModel: ObservableObject {
         self.templatePaletteManager = .init()
         self.favoriteManager = FavoriteManager.shared
         self.input = Input()
-        self.output = Output()
+        self.output = Output(colors: self.templatePaletteManager.colors,
+                             isLimit: self.templatePaletteManager.isLimit)
         self.router = router
         
         bindTemplateManager()
@@ -43,6 +44,10 @@ private extension CreateColorPaletteViewModel {
     func bindTemplateManager() {
         templatePaletteManager.$colors
             .sink { [weak self] colors in self?.output.colors = colors }
+            .store(in: &cancellable)
+        
+        templatePaletteManager.$isLimit
+            .sink { [weak self] flag in self?.output.isLimit = flag }
             .store(in: &cancellable)
     }
     
@@ -103,7 +108,8 @@ extension CreateColorPaletteViewModel {
     }
     
     struct Output {
-        var colors: [AppColor] = []
+        var colors: [AppColor]
+        var isLimit: Bool
         var showSaveAlert: Bool = false
     }
 }

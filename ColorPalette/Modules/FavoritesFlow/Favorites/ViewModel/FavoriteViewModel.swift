@@ -17,9 +17,12 @@ final class FavoriteViewModel: ObservableObject {
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(router: FavoritesRoutable? = nil) {
-        self.input = Input()
-        self.output = Output()
         self.favoriteManager = FavoriteManager.shared
+        self.input = Input()
+        self.output = Output(palettes: self.favoriteManager.palettes,
+                             colors: self.favoriteManager.colors,
+                             palettesLimit: self.favoriteManager.isPalettesLimit,
+                             colorsLimit: self.favoriteManager.isColorsLimit)
         self.router = router
         
         bindFavoriteManager()
@@ -38,15 +41,21 @@ final class FavoriteViewModel: ObservableObject {
 
 private extension FavoriteViewModel {
     func bindFavoriteManager() {
-        favoriteManager.$palettes.sink { [weak self] palettes in
-            self?.output.palettes = palettes
-        }
-        .store(in: &cancellable)
+        favoriteManager.$palettes
+            .sink { [weak self] palettes in self?.output.palettes = palettes }
+            .store(in: &cancellable)
         
-        favoriteManager.$colors.sink { [weak self] colors in
-            self?.output.colors = colors
-        }
-        .store(in: &cancellable)
+        favoriteManager.$colors
+            .sink { [weak self] colors in self?.output.colors = colors }
+            .store(in: &cancellable)
+        
+        favoriteManager.$isColorsLimit
+            .sink { [weak self] flag in self?.output.colorsLimit = flag }
+            .store(in: &cancellable)
+        
+        favoriteManager.$isPalettesLimit
+            .sink { [weak self] flag in self?.output.palettesLimit = flag }
+            .store(in: &cancellable)
     }
     
     func bindTaps() {
@@ -117,7 +126,9 @@ extension FavoriteViewModel {
     }
     
     struct Output {
-        var palettes: [ColorPalette] = []
-        var colors: [AppColor] = []
+        var palettes: [ColorPalette]
+        var colors: [AppColor]
+        var palettesLimit: Bool
+        var colorsLimit: Bool
     }
 }

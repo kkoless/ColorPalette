@@ -8,10 +8,10 @@
 import Foundation
 
 final class TemplatePaletteManager: ObservableObject {
-    @Published private(set) var colors: [AppColor]
+    @Published private(set) var colors: [AppColor] = .init()
+    @Published private(set) var isLimit: Bool = false
     
     init() {
-        self.colors = []
         print("\(self) INIT")
     }
     
@@ -23,11 +23,13 @@ final class TemplatePaletteManager: ObservableObject {
 extension TemplatePaletteManager {
     func addColor(_ newColor: AppColor) {
         colors.append(newColor)
+        checkLimit()
     }
     
     func deleteColor(_ colorForDelete: AppColor) {
         if let index = colors.firstIndex(where: { $0 == colorForDelete }) {
             colors.remove(at: index)
+            checkLimit()
         }
     }
     
@@ -37,5 +39,19 @@ extension TemplatePaletteManager {
     
     func replaceColors(fromOffsets: IndexSet, toOffset: Int) {
         colors.move(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
+}
+
+private extension TemplatePaletteManager {
+    func checkLimit() {
+        let firstCondition = CredentialsManager.shared.isGuest && colors.count == 3
+        let secondCondition = ProfileManager.shared.profile?.role == .free && colors.count == 3
+        let thirdCondition = ProfileManager.shared.profile?.role == .paid && colors.count == 5
+        
+        let newValue = firstCondition || secondCondition || thirdCondition ? true : false
+        
+        if isLimit != newValue {
+            isLimit = newValue
+        }
     }
 }

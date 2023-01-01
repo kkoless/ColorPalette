@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct SamplePalettesView: View {
-    @State private var palettes = ColorPalette.getTestPalettes(20)
-    weak private var router: GeneralRoutable?
-    
-    init(router: GeneralRoutable? = nil) {
-        self.router = router
-    }
+    @ObservedObject var viewModel: SamplePalettesViewModel
     
     var body: some View {
         VStack {
@@ -27,6 +22,7 @@ struct SamplePalettesView: View {
             .listStyle(.plain)
         }
         .edgesIgnoringSafeArea(.top)
+        .onAppear { onAppear() }
     }
 }
 
@@ -48,7 +44,7 @@ private extension SamplePalettesView {
     }
     
     var cells: some View {
-        ForEach(palettes) { palette in
+        ForEach(viewModel.output.palettes) { palette in
             ColorPaletteCell(palette: palette)
                 .padding([.leading, .trailing])
                 .listRowSeparator(.hidden)
@@ -57,20 +53,21 @@ private extension SamplePalettesView {
                     navigateToColorPaletteScreen(palette)
                 }
         }
-        .onDelete { indexSet in
-            indexSet.forEach { palettes.remove(at: $0) }
-        }
     }
 }
 
 private extension SamplePalettesView {
+    func onAppear() {
+        viewModel.input.onAppear.send()
+    }
+    
     func navigateToColorPaletteScreen(_ selectedPalette: ColorPalette) {
-        router?.navigateToColorPalette(palette: selectedPalette)
+        viewModel.input.paletteTap.send(selectedPalette)
     }
 }
 
 struct SamplePalettesView_Previews: PreviewProvider {
     static var previews: some View {
-        SamplePalettesView()
+        SamplePalettesView(viewModel: SamplePalettesViewModel())
     }
 }

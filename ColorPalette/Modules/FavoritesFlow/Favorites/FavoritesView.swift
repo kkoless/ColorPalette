@@ -60,6 +60,7 @@ private extension FavoritesView {
         } label: {
             Text("Add palette")
         }
+        .disabled(viewModel.output.palettesLimit)
     }
     
     var colorMenu: some View {
@@ -73,6 +74,7 @@ private extension FavoritesView {
         } label: {
             Text("Add color")
         }
+        .disabled(viewModel.output.colorsLimit)
     }
     
     var favoriteList: some View {
