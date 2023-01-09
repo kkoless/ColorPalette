@@ -10,16 +10,16 @@ import Foundation
 
 struct Profile {
     let username: String
-    var role: Role
+    var isFree: Bool
     
-    mutating func changeRole(_ newRole: Role) {
-        self.role = newRole
+    var role: String {
+        switch isFree {
+            case true: return "FREE"
+            case false: return "PAID"
+        }
     }
-}
-
-extension Profile {
-    enum Role {
-        case free
-        case paid
+    
+    mutating func changeRole() {
+        self.isFree.toggle()
     }
 }

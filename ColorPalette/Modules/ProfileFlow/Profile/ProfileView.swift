@@ -39,14 +39,11 @@ private extension ProfileView {
     
     var profileBlock: some View {
         VStack {
-            Circle()
-                .foregroundColor(.gray)
-                .frame(width: 150, height: 150)
-                .shadow(radius: 20)
+            userAvatarView
             
-            Text(viewModel.output.profile?.username ?? "EMPTY")
-                .padding(.top, 20)
-                .font(.headline)
+            userInfo
+           
+            changeRoleButton
             
             Spacer()
             
@@ -67,8 +64,38 @@ private extension ProfileView {
 }
 
 private extension ProfileView {
+    var userAvatarView: some View {
+        Circle()
+            .foregroundColor(.gray)
+            .frame(width: 150, height: 150)
+            .shadow(radius: 20)
+    }
+    
+    var userInfo: some View {
+        VStack {
+            Text(viewModel.output.profile?.username ?? "EMPTY")
+                .font(.headline)
+            
+            Text(viewModel.output.profile?.role ?? "NONE")
+                .font(.subheadline)
+                .bold()
+        }
+    }
+    
+    var changeRoleButton: some View {
+        Button(action: { changeRole() }) {
+            Text("Change role")
+        }
+    }
+}
+
+private extension ProfileView {
     func signInTap() {
         viewModel.input.signInTap.send()
+    }
+    
+    func changeRole() {
+        viewModel.input.changeRoleTap.send()
     }
     
     func logOutTap() {

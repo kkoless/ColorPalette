@@ -121,7 +121,7 @@ extension FavoriteManager {
 private extension FavoriteManager {
     func checkColorsLimit(forceReload: Bool = false) {
         let firstCondition = CredentialsManager.shared.isGuest && colors.count == 5
-        let secondCondition = profileManager.profile?.role == .free && colors.count == 5
+        let secondCondition = (profileManager.profile?.isFree ?? false) && colors.count == 5
         
         let newValue = firstCondition || secondCondition ? true : false
         
@@ -135,7 +135,7 @@ private extension FavoriteManager {
     
     func checkPalettesLimit(forceReload: Bool = false) {
         let firstCondition = CredentialsManager.shared.isGuest && palettes.count == 5
-        let secondCondition = profileManager.profile?.role == .free && palettes.count == 5
+        let secondCondition = (profileManager.profile?.isFree ?? false) && palettes.count == 5
         
         let newValue = firstCondition || secondCondition ? true : false
         

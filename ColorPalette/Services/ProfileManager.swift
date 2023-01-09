@@ -26,7 +26,11 @@ final class ProfileManager: ObservableObject {
 extension ProfileManager {
     func fetchProfile() {
         CredentialsManager.shared.isGuest = false
-        self.profile = Profile(username: "kkolesss", role: .paid)
+        self.profile = Profile(username: "kkolesss", isFree: false)
+    }
+    
+    func changeRole() {
+        self.profile?.changeRole()
     }
     
     func logOut() {

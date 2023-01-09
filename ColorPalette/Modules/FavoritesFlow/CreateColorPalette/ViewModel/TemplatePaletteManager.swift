@@ -45,8 +45,14 @@ extension TemplatePaletteManager {
 private extension TemplatePaletteManager {
     func checkLimit() {
         let firstCondition = CredentialsManager.shared.isGuest && colors.count == 3
-        let secondCondition = ProfileManager.shared.profile?.role == .free && colors.count == 3
-        let thirdCondition = ProfileManager.shared.profile?.role == .paid && colors.count == 5
+        
+        guard let profileRole = ProfileManager.shared.profile?.isFree else {
+            if isLimit != firstCondition { isLimit = firstCondition }
+            return
+        }
+        
+        let secondCondition = profileRole && colors.count == 3
+        let thirdCondition = !profileRole && colors.count == 5
         
         let newValue = firstCondition || secondCondition || thirdCondition ? true : false
         

@@ -46,6 +46,10 @@ private extension ProfileViewModel {
             .sink { [weak self] _ in self?.router?.navigateToAuthorizationFlow() }
             .store(in: &cancellable)
         
+        input.changeRoleTap
+            .sink { [weak self] _ in self?.profileManager.changeRole() }
+            .store(in: &cancellable)
+        
         input.logOutTap
             .sink { [weak self] _ in self?.profileManager.logOut() }
             .store(in: &cancellable)
@@ -55,6 +59,7 @@ private extension ProfileViewModel {
 extension ProfileViewModel {
     struct Input {
         let signInTap: PassthroughSubject<Void, Never> = .init()
+        let changeRoleTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()
     }
     
