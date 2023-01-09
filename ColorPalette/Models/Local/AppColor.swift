@@ -20,7 +20,7 @@ struct AppColor: Identifiable {
         return UIColor(self)
     }
     
-    init(name: String, hex: String) {
+    init(name: String = "", hex: String) {
         self.hex = hex
         self.name = name.isEmpty ? UIColor(hexString: hex).accessibilityName : name
     }

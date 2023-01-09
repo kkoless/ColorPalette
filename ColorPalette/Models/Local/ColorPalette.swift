@@ -7,6 +7,25 @@
 
 import Foundation
 
+struct PopularPaletteJSON: Codable {
+    let data: [PopularPalette]
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.data = try container.decode([PopularPalette].self, forKey: .data)
+    }
+    
+    struct PopularPalette: Codable {
+        let colors: [String]
+        let saves: Int
+        
+        var colorPalette: ColorPalette {
+            let colors = colors.map { AppColor(hex: "#" + $0) }
+            return ColorPalette(colors: colors)
+        }
+    }
+}
+
 struct ColorPalette: Identifiable {
     let colors: [AppColor]
     

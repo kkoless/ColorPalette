@@ -35,6 +35,7 @@ private extension ColorPaletteRowView {
                         .font(.title3)
                 }
                 .foregroundColor(Color(color.invertColor()))
+                .minimumScaleFactor(0.1)
                 
                 Spacer()
             }

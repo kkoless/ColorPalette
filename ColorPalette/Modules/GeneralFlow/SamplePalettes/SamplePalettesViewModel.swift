@@ -39,7 +39,8 @@ private extension SamplePalettesViewModel {
         input.onAppear
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.output.palettes = ColorPalette.getTestPalettes(self.checkLimit() - 1)
+                self.output.palettes = Array(PopularPalettesManager.shared.palettes
+                    .prefix(self.checkLimit()))
             }
             .store(in: &cancellable)
     }
@@ -54,11 +55,11 @@ private extension SamplePalettesViewModel {
 }
 
 private extension SamplePalettesViewModel {
-    func checkLimit() -> UInt {
+    func checkLimit() -> Int {
         let firstCondition = CredentialsManager.shared.isGuest
         let secondCondition = ProfileManager.shared.profile?.isFree ?? false
         
-        return firstCondition || secondCondition ? 5 : 10
+        return firstCondition || secondCondition ? 20 : 100
     }
 }
 

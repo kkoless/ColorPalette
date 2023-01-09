@@ -16,6 +16,8 @@
 		E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF960295353E200534E82 /* ColorPaletteCell.swift */; };
 		E50BF9632953563200534E82 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF9622953563200534E82 /* UIColor+Extensions.swift */; };
 		E50CDA782961ABF30002F468 /* SamplePalettesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */; };
+		E522D50D296C776E0087BD9F /* popular_color_pallets.json in Resources */ = {isa = PBXBuildFile; fileRef = E522D50C296C776E0087BD9F /* popular_color_pallets.json */; };
+		E522D50F296C783B0087BD9F /* PopularPalettesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522D50E296C783B0087BD9F /* PopularPalettesManager.swift */; };
 		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
 		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */; };
@@ -98,6 +100,8 @@
 		E50BF960295353E200534E82 /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
 		E50BF9622953563200534E82 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesViewModel.swift; sourceTree = "<group>"; };
+		E522D50C296C776E0087BD9F /* popular_color_pallets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = popular_color_pallets.json; sourceTree = "<group>"; };
+		E522D50E296C783B0087BD9F /* PopularPalettesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPalettesManager.swift; sourceTree = "<group>"; };
 		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				E55031C229577BB80052F544 /* FavoriteManager.swift */,
 				E5F3C480295F53ED000DDD36 /* CoreData */,
 				E588B91C2960824900D45F7C /* ProfileManager.swift */,
+				E522D50E296C783B0087BD9F /* PopularPalettesManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				E55F6F812955A05B00A8B935 /* colors.json */,
+				E522D50C296C776E0087BD9F /* popular_color_pallets.json */,
 				E55BAD7229190B5900B3E233 /* Assets.xcassets */,
 				E57A26B4291EA7F60027FAC8 /* Localizable.strings */,
 			);
@@ -767,6 +773,7 @@
 				E55F6F822955A05B00A8B935 /* colors.json in Resources */,
 				E57A26B2291EA7F60027FAC8 /* Localizable.strings in Resources */,
 				E55BAD7329190B5900B3E233 /* Assets.xcassets in Resources */,
+				E522D50D296C776E0087BD9F /* popular_color_pallets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +819,7 @@
 				E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */,
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
+				E522D50F296C783B0087BD9F /* PopularPalettesManager.swift in Sources */,
 				E56DD25D295B6270003F0D29 /* View+Extensions.swift in Sources */,
 				E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */,
 				E53E2215295AD9EC00BD5D5D /* SampleColorsViewModel.swift in Sources */,
