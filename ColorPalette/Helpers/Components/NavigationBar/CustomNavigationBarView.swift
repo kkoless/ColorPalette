@@ -74,7 +74,7 @@ private extension CustomNavigationBarView {
         Color(UIColor(named: "systemBackground") ?? .clear)
     }
     private var tintColor: Color {
-        Color(backgroundColor.uiColor.invertColor())
+        Color(UIColor(named: "systemBackground")?.invertColor() ?? .clear)
     }
 }
 
