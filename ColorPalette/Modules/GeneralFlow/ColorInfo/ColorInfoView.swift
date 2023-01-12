@@ -51,12 +51,17 @@ private extension ColorInfoView {
     }
     
     var copyButton: some View {
-        Button(action: { copyColorInfo() }, label: {
+        Menu {
+            Button(action: { copyColorInfo(.HEX) }, label: { Text("HEX") })
+            Button(action: { copyColorInfo(.RGB) }, label: { Text("RGB") })
+            Button(action: { copyColorInfo(.HSB) }, label: { Text("HSB") })
+            Button(action: { copyColorInfo(.CMYK) }, label: { Text("CMYK") })
+        } label: {
             Image(systemName: "clipboard")
                 .resizable()
                 .frame(width: 20, height: 25)
                 .foregroundColor(invertedColor)
-        })
+        }
     }
 }
 
@@ -83,8 +88,17 @@ private extension ColorInfoView {
         }
     }
     
-    func copyColorInfo() {
-        UIPasteboard.general.string = appColor.hex
+    func copyColorInfo(_ type: ColorType) {
+        switch type {
+            case .HEX:
+                UIPasteboard.general.string = appColor.uiColor.hexValue
+            case .RGB:
+                UIPasteboard.general.string = appColor.uiColor.getRGBCopyInfo()
+            case .HSB:
+                UIPasteboard.general.string = appColor.uiColor.getHSVCopyInfo()
+            case .CMYK:
+                UIPasteboard.general.string = appColor.uiColor.getCMYKCopyInfo()
+        }
     }
 }
 

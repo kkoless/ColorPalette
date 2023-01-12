@@ -183,6 +183,21 @@ extension UIColor {
 }
 
 extension UIColor {
+    func getRGBCopyInfo() -> String {
+        return "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(cgColor.alpha)"
+    }
+    
+    func getHSVCopyInfo() -> String {
+        return "\(hsvValue.h.rounded(toDecimalPlaces: 1)), \(hsvValue.s.rounded(toDecimalPlaces: 1)), \(hsvValue.v.rounded(toDecimalPlaces: 1))"
+    }
+    
+    func getCMYKCopyInfo() -> String {
+        let cmyk = cmyk(r: redValue, g: greenValue, b: blueValue)
+        return "\(cmyk.c), \(cmyk.m), \(cmyk.y), \(cmyk.k)"
+    }
+}
+
+extension UIColor {
     func invertColor() -> UIColor {
         if (redValue * 0.299 + greenValue * 0.587 + blueValue * 0.114) > 186 {
             return UIColor(hexString: "#000000")

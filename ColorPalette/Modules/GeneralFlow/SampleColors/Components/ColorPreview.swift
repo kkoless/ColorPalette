@@ -10,7 +10,6 @@ import SwiftUI
 struct ColorPreview: View {
     private let color: UIColor
     private let colorName: String
-    @State private var showInfo = true
     
     init(color: AppColor) {
         self.color = color.uiColor
@@ -20,11 +19,8 @@ struct ColorPreview: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color(color)
-            if showInfo {
-                infoBlock
-            }
+            infoBlock
         }
-        .onTapGesture { showInfo.toggle() }
     }
 }
 

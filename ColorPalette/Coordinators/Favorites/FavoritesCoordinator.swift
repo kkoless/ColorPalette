@@ -62,7 +62,7 @@ extension FavoritesCoordinator: FavoritesRoutable {
     }
     
     func navigateToColorPalette(palette: ColorPalette) {
-        let view = ColorPaletteView(palette: palette)
+        let view = ColorPaletteView(palette: palette).environmentObject(FavoriteManager.shared)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }

@@ -15,8 +15,12 @@ struct ColorPaletteRowView: View {
     var body: some View {
         ZStack {
             Color(appColor)
-            if showInfo {
-                getColorInfo(color: appColor.uiColor)
+            
+            HStack {
+                if showInfo {
+                    getColorInfo(color: appColor.uiColor)
+                    copyButton
+                }
             }
         }
     }
@@ -42,6 +46,29 @@ private extension ColorPaletteRowView {
             .padding(.all)
             
             Spacer()
+        }
+    }
+    
+    var copyButton: some View {
+        Button(action: { copyTap() }) {
+            Image(systemName: "clipboard")
+        }
+        .foregroundColor(Color(appColor.uiColor.invertColor()))
+        .padding()
+    }
+}
+
+private extension ColorPaletteRowView {
+    func copyTap() {
+        switch type {
+            case .HEX:
+                UIPasteboard.general.string = appColor.uiColor.hexValue
+            case .RGB:
+                UIPasteboard.general.string = appColor.uiColor.getRGBCopyInfo()
+            case .HSB:
+                UIPasteboard.general.string = appColor.uiColor.getHSVCopyInfo()
+            case .CMYK:
+                UIPasteboard.general.string = appColor.uiColor.getCMYKCopyInfo()
         }
     }
 }
