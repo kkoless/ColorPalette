@@ -17,8 +17,6 @@ final class PopularPalettesManager {
             .sorted(by: { $0.saves > $1.saves })
             .map { $0.colorPalette }
         
-        print(popularPalettes.count)
-        
         print("\(self) INIT")
     }
     
