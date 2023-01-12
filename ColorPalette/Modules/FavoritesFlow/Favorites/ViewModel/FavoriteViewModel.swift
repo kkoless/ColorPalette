@@ -72,6 +72,12 @@ private extension FavoriteViewModel {
             }
             .store(in: &cancellable)
         
+        input.addTaps.choosePaletteTap
+            .sink { [weak self] _ in
+                self?.router?.navigateToPaletteLibrary()
+            }
+            .store(in: &cancellable)
+        
         input.addTaps.generatePaletteFromImageTap
             .sink { [weak self] _ in
                 self?.router?.navigateToImageColorDetection()

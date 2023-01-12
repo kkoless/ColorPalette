@@ -25,7 +25,7 @@ protocol GeneralRoutable: AnyObject {
 final class GeneralCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
-    let type: CoordinatorType = .profile
+    let type: CoordinatorType = .general
     
     weak var finishDelegate: CoordinatorFinishDelegate?
     

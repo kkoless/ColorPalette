@@ -20,6 +20,7 @@ protocol FavoritesRoutable: AnyObject {
     func navigateToAddNewColor(templateManager: TemplatePaletteManager)
     func navigateToImageColorDetection()
     func navigateToCreatePalette()
+    func navigateToPaletteLibrary()
 }
 
 final class FavoritesCoordinator: Coordinatable {
@@ -28,6 +29,7 @@ final class FavoritesCoordinator: Coordinatable {
     let type: CoordinatorType = .favorites
     
     weak var finishDelegate: CoordinatorFinishDelegate?
+    weak var tabBarDelegate: TabBarCoordinatorProtocol?
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -93,5 +95,10 @@ extension FavoritesCoordinator: FavoritesRoutable {
         let view = CreateColorPaletteView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToPaletteLibrary() {
+        tabBarDelegate?.selectPage(.general)
+        tabBarDelegate?.getGeneralRouter()?.navigateToSamplePalettes()
     }
 }

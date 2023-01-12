@@ -13,13 +13,18 @@ protocol TabBarCoordinatorProtocol: Coordinatable {
     
     func selectPage(_ page: TabBarPage)
     func setSelectedIndex(_ index: Int)
+    
     func currentPage() -> TabBarPage?
+    
+    func getGeneralRouter() -> GeneralRoutable?
+    func getFavoriteRouter() -> FavoritesRoutable?
+    func getProfileRouter() -> ProfileRoutable?
 }
 
 final class TabBarCoordinator: Coordinatable {
     var childCoordinators: [Coordinatable] = []
     let navigationController: UINavigationController
-    let tabBarController: UITabBarController
+    var tabBarController: UITabBarController
     let type: CoordinatorType = .tabBar
     
     weak var finishDelegate: CoordinatorFinishDelegate?
@@ -69,6 +74,7 @@ private extension TabBarCoordinator {
             case .favorites:
                 let favoritesCoordinator = FavoritesCoordinator(navController)
                 childCoordinators.append(favoritesCoordinator)
+                favoritesCoordinator.tabBarDelegate = self
                 favoritesCoordinator.start()
                 
             case .general:
@@ -78,6 +84,32 @@ private extension TabBarCoordinator {
         }
         
         return navController
+    }
+}
+
+extension TabBarCoordinator: TabBarCoordinatorProtocol {
+    func getGeneralRouter() -> GeneralRoutable? {
+        return childCoordinators.filter({ $0.type == .general }).first as? GeneralRoutable
+    }
+    
+    func getFavoriteRouter() -> FavoritesRoutable? {
+        return childCoordinators.filter({ $0.type == .favorites }).first as? FavoritesRoutable
+    }
+    
+    func getProfileRouter() -> ProfileRoutable? {
+        return childCoordinators.filter({ $0.type == .profile }).first as? ProfileRoutable
+    }
+    
+    func selectPage(_ page: TabBarPage) {
+        tabBarController.selectedIndex = page.rawValue
+    }
+    
+    func setSelectedIndex(_ index: Int) {
+        tabBarController.selectedIndex = index
+    }
+    
+    func currentPage() -> TabBarPage? {
+        return TabBarPage(rawValue: tabBarController.selectedIndex)
     }
 }
 
