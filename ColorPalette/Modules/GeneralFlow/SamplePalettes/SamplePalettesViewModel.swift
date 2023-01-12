@@ -23,7 +23,7 @@ final class SamplePalettesViewModel: ObservableObject {
         bindActions()
         bindTaps()
         
-        print("'\(self) INIT")
+        print("\(self) INIT")
     }
     
     deinit {

@@ -26,6 +26,7 @@ struct SampleColorsView: View {
                 .padding([.leading, .trailing])
             
             ColorTypePickerView(selectedType: $selectedType)
+                .padding(.top, 10)
             
             ScrollView {
                 LazyVStack(spacing: 15) {

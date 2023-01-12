@@ -34,8 +34,8 @@ struct ColorTypePickerView: View {
                             getblockType(type: type)
                         }
                         .buttonStyle(.plain)
+                        .padding()
                     }
-                    .padding(.all)
                 }
                 .frame(width: geometry.size.width)
             }

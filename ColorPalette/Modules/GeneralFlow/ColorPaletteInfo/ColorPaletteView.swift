@@ -30,6 +30,7 @@ struct ColorPaletteView: View {
             .onAppear { checkFavorite(palette: palette) }
             
             ColorTypePickerView(selectedType: $selectedType)
+                .padding(.top, 10)
         }
     }
 }
