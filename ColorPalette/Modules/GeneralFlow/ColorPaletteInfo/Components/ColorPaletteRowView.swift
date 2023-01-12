@@ -52,6 +52,8 @@ private extension ColorPaletteRowView {
     var copyButton: some View {
         Button(action: { copyTap() }) {
             Image(systemName: "clipboard")
+                .resizable()
+                .frame(width: 19, height: 24)
         }
         .foregroundColor(Color(appColor.uiColor.invertColor()))
         .padding()

@@ -46,14 +46,14 @@ private extension ColorPaletteView {
             .padding(20)
         }
         .frame(height: 25)
-        .padding(.top)
+        .padding([.top, .bottom])
     }
     
     var backButton: some View {
         Button(action: { dismiss() }) {
-            Image(systemName: "chevron.left")
+            Image(systemName: "multiply")
                 .resizable()
-                .frame(width: 10, height: 20)
+                .frame(width: 20, height: 20)
                 .foregroundColor(Color(palette.colors[0].uiColor.invertColor()))
         }
     }
@@ -62,7 +62,7 @@ private extension ColorPaletteView {
         Button(action: { changeFavoriteState() }, label: {
             Image(systemName: isFavorite ? "heart.fill" : "heart")
                 .resizable()
-                .frame(width: 23, height: 23)
+                .frame(width: 25, height: 25)
                 .foregroundColor(isFavorite ? .red : Color(palette.colors[0].uiColor.invertColor()))
         })
     }
@@ -81,7 +81,7 @@ private extension ColorPaletteView {
             isFavorite.toggle()
         }
         else {
-            if !favoriteManager.isColorsLimit {
+            if !favoriteManager.isPalettesLimit {
                 favoriteManager.addPalette(palette)
                 isFavorite.toggle()
             }
