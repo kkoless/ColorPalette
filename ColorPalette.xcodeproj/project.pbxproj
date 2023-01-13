@@ -29,6 +29,7 @@
 		E54263F02938998D003334FE /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263EF2938998D003334FE /* Consts.swift */; };
 		E54263F329389CD4003334FE /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263F229389CD4003334FE /* Provider.swift */; };
 		E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263F429389DCD003334FE /* CredentialsManager.swift */; };
+		E5446F1E29717216004EC2B5 /* InclusiveColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5446F1D29717216004EC2B5 /* InclusiveColor.swift */; };
 		E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */; };
 		E54E48F7293488290078B12B /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48F6293488290078B12B /* AuthorizationCoordinator.swift */; };
 		E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48FB29349C3E0078B12B /* AppCoordinator.swift */; };
@@ -113,6 +114,7 @@
 		E54263EF2938998D003334FE /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		E54263F229389CD4003334FE /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		E54263F429389DCD003334FE /* CredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsManager.swift; sourceTree = "<group>"; };
+		E5446F1D29717216004EC2B5 /* InclusiveColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InclusiveColor.swift; sourceTree = "<group>"; };
 		E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		E54E48F6293488290078B12B /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		E54E48FB29349C3E0078B12B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 				E55F6F7F2955A02400A8B935 /* AppColor.swift */,
 				E5BAE91E295413CC005DF70B /* ColorPalette.swift */,
 				E588B91E2960828800D45F7C /* Profile.swift */,
+				E5446F1D29717216004EC2B5 /* InclusiveColor.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				E54263E929388614003334FE /* OnboardingManager.swift in Sources */,
 				E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */,
 				E588B92129608D6200D45F7C /* ProfileViewModel.swift in Sources */,
+				E5446F1E29717216004EC2B5 /* InclusiveColor.swift in Sources */,
 				E50CDA782961ABF30002F468 /* SamplePalettesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
