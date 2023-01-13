@@ -15,8 +15,8 @@ struct Consts {
     }
     
     struct Constraints {
-        static let top = UIApplication.shared.windows.first?.safeAreaInsets.top
-        static let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom
+        static let top = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
+        static let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
         static let screenWidth = UIScreen.main.bounds.width
         static let screenHeight = UIScreen.main.bounds.height
     }

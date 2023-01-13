@@ -48,13 +48,13 @@ private extension FavoritesView {
     
     var paletteMenu: some View {
         Menu {
-            Button(action: { createPaletteTap() }) {
+            Button(action: { addPaletteTap(.customPalette) }) {
                 Text("Create palette")
             }
-            Button(action: { choosePaletteTap() }) {
+            Button(action: { addPaletteTap(.libraryPalette) }) {
                 Text("Choose from library")
             }
-            Button(action: { generatePaletteFromImageTap() }) {
+            Button(action: { addPaletteTap(.paletteFromImage) }) {
                 Text("Generate from image")
             }
         } label: {
@@ -65,11 +65,14 @@ private extension FavoritesView {
     
     var colorMenu: some View {
         Menu {
-            Button(action: { createColorTap() }) {
+            Button(action: { addColorTap(.customColor) }) {
                 Text("Create color")
             }
-            Button(action: { chooseColorTap() }) {
+            Button(action: { addColorTap(.libraryColor) }) {
                 Text("Choose from library")
+            }
+            Button(action: { addColorTap(.colorFromCamera) }) {
+                Text("Choose from Camera")
             }
         } label: {
             Text("Add color")
@@ -134,24 +137,30 @@ private extension FavoritesView {
 }
 
 private extension FavoritesView {
-    func createColorTap() {
-        viewModel.input.addTaps.createColorTap.send()
+    func addPaletteTap(_ type: FavoriteAddType) {
+        switch type {
+            case .customPalette:
+                viewModel.input.addTaps.createPaletteTap.send()
+            case .libraryPalette:
+                viewModel.input.addTaps.choosePaletteTap.send()
+            case .paletteFromImage:
+                viewModel.input.addTaps.generatePaletteFromImageTap.send()
+            default:
+                return
+        }
     }
     
-    func chooseColorTap() {
-        viewModel.input.addTaps.chooseColorTap.send()
-    }
-    
-    func createPaletteTap() {
-        viewModel.input.addTaps.createPaletteTap.send()
-    }
-    
-    func choosePaletteTap() {
-        viewModel.input.addTaps.choosePaletteTap.send()
-    }
-    
-    func generatePaletteFromImageTap() {
-        viewModel.input.addTaps.generatePaletteFromImageTap.send()
+    func addColorTap(_ type: FavoriteAddType) {
+        switch type {
+            case .customColor:
+                viewModel.input.addTaps.createColorTap.send()
+            case .libraryColor:
+                viewModel.input.addTaps.chooseColorTap.send()
+            case .colorFromCamera:
+                viewModel.input.addTaps.generateColorFromCameraTap.send()
+            default:
+                return
+        }
     }
     
     func showColorInfoTap(_ appColor: AppColor) {

@@ -59,13 +59,14 @@ private extension FavoriteViewModel {
     }
     
     func bindTaps() {
-        bindAddTaps()
+        bindAddPaletteTaps()
+        bindAddColorTaps()
         bindShowTaps()
     }
 }
 
 private extension FavoriteViewModel {
-    func bindAddTaps() {
+    func bindAddPaletteTaps() {
         input.addTaps.createPaletteTap
             .sink { [weak self] _ in
                 self?.router?.navigateToCreatePalette()
@@ -81,6 +82,14 @@ private extension FavoriteViewModel {
         input.addTaps.generatePaletteFromImageTap
             .sink { [weak self] _ in
                 self?.router?.navigateToImageColorDetection()
+            }
+            .store(in: &cancellable)
+    }
+    
+    func bindAddColorTaps() {
+        input.addTaps.generateColorFromCameraTap
+            .sink { [weak self] _ in
+                self?.router?.navigateToCameraColorDetection()
             }
             .store(in: &cancellable)
     }
@@ -123,6 +132,7 @@ extension FavoriteViewModel {
             let generatePaletteFromImageTap: PassthroughSubject<Void, Never> = .init()
             let createColorTap: PassthroughSubject<Void, Never> = .init()
             let chooseColorTap: PassthroughSubject<Void, Never> = .init()
+            let generateColorFromCameraTap: PassthroughSubject<Void, Never> = .init()
         }
         
         struct ShowTap {
@@ -137,4 +147,14 @@ extension FavoriteViewModel {
         var palettesLimit: Bool
         var colorsLimit: Bool
     }
+}
+
+enum FavoriteAddType {
+    case customPalette
+    case libraryPalette
+    case paletteFromImage
+    
+    case customColor
+    case libraryColor
+    case colorFromCamera
 }
