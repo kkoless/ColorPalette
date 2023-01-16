@@ -18,6 +18,7 @@
 		E50CDA782961ABF30002F468 /* SamplePalettesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */; };
 		E522D50D296C776E0087BD9F /* popular_color_pallets.json in Resources */ = {isa = PBXBuildFile; fileRef = E522D50C296C776E0087BD9F /* popular_color_pallets.json */; };
 		E522D50F296C783B0087BD9F /* PopularPalettesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522D50E296C783B0087BD9F /* PopularPalettesManager.swift */; };
+		E528434829753F6E005102D5 /* EditPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E528434729753F6E005102D5 /* EditPaletteView.swift */; };
 		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
 		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */; };
@@ -103,6 +104,7 @@
 		E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesViewModel.swift; sourceTree = "<group>"; };
 		E522D50C296C776E0087BD9F /* popular_color_pallets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = popular_color_pallets.json; sourceTree = "<group>"; };
 		E522D50E296C783B0087BD9F /* PopularPalettesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPalettesManager.swift; sourceTree = "<group>"; };
+		E528434729753F6E005102D5 /* EditPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaletteView.swift; sourceTree = "<group>"; };
 		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -220,6 +222,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		E528434629753F56005102D5 /* EditPalette */ = {
+			isa = PBXGroup;
+			children = (
+				E528434729753F6E005102D5 /* EditPaletteView.swift */,
+			);
+			path = EditPalette;
+			sourceTree = "<group>";
+		};
 		E52D433829588E34002B11B8 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +249,7 @@
 		E52D433C29588FE8002B11B8 /* GeneralFlow */ = {
 			isa = PBXGroup;
 			children = (
+				E528434629753F56005102D5 /* EditPalette */,
 				E56DD259295B5F3A003F0D29 /* ColorInfo */,
 				E55F6F7A295597C400A8B935 /* SampleColors */,
 				E5BAE92229541DC6005DF70B /* ColorPaletteInfo */,
@@ -799,6 +810,7 @@
 				E56C0E3129376E6400A878CB /* GeneralView.swift in Sources */,
 				E596B249295F0FAF00B64BA8 /* ColorPalette.xcdatamodeld in Sources */,
 				E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */,
+				E528434829753F6E005102D5 /* EditPaletteView.swift in Sources */,
 				E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */,
 				E5C2AEAF2937416300508DF4 /* LoginView.swift in Sources */,
 				E57AF3AA2957222F0002FC75 /* SimilarColorsView.swift in Sources */,

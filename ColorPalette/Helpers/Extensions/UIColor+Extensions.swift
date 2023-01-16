@@ -167,6 +167,24 @@ extension UIColor {
 }
 
 extension UIColor {
+    func add(hue: CGFloat = 0, saturation: CGFloat = 0, brightness: CGFloat = 0, alpha: CGFloat = 1) -> UIColor {
+        var (oldHue, oldSat, oldBright, oldAlpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+        getHue(&oldHue, saturation: &oldSat, brightness: &oldBright, alpha: &oldAlpha)
+        
+        // make sure new values doesn't overflow
+        var newHue = oldHue + (hue / 180)
+        while newHue < 0.0 { newHue += 1.0 }
+        while newHue > 1.0 { newHue -= 1.0 }
+        
+        let newSat: CGFloat = max(min(oldSat + (saturation / 100), 1.0), 0)
+        let newBright: CGFloat = max(min(oldBright + (brightness / 100), 1.0), 0)
+        let newAlpha: CGFloat = oldAlpha + alpha
+        
+        return UIColor(hue: newHue, saturation: newSat, brightness: newBright, alpha: newAlpha)
+      }
+}
+
+extension UIColor {
     func rgbDescription(isExtended: Bool = false) -> String {
         return isExtended ? "R: \(Int(redValue))\nG: \(Int(greenValue))\nB: \(Int(blueValue))" : "R:\(Int(redValue)) G:\(Int(greenValue)) B:\(Int(blueValue))"
     }
