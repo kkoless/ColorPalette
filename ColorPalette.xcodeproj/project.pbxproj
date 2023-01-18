@@ -66,7 +66,7 @@
 		E57A26AE291EA5C00027FAC8 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26AD291EA5C00027FAC8 /* OnboardingPageView.swift */; };
 		E57A26B2291EA7F60027FAC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E57A26B4291EA7F60027FAC8 /* Localizable.strings */; };
 		E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26B9291EC7210027FAC8 /* OnboardingViewModel.swift */; };
-		E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */; };
+		E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26BD291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift */; };
 		E57AF3AA2957222F0002FC75 /* SimilarColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */; };
 		E57AF3AC2957315B0002FC75 /* ColorPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3AB2957315B0002FC75 /* ColorPreview.swift */; };
 		E588B91D2960824900D45F7C /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E588B91C2960824900D45F7C /* ProfileManager.swift */; };
@@ -89,6 +89,7 @@
 		E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF202F29575C6000143582 /* AddNewColorView.swift */; };
 		E5D068A32955F12000E0BBE2 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D068A22955F12000E0BBE2 /* CGFloat+Extensions.swift */; };
 		E5DCBC8129365C46000C1B4E /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DCBC8029365C46000C1B4E /* AppRouter.swift */; };
+		E5E6F61329780057000AC4A2 /* CameraColorDetectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */; };
 		E5EBC207295CB05E00467A6D /* AddNewColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EBC206295CB05E00467A6D /* AddNewColorViewModel.swift */; };
 		E5F3C482295F5403000DDD36 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3C481295F5403000DDD36 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -152,7 +153,7 @@
 		E57A26AF291EA7480027FAC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E57A26B3291EA7F60027FAC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E57A26B9291EC7210027FAC8 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetectionViewController.swift; sourceTree = "<group>"; };
+		E57A26BD291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraColorDetectionViewController.swift; sourceTree = "<group>"; };
 		E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarColorsView.swift; sourceTree = "<group>"; };
 		E57AF3AB2957315B0002FC75 /* ColorPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPreview.swift; sourceTree = "<group>"; };
 		E588B91C2960824900D45F7C /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 		E5CF202F29575C6000143582 /* AddNewColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewColorView.swift; sourceTree = "<group>"; };
 		E5D068A22955F12000E0BBE2 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		E5DCBC8029365C46000C1B4E /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraColorDetectionViewModel.swift; sourceTree = "<group>"; };
 		E5EBC206295CB05E00467A6D /* AddNewColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewColorViewModel.swift; sourceTree = "<group>"; };
 		E5F3C481295F5403000DDD36 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,7 +257,7 @@
 				E5BAE92229541DC6005DF70B /* ColorPaletteInfo */,
 				E50BF95C2953526C00534E82 /* SamplePalettes */,
 				E56C0E2F29376E5700A878CB /* General */,
-				E57A26BB291ECAF70027FAC8 /* ColorDetection */,
+				E57A26BB291ECAF70027FAC8 /* CameraColorDetection */,
 			);
 			path = GeneralFlow;
 			sourceTree = "<group>";
@@ -601,18 +603,19 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		E57A26BB291ECAF70027FAC8 /* ColorDetection */ = {
+		E57A26BB291ECAF70027FAC8 /* CameraColorDetection */ = {
 			isa = PBXGroup;
 			children = (
+				E5E6F6112978003B000AC4A2 /* ViewModel */,
 				E57A26BC291ECAFF0027FAC8 /* View */,
 			);
-			path = ColorDetection;
+			path = CameraColorDetection;
 			sourceTree = "<group>";
 		};
 		E57A26BC291ECAFF0027FAC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E57A26BD291ECB0A0027FAC8 /* ColorDetectionViewController.swift */,
+				E57A26BD291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -703,6 +706,14 @@
 				E5EBC206295CB05E00467A6D /* AddNewColorViewModel.swift */,
 			);
 			path = AddNewColor;
+			sourceTree = "<group>";
+		};
+		E5E6F6112978003B000AC4A2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E5F3C480295F53ED000DDD36 /* CoreData */ = {
@@ -862,11 +873,12 @@
 				E54263EE29389820003334FE /* AuthorizationAPI.swift in Sources */,
 				E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
-				E57A26BE291ECB0A0027FAC8 /* ColorDetectionViewController.swift in Sources */,
+				E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */,
 				E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */,
 				E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */,
 				E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */,
 				E55F6F872955B6AC00A8B935 /* SearchBarView.swift in Sources */,
+				E5E6F61329780057000AC4A2 /* CameraColorDetectionViewModel.swift in Sources */,
 				E55F6F7C295597E000A8B935 /* SampleColorsView.swift in Sources */,
 				E54263E929388614003334FE /* OnboardingManager.swift in Sources */,
 				E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */,

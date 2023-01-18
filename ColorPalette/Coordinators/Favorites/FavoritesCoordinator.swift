@@ -94,7 +94,9 @@ extension FavoritesCoordinator: FavoritesRoutable {
     func navigateToCameraColorDetection() {
     #if IOS_SIMULATOR
     #else
-        let vc = ColorDetectionViewController()
+        let vc = CameraColorDetectionViewController()
+        let viewModel = CameraColorDetectionViewModel(router: self)
+        vc.injectViewModel(viewModel)
         navigationController.pushViewController(vc, animated: true)
     #endif
     }

@@ -1,5 +1,5 @@
 //
-//  ColorDetectionViewController.swift
+//  CameraColorDetectionViewController.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 11.11.2022.
@@ -9,11 +9,13 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-final class ColorDetectionViewController: UIViewController {
+final class CameraColorDetectionViewController: UIViewController {
     private let captureSession = AVCaptureSession() // Audio and video capture session
     private var backFacingCamera: AVCaptureDevice?  // Rear camera
     private var currentDevice: AVCaptureDevice?     // Devices currently in use
     private let queue = DispatchQueue(label: "com.camera.video.queue")  // Camera data frame receiving queue
+    
+    private var viewModel: CameraColorDetectionViewModel?
     
     // Coloring position
     private var center: CGPoint = CGPoint(x: Consts.Constraints.screenWidth / 2 - 15, y: Consts.Constraints.screenWidth / 2 - 15)
@@ -21,25 +23,68 @@ final class ColorDetectionViewController: UIViewController {
     private let previewLayer = CALayer()
     private let lineShape = CAShapeLayer()
     
+    private lazy var closeButton: UIButton = {
+        let btn = UIButton(
+            frame: .zero,
+            primaryAction: UIAction(handler: { [weak self] _ in
+                self?.viewModel?.input.closeTap.send()
+            })
+        )
+        btn.setImage(UIImage(systemName: "multiply"), for: .normal)
+        btn.backgroundColor = .black
+        btn.tintColor = .white
+        return btn
+    }()
     private lazy var addButton: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Add", for: .normal)
+        let btn = UIButton(
+            frame: .zero,
+            primaryAction: UIAction(handler: { [weak self] _ in
+                guard let hex = self?.view.backgroundColor?.hexValue else { return }
+                self?.viewModel?.input.addTap.send(hex)
+            })
+        )
+        btn.setImage(UIImage(systemName: "plus"), for: .normal)
+        btn.backgroundColor = .black
+        btn.tintColor = .white
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        createUI()  // Get the device and create a UI
     }
     
-    func setupUI() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.isHidden = true
+        fetchDevice()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        closeButton.layer.cornerRadius = closeButton.frame.width / 2
+        addButton.layer.cornerRadius = addButton.frame.width / 2
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        captureSession.stopRunning()
+        tabBarController?.tabBar.isTranslucent = false
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    func injectViewModel(_ viewModel: CameraColorDetectionViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    private func setupUI() {
         configureLayers()
         configureViews()
     }
 }
 
-private extension ColorDetectionViewController {
+private extension CameraColorDetectionViewController {
     func configureLayers() {
         configurePreviewLayer()
         configureLoopLayer()
@@ -48,8 +93,8 @@ private extension ColorDetectionViewController {
     
     func configurePreviewLayer() {
         previewLayer.bounds = CGRect(x: 0, y: 0,
-                                     width: Consts.Constraints.screenWidth - 30,
-                                     height: Consts.Constraints.screenWidth - 30)
+                                     width: Consts.Constraints.screenWidth - 80,
+                                     height: Consts.Constraints.screenWidth - 80)
         previewLayer.position = view.center
         previewLayer.cornerRadius = 10
         previewLayer.contentsGravity = CALayerContentsGravity.resizeAspectFill
@@ -71,7 +116,7 @@ private extension ColorDetectionViewController {
         lineShape.path = linePath.cgPath
         lineShape.fillColor = UIColor.clear.cgColor
         
-        self.view.layer.insertSublayer(lineShape, at: 1)
+        view.layer.insertSublayer(lineShape, at: 1)
     }
     
     // Dots
@@ -84,34 +129,42 @@ private extension ColorDetectionViewController {
         lineShape1.path = linePath1.cgPath
         lineShape1.fillColor = UIColor.init(white: 0.7, alpha: 0.5).cgColor
         
-        self.view.layer.insertSublayer(lineShape1, at: 1)
+        view.layer.insertSublayer(lineShape1, at: 1)
     }
 }
 
-private extension ColorDetectionViewController {
+private extension CameraColorDetectionViewController {
     func configureViews() {
-        configureAddButton()
+        configureButtons()
     }
     
-    func configureAddButton() {
-        self.view.addSubview(addButton)
+    func configureButtons() {
+        view.addSubview(closeButton)
+        view.addSubview(addButton)
+        
+        closeButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(Consts.Constraints.bottom + 50)
+            $0.leading.equalToSuperview().inset(40)
+            $0.size.equalTo(50)
+        }
         
         addButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Consts.Constraints.top + 40)
-            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(Consts.Constraints.bottom + 50)
+            $0.trailing.equalToSuperview().inset(40)
+            $0.size.equalTo(50)
         }
     }
 }
 
-private extension ColorDetectionViewController {
+private extension CameraColorDetectionViewController {
     //MARK: - Get the device and create a custom view
-    func createUI() {
+    func fetchDevice() {
         // Obtain the device
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualWideCamera], mediaType: .video, position: .back)
-        self.backFacingCamera = discoverySession.devices.first
+        backFacingCamera = discoverySession.devices.first
         
         // Set the current device as a front-facing camera
-        self.currentDevice = self.backFacingCamera
+        currentDevice = backFacingCamera
         
         do {
             // Current device input
@@ -121,10 +174,10 @@ private extension ColorDetectionViewController {
             videoOutput.alwaysDiscardsLateVideoFrames = true
             videoOutput.setSampleBufferDelegate(self, queue: queue)
             
-            if self.captureSession.canAddOutput(videoOutput) {
-                self.captureSession.addOutput(videoOutput)
+            if captureSession.canAddOutput(videoOutput) {
+                captureSession.addOutput(videoOutput)
             }
-            self.captureSession.addInput(captureDeviceInput)
+            captureSession.addInput(captureDeviceInput)
         } catch {
             print(error)
             return
@@ -137,7 +190,7 @@ private extension ColorDetectionViewController {
     }
 }
 
-extension ColorDetectionViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension CameraColorDetectionViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
