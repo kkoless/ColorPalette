@@ -58,7 +58,11 @@ final class CameraColorDetectionViewController: UIViewController {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = true
-        fetchDevice()
+        PermissionsManager
+            .checkCameraPermission(
+                deniedHandler: { [weak self] in self?.presentCameraSettings() },
+                authorizedHandler: { [weak self] in self?.fetchDevice() }
+            )
     }
     
     override func viewWillLayoutSubviews() {
@@ -224,6 +228,29 @@ extension CameraColorDetectionViewController: AVCaptureVideoDataOutputSampleBuff
             let color = self.previewLayer.pickColor(at: self.center)
             self.view.backgroundColor = color
             self.lineShape.strokeColor = color?.cgColor
+        }
+    }
+}
+
+private extension CameraColorDetectionViewController {
+    func presentCameraSettings() {
+        let alertController = UIAlertController(title: "Error",
+                                      message: "Camera access is denied",
+                                      preferredStyle: .alert)
+        alertController
+            .addAction(UIAlertAction(title: "Cancel", style: .default) { [weak self] _ in self?.viewModel?.input.closeTap.send()
+            })
+        alertController
+            .addAction(UIAlertAction(title: "Settings", style: .cancel) { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: { _ in
+                        // Handle
+                    })
+                }
+            })
+
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
         }
     }
 }
