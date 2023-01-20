@@ -95,7 +95,7 @@ private extension ColorInfoView {
             case .RGB:
                 UIPasteboard.general.string = appColor.uiColor.getRGBCopyInfo()
             case .HSB:
-                UIPasteboard.general.string = appColor.uiColor.getHSVCopyInfo()
+                UIPasteboard.general.string = appColor.uiColor.getHSBCopyInfo()
             case .CMYK:
                 UIPasteboard.general.string = appColor.uiColor.getCMYKCopyInfo()
         }

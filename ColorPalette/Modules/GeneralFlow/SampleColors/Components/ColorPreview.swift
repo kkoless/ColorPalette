@@ -28,7 +28,7 @@ private extension ColorPreview {
     var infoBlock: some View {
         VStack(alignment: .leading) {
             Text(colorName)
-                .font(.title2)
+                .font(.title)
                 .bold()
                 .padding(.top, 30)
                 .frame(maxWidth: Consts.Constraints.screenWidth / 2, alignment: .leading)
@@ -43,45 +43,46 @@ private extension ColorPreview {
         }
         .padding([.leading, .trailing])
         .foregroundColor(Color(color.invertColor()))
+        .minimumScaleFactor(0.1)
     }
     
     var hexInfo: some View {
         VStack(alignment: .leading) {
             Text("HEX")
-                .font(.headline)
+                .font(.title2)
                 .bold()
             Text(color.hexValue)
-                .font(.subheadline)
+                .font(.title3)
         }
     }
     
     var rgbInfo: some View {
         VStack(alignment: .leading) {
             Text("RGB")
-                .font(.headline)
+                .font(.title2)
                 .bold()
             Text(color.rgbDescription(isExtended: true))
-                .font(.subheadline)
+                .font(.title3)
         }
     }
     
     var hsvInfo: some View {
         VStack(alignment: .leading) {
-            Text("HSV")
-                .font(.headline)
+            Text("HSB")
+                .font(.title2)
                 .bold()
-            Text(color.hsvDescription(isExtended: true))
-                .font(.subheadline)
+            Text(color.hsbDescription(isExtended: true))
+                .font(.title3)
         }
     }
     
     var cmykInfo: some View {
         VStack(alignment: .leading) {
             Text("CMYK")
-                .font(.headline)
+                .font(.title2)
                 .bold()
             Text(color.cmykDescription(isExtended: true))
-                .font(.subheadline)
+                .font(.title3)
         }
     }
 }

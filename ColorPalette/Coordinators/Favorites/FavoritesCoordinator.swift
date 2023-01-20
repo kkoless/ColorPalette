@@ -21,7 +21,9 @@ protocol FavoritesRoutable: AnyObject {
     func navigateToImageColorDetection()
     func navigateToCameraColorDetection()
     func navigateToCreatePalette()
+    
     func navigateToPaletteLibrary()
+    func navigateToColorLibrary()
 }
 
 final class FavoritesCoordinator: Coordinatable {
@@ -111,5 +113,10 @@ extension FavoritesCoordinator: FavoritesRoutable {
     func navigateToPaletteLibrary() {
         tabBarDelegate?.selectPage(.general)
         tabBarDelegate?.getGeneralRouter()?.navigateToSamplePalettes()
+    }
+    
+    func navigateToColorLibrary() {
+        tabBarDelegate?.selectPage(.general)
+        tabBarDelegate?.getGeneralRouter()?.navigateToSampleColors()
     }
 }

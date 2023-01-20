@@ -188,11 +188,11 @@ extension UIColor {
         return isExtended ? "R: \(Int(redValue))\nG: \(Int(greenValue))\nB: \(Int(blueValue))" : "R:\(Int(redValue)) G:\(Int(greenValue)) B:\(Int(blueValue))"
     }
     
-    func hsvDescription(isExtended: Bool = false) -> String {
+    func hsbDescription(isExtended: Bool = false) -> String {
         let h = hsvValue.h.rounded(toDecimalPlaces: 1)
         let s = hsvValue.s.rounded(toDecimalPlaces: 1)
         let v = hsvValue.v.rounded(toDecimalPlaces: 1)
-        return isExtended ? "H: \(h)°\nS: \(s)%\nV: \(v)%" : "H:\(h)° S:\(s)% V:\(v)%"
+        return isExtended ? "H: \(h)°\nS: \(s)%\nB: \(v)%" : "H:\(h)° S:\(s)% B:\(v)%"
     }
     
     func cmykDescription(isExtended: Bool = false) -> String {
@@ -206,7 +206,7 @@ extension UIColor {
         return "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(cgColor.alpha)"
     }
     
-    func getHSVCopyInfo() -> String {
+    func getHSBCopyInfo() -> String {
         return "\(hsvValue.h.rounded(toDecimalPlaces: 1)), \(hsvValue.s.rounded(toDecimalPlaces: 1)), \(hsvValue.v.rounded(toDecimalPlaces: 1))"
     }
     
@@ -231,7 +231,7 @@ extension UIColor {
         switch type {
             case .HEX: return self.hexValue
             case .RGB: return self.rgbDescription(isExtended: isExtended)
-            case .HSB: return self.hsvDescription(isExtended: isExtended)
+            case .HSB: return self.hsbDescription(isExtended: isExtended)
             case .CMYK: return self.cmykDescription(isExtended: isExtended)
         }
     }

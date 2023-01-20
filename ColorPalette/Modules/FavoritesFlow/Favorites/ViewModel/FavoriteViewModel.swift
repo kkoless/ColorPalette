@@ -68,43 +68,35 @@ private extension FavoriteViewModel {
 private extension FavoriteViewModel {
     func bindAddPaletteTaps() {
         input.addTaps.createPaletteTap
-            .sink { [weak self] _ in
-                self?.router?.navigateToCreatePalette()
-            }
+            .sink { [weak self] _ in self?.router?.navigateToCreatePalette() }
             .store(in: &cancellable)
         
         input.addTaps.choosePaletteTap
-            .sink { [weak self] _ in
-                self?.router?.navigateToPaletteLibrary()
-            }
+            .sink { [weak self] _ in self?.router?.navigateToPaletteLibrary() }
             .store(in: &cancellable)
         
         input.addTaps.generatePaletteFromImageTap
-            .sink { [weak self] _ in
-                self?.router?.navigateToImageColorDetection()
-            }
+            .sink { [weak self] _ in self?.router?.navigateToImageColorDetection() }
             .store(in: &cancellable)
     }
     
     func bindAddColorTaps() {
+        input.addTaps.chooseColorTap
+            .sink { [weak self] _ in self?.router?.navigateToColorLibrary() }
+            .store(in: &cancellable)
+        
         input.addTaps.generateColorFromCameraTap
-            .sink { [weak self] _ in
-                self?.router?.navigateToCameraColorDetection()
-            }
+            .sink { [weak self] _ in self?.router?.navigateToCameraColorDetection() }
             .store(in: &cancellable)
     }
     
     func bindShowTaps() {
         input.showTaps.showColorInfoTap
-            .sink { [weak self] appColor in
-                self?.router?.navigateToColorInfo(color: appColor)
-            }
+            .sink { [weak self] appColor in self?.router?.navigateToColorInfo(color: appColor) }
             .store(in: &cancellable)
         
         input.showTaps.showPaletteInfoTap
-            .sink { [weak self] palette in
-                self?.router?.navigateToColorPalette(palette: palette)
-            }
+            .sink { [weak self] palette in self?.router?.navigateToColorPalette(palette: palette) }
             .store(in: &cancellable)
     }
 }

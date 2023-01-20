@@ -68,7 +68,13 @@ private extension CreateColorPaletteViewModel {
             .store(in: &cancellable)
         
         input.backTap
-            .sink { [weak self] _ in self?.output.showSaveAlert.toggle() }
+            .sink { [weak self] _ in
+                if let colors = self?.templatePaletteManager.colors, colors.isEmpty {
+                    self?.router?.pop()
+                } else {
+                    self?.output.showSaveAlert.toggle()
+                }
+            }
             .store(in: &cancellable)
         
         input.alertTaps.stayTap
