@@ -46,6 +46,10 @@ private extension SamplePalettesViewModel {
     }
     
     func bindTaps() {
+        input.backTap
+            .sink { [weak self] _ in self?.router?.popToRoot() }
+            .store(in: &cancellable)
+        
         input.paletteTap
             .sink { [weak self] palette in
                 self?.router?.navigateToColorPalette(palette: palette)
@@ -67,6 +71,7 @@ extension SamplePalettesViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
         let paletteTap: PassthroughSubject<ColorPalette, Never> = .init()
+        let backTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {

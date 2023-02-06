@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol GeneralRoutable: AnyObject {
     func pop()
+    func popToRoot()
     
     func navigateToGeneralScreen()
     
@@ -48,9 +49,8 @@ final class GeneralCoordinator: Coordinatable {
 }
 
 extension GeneralCoordinator: GeneralRoutable {
-    func pop() {
-        navigationController.popViewController(animated: true)
-    }
+    func pop() { navigationController.popViewController(animated: true) }
+    func popToRoot() { navigationController.popToRootViewController(animated: true) }
     
     func navigateToGeneralScreen() {
         var generalView = GeneralView()

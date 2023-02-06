@@ -60,9 +60,7 @@ private extension SampleColorsViewModel {
             .store(in: &cancellable)
         
         input.popTap
-            .sink { [weak self] _ in
-                self?.router?.pop()
-            }
+            .sink { [weak self] _ in self?.router?.popToRoot() }
             .store(in: &cancellable)
     }
 }

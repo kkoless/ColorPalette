@@ -31,7 +31,7 @@ final class TabBarCoordinator: Coordinatable {
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.tabBarController = .init()
+        self.tabBarController = TabBarController()
         configureTabBar()
     }
     

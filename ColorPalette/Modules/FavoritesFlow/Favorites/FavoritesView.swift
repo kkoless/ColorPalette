@@ -82,19 +82,43 @@ private extension FavoritesView {
     
     var favoriteList: some View {
         List {
-            if !viewModel.output.palettes.isEmpty {
-                Section("Palettes") {
-                    paletteCells
-                }
-            }
-            
-            if !viewModel.output.colors.isEmpty {
-                Section("Colors") {
-                    colorCells
-                }
-            }
+            palettesBlock
+            colorsBlock
         }
         .listStyle(.plain)
+    }
+    
+    func getHeaderText(text: String) -> some View {
+        Text(text)
+            .font(.title3)
+            .bold()
+    }
+}
+
+private extension FavoritesView {
+    @ViewBuilder
+    var palettesBlock: some View {
+        if !viewModel.output.palettes.isEmpty {
+            HStack {
+                getHeaderText(text: "Palettes")
+                Spacer()
+            }
+            
+            paletteCells
+        }
+    }
+    
+    @ViewBuilder
+    var colorsBlock: some View {
+        if !viewModel.output.colors.isEmpty {
+            HStack {
+                getHeaderText(text: "Colors")
+                Spacer()
+            }
+            .padding(.top, 20)
+            
+            colorCells
+        }
     }
     
     var paletteCells: some View {
