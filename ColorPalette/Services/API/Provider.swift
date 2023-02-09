@@ -14,11 +14,6 @@ final class Provider<P>: MoyaProvider<P> where P: TargetType {
             let defaultEndpointMapping = MoyaProvider
                 .defaultEndpointMapping(for: target)
             
-            if let token = CredentialsManager.shared.token {
-                return defaultEndpointMapping
-                    .adding(newHTTPHeaderFields: [Consts.API.tokenHeader : token])
-            }
-            
             return defaultEndpointMapping
         }
         let logger = NetworkLoggerPlugin(configuration: NetworkLoggerPlugin.Configuration(logOptions: [.formatRequestAscURL, .errorResponseBody, .verbose]))

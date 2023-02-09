@@ -13,14 +13,17 @@ final class ProfileViewModel: ObservableObject {
     @Published var output: Output
     
     private let profileManager: ProfileManager
+    private let service: ProfileServiceProtocol
     private weak var router: ProfileRoutable?
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: ProfileRoutable? = nil) {
+    init(router: ProfileRoutable? = nil,
+         service: ProfileServiceProtocol = AuthorizationService.shared) {
         self.input = Input()
         self.output = Output()
         self.router = router
+        self.service = service
         self.profileManager = ProfileManager.shared
         
         bindProfile()
@@ -36,6 +39,23 @@ final class ProfileViewModel: ObservableObject {
 
 private extension ProfileViewModel {
     func bindProfile() {
+        input.onAppear
+            .filter { _ in !CredentialsManager.shared.isGuest }
+            .flatMap { [unowned self] _ -> AnyPublisher<Profile, ApiError>  in
+                self.service.fetchProfile()
+            }
+            .sink { response in
+                switch response {
+                    case.failure(let apiError):
+                        print(apiError.localizedDescription)
+                    case .finished:
+                        print("finished")
+                }
+            } receiveValue: { [weak self] profile in
+                self?.profileManager.setProfile(profile)
+            }
+            .store(in: &cancellable)
+        
         profileManager.$profile
             .sink { [weak self] profile in self?.output.profile = profile }
             .store(in: &cancellable)
@@ -46,10 +66,6 @@ private extension ProfileViewModel {
             .sink { [weak self] _ in self?.router?.navigateToAuthorizationFlow() }
             .store(in: &cancellable)
         
-        input.changeRoleTap
-            .sink { [weak self] _ in self?.profileManager.changeRole() }
-            .store(in: &cancellable)
-        
         input.logOutTap
             .sink { [weak self] _ in self?.profileManager.logOut() }
             .store(in: &cancellable)
@@ -58,8 +74,8 @@ private extension ProfileViewModel {
 
 extension ProfileViewModel {
     struct Input {
+        let onAppear: PassthroughSubject<Void, Never> = .init()
         let signInTap: PassthroughSubject<Void, Never> = .init()
-        let changeRoleTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()
     }
     

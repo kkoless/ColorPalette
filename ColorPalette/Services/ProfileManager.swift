@@ -5,12 +5,14 @@
 //  Created by Кирилл Колесников on 31.12.2022.
 //
 
-import Foundation
+import Combine
 
 final class ProfileManager: ObservableObject {
     @Published private(set) var profile: Profile? = nil
     
     static let shared = ProfileManager()
+    
+    private var cancellable: Set<AnyCancellable> = .init()
     
     // Network manager
     
@@ -19,22 +21,21 @@ final class ProfileManager: ObservableObject {
     }
     
     deinit {
+        cancellable.forEach { $0.cancel() }
+        cancellable.removeAll()
+        
         print("\(self) DEINIT")
     }
 }
 
 extension ProfileManager {
-    func fetchProfile() {
-        CredentialsManager.shared.isGuest = false
-        self.profile = Profile(username: "kkolesss", isFree: false)
-    }
-    
-    func changeRole() {
-        self.profile?.changeRole()
+    func setProfile(_ newProfile: Profile) {
+        profile = newProfile
     }
     
     func logOut() {
         CredentialsManager.shared.isGuest = true
+        CredentialsManager.shared.token = nil
         self.profile = nil
     }
 }

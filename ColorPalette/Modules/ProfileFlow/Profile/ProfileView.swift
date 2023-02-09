@@ -24,6 +24,7 @@ struct ProfileView: View {
             Spacer()
         }
         .padding()
+        .onAppear(perform: onAppear)
     }
 }
 
@@ -42,8 +43,6 @@ private extension ProfileView {
             userAvatarView
             
             userInfo
-           
-            changeRoleButton
             
             Spacer()
             
@@ -51,6 +50,7 @@ private extension ProfileView {
                 Text("Log out")
             }
         }
+        .padding()
     }
     
     var guestBlock: some View {
@@ -73,29 +73,21 @@ private extension ProfileView {
     
     var userInfo: some View {
         VStack {
-            Text(viewModel.output.profile?.username ?? "EMPTY")
-                .font(.headline)
-            
-            Text(viewModel.output.profile?.role ?? "NONE")
-                .font(.subheadline)
-                .bold()
+            Text(viewModel.output.profile?.email ?? "")
+                .padding([.top, .bottom], 15)
+            Text(viewModel.output.profile?.role.title ?? "")
         }
-    }
-    
-    var changeRoleButton: some View {
-        Button(action: { changeRole() }) {
-            Text("Change role")
-        }
+        .font(.subheadline)
     }
 }
 
 private extension ProfileView {
-    func signInTap() {
-        viewModel.input.signInTap.send()
+    func onAppear() {
+        viewModel.input.onAppear.send()
     }
     
-    func changeRole() {
-        viewModel.input.changeRoleTap.send()
+    func signInTap() {
+        viewModel.input.signInTap.send()
     }
     
     func logOutTap() {

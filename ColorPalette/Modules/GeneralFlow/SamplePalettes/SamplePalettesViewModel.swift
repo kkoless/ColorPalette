@@ -61,7 +61,7 @@ private extension SamplePalettesViewModel {
 private extension SamplePalettesViewModel {
     func checkLimit() -> Int {
         let firstCondition = CredentialsManager.shared.isGuest
-        let secondCondition = ProfileManager.shared.profile?.isFree ?? false
+        let secondCondition = ProfileManager.shared.profile?.role.boolValue ?? false
         
         return firstCondition || secondCondition ? 20 : 100
     }

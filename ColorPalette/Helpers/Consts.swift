@@ -10,8 +10,8 @@ import UIKit
 
 struct Consts {
     struct API {
-        static let baseUrl = URL(string: "")!
-        static let tokenHeader = "apiKey"
+        static let baseUrl = URL(string: "http://127.0.0.1:8000/api")!
+        static let tokenHeader = "Authorization"
     }
     
     struct Constraints {

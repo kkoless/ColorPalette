@@ -11,6 +11,8 @@ struct RegistrationView: View {
     @State private var loginText = ""
     @State private var passwordText = ""
     
+    @ObservedObject var viewModel: RegistrationViewModel
+    
     var body: some View {
         VStack {
             Spacer()
@@ -33,7 +35,7 @@ extension RegistrationView {
         VStack {
             Group {
                 TextField("Email", text: $loginText)
-                TextField("Password", text: $passwordText)
+                SecureField("Password", text: $passwordText)
             }
             .padding()
             .overlay(
@@ -47,12 +49,12 @@ extension RegistrationView {
 
 extension RegistrationView {
     func registerButtonTap() {
-        
+        viewModel.input.registrTap.send((loginText, passwordText))
     }
 }
 
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationView()
+        RegistrationView(viewModel: RegistrationViewModel())
     }
 }

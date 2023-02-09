@@ -46,7 +46,8 @@ extension AuthorizationCoordinator: AuthorizationRoutable {
     }
     
     func navigateToRegistrationScreen() {
-        let registrationView = RegistrationView()
+        let viewModel = RegistrationViewModel(router: self)
+        let registrationView = RegistrationView(viewModel: viewModel)
         let vc = UIHostingController(rootView: registrationView)
         navigationController.pushViewController(vc, animated: true)
     }

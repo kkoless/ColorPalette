@@ -9,8 +9,9 @@ import Foundation
 import Moya
 
 enum AuthorizationAPI {
-    case login
-    case register
+    case login(email: String, password: String)
+    case register(email: String, password: String)
+    case fetchUser
 }
 
 extension AuthorizationAPI: TargetType {
@@ -21,9 +22,11 @@ extension AuthorizationAPI: TargetType {
     var path: String {
         switch self {
             case .login:
-                return ""
+                return "/user/login"
             case .register:
-                return ""
+                return "/user/signup"
+            case .fetchUser:
+                return "/user"
         }
     }
     
@@ -31,18 +34,40 @@ extension AuthorizationAPI: TargetType {
         switch self {
             case .login, .register:
                 return .post
+            case .fetchUser:
+                return .get
         }
     }
     
     var task: Moya.Task {
+        var params = [String: Any]()
         switch self {
-            case .login, .register:
+            case let .login(email: email, password: password):
+                params["email"] = email
+                params["password"] = password
+                return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+                
+            case let .register(email: email, password: password):
+                params["email"] = email
+                params["password"] = password
+                return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+            case .fetchUser:
                 return .requestPlain
         }
     }
     
     var headers: [String : String]? {
-        var dict = [String: String]()
-        return dict
+        var params: [String: String] = .init()
+        
+        switch self {
+            case .fetchUser:
+                if let token = CredentialsManager.shared.token, !token.isEmpty {
+                    params[Consts.API.tokenHeader] = "Bearer \(token)"
+                }
+            default:
+                return params
+        }
+        
+        return params
     }
 }

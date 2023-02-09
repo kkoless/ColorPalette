@@ -9,17 +9,31 @@ import Foundation
 
 
 struct Profile {
-    let username: String
-    var isFree: Bool
+    let email: String
+    let role: Role
+    let accessTokenData: TokenData
+}
+
+struct TokenData {
+    let access_token: String
+    let expire_time: String
+}
+
+enum Role {
+    case free
+    case paid
     
-    var role: String {
-        switch isFree {
-            case true: return "FREE"
-            case false: return "PAID"
+    var boolValue: Bool {
+        switch self {
+            case .free: return false
+            case .paid: return true
         }
     }
     
-    mutating func changeRole() {
-        self.isFree.toggle()
+    var title: String {
+        switch self {
+            case .free: return "FREE"
+            case .paid: return "PAID"
+        }
     }
 }

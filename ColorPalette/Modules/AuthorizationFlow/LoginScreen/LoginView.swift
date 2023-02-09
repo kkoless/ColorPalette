@@ -36,7 +36,7 @@ extension LoginView {
         VStack {
             Group {
                 TextField("Email", text: $loginText)
-                TextField("Password", text: $passwordText)
+                SecureField("Password", text: $passwordText)
             }
             .padding()
             .overlay(
@@ -55,7 +55,7 @@ extension LoginView {
 
 extension LoginView {
     func loginButtonTap() {
-        viewModel.input.loginTap.send()
+        viewModel.input.loginTap.send((loginText, passwordText))
     }
     
     func registerButtonTap() {
