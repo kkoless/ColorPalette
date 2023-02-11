@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ColorInfoView: View {
-    @EnvironmentObject var favoriteManager: FavoriteManager
-    @State var isFavorite: Bool = false
+    @ObservedObject var viewModel: ColorInfoViewModel
     
     let appColor: AppColor
     var invertedColor: Color {
@@ -22,8 +21,7 @@ struct ColorInfoView: View {
             helpButtonsBlock
         }
         .edgesIgnoringSafeArea(.bottom)
-        .onAppear { checkFavorite(color: appColor) }
-        .onChange(of: appColor) { newValue in checkFavorite(color: newValue) }
+        .onAppear { viewModel.input.onAppear.send() }
     }
 }
 
@@ -43,10 +41,10 @@ private extension ColorInfoView {
     
     var favoriteButton: some View {
         Button(action: { changeFavoriteState() }, label: {
-            Image(systemName: isFavorite ? "heart.fill" : "heart")
+            Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundColor(isFavorite ? .red : invertedColor)
+                .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
         })
     }
     
@@ -66,26 +64,8 @@ private extension ColorInfoView {
 }
 
 private extension ColorInfoView {
-    func checkFavorite(color: AppColor) {
-        self.isFavorite = favoriteManager
-            .colors
-            .contains(where: {
-                $0.hex == color.hex &&
-                $0.name == color.name
-            })
-    }
-    
     func changeFavoriteState() {
-        if isFavorite {
-            favoriteManager.removeColor(appColor)
-            isFavorite.toggle()
-        }
-        else {
-            if !favoriteManager.isColorsLimit {
-                favoriteManager.addColor(appColor)
-                isFavorite.toggle()
-            }
-        }
+        viewModel.input.favTap.send()
     }
     
     func copyColorInfo(_ type: ColorType) {
@@ -104,7 +84,7 @@ private extension ColorInfoView {
 
 struct ColorInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorInfoView(appColor: AppColor.getRandomColor())
-            .environmentObject(FavoriteManager.shared)
+        let color = AppColor.getRandomColor()
+        ColorInfoView(viewModel: ColorInfoViewModel(color: color), appColor: color)
     }
 }

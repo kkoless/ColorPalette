@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GeneralView: View {
-    weak var router: GeneralRoutable?
+    @StateObject var viewModel: GeneralViewModel
     
     var body: some View {
         VStack {
@@ -20,6 +20,7 @@ struct GeneralView: View {
             
             Spacer()
         }
+        .onAppear(perform: onAppear)
     }
 }
 
@@ -48,17 +49,21 @@ private extension GeneralView {
 }
 
 private extension GeneralView {
+    func onAppear() {
+        viewModel.input.onAppear.send()
+    }
+    
     func navigateToSamplePalettes() {
-        router?.navigateToSamplePalettes()
+        viewModel.input.palettesTap.send()
     }
     
     func navigateToSampleColors() {
-        router?.navigateToSampleColors()
+        viewModel.input.colorsTap.send()
     }
 }
 
 struct GeneralView_Previews: PreviewProvider {
     static var previews: some View {
-        GeneralView()
+        GeneralView(viewModel: GeneralViewModel())
     }
 }

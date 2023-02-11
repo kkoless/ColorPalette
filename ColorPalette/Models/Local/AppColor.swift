@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 struct AppColor: Identifiable {
     let name: String
@@ -48,6 +49,10 @@ extension AppColor {
     static func getClear() -> AppColor {
         return AppColor(uiColor: UIColor.clear)
     }
+    
+    static func getPrimary() -> AppColor {
+        return AppColor(uiColor: Color.primary.uiColor)
+    }
 }
 
 extension AppColor: Hashable {
@@ -56,7 +61,21 @@ extension AppColor: Hashable {
         hasher.combine(name.lowercased())
     }
     
+    var hashValue: Int {
+        Int(hex.lowercased().hash)
+    }
+    
     static func == (lhs: AppColor, rhs: AppColor) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension AppColor {
+    func getJSON() -> [String: Any] {
+        var params: [String: Any] = .init()
+        params["id"] = id
+        params["name"] = name
+        params["hex"] = hex
+        return params
     }
 }

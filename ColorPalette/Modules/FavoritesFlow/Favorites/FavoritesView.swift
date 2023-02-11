@@ -23,6 +23,7 @@ struct FavoritesView: View {
                 favoriteList
             }
         }
+        .onAppear(perform: onAppear)
     }
 }
 
@@ -161,6 +162,10 @@ private extension FavoritesView {
 }
 
 private extension FavoritesView {
+    func onAppear() {
+        viewModel.input.onAppear.send(())
+    }
+    
     func addPaletteTap(_ type: FavoriteAddType) {
         switch type {
             case .customPalette:

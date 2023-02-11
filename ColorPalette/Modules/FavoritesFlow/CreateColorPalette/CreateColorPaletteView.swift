@@ -13,11 +13,8 @@ struct CreateColorPaletteView: View {
     var body: some View {
         VStack {
             navBar
-            
-            topButtons
-            
             palettePreview
-                .padding()
+                .padding([.top, .bottom])
         }
         .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
             Button(role: .cancel, action: { stayAlertTap() }) {
@@ -35,26 +32,28 @@ struct CreateColorPaletteView: View {
 
 private extension CreateColorPaletteView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: viewModel.input.backTap)
-            .padding(.top, Consts.Constraints.top)
-    }
-    
-    var topButtons: some View {
-        HStack {
-            Button(action: { addColorTap() }) {
-                Text("Add custom color")
-            }
-            .disabled(viewModel.output.isLimit)
-            
-            Spacer()
-            
-            if !viewModel.output.colors.isEmpty {
-                Button(action: { savePaletteTap() }) {
-                    Text("Save palette")
+        CustomNavigationBarView(backAction: {
+            viewModel.input.backTap.send()
+        })
+        .trailingItems {
+            HStack(spacing: 25) {
+                Button(action: { addColorTap() }) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                }
+                .disabled(viewModel.output.isLimit)
+                .foregroundColor(viewModel.output.isLimit ? .gray : .primary)
+                
+                if !viewModel.output.colors.isEmpty {
+                    Button(action: { savePaletteTap() }) {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
                 }
             }
         }
-        .padding()
     }
     
     var palettePreview: some View {
@@ -62,7 +61,7 @@ private extension CreateColorPaletteView {
             ForEach(viewModel.output.colors) { color in
                 Color(color)
                     .listRowSeparator(.hidden)
-                    .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                    .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
                     .cornerRadius(10)
             }
             .onDelete { indexSet in
@@ -74,6 +73,7 @@ private extension CreateColorPaletteView {
             .frame(height: 60)
         }
         .listStyle(.plain)
+        .environment(\.editMode, .constant(.active))
     }
 }
 

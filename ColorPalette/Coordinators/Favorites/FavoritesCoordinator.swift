@@ -17,7 +17,9 @@ protocol FavoritesRoutable: AnyObject {
     func navigateToColorPalette(palette: ColorPalette)
     func navigateToColorInfo(color: AppColor)
     
-    func navigateToAddNewColor(templateManager: TemplatePaletteManager)
+    func navigateToAddNewColorToPalette(templateManager: TemplatePaletteManager)
+    func navigateToAddNewColorToFavorites()
+    
     func navigateToImageColorDetection()
     func navigateToCameraColorDetection()
     func navigateToCreatePalette()
@@ -67,23 +69,31 @@ extension FavoritesCoordinator: FavoritesRoutable {
     }
     
     func navigateToColorPalette(palette: ColorPalette) {
-        let view = ColorPaletteView(palette: palette).environmentObject(FavoriteManager.shared)
+        let viewModel = ColorPaletteInfoViewModel(palette: palette)
+        let view = ColorPaletteView(viewModel: viewModel, palette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }
     
     func navigateToColorInfo(color: AppColor) {
-        let view = ColorInfoView(appColor: color)
-            .environmentObject(FavoriteManager.shared)
+        let viewModel = ColorInfoViewModel(color: color)
+        let view = ColorInfoView(viewModel: viewModel, appColor: color)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }
     
-    func navigateToAddNewColor(templateManager: TemplatePaletteManager) {
-        let viewModel = AddNewColorViewModel(templatePaletteManager: templateManager, router: self)
-        let view = AddNewColorView(viewModel: viewModel)
+    func navigateToAddNewColorToPalette(templateManager: TemplatePaletteManager) {
+        let viewModel = AddNewColorToPaletteViewModel(templatePaletteManager: templateManager, router: self)
+        let view = AddNewColorToPaletteView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToAddNewColorToFavorites() {
+        let viewModel = AddNewColorToFavoritesViewModel(router: self)
+        let view = AddNewColorToFavoritesView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToImageColorDetection() {

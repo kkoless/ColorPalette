@@ -22,17 +22,7 @@ final class FavoriteManager: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    private init() {        
-        if CredentialsManager.shared.isGuest {
-            self.colors = self.coreDataManager.getColors()
-            self.palettes = self.coreDataManager.getPalettes()
-        } else {
-            // Server
-        }
-        
-        checkColorsLimit()
-        checkPalettesLimit()
-        
+    private init() {
         bindProfile()
         
         print("\(self) INIT")
@@ -50,30 +40,37 @@ private extension FavoriteManager {
     func bindProfile() {
         profileManager.$profile
             .sink { [weak self] _ in
-                guard let self = self else { return }
-                
                 if CredentialsManager.shared.isGuest {
-                    self.colors = self.coreDataManager.getColors()
-                    self.palettes = self.coreDataManager.getPalettes()
-                }
-                else {
-                    self.colors = [] // fetch from server
-                    self.palettes = [] // fetch from server
+                    self?.setItemsFromCoreData()
                 }
                 
-                self.checkColorsLimit(forceReload: true)
-                self.checkPalettesLimit(forceReload: true)
+                self?.checkColorsLimit(forceReload: true)
+                self?.checkPalettesLimit(forceReload: true)
             }
             .store(in: &cancellable)
     }
 }
 
 extension FavoriteManager {
+    func setItemsFromCoreData() {
+        self.colors = self.coreDataManager.getColors()
+        self.palettes = self.coreDataManager.getPalettes()
+        
+        checkColorsLimit()
+        checkPalettesLimit()
+    }
+    
+    func setItemsFromServer(colors: [AppColor], palettes: [ColorPalette]) {
+        self.colors = colors
+        self.palettes = palettes
+        
+        checkColorsLimit()
+        checkPalettesLimit()
+    }
+    
     func addColor(_ newColor: AppColor) {
         if CredentialsManager.shared.isGuest {
             coreDataManager.addColor(newColor)
-        } else {
-            // Server
         }
         
         colors.append(newColor)
@@ -83,8 +80,6 @@ extension FavoriteManager {
     func addPalette(_ newPalette: ColorPalette) {
         if CredentialsManager.shared.isGuest {
             coreDataManager.addPalette(newPalette)
-        } else {
-            // Server
         }
         
         palettes.append(newPalette)
@@ -95,8 +90,6 @@ extension FavoriteManager {
         if let index = colors.firstIndex(where: { $0 == color })  {
             if CredentialsManager.shared.isGuest {
                 coreDataManager.removeColor(color)
-            } else {
-                // Server
             }
             
             colors.remove(at: index)
@@ -108,8 +101,6 @@ extension FavoriteManager {
         if let index = palettes.firstIndex(where: { $0 == palette })  {
             if CredentialsManager.shared.isGuest {
                 coreDataManager.removePalette(palette)
-            } else {
-                // Server
             }
             
             palettes.remove(at: index)
@@ -121,7 +112,7 @@ extension FavoriteManager {
 private extension FavoriteManager {
     func checkColorsLimit(forceReload: Bool = false) {
         let firstCondition = CredentialsManager.shared.isGuest && colors.count == 5
-        let secondCondition = (profileManager.profile?.role.boolValue ?? false) && colors.count == 5
+        let secondCondition = !(profileManager.profile?.role.boolValue ?? false) && colors.count == 5
         
         let newValue = firstCondition || secondCondition ? true : false
         
@@ -135,7 +126,7 @@ private extension FavoriteManager {
     
     func checkPalettesLimit(forceReload: Bool = false) {
         let firstCondition = CredentialsManager.shared.isGuest && palettes.count == 5
-        let secondCondition = (profileManager.profile?.role.boolValue ?? false) && palettes.count == 5
+        let secondCondition = !(profileManager.profile?.role.boolValue ?? false) && palettes.count == 5
         
         let newValue = firstCondition || secondCondition ? true : false
         

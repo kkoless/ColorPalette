@@ -28,8 +28,7 @@ struct SamplePalettesView: View {
 
 private extension SamplePalettesView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: viewModel.input.backTap)
-            .padding(.top, Consts.Constraints.top)
+        CustomNavigationBarView(backAction: { viewModel.input.backTap.send() })
     }
     
     var header: some View {

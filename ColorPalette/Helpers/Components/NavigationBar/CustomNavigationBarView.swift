@@ -8,106 +8,103 @@
 import SwiftUI
 import Combine
 
+struct CustomNavigationBarAppearance: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding([.leading, .trailing], 16)
+            .padding(.top, Consts.Constraints.top + 45)
+            .padding(.bottom)
+            .foregroundColor(.primary)
+    }
+}
+
+struct CustomNavigationBarTitleAppearance: ViewModifier {
+    let font: Font
+    let isBold: Bool
+    let opacity: Double
+    
+    func body(content: Content) -> some View {
+        content
+            .font(isBold ? font.bold() : font)
+            .opacity(opacity)
+            .foregroundColor(.primary)
+    }
+}
+
 struct CustomNavigationBarView: View {
-    private let title: String
-    private let trailingItems: [Button<AnyView>]
-    private let backAction: PassthroughSubject<Void, Never>?
+    @State private var titleText: String
+    private var backAction: () -> Void
     
-    @Environment(\.dismiss) private var dismiss: DismissAction
-    
-    init(backAction: PassthroughSubject<Void, Never>? = nil,
-         title: String = "",
-         trailingItems: [Button<AnyView>] = []) {
+    init(backAction: @escaping () -> Void, titleText: String = "") {
         self.backAction = backAction
-        self.title = title
-        self.trailingItems = trailingItems
+        self.titleText = titleText
     }
     
     var body: some View {
         HStack(spacing: 0) {
             backButton
             Spacer()
-            
-            if !title.isEmpty {
-                titleBlock
-                Spacer()
-            }
-            
-            if !trailingItems.isEmpty {
-                trailingItemsBlock
-            }
+            title
+            Spacer()
         }
-        .padding(.top, 45)
-        .padding([.leading, .trailing, .bottom])
-        .frame(maxWidth: .infinity)
-        .foregroundColor(tintColor)
-        .background(backgroundColor.edgesIgnoringSafeArea(.top))
+        .setCustomNavigationBarAppearance()
     }
 }
 
 private extension CustomNavigationBarView {
     var backButton: some View {
-        Button(action: { pop() }) {
+        Button(action: { backAction() }) {
             Image(systemName: "chevron.left")
                 .resizable()
                 .frame(width: 10, height: 20)
         }
     }
     
-    var titleBlock: some View {
-        Text(title)
-            .font(.headline)
-            .bold()
-    }
-    
-    var trailingItemsBlock: some View {
-        HStack(spacing: 35) {
-            ForEach(0..<trailingItems.count) { index in
-                self.trailingItems[index]
-            }
-        }
+    var title: some View {
+        Text(titleText)
+            .setCustomNavigationBarTitleAppearance()
     }
 }
 
-private extension CustomNavigationBarView {
-    private var backgroundColor: Color {
-        Color(UIColor(named: "systemBackground") ?? .clear)
-    }
-    private var tintColor: Color {
-        Color(UIColor(named: "systemBackground")?.invertColor() ?? .clear)
+extension CustomNavigationBarView {
+    func setTitleText(_ text: String) {
+        self.titleText = text
     }
 }
 
-private extension CustomNavigationBarView {
-    func pop() {
-        if backAction == nil {
-            dismiss()
-        } else {
-            self.backAction?.send(())
+extension CustomNavigationBarView {
+    func trailingItems<Content: View>(@ViewBuilder items: @escaping () -> Content) -> some View {
+        HStack {
+            backButton
+            Spacer()
+            title
+            Spacer()
+            items()
         }
+        .setCustomNavigationBarAppearance()
     }
 }
+
 
 struct CustomNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        let buttons: [Button<AnyView>] = [
-            Button(action: {}, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .eraseToAnyView()
-            }),
-            Button(action: {}, label: {
-                Image(systemName: "trash")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .eraseToAnyView()
-            })
-        ]
-        let backTap = PassthroughSubject<Void, Never>()
         VStack {
-            CustomNavigationBarView(backAction: backTap,
-                                    trailingItems: buttons)
+            CustomNavigationBarView(backAction: {}, titleText: "Test")
+                .trailingItems {
+                    Button(action: {}) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                            .padding(.trailing)
+                    }
+                    
+                    Button(action: {}) {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
+                }
+
             Spacer()
         }
     }

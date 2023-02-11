@@ -9,22 +9,30 @@ import Foundation
 import Combine
 
 final class FavoriteViewModel: ObservableObject {
+    typealias FavoriteService = FavoritesFetchServiceProtocol & FavoritesAddServiceProtocol & FavoritesDeleteServiceProtocol
+    
     let input: Input
     @Published var output: Output
     
     private let favoriteManager: FavoriteManager
+    private let service: FavoriteService
     weak private var router: FavoritesRoutable?
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil) {
+    init(router: FavoritesRoutable? = nil,
+         service: FavoriteService = FavoritesNetworkService.shared) {
         self.favoriteManager = FavoriteManager.shared
+        self.service = service
+        
         self.input = Input()
         self.output = Output(palettes: self.favoriteManager.palettes,
                              colors: self.favoriteManager.colors,
                              palettesLimit: self.favoriteManager.isPalettesLimit,
                              colorsLimit: self.favoriteManager.isColorsLimit)
+        
         self.router = router
         
+        bindRequests()
         bindFavoriteManager()
         bindTaps()
         
@@ -40,6 +48,34 @@ final class FavoriteViewModel: ObservableObject {
 }
 
 private extension FavoriteViewModel {
+    func bindRequests() {
+        input.onAppear
+            .filter { _ in !CredentialsManager.shared.isGuest }
+            .flatMap { [unowned self] _ -> AnyPublisher<([AppColor], [ColorPalette]), ApiError> in
+                Publishers.Zip(self.service.fetchColors(), self.service.fetchPalettes())
+                    .eraseToAnyPublisher()
+            }
+            .sink { response in
+                switch response {
+                    case.failure(let apiError):
+                        print(apiError.localizedDescription)
+                    case .finished:
+                        print("finished")
+                }
+            } receiveValue: { [weak self] items in
+                self?.favoriteManager
+                    .setItemsFromServer(colors: items.0, palettes: items.1)
+            }
+            .store(in: &cancellable)
+        
+        input.onAppear
+            .filter { _ in CredentialsManager.shared.isGuest }
+            .sink { [weak self] _ in
+                self?.favoriteManager.setItemsFromCoreData()
+            }
+            .store(in: &cancellable)
+    }
+    
     func bindFavoriteManager() {
         favoriteManager.$palettes
             .sink { [weak self] palettes in self?.output.palettes = palettes }
@@ -88,6 +124,10 @@ private extension FavoriteViewModel {
         input.addTaps.generateColorFromCameraTap
             .sink { [weak self] _ in self?.router?.navigateToCameraColorDetection() }
             .store(in: &cancellable)
+        
+        input.addTaps.createColorTap
+            .sink { [weak self] _ in self?.router?.navigateToAddNewColorToFavorites() }
+            .store(in: &cancellable)
     }
     
     func bindShowTaps() {
@@ -104,17 +144,69 @@ private extension FavoriteViewModel {
 extension FavoriteViewModel {
     func removePalette(from index: Int) {
         let paletteForDelete = output.palettes[index]
-        favoriteManager.removePalette(paletteForDelete)
+        
+        let isGuest = Just(CredentialsManager.shared.isGuest)
+        
+        isGuest
+            .filter { !$0 }
+            .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
+                self.service.deletePalette(paletteId: paletteForDelete.id)
+            }
+            .sink { response in
+                switch response {
+                    case.failure(let apiError):
+                        print(apiError.localizedDescription)
+                    case .finished:
+                        print("finished")
+                }
+            } receiveValue: { [weak self] _ in
+                self?.favoriteManager.removePalette(paletteForDelete)
+            }
+            .store(in: &cancellable)
+        
+        isGuest
+            .filter { $0 }
+            .sink { [weak self] _ in
+                self?.favoriteManager.removePalette(paletteForDelete)
+            }
+            .store(in: &cancellable)
+        
     }
     
     func removeColor(from index: Int) {
         let colorForDelete = output.colors[index]
-        favoriteManager.removeColor(colorForDelete)
+        
+        let isGuest = Just(CredentialsManager.shared.isGuest)
+        
+        isGuest
+            .filter { !$0 }
+            .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
+                self.service.deleteColor(colorId: colorForDelete.id)
+            }
+            .sink { response in
+                switch response {
+                    case.failure(let apiError):
+                        print(apiError.localizedDescription)
+                    case .finished:
+                        print("finished")
+                }
+            } receiveValue: { [weak self] _ in
+                self?.favoriteManager.removeColor(colorForDelete)
+            }
+            .store(in: &cancellable)
+        
+        isGuest
+            .filter { $0 }
+            .sink { [weak self] _ in
+                self?.favoriteManager.removeColor(colorForDelete)
+            }
+            .store(in: &cancellable)
     }
 }
 
 extension FavoriteViewModel {
     struct Input {
+        let onAppear: PassthroughSubject<Void, Never> = .init()
         let addTaps: AddTap = .init()
         let showTaps: ShowTap = .init()
         

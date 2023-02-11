@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ColorPaletteView: View {
-    @EnvironmentObject var favoriteManager: FavoriteManager
+    @StateObject var viewModel: ColorPaletteInfoViewModel
     @Environment(\.dismiss) private var dismiss: DismissAction
     
     @State var selectedType: ColorType = .HEX
     @State var showInfo: Bool = true
-    @State var isFavorite: Bool = false
     
     let palette: ColorPalette
     
@@ -27,7 +26,7 @@ struct ColorPaletteView: View {
                 }
             }
             .onTapGesture { showInfo.toggle() }
-            .onAppear { checkFavorite(palette: palette) }
+            .onAppear(perform: onAppear)
             
             ColorTypePickerView(selectedType: $selectedType)
                 .padding(.top, 10)
@@ -61,38 +60,27 @@ private extension ColorPaletteView {
     
     var favoriteButton: some View {
         Button(action: { changeFavoriteState() }, label: {
-            Image(systemName: isFavorite ? "heart.fill" : "heart")
+            Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundColor(isFavorite ? .red : Color(palette.colors[0].uiColor.invertColor()))
+                .foregroundColor(viewModel.output.isFavorite ? .red : Color(palette.colors[0].uiColor.invertColor()))
         })
     }
 }
 
 private extension ColorPaletteView {
-    func checkFavorite(palette: ColorPalette) {
-        self.isFavorite = favoriteManager
-            .palettes
-            .contains(where: { $0.hashValue == palette.hashValue })
+    func onAppear() {
+        viewModel.input.onAppear.send()
     }
     
     func changeFavoriteState() {
-        if isFavorite {
-            favoriteManager.removePalette(palette)
-            isFavorite.toggle()
-        }
-        else {
-            if !favoriteManager.isPalettesLimit {
-                favoriteManager.addPalette(palette)
-                isFavorite.toggle()
-            }
-        }
+        viewModel.input.favTap.send()
     }
 }
 
 struct ColorPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorPaletteView(palette: ColorPalette.getTestPalettes(20)[1])
-            .environmentObject(FavoriteManager.shared)
+        let palette = ColorPalette.getTestPalettes(20)[1]
+        ColorPaletteView(viewModel: ColorPaletteInfoViewModel(palette: palette), palette: palette)
     }
 }

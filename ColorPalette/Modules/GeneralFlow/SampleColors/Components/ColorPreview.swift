@@ -28,7 +28,7 @@ private extension ColorPreview {
     var infoBlock: some View {
         VStack(alignment: .leading) {
             Text(colorName)
-                .font(.title)
+                .font(.title2)
                 .bold()
                 .padding(.top, 30)
                 .frame(maxWidth: Consts.Constraints.screenWidth / 2, alignment: .leading)
@@ -49,40 +49,40 @@ private extension ColorPreview {
     var hexInfo: some View {
         VStack(alignment: .leading) {
             Text("HEX")
-                .font(.title2)
+                .font(.title3)
                 .bold()
             Text(color.hexValue)
-                .font(.title3)
+                .font(.headline)
         }
     }
     
     var rgbInfo: some View {
         VStack(alignment: .leading) {
             Text("RGB")
-                .font(.title2)
+                .font(.title3)
                 .bold()
             Text(color.rgbDescription(isExtended: true))
-                .font(.title3)
+                .font(.headline)
         }
     }
     
     var hsvInfo: some View {
         VStack(alignment: .leading) {
             Text("HSB")
-                .font(.title2)
+                .font(.title3)
                 .bold()
             Text(color.hsbDescription(isExtended: true))
-                .font(.title3)
+                .font(.headline)
         }
     }
     
     var cmykInfo: some View {
         VStack(alignment: .leading) {
             Text("CMYK")
-                .font(.title2)
+                .font(.title3)
                 .bold()
             Text(color.cmykDescription(isExtended: true))
-                .font(.title3)
+                .font(.headline)
         }
     }
 }

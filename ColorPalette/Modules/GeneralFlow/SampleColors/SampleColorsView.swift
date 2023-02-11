@@ -41,8 +41,7 @@ struct SampleColorsView: View {
 
 private extension SampleColorsView {
     var navBar: some View {
-        CustomNavigationBarView(backAction: viewModel.input.popTap)
-            .padding(.top, Consts.Constraints.top)
+        CustomNavigationBarView(backAction: { viewModel.input.popTap.send() })
     }
     
     var header: some View {

@@ -14,15 +14,20 @@ final class CameraColorDetectionViewModel: ObservableObject {
     
     private weak var router: FavoritesRoutable?
     private let favoriteManager: FavoriteManager
+    private let service: FavoritesAddServiceProtocol
+    
+    private var color: AppColor = .getClear()
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable) {
+    init(router: FavoritesRoutable? = nil,
+         service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.input = Input()
         self.output = Output()
         
         self.router = router
         self.favoriteManager = .shared
+        self.service = service
         
         bindTaps()
         
@@ -44,16 +49,34 @@ private extension CameraColorDetectionViewModel {
             .store(in: &cancellable)
         
         input.addTap
+            .filter { _ in CredentialsManager.shared.isGuest }
             .sink { [weak self] hex in
-                let color = AppColor(hex: hex)
-                self?.favoriteManager.addColor(color)
-                self?.router?.pop()
+                self?.color = AppColor(hex: hex)
+                if let color = self?.color {
+                    self?.favoriteManager.addColor(color)
+                    self?.router?.pop()
+                }
             }
+            .store(in: &cancellable)
+        
+        input.addTap
+            .filter { _ in !CredentialsManager.shared.isGuest }
+            .flatMap { [unowned self] hex in
+                color = AppColor(hex: hex)
+                return service.addColor(color: color)
+            }
+            .sink(receiveCompletion: { [weak self] response in self?.handleError(response) },
+                  receiveValue: { [weak self] _ in
+                if let color = self?.color {
+                    self?.favoriteManager.addColor(color)
+                    self?.router?.pop()
+                }
+            })
             .store(in: &cancellable)
     }
 }
 
-extension CameraColorDetectionViewModel {
+extension CameraColorDetectionViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let closeTap: PassthroughSubject<Void, Never> = .init()
         let addTap: PassthroughSubject<String, Never> = .init()

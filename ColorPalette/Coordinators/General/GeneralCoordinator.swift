@@ -53,8 +53,8 @@ extension GeneralCoordinator: GeneralRoutable {
     func popToRoot() { navigationController.popToRootViewController(animated: true) }
     
     func navigateToGeneralScreen() {
-        var generalView = GeneralView()
-        generalView.router = self
+        let viewModel = GeneralViewModel(router: self)
+        var generalView = GeneralView(viewModel: viewModel)
         let vc = UIHostingController(rootView: generalView)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -74,7 +74,8 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToColorPalette(palette: ColorPalette) {
-        let view = ColorPaletteView(palette: palette).environmentObject(FavoriteManager.shared)
+        let viewModel = ColorPaletteInfoViewModel(palette: palette)
+        let view = ColorPaletteView(viewModel: viewModel, palette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }
@@ -92,8 +93,8 @@ extension GeneralCoordinator: GeneralRoutable {
     }
     
     func navigateToColorInfo(color: AppColor) {
-        let view = ColorInfoView(appColor: color)
-            .environmentObject(FavoriteManager.shared)
+        let viewModel = ColorInfoViewModel(color: color)
+        let view = ColorInfoView(viewModel: viewModel, appColor: color)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }

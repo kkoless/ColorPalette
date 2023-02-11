@@ -19,7 +19,7 @@ final class RegistrationViewModel: ObservableObject {
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(router: AuthorizationRoutable? = nil,
-         service: AuthServiceProtocol = AuthorizationService.shared) {
+         service: AuthServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
         self.output = Output()
         self.service = service

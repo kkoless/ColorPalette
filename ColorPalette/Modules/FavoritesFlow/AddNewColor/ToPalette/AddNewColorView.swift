@@ -1,5 +1,5 @@
 //
-//  AddNewColorView.swift
+//  AddNewColorToPaletteView.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 24.12.2022.
@@ -8,8 +8,8 @@
 import SwiftUI
 import Combine
 
-struct AddNewColorView: View {
-    @ObservedObject var viewModel: AddNewColorViewModel
+struct AddNewColorToPaletteView: View {
+    @StateObject var viewModel: AddNewColorToPaletteViewModel
     
     @State private var colorName = ""
     @State private var selectedColor: Color = .clear
@@ -28,7 +28,7 @@ struct AddNewColorView: View {
     }
 }
 
-private extension AddNewColorView {
+private extension AddNewColorToPaletteView {
     var configureBlock: some View {
         HStack(spacing: 15) {
             TextField("Color name", text: $colorName)
@@ -49,8 +49,7 @@ private extension AddNewColorView {
     }
     
     var preview: some View {
-        ColorInfoView(appColor: viewModel.output.color)
-            .environmentObject(FavoriteManager.shared)
+        ColorPreview(color: viewModel.output.color)
             .cornerRadius(10)
     }
     
@@ -67,8 +66,8 @@ private extension AddNewColorView {
     }
 }
 
-struct AddNewColorView_Previews: PreviewProvider {
+struct AddNewColorToPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewColorView(viewModel: AddNewColorViewModel(templatePaletteManager: TemplatePaletteManager()))
+        AddNewColorToPaletteView(viewModel: AddNewColorToPaletteViewModel(templatePaletteManager: TemplatePaletteManager()))
     }
 }

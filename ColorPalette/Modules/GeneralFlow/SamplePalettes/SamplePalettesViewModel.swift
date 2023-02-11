@@ -63,7 +63,7 @@ private extension SamplePalettesViewModel {
         let firstCondition = CredentialsManager.shared.isGuest
         let secondCondition = ProfileManager.shared.profile?.role.boolValue ?? false
         
-        return firstCondition || secondCondition ? 20 : 100
+        return firstCondition || !secondCondition ? 20 : 100
     }
 }
 

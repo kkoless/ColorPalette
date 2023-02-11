@@ -17,8 +17,13 @@ final class ImageColorDetectionManager: ObservableObject {
     }
     
     func generatePalette(from data: Data)  {
-        let appColors = getColorsHex(from: data).map { AppColor(uiColor: UIColor(hexString: $0)) }
-        self.palette = ColorPalette(colors: appColors)
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            if let appColors = self?.getColorsHex(from: data).map({ AppColor(uiColor: UIColor(hexString: $0)) }) {
+                DispatchQueue.main.async {
+                    self?.palette = ColorPalette(colors: appColors)
+                }
+            }
+        }
     }
     
     deinit {

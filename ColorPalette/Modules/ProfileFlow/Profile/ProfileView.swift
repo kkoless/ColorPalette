@@ -23,7 +23,7 @@ struct ProfileView: View {
             
             Spacer()
         }
-        .padding()
+        .padding([.leading, .trailing])
         .onAppear(perform: onAppear)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AddNewColorViewModel.swift
+//  AddNewColorToPaletteViewModel.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 28.12.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class AddNewColorViewModel: ObservableObject {
+final class AddNewColorToPaletteViewModel: ObservableObject {
     let input: Input
     @Published var output: Output
     
@@ -38,7 +38,7 @@ final class AddNewColorViewModel: ObservableObject {
     }
 }
 
-private extension AddNewColorViewModel {
+private extension AddNewColorToPaletteViewModel {
     func bindColorChanges() {
         Publishers.CombineLatest(input.selectedColor, input.colorName)
         .sink { [weak self] data in
@@ -57,14 +57,14 @@ private extension AddNewColorViewModel {
     }
 }
 
-private extension AddNewColorViewModel {
+private extension AddNewColorToPaletteViewModel {
     func addColorToTemplatePalette() {
         let appColor = output.color
         templatePaletteManager.addColor(appColor)
     }
 }
 
-extension AddNewColorViewModel {
+extension AddNewColorToPaletteViewModel {
     struct Input {
         let colorName: CurrentValueSubject<String, Never> = .init("")
         let selectedColor: CurrentValueSubject<AppColor, Never> = .init(.getClear())

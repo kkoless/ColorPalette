@@ -10,35 +10,42 @@ import Photos
 
 struct PermissionsManager {
     static func checkPhotoLibraryPermission(deniedHandler: @escaping () -> (), authorizedHandler: @escaping () -> ()) {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-            case .denied, .restricted : deniedHandler()
-            case .authorized: authorizedHandler()
-            case .notDetermined:
-                PHPhotoLibrary.requestAuthorization { status in
-                    switch status {
-                        case .authorized: authorizedHandler()
-                        case .denied, .restricted: deniedHandler()
-                        default: return
+        DispatchQueue.global(qos: .userInteractive).async {
+            let status = PHPhotoLibrary.authorizationStatus()
+            switch status {
+                case .denied, .restricted: DispatchQueue.main.async { deniedHandler() }
+                case .authorized: DispatchQueue.main.async { authorizedHandler() }
+                case .notDetermined:
+                    PHPhotoLibrary.requestAuthorization { status in
+                        switch status {
+                            case .authorized: DispatchQueue.main.async { authorizedHandler() }
+                            case .denied, .restricted:
+                                DispatchQueue.main.async { deniedHandler() }
+                            default: return
+                        }
                     }
-                }
-            default: return
+                default: return
+            }
         }
     }
     
     static func checkCameraPermission(deniedHandler: @escaping () -> (), authorizedHandler: @escaping () -> ()) {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-            case .denied, .restricted: deniedHandler()
-            case .authorized: authorizedHandler()
-            case .notDetermined:
-                AVCaptureDevice.requestAccess(for: .video) { success in
-                    if success {
-                        authorizedHandler()
-                    } else {
-                        deniedHandler()
+        DispatchQueue.global(qos: .userInteractive).async {
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+                case .denied, .restricted: DispatchQueue.main.async { deniedHandler() }
+                case .authorized:  DispatchQueue.main.async { authorizedHandler() }
+                case .notDetermined:
+                    AVCaptureDevice.requestAccess(for: .video) { success in
+                        DispatchQueue.main.async {
+                            if success {
+                                authorizedHandler()
+                            } else {
+                                deniedHandler()
+                            }
+                        }
                     }
-                }
-            default: return
+                default: return
+            }
         }
     }
 }

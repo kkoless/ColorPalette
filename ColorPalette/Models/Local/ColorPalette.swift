@@ -56,6 +56,10 @@ extension ColorPalette: Hashable {
         hasher.combine(colors)
     }
     
+    var hashValue: Int {
+        colors.map { $0.hex }.reduce("", +).hash
+    }
+    
     static func == (lhs: ColorPalette, rhs: ColorPalette) -> Bool {
         return lhs.id == rhs.id
     }
@@ -68,6 +72,13 @@ extension ColorPalette: Codable {
             print("Unable to encode \(error)")
             return Data()
         }
+    }
+    
+    func getJSON() -> [String: Any] {
+        var params: [String: Any] = .init()
+        params["id"] = id
+        params["colors"] = colors.map { $0.getJSON() }
+        return params
     }
 }
 

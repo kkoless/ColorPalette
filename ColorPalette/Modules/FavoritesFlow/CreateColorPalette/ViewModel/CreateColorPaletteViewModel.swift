@@ -14,13 +14,17 @@ final class CreateColorPaletteViewModel: ObservableObject {
     
     let templatePaletteManager: TemplatePaletteManager
     private let favoriteManager: FavoriteManager
+    private let service: FavoritesAddServiceProtocol
     
     weak private var router: FavoritesRoutable?
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil) {
+    init(router: FavoritesRoutable? = nil,
+         service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.templatePaletteManager = .init()
         self.favoriteManager = FavoriteManager.shared
+        self.service = service
+        
         self.input = Input()
         self.output = Output(colors: self.templatePaletteManager.colors,
                              isLimit: self.templatePaletteManager.isLimit)
@@ -62,7 +66,7 @@ private extension CreateColorPaletteViewModel {
         input.addTaps.addColorTap
             .sink { [weak self] _ in
                 if let manager = self?.templatePaletteManager {
-                    self?.router?.navigateToAddNewColor(templateManager: manager)
+                    self?.router?.navigateToAddNewColorToPalette(templateManager: manager)
                 }
             }
             .store(in: &cancellable)
@@ -100,11 +104,23 @@ extension CreateColorPaletteViewModel {
 private extension CreateColorPaletteViewModel {
     func savePalette() {
         let palette = templatePaletteManager.createPalette()
-        favoriteManager.addPalette(palette)
+        let isGuest = Just(CredentialsManager.shared.isGuest)
+        
+        isGuest
+            .filter { $0 }
+            .sink { [weak self] _ in self?.favoriteManager.addPalette(palette) }
+            .store(in: &cancellable)
+        
+        isGuest
+            .filter { !$0 }
+            .flatMap { [unowned self] _ in service.addPalette(palette: palette) }
+            .sink(receiveCompletion: { [weak self] response in self?.handleError(response) },
+                  receiveValue: { [weak self] _ in self?.favoriteManager.addPalette(palette) })
+            .store(in: &cancellable)
     }
 }
 
-extension CreateColorPaletteViewModel {
+extension CreateColorPaletteViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let alertTaps = AlertTap()
         let addTaps = AddTap()

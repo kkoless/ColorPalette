@@ -29,11 +29,9 @@ struct ImageColorDetectionView: View {
         
             if viewModel.output.palette != nil {
                 palette
-                addToFavoriteButton
-                Spacer()
-            } else {
-                Spacer()
             }
+            
+            Spacer()
         }
         .edgesIgnoringSafeArea(.top)
         .onChange(of: selection) { newValue in
@@ -46,8 +44,18 @@ struct ImageColorDetectionView: View {
 
 private extension ImageColorDetectionView {
     var navBar: some View {
-        CustomNavigationBarView()
-            .padding(.top, Consts.Constraints.top)
+        CustomNavigationBarView(backAction: { viewModel.input.backTap.send() } )
+            .trailingItems {
+                if viewModel.output.palette != nil {
+                    Button(action: { addToFavorite() }) {
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
+                    .disabled(viewModel.output.isLimit || viewModel.output.isFavorire)
+                    .foregroundColor((viewModel.output.isLimit || viewModel.output.isFavorire) ? .gray : .primary)
+                }
+            }
     }
     
     @ViewBuilder
@@ -74,13 +82,7 @@ private extension ImageColorDetectionView {
     }
     
     var chooseButton: some View {
-        Button(action: {
-            PermissionsManager
-                .checkPhotoLibraryPermission(
-                    deniedHandler: { showSettingsAlert.toggle() },
-                    authorizedHandler: { showPopover.toggle() }
-                )
-        }) {
+        Button(action: { checkPermissions() }) {
             Text("Choose image")
         }
         .padding()
@@ -114,6 +116,14 @@ private extension ImageColorDetectionView {
         if let palette = viewModel.output.palette {
             viewModel.input.addToFavoriteTap.send(palette)
         }
+    }
+    
+    func checkPermissions() {
+        PermissionsManager
+            .checkPhotoLibraryPermission(
+                deniedHandler: { showSettingsAlert.toggle() },
+                authorizedHandler: { showPopover.toggle() }
+            )
     }
     
     func settingsTap() {

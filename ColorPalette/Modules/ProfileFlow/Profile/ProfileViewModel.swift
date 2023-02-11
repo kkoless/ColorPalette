@@ -19,7 +19,7 @@ final class ProfileViewModel: ObservableObject {
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(router: ProfileRoutable? = nil,
-         service: ProfileServiceProtocol = AuthorizationService.shared) {
+         service: ProfileServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
         self.output = Output()
         self.router = router

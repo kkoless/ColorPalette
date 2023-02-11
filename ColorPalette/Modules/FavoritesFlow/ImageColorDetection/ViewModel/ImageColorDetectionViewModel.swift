@@ -13,17 +13,22 @@ final class ImageColorDetectionViewModel: ObservableObject {
     @Published var output: Output
     
     weak private var router: FavoritesRoutable?
-    private var manager: ImageColorDetectionManager
-    private var favoriteManager: FavoriteManager
+    private let manager: ImageColorDetectionManager
+    private let favoriteManager: FavoriteManager
+    private let service: FavoritesAddServiceProtocol
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil) {
+    init(router: FavoritesRoutable? = nil,
+         service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.manager = ImageColorDetectionManager()
         self.favoriteManager = FavoriteManager.shared
+        self.service = service
+        
+        self.router = router
+        
         self.input = Input()
         self.output = Output(isLimit: self.favoriteManager.isPalettesLimit)
-        self.router = router
         
         bindFavoriteManager()
         bindDetection()
@@ -45,6 +50,13 @@ extension ImageColorDetectionViewModel {
         favoriteManager.$isPalettesLimit
             .sink { [weak self] flag in self?.output.isLimit = flag }
             .store(in: &cancellable)
+        
+        favoriteManager.$palettes
+            .combineLatest(manager.$palette) { (favoritePalettes: $0, palette: $1) }
+            .sink { [weak self] data in
+                self?.output.isFavorire = data.favoritePalettes.contains(where: { $0 == data.palette }) ? true : false
+            }
+            .store(in: &cancellable)
     }
     
     func bindDetection() {
@@ -56,37 +68,59 @@ extension ImageColorDetectionViewModel {
             .store(in: &cancellable)
         
         manager.$palette
-            .sink { [weak self] palette in self?.output.palette = palette }
+            .combineLatest(favoriteManager.$palettes) { (favoritePalettes: $1, palette: $0) }
+            .sink { [weak self] data in
+                self?.output.palette = data.palette
+                
+                if data.favoritePalettes.contains(where: { $0 == data.palette }) {
+                    self?.output.isFavorire = true
+                }
+            }
             .store(in: &cancellable)
     }
     
     func bindTaps() {
+        input.backTap
+            .sink { [weak self] _ in self?.router?.pop() }
+            .store(in: &cancellable)
+        
         input.addToFavoriteTap
+            .filter { _ in CredentialsManager.shared.isGuest }
             .sink { [weak self] palette in
                 self?.favoriteManager.addPalette(palette)
+                self?.router?.pop()
             }
             .store(in: &cancellable)
         
+        input.addToFavoriteTap
+            .filter { _ in !CredentialsManager.shared.isGuest }
+            .flatMap { [unowned self] palette in service.addPalette(palette: palette) }
+            .sink(receiveCompletion: { [weak self] response in self?.handleError(response) },
+                  receiveValue: { [weak self] palette in
+                if let palette = self?.output.palette {
+                    self?.favoriteManager.addPalette(palette)
+                    self?.router?.pop()
+                }
+            })
+            .store(in: &cancellable)
+        
         input.showPaletteTap
-            .sink { [weak self] palette in
-                self?.router?.navigateToColorPalette(palette: palette)
-            }
+            .sink { [weak self] palette in self?.router?.navigateToColorPalette(palette: palette) }
             .store(in: &cancellable)
     }
 }
 
-private extension ImageColorDetectionViewModel {
-}
-
-extension ImageColorDetectionViewModel {
+extension ImageColorDetectionViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let imageAppear: PassthroughSubject<Data?, Never> = .init()
         let addToFavoriteTap: PassthroughSubject<ColorPalette, Never> = .init()
         let showPaletteTap: PassthroughSubject<ColorPalette, Never> = .init()
+        let backTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
         var palette: ColorPalette?
         var isLimit: Bool
+        var isFavorire: Bool = false
     }
 }

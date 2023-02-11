@@ -17,8 +17,8 @@ final class LoginViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: AuthorizationRoutable?,
-         service: AuthServiceProtocol = AuthorizationService.shared) {
+    init(router: AuthorizationRoutable? = nil,
+         service: AuthServiceProtocol = AuthorizationNetworkService.shared) {
         self.router = router
         self.service = service
         self.input = Input()

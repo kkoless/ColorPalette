@@ -1,5 +1,5 @@
 //
-//  AuthorizationService.swift
+//  AuthorizationNetworkService.swift
 //  ColorPalette
 //
 //  Created by Кирилл Колесников on 06.02.2023.
@@ -19,10 +19,10 @@ protocol ProfileServiceProtocol {
     func fetchProfile() -> AnyPublisher<Profile, ApiError>
 }
 
-final class AuthorizationService: MoyaErrorParserable {
+final class AuthorizationNetworkService: MoyaErrorParserable {
     private let provider: Provider<AuthorizationAPI>
     
-    static let shared: AuthorizationService = .init()
+    static let shared: AuthorizationNetworkService = .init()
     
     private init() {
         self.provider = .init()
@@ -34,7 +34,7 @@ final class AuthorizationService: MoyaErrorParserable {
     }
 }
 
-extension AuthorizationService: AuthServiceProtocol {
+extension AuthorizationNetworkService: AuthServiceProtocol {
     func login(email: String, password: String) -> AnyPublisher<TokenData, ApiError> {
         provider.requestPublisher(.login(email: email, password: password))
             .filterSuccessfulStatusCodes()
@@ -56,7 +56,7 @@ extension AuthorizationService: AuthServiceProtocol {
     }
 }
 
-extension AuthorizationService: ProfileServiceProtocol {
+extension AuthorizationNetworkService: ProfileServiceProtocol {
     func fetchProfile() -> AnyPublisher<Profile, ApiError> {
         provider.requestPublisher(.fetchUser)
             .filterSuccessfulStatusCodes()
