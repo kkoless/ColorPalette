@@ -61,7 +61,7 @@ private extension TabBarCoordinator {
         let navController = UINavigationController()
         navController.setNavigationBarHidden(true, animated: false)
         
-        navController.tabBarItem = UITabBarItem.init(title: page.title,
+        navController.tabBarItem = UITabBarItem.init(title: nil,
                                                      image: UIImage(systemName: page.iconName),
                                                      tag: page.rawValue)
         

@@ -62,6 +62,10 @@ private extension ProfileViewModel {
     }
     
     func bindTaps() {
+        input.settingsTap
+            .sink { [weak self] _ in self?.router?.navigateToSettingsScreen() }
+            .store(in: &cancellable)
+        
         input.signInTap
             .sink { [weak self] _ in self?.router?.navigateToAuthorizationFlow() }
             .store(in: &cancellable)
@@ -75,6 +79,7 @@ private extension ProfileViewModel {
 extension ProfileViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
+        let settingsTap: PassthroughSubject<Void, Never> = .init()
         let signInTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()
     }

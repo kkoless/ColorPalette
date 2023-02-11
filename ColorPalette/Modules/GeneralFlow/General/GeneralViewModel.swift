@@ -94,12 +94,20 @@ private extension GeneralViewModel {
     }
     
     func bindTaps() {
-        input.palettesTap
+        input.showMorePalettesTap
             .sink { [weak self] _ in self?.router?.navigateToSamplePalettes() }
             .store(in: &cancellable)
         
-        input.colorsTap
+        input.showMoreColorsTap
             .sink { [weak self] _ in self?.router?.navigateToSampleColors() }
+            .store(in: &cancellable)
+        
+        input.paletteTap
+            .sink { [weak self] in self?.router?.navigateToColorPalette(palette: $0) }
+            .store(in: &cancellable)
+        
+        input.colorTap
+            .sink { [weak self] in self?.router?.navigateToColorInfo(color: $0) }
             .store(in: &cancellable)
     }
 }
@@ -107,9 +115,14 @@ private extension GeneralViewModel {
 extension GeneralViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
-        let palettesTap: PassthroughSubject<Void, Never> = .init()
-        let colorsTap: PassthroughSubject<Void, Never> = .init()
+        let showMorePalettesTap: PassthroughSubject<Void, Never> = .init()
+        let showMoreColorsTap: PassthroughSubject<Void, Never> = .init()
+        let paletteTap: PassthroughSubject<ColorPalette, Never> = .init()
+        let colorTap: PassthroughSubject<AppColor, Never> = .init()
     }
     
-    struct Output { }
+    struct Output {
+        let samplePalettes: [ColorPalette] = Array(PopularPalettesManager.shared.palettes.prefix(5))
+        let sampleColors: [AppColor] = Array(ColorManager.shared.colors.prefix(5))
+    }
 }

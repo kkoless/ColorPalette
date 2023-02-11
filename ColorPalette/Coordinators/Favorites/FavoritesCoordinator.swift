@@ -64,6 +64,7 @@ extension FavoritesCoordinator: FavoritesRoutable {
     func navigateToFavoritesScreen() {
         let viewModel = FavoriteViewModel(router: self)
         let favoriteView = FavoritesView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: favoriteView)
         navigationController.pushViewController(vc, animated: true)
     }

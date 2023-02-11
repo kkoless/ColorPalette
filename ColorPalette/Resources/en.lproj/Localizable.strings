@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  ColorPalette
+
+  Created by Кирилл Колесников on 11.11.2022.
+  
+*/
+
+firstOnboardingText = "First Onboarding";
+secondOnboardingText = "Second Onboarding";
+thirdOnboardingText = "Third Onboarding";
+
+russian = "Russian";
+english = "English";
+
+error = "Error";
+cameraAccessDenied = "Camera access is denied";
+
+general = "General";
+palettes = "Palettes";
+colors = "Colors";
+favorites = "Favorites";
+profile = "Profile";
+settings = "Settings";
+registration = "Registration";
+authorization = "Authorization";
+
+createAccount = "Create account";
+addPalette = "Add palette";
+createPalette = "Create palette";
+chooseFromLibrary = "Choose from library";
+generateFromImage = "Generate from image";
+generateFromCamera = "Generate from camera";
+addColor = "Add color";
+createColor = "Create color";
+chooseImage = "Choose image";
+changeLanguage = "Change language";
+
+favoritesEmptyState = "So empty here...";
+
+email = "Email";
+password = "Password";
+
+cancel = "Cancel";
+logOut = "Log out";
+signIn = "Sign in";
+signUp = "Sign up";
+next = "Next";
+showMore = "Show more";

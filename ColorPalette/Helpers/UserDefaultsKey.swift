@@ -11,4 +11,5 @@ enum UserDefaultsKey: String {
     case isOnboarding
     case isGuest
     case token
+    case language
 }

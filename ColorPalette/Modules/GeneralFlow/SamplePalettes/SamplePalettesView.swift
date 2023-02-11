@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SamplePalettesView: View {
     @ObservedObject var viewModel: SamplePalettesViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
     
     var body: some View {
         VStack {
@@ -33,7 +34,7 @@ private extension SamplePalettesView {
     
     var header: some View {
         HStack {
-            Text("Sample Palettes")
+            Text(.palettes)
                 .font(.largeTitle)
                 .bold()
                 
@@ -68,5 +69,6 @@ private extension SamplePalettesView {
 struct SamplePalettesView_Previews: PreviewProvider {
     static var previews: some View {
         SamplePalettesView(viewModel: SamplePalettesViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }

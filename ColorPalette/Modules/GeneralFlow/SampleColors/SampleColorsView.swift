@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SampleColorsView: View {
+    @StateObject var viewModel: SampleColorsViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
+    
     @State private var searchText: String = ""
     @State private var selectedType: ColorType = .HEX
-    
-    @EnvironmentObject private var viewModel: SampleColorsViewModel
     
     var body: some View {
         VStack {
@@ -46,7 +47,7 @@ private extension SampleColorsView {
     
     var header: some View {
         HStack {
-            Text("Sample Colors")
+            Text(.colors)
                 .font(.largeTitle)
                 .bold()
             Spacer()
@@ -67,7 +68,7 @@ private extension SampleColorsView {
 
 struct SampleColorsView_Previews: PreviewProvider {
     static var previews: some View {
-        SampleColorsView()
-            .environmentObject(SampleColorsViewModel())
+        SampleColorsView(viewModel: SampleColorsViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }

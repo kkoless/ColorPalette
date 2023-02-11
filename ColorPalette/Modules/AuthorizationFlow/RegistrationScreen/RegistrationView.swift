@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct RegistrationView: View {
+    @StateObject var viewModel: RegistrationViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
+    
     @State private var loginText = ""
     @State private var passwordText = ""
-    
-    @ObservedObject var viewModel: RegistrationViewModel
     
     var body: some View {
         VStack {
             Spacer()
-            Text("Registration")
+            Text(.registration)
                 .bold()
                 .font(.largeTitle)
             Spacer()
             registrationForm
             Spacer()
             Button(action: registerButtonTap) {
-                Text("Create account")
+                Text(.createAccount)
             }
             .padding()
         }
@@ -34,8 +35,8 @@ extension RegistrationView {
     var registrationForm: some View {
         VStack {
             Group {
-                TextField("Email", text: $loginText)
-                SecureField("Password", text: $passwordText)
+                TextField("email", text: $loginText)
+                SecureField("password", text: $passwordText)
             }
             .padding()
             .overlay(
@@ -56,5 +57,6 @@ extension RegistrationView {
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView(viewModel: RegistrationViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }

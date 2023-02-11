@@ -83,28 +83,28 @@ private extension ImageColorDetectionView {
     
     var chooseButton: some View {
         Button(action: { checkPermissions() }) {
-            Text("Choose image")
+            Text(.chooseImage)
         }
         .padding()
         .popover(isPresented: $showPopover) {
             ImagePicker(selectedImage: $selection, didSet: $isSet)
         }
-        .alert(Text("Error"), isPresented: $showSettingsAlert) {
+        .alert(Text(.error), isPresented: $showSettingsAlert) {
             Button(action: { settingsTap() }) {
-                Text("Settings")
+                Text(.settings)
             }
             Button(action: {}) {
-                Text("Cancel")
+                Text(.cancel)
             }
         } message: {
-            Text("Camera access is denied")
+            Text(.cameraAccessDenied)
         }
 
     }
     
     var addToFavoriteButton: some View {
         Button(action: { addToFavorite() }) {
-            Text("Add palette to favorite")
+            Text(.addPalette)
         }
         .padding()
         .disabled(viewModel.output.isLimit)
@@ -139,5 +139,6 @@ private extension ImageColorDetectionView {
 struct ImageColorDetectionView_Previews: PreviewProvider {
     static var previews: some View {
         ImageColorDetectionView(viewModel: ImageColorDetectionViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }

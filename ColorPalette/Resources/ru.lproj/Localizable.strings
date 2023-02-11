@@ -6,6 +6,44 @@
   
 */
 
-firstOnboardingText = "First Onboarding Text";
-secondOnboardingText = "Second OnboardingText";
-thirdOnboardingText = "Third OnboardingText";
+firstOnboardingText = "Первый ознакомительный экран";
+secondOnboardingText = "Первый ознакомительный экран";
+thirdOnboardingText = "Первый ознакомительный экран";
+
+russian = "Русский";
+english = "Английский";
+
+error = "Ошибка";
+cameraAccessDenied = "Доступ к камере запрещен";
+
+general = "Главная";
+palettes = "Палитры";
+colors = "Цвета";
+favorites = "Избранное";
+profile = "Профиль";
+settings = "Настройки";
+registration = "Регистрация";
+authorization = "Авторизация";
+
+createAccount = "Создать аккаунт";
+addPalette = "Добавить палитру";
+createPalette = "Создать палитру";
+chooseFromLibrary = "Выбрать из библиотеки";
+generateFromImage = "Сгенерировать из изображения";
+generateFromCamera = "Сгенерировать из камеры";
+addColor = "Добавить цвет";
+createColor = "Создать цвет";
+chooseImage = "Выбрать изображение";
+changeLanguage = "Изменить язык";
+
+favoritesEmptyState = "Как-то пусто тут...";
+
+email = "Почта";
+password = "Пароль";
+
+cancel = "Закрыть";
+logOut = "Выйти";
+signIn = "Войти";
+signUp = "Регистрация";
+next = "Продолжить";
+showMore = "Показать больше";

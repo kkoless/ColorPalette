@@ -54,7 +54,8 @@ extension GeneralCoordinator: GeneralRoutable {
     
     func navigateToGeneralScreen() {
         let viewModel = GeneralViewModel(router: self)
-        var generalView = GeneralView(viewModel: viewModel)
+        let generalView = GeneralView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: generalView)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -62,13 +63,15 @@ extension GeneralCoordinator: GeneralRoutable {
     func navigateToSamplePalettes() {
         let viewModel = SamplePalettesViewModel(router: self)
         let view = SamplePalettesView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToSampleColors() {
         let viewModel = SampleColorsViewModel(router: self)
-        let view = SampleColorsView().environmentObject(viewModel)
+        let view = SampleColorsView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }

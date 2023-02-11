@@ -24,8 +24,8 @@ struct OnboardingView: View {
 private extension OnboardingView {
     @ViewBuilder var pages: some View {
         ForEach(OnboardingPageType.allCases) { pageType in
-            OnboardingPageView(pageType: pageType)
-                .environmentObject(viewModel)
+            OnboardingPageView(viewModel: viewModel, pageType: pageType)
+                .environmentObject(LocalizationService.shared)
                 .tag(pageType.id)
         }
     }

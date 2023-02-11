@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @ObservedObject var viewModel: FavoriteViewModel
+    @StateObject var viewModel: FavoriteViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
     
     var body: some View {
         VStack(spacing: 10) {
@@ -30,7 +31,7 @@ struct FavoritesView: View {
 private extension FavoritesView {
     var header: some View {
         HStack(alignment: .center) {
-            Text("Favorites")
+            Text(.favorites)
                 .font(.largeTitle)
             .bold()
             Spacer()
@@ -50,16 +51,16 @@ private extension FavoritesView {
     var paletteMenu: some View {
         Menu {
             Button(action: { addPaletteTap(.customPalette) }) {
-                Text("Create palette")
+                Text(.createPalette)
             }
             Button(action: { addPaletteTap(.libraryPalette) }) {
-                Text("Choose from library")
+                Text(.chooseFromLibrary)
             }
             Button(action: { addPaletteTap(.paletteFromImage) }) {
-                Text("Generate from image")
+                Text(.generateFromImage)
             }
         } label: {
-            Text("Add palette")
+            Text(.addPalette)
         }
         .disabled(viewModel.output.palettesLimit)
     }
@@ -67,16 +68,16 @@ private extension FavoritesView {
     var colorMenu: some View {
         Menu {
             Button(action: { addColorTap(.customColor) }) {
-                Text("Create color")
+                Text(.createColor)
             }
             Button(action: { addColorTap(.libraryColor) }) {
-                Text("Choose from library")
+                Text(.chooseFromLibrary)
             }
             Button(action: { addColorTap(.colorFromCamera) }) {
-                Text("Choose from Camera")
+                Text(.generateFromCamera)
             }
         } label: {
-            Text("Add color")
+            Text(.addColor)
         }
         .disabled(viewModel.output.colorsLimit)
     }
@@ -89,10 +90,9 @@ private extension FavoritesView {
         .listStyle(.plain)
     }
     
-    func getHeaderText(text: String) -> some View {
+    func getHeaderText(text: Strings) -> some View {
         Text(text)
-            .font(.title3)
-            .bold()
+            .font(.title3.bold())
     }
 }
 
@@ -101,7 +101,7 @@ private extension FavoritesView {
     var palettesBlock: some View {
         if !viewModel.output.palettes.isEmpty {
             HStack {
-                getHeaderText(text: "Palettes")
+                getHeaderText(text: .palettes)
                 Spacer()
             }
             
@@ -113,7 +113,7 @@ private extension FavoritesView {
     var colorsBlock: some View {
         if !viewModel.output.colors.isEmpty {
             HStack {
-                getHeaderText(text: "Colors")
+                getHeaderText(text: .colors)
                 Spacer()
             }
             .padding(.top, 20)
@@ -150,7 +150,7 @@ private extension FavoritesView {
     var emptyState: some View {
         VStack(spacing: 15) {
             Spacer()
-            Text("So empty here...")
+            Text(.favoritesEmptyState)
                 .font(.headline)
                 .bold()
                 .frame(alignment: .center)
@@ -204,5 +204,6 @@ private extension FavoritesView {
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
         FavoritesView(viewModel: FavoriteViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
     
     @State private var loginText = ""
     @State private var passwordText = ""
@@ -16,7 +17,7 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("Authorization")
+            Text(.authorization)
                 .bold()
                 .font(.largeTitle)
             Spacer()
@@ -24,7 +25,7 @@ struct LoginView: View {
             Spacer()
             
             Button(action: registerButtonTap) {
-                Text("Register")
+                Text(.registration)
             }
             .padding()
         }
@@ -35,8 +36,8 @@ extension LoginView {
     var loginForm: some View {
         VStack {
             Group {
-                TextField("Email", text: $loginText)
-                SecureField("Password", text: $passwordText)
+                TextField("email", text: $loginText)
+                SecureField("password", text: $passwordText)
             }
             .padding()
             .overlay(
@@ -45,7 +46,7 @@ extension LoginView {
             )
             
             Button(action: loginButtonTap) {
-                Text("Login")
+                Text(.signIn)
             }
             .padding()
         }
@@ -66,5 +67,6 @@ extension LoginView {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(viewModel: LoginViewModel(router: nil))
+            .environmentObject(LocalizationService.shared)
     }
 }

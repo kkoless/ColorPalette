@@ -9,7 +9,9 @@ import SwiftUI
 import Combine
 
 struct OnboardingPageView: View {
-    @EnvironmentObject var viewModel: OnboardingViewModel
+    @ObservedObject var viewModel: OnboardingViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
+    
     let pageType: OnboardingPageType
     
     var body: some View {
@@ -40,11 +42,11 @@ private extension OnboardingPageView {
         if pageType.isLastPage {
             VStack(spacing: 30) {
                 Button(action: { signInTap() }) {
-                    Text("Sign In")
+                    Text(.signIn)
                 }
                 
                 Button(action: { skipTap() }) {
-                    Text("Next")
+                    Text(.next)
                 }
             }
             .padding()
@@ -64,7 +66,7 @@ private extension OnboardingPageView {
 
 struct OnboardingPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingPageView(pageType: .thirdPage)
-            .environmentObject(OnboardingViewModel())
+        OnboardingPageView(viewModel: OnboardingViewModel(), pageType: .thirdPage)
+            .environmentObject(LocalizationService.shared)
     }
 }

@@ -41,6 +41,7 @@ extension AuthorizationCoordinator: AuthorizationRoutable {
     func navigateToLoginScreen() {
         let viewModel = LoginViewModel(router: self)
         let loginView = LoginView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: loginView)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -48,6 +49,7 @@ extension AuthorizationCoordinator: AuthorizationRoutable {
     func navigateToRegistrationScreen() {
         let viewModel = RegistrationViewModel(router: self)
         let registrationView = RegistrationView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: registrationView)
         navigationController.pushViewController(vc, animated: true)
     }

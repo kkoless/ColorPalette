@@ -24,11 +24,11 @@ enum TabBarPage: Int, CaseIterable {
     var title: String {
         switch self {
             case .general:
-                return "General"
+                return .init(.general)
             case .favorites:
-                return "Favorites"
+                return .init(.favorites)
             case .profile:
-                return "Profile"
+                return .init(.profile)
         }
     }
 }

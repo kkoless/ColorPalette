@@ -58,7 +58,7 @@ private extension AddNewColorToPaletteView {
             Spacer()
             
             Button(action: { viewModel.input.addTap.send() }) {
-                Text("Add color")
+                Text(.addColor)
             }
             
             Spacer()

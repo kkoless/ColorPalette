@@ -11,6 +11,8 @@ import SwiftUI
 protocol ProfileRoutable: AnyObject {
     func navigateToProfileScreen()
     func navigateToAuthorizationFlow()
+    
+    func navigateToSettingsScreen()
 }
 
 final class ProfileCoordinator: Coordinatable {
@@ -40,6 +42,7 @@ extension ProfileCoordinator: ProfileRoutable {
     func navigateToProfileScreen() {
         let viewModel = ProfileViewModel(router: self)
         let profileView = ProfileView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: profileView)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -49,6 +52,13 @@ extension ProfileCoordinator: ProfileRoutable {
         authCoordinator.finishDelegate = self
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
+    }
+    
+    func navigateToSettingsScreen() {
+        let view = SettingsView()
+            .environmentObject(LocalizationService.shared)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 

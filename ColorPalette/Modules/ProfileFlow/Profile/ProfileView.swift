@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject private var localizationService: LocalizationService
     
     var body: some View {
         VStack {
@@ -31,10 +32,16 @@ struct ProfileView: View {
 private extension ProfileView {
     var header: some View {
         HStack {
-            Text("Profile")
+            Text(.profile)
                 .bold()
                 .font(.largeTitle)
             Spacer()
+            Button(action: { settingsTap() }) {
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.primary)
+            }
         }
     }
     
@@ -47,18 +54,19 @@ private extension ProfileView {
             Spacer()
             
             Button(action: { logOutTap() }) {
-                Text("Log out")
+                Text(.logOut)
             }
         }
-        .padding()
+        .padding([.leading, .trailing])
     }
     
     var guestBlock: some View {
         VStack {
             Spacer()
             Button(action: { signInTap() }) {
-                Text("Sign In")
+                Text(.signIn)
             }
+            .padding(.bottom, 50)
         }
     }
 }
@@ -82,21 +90,18 @@ private extension ProfileView {
 }
 
 private extension ProfileView {
-    func onAppear() {
-        viewModel.input.onAppear.send()
-    }
+    func onAppear() { viewModel.input.onAppear.send() }
     
-    func signInTap() {
-        viewModel.input.signInTap.send()
-    }
+    func settingsTap() { viewModel.input.settingsTap.send() }
     
-    func logOutTap() {
-        viewModel.input.logOutTap.send()
-    }
+    func signInTap() { viewModel.input.signInTap.send() }
+    
+    func logOutTap() { viewModel.input.logOutTap.send() }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel())
+            .environmentObject(LocalizationService.shared)
     }
 }
