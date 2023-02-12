@@ -49,4 +49,20 @@ enum Strings: String {
     case signUp
     case next
     case showMore
+    
+    case complement
+    case splitComplement
+    case triadic
+    case tetradic
+    case analagous
+    
+    case normal
+    case protanopia
+    case protanomaly
+    case deuteranopia
+    case deuteranomaly
+    case tritanopia
+    case tritanomaly
+    case achromatopsia
+    case achromatomaly
 }

@@ -9,16 +9,24 @@ import SwiftUI
 
 struct ColorInfoView: View {
     @ObservedObject var viewModel: ColorInfoViewModel
+    @Environment(\.dismiss) private var dismiss: DismissAction
+    
+    @State var isBlind: Bool = false
+    @State var blindColor: AppColor = .getClear()
     
     let appColor: AppColor
     var invertedColor: Color {
-        return Color(UIColor(appColor).invertColor())
+        if isBlind {
+            return Color(UIColor(blindColor).invertColor())
+        } else {
+            return Color(UIColor(appColor).invertColor())
+        }
     }
     
     var body: some View {
-        ZStack {
-            ColorPreview(color: appColor)
-            helpButtonsBlock
+        VStack(spacing: 0) {
+            topBar
+            ColorPreview(color: isBlind ? blindColor : appColor)
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear { viewModel.input.onAppear.send() }
@@ -26,17 +34,20 @@ struct ColorInfoView: View {
 }
 
 private extension ColorInfoView {
-    var helpButtonsBlock: some View {
-        GeometryReader { reader in
+    var topBar: some View {
+        ZStack {
+            Color(isBlind ? blindColor : appColor)
             HStack(spacing: 25) {
+                backButton
+                Spacer()
+                blindButton
                 copyButton
                 favoriteButton
             }
-            .padding()
-            .frame(maxWidth: reader.size.width, alignment: .trailing)
+            .padding(20)
         }
-        .padding(.top, 15)
-        .padding(.leading, Consts.Constraints.screenWidth / 2)
+        .frame(height: 25)
+        .padding([.top, .bottom])
     }
     
     var favoriteButton: some View {
@@ -46,6 +57,31 @@ private extension ColorInfoView {
                 .frame(width: 25, height: 25)
                 .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
         })
+    }
+    
+    var blindButton: some View {
+        Menu {
+            ForEach(InclusiveColor.BlindnessType.allCases, id: \.rawValue) { type in
+                Button(action: { blindTap(type) }) {
+                    Text(type.title)
+                }
+            }
+        } label: {
+            Image(systemName: isBlind ? "eye.slash" : "eye")
+                .resizable()
+                .frame(width: 30, height: 20)
+                .foregroundColor(invertedColor)
+        }
+
+    }
+    
+    var backButton: some View {
+        Button(action: { dismiss() }) {
+            Image(systemName: "multiply")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(invertedColor)
+        }
     }
     
     var copyButton: some View {
@@ -68,16 +104,22 @@ private extension ColorInfoView {
         viewModel.input.favTap.send()
     }
     
+    func blindTap(_ type: InclusiveColor.BlindnessType) {
+        blindColor = AppColor(uiColor: appColor.uiColor.inclusiveColor(for: type))
+        isBlind = type != .normal ? true : false
+    }
+    
     func copyColorInfo(_ type: ColorType) {
+        let color = isBlind ? blindColor : appColor
         switch type {
             case .HEX:
-                UIPasteboard.general.string = appColor.uiColor.hexValue
+                UIPasteboard.general.string = color.uiColor.hexValue
             case .RGB:
-                UIPasteboard.general.string = appColor.uiColor.getRGBCopyInfo()
+                UIPasteboard.general.string = color.uiColor.getRGBCopyInfo()
             case .HSB:
-                UIPasteboard.general.string = appColor.uiColor.getHSBCopyInfo()
+                UIPasteboard.general.string = color.uiColor.getHSBCopyInfo()
             case .CMYK:
-                UIPasteboard.general.string = appColor.uiColor.getCMYKCopyInfo()
+                UIPasteboard.general.string = color.uiColor.getCMYKCopyInfo()
         }
     }
 }

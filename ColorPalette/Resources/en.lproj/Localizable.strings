@@ -47,3 +47,19 @@ signIn = "Sign in";
 signUp = "Sign up";
 next = "Next";
 showMore = "Show more";
+
+complement = "Complement";
+splitComplement = "Split Complement";
+triadic = "Triadic";
+tetradic = "Tetradic";
+analagous = "Analagous";
+
+normal = "Normal";
+protanopia = "Protanopia";
+protanomaly = "Protanomaly";
+deuteranopia = "Deuteranopia";
+deuteranomaly = "Deuteranomaly";
+tritanopia = "Tritanopia";
+tritanomaly = "Tritanomaly";
+achromatopsia = "Achromatopsia";
+achromatomaly = "Achromatomaly";

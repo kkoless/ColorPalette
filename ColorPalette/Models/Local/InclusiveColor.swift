@@ -48,7 +48,7 @@ final class InclusiveColor {
     /// - tritanomaly: A blue-yellow color abnormality.
     /// - achromatopsia: A deficiency affecting all hues.
     /// - achromatomaly: An abnormality affecting all hues.
-    enum BlindnessType {
+    enum BlindnessType: Int, CaseIterable {
         case normal
         case protanopia
         case protanomaly
@@ -58,6 +58,20 @@ final class InclusiveColor {
         case tritanomaly
         case achromatopsia
         case achromatomaly
+        
+        var title: Strings {
+            switch self {
+                case .normal: return .normal
+                case .protanopia: return .protanopia
+                case .protanomaly: return .protanomaly
+                case .deuteranopia: return .deuteranopia
+                case .deuteranomaly: return .deuteranomaly
+                case .tritanopia: return .tritanopia
+                case .tritanomaly: return .tritanomaly
+                case .achromatopsia: return .achromatopsia
+                case .achromatomaly: return .achromatomaly
+            }
+        }
     }
     
     // MARK: - Properties

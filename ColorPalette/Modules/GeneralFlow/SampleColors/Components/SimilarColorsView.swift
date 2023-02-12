@@ -27,7 +27,11 @@ struct SimilarColorsView: View {
 private extension SimilarColorsView {
     var complementColor: some View {
         VStack {
-            Text("Complement:")
+            HStack {
+                Text(.complement).font(.headline)
+                Spacer()
+            }
+            
             Color(color.complement)
                 .frame(height: 30)
                 .cornerRadius(10)
@@ -37,7 +41,11 @@ private extension SimilarColorsView {
     
     var splitComplementColors: some View {
         VStack {
-            Text("Split Complement:")
+            HStack {
+                Text(.splitComplement).font(.headline)
+                Spacer()
+            }
+         
             ForEach(color.getSplitComplementColors()) {
                 Color($0)
                     .frame(height: 30)
@@ -49,7 +57,11 @@ private extension SimilarColorsView {
     
     var triadicColors: some View {
         VStack {
-            Text("Triadic:")
+            HStack {
+                Text(.triadic).font(.headline)
+                Spacer()
+            }
+            
             ForEach(color.getTriadicColors()) {
                 Color($0)
                     .frame(height: 30)
@@ -61,7 +73,11 @@ private extension SimilarColorsView {
     
     var tetradicColors: some View {
         VStack {
-            Text("Tetradic:")
+            HStack {
+                Text(.tetradic).font(.headline)
+                Spacer()
+            }
+            
             ForEach(color.getTetradicColors()) {
                 Color($0)
                     .frame(height: 30)
@@ -73,7 +89,11 @@ private extension SimilarColorsView {
     
     var analagousColors: some View {
         VStack {
-            Text("Analagous:")
+            HStack {
+                Text(.analagous).font(.headline)
+                Spacer()
+            }
+            
             ForEach(color.getAnalagousColors()) {
                 Color($0)
                     .frame(height: 30)

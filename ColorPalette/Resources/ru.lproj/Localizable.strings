@@ -47,3 +47,19 @@ signIn = "Войти";
 signUp = "Регистрация";
 next = "Продолжить";
 showMore = "Показать больше";
+
+complement = "Комплементарный";
+splitComplement = "Раздельный комплиментарный";
+triadic = "Триада";
+tetradic = "Тетрада";
+analagous = "Аналогия";
+
+normal = "Нормальный";
+protanopia = "Протанопия";
+protanomaly = "Протаномалия";
+deuteranopia = "Дейтеранопия";
+deuteranomaly = "Дейтераномалия";
+tritanopia = "Тританопия";
+tritanomaly = "Тританомалия";
+achromatopsia = "Ахроматопсия";
+achromatomaly = "Ахроматомия";

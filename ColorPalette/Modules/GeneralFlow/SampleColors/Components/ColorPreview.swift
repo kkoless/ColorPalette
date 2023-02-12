@@ -27,11 +27,11 @@ struct ColorPreview: View {
 private extension ColorPreview {
     var infoBlock: some View {
         VStack(alignment: .leading) {
-            Text(colorName)
-                .font(.title2)
+            Text(colorName.capitalized)
+                .font(.title)
                 .bold()
-                .padding(.top, 30)
-                .frame(maxWidth: Consts.Constraints.screenWidth / 2, alignment: .leading)
+                .padding(.top, 15)
+                .frame(maxWidth: Consts.Constraints.screenWidth, alignment: .leading)
             
             Group {
                 hexInfo
@@ -39,7 +39,7 @@ private extension ColorPreview {
                 hsvInfo
                 cmykInfo
             }
-            .padding([.top, .bottom], 10)
+            .padding([.top, .bottom], 5)
         }
         .padding([.leading, .trailing])
         .foregroundColor(Color(color.invertColor()))
@@ -49,7 +49,7 @@ private extension ColorPreview {
     var hexInfo: some View {
         VStack(alignment: .leading) {
             Text("HEX")
-                .font(.title3)
+                .font(.title2)
                 .bold()
             Text(color.hexValue)
                 .font(.headline)
@@ -59,7 +59,7 @@ private extension ColorPreview {
     var rgbInfo: some View {
         VStack(alignment: .leading) {
             Text("RGB")
-                .font(.title3)
+                .font(.title2)
                 .bold()
             Text(color.rgbDescription(isExtended: true))
                 .font(.headline)
@@ -69,7 +69,7 @@ private extension ColorPreview {
     var hsvInfo: some View {
         VStack(alignment: .leading) {
             Text("HSB")
-                .font(.title3)
+                .font(.title2)
                 .bold()
             Text(color.hsbDescription(isExtended: true))
                 .font(.headline)
@@ -79,7 +79,7 @@ private extension ColorPreview {
     var cmykInfo: some View {
         VStack(alignment: .leading) {
             Text("CMYK")
-                .font(.title3)
+                .font(.title2)
                 .bold()
             Text(color.cmykDescription(isExtended: true))
                 .font(.headline)
