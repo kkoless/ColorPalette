@@ -31,7 +31,7 @@ struct RegistrationView: View {
     }
 }
 
-extension RegistrationView {
+private extension RegistrationView {
     var registrationForm: some View {
         VStack {
             Group {
@@ -48,7 +48,7 @@ extension RegistrationView {
     }
 }
 
-extension RegistrationView {
+private extension RegistrationView {
     func registerButtonTap() {
         viewModel.input.registrTap.send((loginText, passwordText))
     }

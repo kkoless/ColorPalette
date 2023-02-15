@@ -67,7 +67,9 @@ extension FavoriteManager {
         checkColorsLimit()
         checkPalettesLimit()
     }
-    
+}
+
+extension FavoriteManager {
     func addColor(_ newColor: AppColor) {
         if CredentialsManager.shared.isGuest {
             coreDataManager.addColor(newColor)
@@ -85,7 +87,9 @@ extension FavoriteManager {
         palettes.append(newPalette)
         checkPalettesLimit()
     }
-    
+}
+
+extension FavoriteManager {
     func removeColor(_ color: AppColor) {
         if let index = colors.firstIndex(where: { $0 == color })  {
             if CredentialsManager.shared.isGuest {
@@ -106,6 +110,13 @@ extension FavoriteManager {
             palettes.remove(at: index)
             checkPalettesLimit()
         }
+    }
+}
+
+extension FavoriteManager {
+    func updatePalette(paletteForDelete: ColorPalette, newPalette: ColorPalette) {
+        removePalette(paletteForDelete)
+        addPalette(newPalette)
     }
 }
 

@@ -8,33 +8,41 @@
 import SwiftUI
 
 struct EditPaletteView: View {
-    let initPalette: ColorPalette
+    @StateObject var viewModel: EditPaletteViewModel
     
-    @State private var resultPalette: ColorPalette
+    @State private var draggedColor: AppColor?
     @State private var hueValue: CGFloat = 0
     @State private var saturationValue: CGFloat = 0
     @State private var brightnessValue: CGFloat = 0
     
-    init(initPalette: ColorPalette) {
-        self.initPalette = initPalette
-        self.resultPalette = initPalette
-    }
+    let initPalette: ColorPalette
     
     var body: some View {
         VStack {
+            navigationBarView
             palettesPreview
-            Spacer()
             slidersBlock
+            buttonsBlock
         }
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
 private extension EditPaletteView {
+    var navigationBarView: some View {
+        CustomNavigationBarView(
+            backAction: { backTap() },
+            titleText: "Palette Editor"
+        )
+    }
+    
     var palettesPreview: some View {
         HStack(spacing: 0) {
             initPalettePreview
             resultPalettePreview
         }
+        .cornerRadius(10)
+        .padding([.top, .bottom])
     }
     
     var initPalettePreview: some View {
@@ -53,7 +61,7 @@ private extension EditPaletteView {
     
     var resultPalettePreview: some View {
         VStack(spacing: 0) {
-            ForEach(resultPalette.colors) { color in
+            ForEach(viewModel.output.resultPaletteColors) { color in
                 ZStack {
                     Color(color)
                     Text(color.hex)
@@ -61,6 +69,12 @@ private extension EditPaletteView {
                         .font(.title3)
                         .bold()
                 }
+                .onDrag({ drugAction(color) }, preview: {
+                    EmptyView()
+                })
+                .onDrop(of: [.text],
+                        delegate: DropViewDelegate(destinationItem: color, initColors: $viewModel.output.initPaletteColors, resultColors: $viewModel.output.resultPaletteColors, draggedItem: $draggedColor)
+                    )
             }
         }
     }
@@ -72,25 +86,33 @@ private extension EditPaletteView {
             hueSliderBlock
             saturationSliderBlock
             brightnessSliderBlock
-            
-            Button(action: { resetValues() }) {
-                Text("Reset")
-            }
         }
         .padding()
+        .foregroundColor(.primary)
     }
     
     var hueSliderBlock: some View {
         VStack {
             HStack {
-                Text("Hue")
+                Text(.hue).bold()
                Spacer()
-                Text("\(Int(hueValue))")
+                Text("\(Int(hueValue))").bold()
+                    .padding(.trailing)
+                
+                HStack {
+                    Button(action: { buttonChangeValue(hueValue + 1, type: .hue) }) {
+                        Image(systemName: "plus")
+                    }
+                    
+                    Button(action: { buttonChangeValue(hueValue - 1, type: .hue) }) {
+                        Image(systemName: "minus")
+                    }
+                }
             }
             
             Slider(value: $hueValue, in: -180...180, step: 1)
                 .onChange(of: hueValue) { newValue in
-                    changeValue(newValue, type: .hue)
+                    viewModel.sliderChangeHSB(hue: newValue, saturation: saturationValue, brightness: brightnessValue)
                 }
         }
     }
@@ -98,14 +120,28 @@ private extension EditPaletteView {
     var saturationSliderBlock: some View {
         VStack {
             HStack {
-                Text("Saturation")
+                Text(.saturation).bold()
                Spacer()
                 Text("\(Int(saturationValue))")
+                    .bold()
+                    .padding(.trailing)
+                
+                HStack {
+                    Button(action: {
+                        buttonChangeValue(saturationValue + 1, type: .saturation)
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                    
+                    Button(action: { buttonChangeValue(saturationValue - 1, type: .saturation) }) {
+                        Image(systemName: "minus")
+                    }
+                }
             }
             
             Slider(value: $saturationValue, in: -100...100, step: 1)
                 .onChange(of: saturationValue) { newValue in
-                    changeValue(newValue, type: .saturation)
+                    viewModel.sliderChangeHSB(hue: hueValue, saturation: newValue, brightness: brightnessValue)
                 }
         }
     }
@@ -113,41 +149,123 @@ private extension EditPaletteView {
     var brightnessSliderBlock: some View {
         VStack {
             HStack {
-                Text("Brightness")
+                Text(.brightness).bold()
                Spacer()
                 Text("\(Int(brightnessValue))")
+                    .bold()
+                    .padding(.trailing)
+                
+                HStack {
+                    Button(action: { buttonChangeValue(brightnessValue + 1, type: .brightness) }) {
+                        Image(systemName: "plus")
+                    }
+                    
+                    Button(action: { buttonChangeValue(brightnessValue - 1, type: .brightness) }) {
+                        Image(systemName: "minus")
+                    }
+                }
             }
             
             Slider(value: $brightnessValue, in: -100...100, step: 1)
                 .onChange(of: brightnessValue) { newValue in
-                    changeValue(newValue, type: .brightness)
+                    viewModel.sliderChangeHSB(hue: hueValue, saturation: saturationValue, brightness: newValue)
                 }
         }
     }
 }
 
 private extension EditPaletteView {
-    func changeValue(_ newValue: CGFloat, type: ColorPropertyType) {
-        let colors = initPalette.colors.map { $0.uiColor }
-        
-        let newColors = colors.map {
-            switch type {
-                case .hue:
-                    return AppColor(uiColor: $0.add(hue: newValue, saturation: saturationValue, brightness: brightnessValue))
-                case .saturation:
-                    return AppColor(uiColor: $0.add(hue: hueValue, saturation: newValue, brightness: brightnessValue))
-                case .brightness:
-                    return AppColor(uiColor: $0.add(hue: hueValue, saturation: saturationValue, brightness: newValue))
-            }
+    var buttonsBlock: some View {
+        HStack {
+            Spacer()
+            Button(action: { resetValues() }) { Text(.reset) }
+            Spacer()
+            Button(action: { applyTap() }) { Text(.apply) }
+            Spacer()
         }
-        
-        resultPalette = ColorPalette(colors: newColors)
+        .padding()
+    }
+}
+
+private extension EditPaletteView {
+    func backTap() {
+        viewModel.input.backTap.send()
+    }
+    
+    func applyTap() {
+        viewModel.input.updateTap.send()
+    }
+    
+    func buttonChangeValue(_ newValue: CGFloat, type: ColorPropertyType) {
+        var check = false
+        switch type {
+            case .hue:
+                check = newValue >= -180 && newValue <= 180 ? true : false
+                if check {
+                    hueValue = newValue
+                    viewModel.sliderChangeHSB(hue: newValue, saturation: saturationValue, brightness: brightnessValue)
+                }
+                
+            case .saturation:
+                check = newValue >= -100 && newValue <= 100 ? true : false
+                if check {
+                    saturationValue = newValue
+                    viewModel.sliderChangeHSB(hue: hueValue, saturation: newValue, brightness: brightnessValue)
+                }
+            case .brightness:
+                check = newValue >= -100 && newValue <= 100 ? true : false
+                if check {
+                    brightnessValue = newValue
+                    viewModel.sliderChangeHSB(hue: hueValue, saturation: saturationValue, brightness: newValue)
+                }
+        }
+    }
+    
+    func drugAction(_ color: AppColor) -> NSItemProvider {
+        self.draggedColor = color
+        return NSItemProvider()
     }
     
     func resetValues() {
-        hueValue = 0
-        saturationValue = 0
-        brightnessValue = 0
+        withAnimation {
+            hueValue = 0
+            saturationValue = 0
+            brightnessValue = 0
+        }
+    }
+}
+
+private extension EditPaletteView {
+    struct DropViewDelegate: DropDelegate {
+        let destinationItem: AppColor
+        
+        @Binding var initColors: [AppColor]
+        @Binding var resultColors: [AppColor]
+        @Binding var draggedItem: AppColor?
+        
+        func dropUpdated(info: DropInfo) -> DropProposal? {
+            return DropProposal(operation: .move)
+        }
+        
+        func performDrop(info: DropInfo) -> Bool {
+            draggedItem = nil
+            return true
+        }
+        
+        func dropEntered(info: DropInfo) {
+            if let draggedItem {
+                let fromIndex = resultColors.firstIndex(of: draggedItem)
+                if let fromIndex {
+                    let toIndex = resultColors.firstIndex(of: destinationItem)
+                    if let toIndex, fromIndex != toIndex {
+                        withAnimation {
+                            self.resultColors.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: (toIndex > fromIndex ? (toIndex + 1) : toIndex))
+                        }
+                        self.initColors = resultColors
+                    }
+                }
+            }
+        }
     }
     
     enum ColorPropertyType {
@@ -159,14 +277,7 @@ private extension EditPaletteView {
 
 struct EditPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        let colors: [AppColor] = [
-            AppColor(hex: "#E59F71"),
-            AppColor(hex: "#BA5A31"),
-            AppColor(hex: "#0C0C0C"),
-            AppColor(hex: "#69DC9E"),
-            AppColor(hex: "#FFFFFF")
-        ]
-        let palette = ColorPalette(colors: colors)
-        EditPaletteView(initPalette: palette)
+        let palette = PopularPalettesManager.shared.palettes[0]
+        EditPaletteView(viewModel: EditPaletteViewModel(palette: palette), initPalette: palette)
     }
 }

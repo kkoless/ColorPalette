@@ -124,15 +124,25 @@ private extension FavoritesView {
     
     var paletteCells: some View {
         ForEach(viewModel.output.palettes) { palette in
-            ColorPaletteCell(palette: palette)
-                .padding([.leading, .trailing])
-                .listRowSeparator(.hidden)
-                .listRowInsets(.init())
-                .onTapGesture { showPaletteInfoTap(palette) }
+            HStack {
+                ColorPaletteCell(palette: palette)
+                    .padding([.leading, .trailing])
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(.init())
+                    .onTapGesture { showPaletteInfoTap(palette) }
+                
+                Button(action: { editPalette(palette) }) {
+                    Image(systemName: "wand.and.stars")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.primary)
+                }
+            }
         }
         .onDelete { indexSet in
             indexSet.forEach { viewModel.removePalette(from: $0) }
         }
+        .buttonStyle(.plain)
     }
     
     var colorCells: some View {
@@ -198,6 +208,10 @@ private extension FavoritesView {
     
     func showPaletteInfoTap(_ palette: ColorPalette) {
         viewModel.input.showTaps.showPaletteInfoTap.send(palette)
+    }
+    
+    func editPalette(_ palette: ColorPalette) {
+        viewModel.input.editPaletteTap.send(palette)
     }
 }
 

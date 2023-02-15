@@ -32,7 +32,7 @@ struct LoginView: View {
     }
 }
 
-extension LoginView {
+private extension LoginView {
     var loginForm: some View {
         VStack {
             Group {
@@ -54,7 +54,7 @@ extension LoginView {
     }
 }
 
-extension LoginView {
+private extension LoginView {
     func loginButtonTap() {
         viewModel.input.loginTap.send((loginText, passwordText))
     }

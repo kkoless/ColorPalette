@@ -11,6 +11,8 @@ struct ColorPreview: View {
     private let color: UIColor
     private let colorName: String
     
+    @State private var showMore: Bool = true
+    
     init(color: AppColor) {
         self.color = color.uiColor
         self.colorName = color.name.isEmpty ? self.color.accessibilityName : color.name
@@ -19,8 +21,9 @@ struct ColorPreview: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color(color)
-            infoBlock
+            if showMore { infoBlock }
         }
+        .onTapGesture { showMore.toggle() }
     }
 }
 

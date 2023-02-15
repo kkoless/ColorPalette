@@ -40,6 +40,7 @@ favoritesEmptyState = "Как-то пусто тут...";
 
 email = "Почта";
 password = "Пароль";
+search = "Поиск";
 
 cancel = "Закрыть";
 logOut = "Выйти";
@@ -47,6 +48,12 @@ signIn = "Войти";
 signUp = "Регистрация";
 next = "Продолжить";
 showMore = "Показать больше";
+reset = "Сбросить";
+apply = "Применить";
+
+hue = "Оттенок";
+saturation = "Насыщенность";
+brightness = "Яркость";
 
 complement = "Комплементарный";
 splitComplement = "Раздельный комплиментарный";

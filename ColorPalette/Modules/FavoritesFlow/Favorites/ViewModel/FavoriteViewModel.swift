@@ -98,6 +98,10 @@ private extension FavoriteViewModel {
         bindAddPaletteTaps()
         bindAddColorTaps()
         bindShowTaps()
+        
+        input.editPaletteTap
+            .sink { [weak self] palette in self?.router?.navigateToEditPalette(palette: palette) }
+            .store(in: &cancellable)
     }
 }
 
@@ -207,6 +211,7 @@ extension FavoriteViewModel {
 extension FavoriteViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
+        let editPaletteTap: PassthroughSubject<ColorPalette, Never> = .init()
         let addTaps: AddTap = .init()
         let showTaps: ShowTap = .init()
         

@@ -42,6 +42,7 @@ enum Strings: String {
     
     case email
     case password
+    case search
     
     case cancel
     case logOut
@@ -49,6 +50,12 @@ enum Strings: String {
     case signUp
     case next
     case showMore
+    case reset
+    case apply
+    
+    case hue
+    case saturation
+    case brightness
     
     case complement
     case splitComplement

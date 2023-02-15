@@ -21,8 +21,6 @@ protocol GeneralRoutable: AnyObject {
     
     func navigateToSimilarColors(color: AppColor)
     func navigateToColorInfo(color: AppColor)
-    
-    func navigateToEditPalette(palette: ColorPalette)
 }
 
 final class GeneralCoordinator: Coordinatable {
@@ -98,12 +96,6 @@ extension GeneralCoordinator: GeneralRoutable {
     func navigateToColorInfo(color: AppColor) {
         let viewModel = ColorInfoViewModel(color: color)
         let view = ColorInfoView(viewModel: viewModel, appColor: color)
-        let vc = UIHostingController(rootView: view)
-        navigationController.present(vc, animated: true)
-    }
-    
-    func navigateToEditPalette(palette: ColorPalette) {
-        let view = EditPaletteView(initPalette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }

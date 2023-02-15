@@ -20,6 +20,10 @@ protocol FavoritesDeleteServiceProtocol {
     func deletePalette(paletteId: Int) -> AnyPublisher<Void, ApiError>
 }
 
+protocol FavoritesUpdateServiceProtocol {
+    func updatePalette(paletteId: Int, newPalette: ColorPalette) -> AnyPublisher<Void, ApiError>
+}
+
 protocol FavoritesAddServiceProtocol {
     func addColor(color: AppColor) -> AnyPublisher<Void, ApiError>
     func addPalette(palette: ColorPalette) -> AnyPublisher<Void, ApiError>
@@ -86,6 +90,16 @@ extension FavoritesNetworkService: FavoritesDeleteServiceProtocol {
     
     func deletePalette(paletteId: Int) -> AnyPublisher<Void, ApiError> {
         provider.requestPublisher(.deletePalette(paletteId: paletteId))
+            .filterSuccessfulStatusCodes()
+            .map { _ in Void() }
+            .mapError(mapError(error:))
+            .eraseToAnyPublisher()
+    }
+}
+
+extension FavoritesNetworkService: FavoritesUpdateServiceProtocol {
+    func updatePalette(paletteId: Int, newPalette: ColorPalette) -> AnyPublisher<Void, ApiError> {
+        provider.requestPublisher(.updatePalette(paletteForDelete: paletteId, newPalette: newPalette))
             .filterSuccessfulStatusCodes()
             .map { _ in Void() }
             .mapError(mapError(error:))

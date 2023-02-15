@@ -13,6 +13,7 @@ protocol FavoritesRoutable: AnyObject {
     func dismiss()
     
     func navigateToFavoritesScreen()
+    func navigateToEditPalette(palette: ColorPalette)
     
     func navigateToColorPalette(palette: ColorPalette)
     func navigateToColorInfo(color: AppColor)
@@ -81,6 +82,13 @@ extension FavoritesCoordinator: FavoritesRoutable {
         let view = ColorInfoView(viewModel: viewModel, appColor: color)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToEditPalette(palette: ColorPalette) {
+        let viewModel = EditPaletteViewModel(router: self, palette: palette)
+        let view = EditPaletteView(viewModel: viewModel, initPalette: palette)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToAddNewColorToPalette(templateManager: TemplatePaletteManager) {

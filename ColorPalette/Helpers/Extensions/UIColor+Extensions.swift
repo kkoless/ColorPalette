@@ -176,8 +176,8 @@ extension UIColor {
         while newHue < 0.0 { newHue += 1.0 }
         while newHue > 1.0 { newHue -= 1.0 }
         
-        let newSat: CGFloat = max(min(oldSat + (saturation / 100), 1.0), 0)
-        let newBright: CGFloat = max(min(oldBright + (brightness / 100), 1.0), 0)
+        let newSat: CGFloat = max(min(oldSat + (saturation / 100.0), 1.0), 0.0)
+        let newBright: CGFloat = max(min(oldBright + (brightness / 100.0), 1.0), 0.0)
         
         return UIColor(hue: newHue, saturation: newSat, brightness: newBright, alpha: oldAlpha)
       }

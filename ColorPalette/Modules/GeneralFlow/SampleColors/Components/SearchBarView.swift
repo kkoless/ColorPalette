@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchBarView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     @Binding var searchText: String
     
     var body: some View {
@@ -15,7 +16,7 @@ struct SearchBarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             
-            TextField("Search", text: $searchText)
+            TextField(String(.search).localized(localizationService.language), text: $searchText)
                 .font(.system(size: 16))
             
             if !searchText.isEmpty {
@@ -36,6 +37,11 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarView(searchText: .constant(""))
+        VStack {
+            SearchBarView(searchText: .constant(""))
+                .environmentObject(LocalizationService.shared)
+            Spacer()
+        }
+        .padding()
     }
 }

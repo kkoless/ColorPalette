@@ -11,11 +11,12 @@ struct ColorInfoView: View {
     @ObservedObject var viewModel: ColorInfoViewModel
     @Environment(\.dismiss) private var dismiss: DismissAction
     
-    @State var isBlind: Bool = false
-    @State var blindColor: AppColor = .getClear()
+    @State private var isBlind: Bool = false
+    @State private var blindColor: AppColor = .getClear()
     
     let appColor: AppColor
-    var invertedColor: Color {
+    
+    private var invertedColor: Color {
         if isBlind {
             return Color(UIColor(blindColor).invertColor())
         } else {

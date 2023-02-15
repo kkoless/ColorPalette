@@ -112,6 +112,7 @@
 		E5F3C482295F5403000DDD36 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3C481295F5403000DDD36 /* CoreDataManager.swift */; };
 		E5F9C12F299616EC009B9D66 /* FavoritesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F9C12E299616EC009B9D66 /* FavoritesAPI.swift */; };
 		E5F9C13129961D9D009B9D66 /* FavoritesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F9C13029961D9D009B9D66 /* FavoritesNetworkService.swift */; };
+		E5FD047F299CEC2700582E88 /* EditPaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FD047E299CEC2700582E88 /* EditPaletteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +221,7 @@
 		E5F3C481295F5403000DDD36 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E5F9C12E299616EC009B9D66 /* FavoritesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAPI.swift; sourceTree = "<group>"; };
 		E5F9C13029961D9D009B9D66 /* FavoritesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNetworkService.swift; sourceTree = "<group>"; };
+		E5FD047E299CEC2700582E88 /* EditPaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaletteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 		E528434629753F56005102D5 /* EditPalette */ = {
 			isa = PBXGroup;
 			children = (
+				E5FD047D299CEC1400582E88 /* ViewModel */,
 				E528434729753F6E005102D5 /* EditPaletteView.swift */,
 			);
 			path = EditPalette;
@@ -874,6 +877,14 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
+		E5FD047D299CEC1400582E88 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E5FD047E299CEC2700582E88 /* EditPaletteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -964,6 +975,7 @@
 				E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */,
 				E55F6F892955C23700A8B935 /* Decodable+Extensions.swift in Sources */,
 				E52D434029589011002B11B8 /* FavoritesView.swift in Sources */,
+				E5FD047F299CEC2700582E88 /* EditPaletteViewModel.swift in Sources */,
 				E56C0E2B29376D9D00A878CB /* GeneralCoordinator.swift in Sources */,
 				E5DCBC8129365C46000C1B4E /* AppRouter.swift in Sources */,
 				E55F6F7E29559FCF00A8B935 /* ColorManager.swift in Sources */,

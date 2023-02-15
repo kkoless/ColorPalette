@@ -15,6 +15,7 @@ enum FavoritesAPI {
     
     case addPalette(palette: ColorPalette)
     case deletePalette(paletteId: Int)
+    case updatePalette(paletteForDelete: Int, newPalette: ColorPalette)
     case getPalettes
 }
 
@@ -35,6 +36,8 @@ extension FavoritesAPI: TargetType {
                 return "/palette/add"
             case .deletePalette:
                 return "/palette/delete"
+            case .updatePalette(paletteForDelete: let id, newPalette: _):
+                return "/palette/update/\(id)"
             case .getPalettes:
                 return "/palettes"
         }
@@ -42,7 +45,7 @@ extension FavoritesAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-            case .addColor, .addPalette:
+            case .addColor, .addPalette, .updatePalette:
                 return .post
             case .deleteColor, .deletePalette:
                 return .delete
@@ -73,6 +76,10 @@ extension FavoritesAPI: TargetType {
             case .deletePalette(paletteId: let id):
                 params["id"] = id
                 return .requestCompositeParameters(bodyParameters: [:], bodyEncoding: JSONEncoding.default, urlParameters: params)
+            
+            case .updatePalette(paletteForDelete: _, newPalette: let palette):
+                return .requestParameters(parameters: palette.getJSON(),
+                                          encoding: JSONEncoding.default)
         }
     }
     
