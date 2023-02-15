@@ -99,7 +99,7 @@ extension FavoritesNetworkService: FavoritesDeleteServiceProtocol {
 
 extension FavoritesNetworkService: FavoritesUpdateServiceProtocol {
     func updatePalette(paletteId: Int, newPalette: ColorPalette) -> AnyPublisher<Void, ApiError> {
-        provider.requestPublisher(.updatePalette(paletteForDelete: paletteId, newPalette: newPalette))
+        provider.requestPublisher(.updatePalette(paletteIdForDelete: paletteId, newPalette: newPalette))
             .filterSuccessfulStatusCodes()
             .map { _ in Void() }
             .mapError(mapError(error:))
