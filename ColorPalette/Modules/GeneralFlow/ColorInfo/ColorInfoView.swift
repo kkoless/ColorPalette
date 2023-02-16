@@ -31,6 +31,12 @@ struct ColorInfoView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear { viewModel.input.onAppear.send() }
+        .sheet(isPresented: $viewModel.output.showShareSheet,
+               onDismiss: { viewModel.output.pdfURL = nil }) {
+            if let pdfUrl = viewModel.output.pdfURL {
+                ShareSheet(urls: [pdfUrl])
+            }
+        }
     }
 }
 
@@ -43,6 +49,7 @@ private extension ColorInfoView {
                 Spacer()
                 blindButton
                 copyButton
+                shareButton
                 favoriteButton
             }
             .padding(20)
@@ -57,6 +64,15 @@ private extension ColorInfoView {
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
+        })
+    }
+    
+    var shareButton: some View {
+        Button(action: { shareTap() }, label: {
+            Image(systemName: "square.and.arrow.up")
+                .resizable()
+                .frame(width: 20, height: 25)
+                .foregroundColor(invertedColor)
         })
     }
     
@@ -103,6 +119,19 @@ private extension ColorInfoView {
 private extension ColorInfoView {
     func changeFavoriteState() {
         viewModel.input.favTap.send()
+    }
+    
+    func shareTap() {
+        exportPDF(content: {
+            ColorPreview(color: appColor)
+        }) { status, url in
+            if let url = url, status {
+                viewModel.output.pdfURL = url
+                viewModel.output.showShareSheet.toggle()
+            } else {
+                print("Failed to produce PDF")
+            }
+        }
     }
     
     func blindTap(_ type: InclusiveColor.BlindnessType) {

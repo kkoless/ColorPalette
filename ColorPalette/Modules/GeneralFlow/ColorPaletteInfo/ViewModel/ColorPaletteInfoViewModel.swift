@@ -123,5 +123,7 @@ extension ColorPaletteInfoViewModel {
     
     struct Output {
         var isFavorite: Bool = false
+        var pdfURL: URL?
+        var showShareSheet: Bool = false
     }
 }

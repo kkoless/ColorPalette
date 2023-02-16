@@ -28,7 +28,7 @@ struct ColorPaletteRowView: View {
 
 private extension ColorPaletteRowView {
     @ViewBuilder
-    private func getColorInfo(color: UIColor) -> some View {
+    func getColorInfo(color: UIColor) -> some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {

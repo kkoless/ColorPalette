@@ -124,20 +124,21 @@ private extension FavoritesView {
     
     var paletteCells: some View {
         ForEach(viewModel.output.palettes) { palette in
-            HStack {
+            HStack(alignment: .center) {
                 ColorPaletteCell(palette: palette)
-                    .padding([.leading, .trailing])
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(.init())
+                    .padding(.trailing, 5)
                     .onTapGesture { showPaletteInfoTap(palette) }
                 
                 Button(action: { editPalette(palette) }) {
-                    Image(systemName: "wand.and.stars")
+                    Image(systemName: "slider.horizontal.3")
                         .resizable()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 18, height: 18)
                         .foregroundColor(.primary)
                 }
             }
+            .padding([.leading, .trailing])
+            .listRowSeparator(.hidden)
+            .listRowInsets(.init())
         }
         .onDelete { indexSet in
             indexSet.forEach { viewModel.removePalette(from: $0) }

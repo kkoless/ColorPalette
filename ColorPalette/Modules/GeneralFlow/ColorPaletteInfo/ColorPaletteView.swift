@@ -50,6 +50,12 @@ struct ColorPaletteView: View {
             ColorTypePickerView(selectedType: $selectedType)
                 .padding(.top, 10)
         }
+        .sheet(isPresented: $viewModel.output.showShareSheet,
+               onDismiss: { viewModel.output.pdfURL = nil }) {
+            if let url = viewModel.output.pdfURL {
+                ShareSheet(urls: [url])
+            }
+        }
     }
 }
 
@@ -61,6 +67,7 @@ private extension ColorPaletteView {
                 backButton
                 Spacer()
                 blindButton
+                shareButton
                 favoriteButton
             }
             .padding(20)
@@ -84,6 +91,15 @@ private extension ColorPaletteView {
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
+        })
+    }
+    
+    var shareButton: some View {
+        Button(action: { shareTap() }, label: {
+            Image(systemName: "square.and.arrow.up")
+                .resizable()
+                .frame(width: 20, height: 25)
+                .foregroundColor(invertedColor)
         })
     }
     
@@ -113,10 +129,36 @@ private extension ColorPaletteView {
         viewModel.input.favTap.send()
     }
     
+    func copyTap(_ appColor: AppColor, type: ColorType) {
+        switch type {
+            case .HEX:
+                UIPasteboard.general.string = appColor.uiColor.hexValue
+            case .RGB:
+                UIPasteboard.general.string = appColor.uiColor.getRGBCopyInfo()
+            case .HSB:
+                UIPasteboard.general.string = appColor.uiColor.getHSBCopyInfo()
+            case .CMYK:
+                UIPasteboard.general.string = appColor.uiColor.getCMYKCopyInfo()
+        }
+    }
+    
     func blindTap(_ type: InclusiveColor.BlindnessType) {
         blindPalette = ColorPalette(colors: palette.colors.map { AppColor(uiColor: $0.uiColor.inclusiveColor(for: type)) })
         
         isBlind = type != .normal ? true : false
+    }
+    
+    func shareTap() {
+        exportPDF(content: {
+            ColorPalettePDFView(palette: palette, type: selectedType)
+        }) { status, url in
+            if let url = url, status {
+                viewModel.output.pdfURL = url
+                viewModel.output.showShareSheet.toggle()
+            } else {
+                print("Failed to produce PDF")
+            }
+        }
     }
 }
 
