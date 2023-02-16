@@ -41,7 +41,7 @@ extension UIColor {
     }
     
     convenience init(_ appColor: AppColor) {
-        self.init(hexString: appColor.hex)
+        self.init(hexString: appColor.hex, alpha: appColor.alpha)
     }
 }
 
@@ -115,6 +115,10 @@ extension UIColor {
         return hsv(r: redValue, g: greenValue, b: blueValue)
     }
     
+    var alphaValue: CGFloat {
+        return self.cgColor.alpha.rounded(toDecimalPlaces: 2)
+    }
+    
     var hexValue: String {
         var color = self
         
@@ -179,13 +183,15 @@ extension UIColor {
         let newSat: CGFloat = max(min(oldSat + (saturation / 100.0), 1.0), 0.0)
         let newBright: CGFloat = max(min(oldBright + (brightness / 100.0), 1.0), 0.0)
         
-        return UIColor(hue: newHue, saturation: newSat, brightness: newBright, alpha: oldAlpha)
+        return UIColor(hue: newHue, saturation: newSat, brightness: newBright, alpha: alpha)
       }
 }
 
 extension UIColor {
     func rgbDescription(isExtended: Bool = false) -> String {
-        return isExtended ? "R: \(Int(redValue))\nG: \(Int(greenValue))\nB: \(Int(blueValue))" : "R:\(Int(redValue)) G:\(Int(greenValue)) B:\(Int(blueValue))"
+        return isExtended
+        ? "R: \(Int(redValue))\nG: \(Int(greenValue))\nB: \(Int(blueValue))\nA \(alphaValue)"
+        : "R:\(Int(redValue)) G:\(Int(greenValue)) B:\(Int(blueValue)) A:\(alphaValue)"
     }
     
     func hsbDescription(isExtended: Bool = false) -> String {
@@ -203,7 +209,7 @@ extension UIColor {
 
 extension UIColor {
     func getRGBCopyInfo() -> String {
-        return "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(cgColor.alpha)"
+        return "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(alphaValue)"
     }
     
     func getHSBCopyInfo() -> String {

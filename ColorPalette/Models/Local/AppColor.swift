@@ -12,6 +12,7 @@ import SwiftUI
 struct AppColor: Identifiable {
     let name: String
     let hex: String
+    let alpha: CGFloat
     
     var id: Int {
         self.hashValue
@@ -21,9 +22,10 @@ struct AppColor: Identifiable {
         return UIColor(self)
     }
     
-    init(name: String = "", hex: String) {
+    init(name: String = "", hex: String, alpha: CGFloat = 1) {
         self.hex = hex
-        self.name = name.isEmpty ? UIColor(hexString: hex).accessibilityName : name
+        self.name = name.isEmpty ? UIColor(hexString: hex, alpha: alpha).accessibilityName : name
+        self.alpha = alpha
     }
 }
 
@@ -31,19 +33,21 @@ extension AppColor: Codable {
     init(uiColor: UIColor) {
         self.name = uiColor.accessibilityName
         self.hex = uiColor.hexValue
+        self.alpha = uiColor.cgColor.alpha
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
         self.hex = try container.decode(String.self, forKey: .hex)
+        self.alpha = try container.decodeIfPresent(CGFloat.self, forKey: .alpha) ?? 1.0
     }
 }
 
 extension AppColor {
     static func getRandomColor() -> AppColor {
         let uiColor = UIColor.random
-        return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue)
+        return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue, alpha: uiColor.alphaValue)
     }
     
     static func getClear() -> AppColor {
@@ -59,10 +63,11 @@ extension AppColor: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(hex.lowercased())
         hasher.combine(name.lowercased())
+        hasher.combine(alpha)
     }
     
     var hashValue: Int {
-        Int(hex.lowercased().hash)
+        Int(hex.lowercased().hash) + Int(alpha)
     }
     
     static func == (lhs: AppColor, rhs: AppColor) -> Bool {
@@ -76,6 +81,7 @@ extension AppColor {
         params["id"] = id
         params["name"] = name
         params["hex"] = hex
+        params["alpha"] = alpha
         return params
     }
 }

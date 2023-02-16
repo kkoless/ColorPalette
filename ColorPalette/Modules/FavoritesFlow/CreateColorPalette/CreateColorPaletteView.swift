@@ -60,6 +60,7 @@ private extension CreateColorPaletteView {
         List {
             ForEach(viewModel.output.colors) { color in
                 Color(color)
+                    .opacity(color.alpha)
                     .listRowSeparator(.hidden)
                     .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 5))
                     .cornerRadius(10)

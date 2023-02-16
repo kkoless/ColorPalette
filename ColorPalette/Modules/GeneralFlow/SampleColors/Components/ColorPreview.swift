@@ -10,17 +10,19 @@ import SwiftUI
 struct ColorPreview: View {
     private let color: UIColor
     private let colorName: String
+    private let alpha: CGFloat
     
     @State private var showMore: Bool = true
     
     init(color: AppColor) {
         self.color = color.uiColor
-        self.colorName = color.name.isEmpty ? self.color.accessibilityName : color.name
+        self.colorName = color.name.isEmpty ? color.uiColor.accessibilityName : color.name
+        self.alpha = color.alpha
     }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Color(color)
+            Color(color).opacity(alpha)
             if showMore { infoBlock }
         }
         .onTapGesture { showMore.toggle() }
@@ -45,7 +47,7 @@ private extension ColorPreview {
             .padding([.top, .bottom], 5)
         }
         .padding([.leading, .trailing])
-        .foregroundColor(Color(color.invertColor()))
+        .foregroundColor(Color(color.invertColor()).opacity(1))
         .minimumScaleFactor(0.1)
     }
     
@@ -92,7 +94,7 @@ private extension ColorPreview {
 
 struct ColorPreview_Previews: PreviewProvider {
     static var previews: some View {
-        let appColor = AppColor(name: "African Violet", hex: "#B284BE")
+        let appColor = AppColor(name: "African Violet", hex: "#B284BE", alpha: 0.9)
         ColorPreview(color: appColor)
     }
 }

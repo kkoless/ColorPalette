@@ -12,12 +12,12 @@ struct AddNewColorToPaletteView: View {
     @StateObject var viewModel: AddNewColorToPaletteViewModel
     
     @State private var colorName = ""
-    @State private var selectedColor: Color = .clear
+    @State private var selectedColor: Color = .primary
     
     var body: some View {
         VStack(spacing: 20) {
             configureBlock
-            if selectedColor != .clear {
+            if selectedColor != .primary {
                 preview
                 buttons
             } else {
@@ -39,7 +39,7 @@ private extension AddNewColorToPaletteView {
                     viewModel.input.colorName.send(newValue)
                 }
             
-            ColorPicker("Here you can pick...", selection: $selectedColor)
+            ColorPicker("", selection: $selectedColor)
                 .font(.subheadline)
                 .onChange(of: selectedColor) { newValue in
                     let appColor = AppColor(uiColor: newValue.uiColor)

@@ -14,7 +14,7 @@ struct ColorPaletteRowView: View {
     
     var body: some View {
         ZStack {
-            Color(appColor)
+            Color(appColor).opacity(appColor.alpha)
             
             HStack {
                 if showInfo {
@@ -38,7 +38,7 @@ private extension ColorPaletteRowView {
                     Text(color.getTypeInfo(type: type, isExtended: true))
                         .font(.title3)
                 }
-                .foregroundColor(Color(color.invertColor()))
+                .foregroundColor(Color(color.invertColor()).opacity(1))
                 .minimumScaleFactor(0.1)
                 
                 Spacer()
@@ -55,7 +55,7 @@ private extension ColorPaletteRowView {
                 .resizable()
                 .frame(width: 19, height: 24)
         }
-        .foregroundColor(Color(appColor.uiColor.invertColor()))
+        .foregroundColor(Color(appColor.uiColor.invertColor()).opacity(1))
         .padding()
     }
 }

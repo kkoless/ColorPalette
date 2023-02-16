@@ -50,7 +50,7 @@ private extension AddNewColorToFavoritesView {
                     viewModel.input.colorName.send(newValue)
                 }
             
-            ColorPicker("Here you can pick...", selection: $selectedColor)
+            ColorPicker("", selection: $selectedColor)
                 .font(.subheadline)
                 .onChange(of: selectedColor) { newValue in
                     let appColor = AppColor(uiColor: newValue.uiColor)

@@ -88,6 +88,7 @@ private extension FavoritesView {
             colorsBlock
         }
         .listStyle(.plain)
+        .listSectionSeparator(.hidden)
     }
     
     func getHeaderText(text: Strings) -> some View {
@@ -149,6 +150,7 @@ private extension FavoritesView {
     var colorCells: some View {
         ForEach(viewModel.output.colors) { color in
             Color(color)
+                .opacity(color.alpha)
                 .listRowSeparator(.hidden)
                 .cornerRadius(10)
                 .onTapGesture { showColorInfoTap(color) }

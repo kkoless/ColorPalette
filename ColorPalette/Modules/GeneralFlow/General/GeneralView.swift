@@ -66,6 +66,7 @@ private extension GeneralView {
             
             ForEach(viewModel.output.sampleColors) { color in
                 Color(color)
+                    .opacity(color.alpha)
                     .frame(height: 35)
                     .cornerRadius(7)
                     .padding([.top, .bottom], 10)

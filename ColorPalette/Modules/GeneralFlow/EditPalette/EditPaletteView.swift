@@ -49,9 +49,9 @@ private extension EditPaletteView {
         VStack(spacing: 0) {
             ForEach(initPalette.colors) { color in
                 ZStack {
-                    Color(color)
+                    Color(color).opacity(color.alpha)
                     Text(color.hex)
-                        .foregroundColor(Color(color.uiColor.invertColor()))
+                        .foregroundColor(Color(color.uiColor.invertColor()).opacity(1))
                         .font(.title3)
                         .bold()
                 }
@@ -63,9 +63,9 @@ private extension EditPaletteView {
         VStack(spacing: 0) {
             ForEach(viewModel.output.resultPaletteColors) { color in
                 ZStack {
-                    Color(color)
+                    Color(color).opacity(color.alpha)
                     Text(color.hex)
-                        .foregroundColor(Color(color.uiColor.invertColor()))
+                        .foregroundColor(Color(color.uiColor.invertColor()).opacity(1))
                         .font(.title3)
                         .bold()
                 }

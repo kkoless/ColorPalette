@@ -17,7 +17,7 @@ struct CoreDataManager {
 
 extension CoreDataManager {
     func getColors() -> [AppColor] {
-        return fetchColors().map { AppColor(name: $0.name ?? "", hex: $0.hex ?? "") }
+        return fetchColors().map { AppColor(name: $0.name ?? "", hex: $0.hex ?? "", alpha: $0.alpha ?? 1.0) }
     }
     
     func getPalettes() -> [ColorPalette] {
@@ -94,6 +94,7 @@ private extension CoreDataManager {
         let to = AppColorModel(context: self.context)
         to.name = from.name
         to.hex = from.hex
+        to.alpha = from.alpha
         return to
     }
     

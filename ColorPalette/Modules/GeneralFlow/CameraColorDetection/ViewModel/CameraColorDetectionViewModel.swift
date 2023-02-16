@@ -50,8 +50,8 @@ private extension CameraColorDetectionViewModel {
         
         input.addTap
             .filter { _ in CredentialsManager.shared.isGuest }
-            .sink { [weak self] hex in
-                self?.color = AppColor(hex: hex)
+            .sink { [weak self] data in
+                self?.color = AppColor(hex: data.0, alpha: data.1)
                 if let color = self?.color {
                     self?.favoriteManager.addColor(color)
                     self?.router?.pop()
@@ -61,8 +61,8 @@ private extension CameraColorDetectionViewModel {
         
         input.addTap
             .filter { _ in !CredentialsManager.shared.isGuest }
-            .flatMap { [unowned self] hex in
-                color = AppColor(hex: hex)
+            .flatMap { [unowned self] data in
+                color = AppColor(hex: data.0, alpha: data.1)
                 return service.addColor(color: color)
             }
             .sink(receiveCompletion: { [weak self] response in self?.handleError(response) },
@@ -79,7 +79,7 @@ private extension CameraColorDetectionViewModel {
 extension CameraColorDetectionViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let closeTap: PassthroughSubject<Void, Never> = .init()
-        let addTap: PassthroughSubject<String, Never> = .init()
+        let addTap: PassthroughSubject<(String, CGFloat), Never> = .init()
     }
     
     struct Output {}

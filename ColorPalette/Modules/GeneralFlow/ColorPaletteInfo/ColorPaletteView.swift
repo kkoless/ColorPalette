@@ -11,41 +11,45 @@ struct ColorPaletteView: View {
     @StateObject var viewModel: ColorPaletteInfoViewModel
     @Environment(\.dismiss) private var dismiss: DismissAction
     
-    @State private var selectedType: ColorType
-    @State private var showInfo: Bool
-    @State private var isBlind: Bool
+    @State private var selectedType: ColorType = .HEX
+    @State private var showInfo: Bool = true
+    @State private var isBlind: Bool = false
     @State private var blindPalette: ColorPalette
     
     let palette: ColorPalette
     
+    private var activeColor: AppColor {
+        isBlind ? blindPalette.colors[0] : palette.colors[0]
+    }
+    
     private var invertedColor: Color {
         if !isBlind {
-            return Color(palette.colors[0].uiColor.invertColor())
+            return Color(palette.colors[0].uiColor.invertColor()).opacity(1)
         } else {
-            return Color(blindPalette.colors[0].uiColor.invertColor())
+            return Color(blindPalette.colors[0].uiColor.invertColor()).opacity(1)
         }
     }
     
     init(viewModel: ColorPaletteInfoViewModel, palette: ColorPalette) {
         self.palette = palette
         self._viewModel = StateObject(wrappedValue: viewModel)
-        self._selectedType = .init(initialValue: .HEX)
-        self._showInfo = .init(initialValue: true)
-        self._isBlind = .init(initialValue: false)
         self._blindPalette = .init(initialValue: palette)
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            topBar
-            
-            VStack(spacing: 0) {
-                ForEach(isBlind ? blindPalette.colors : palette.colors) { color in
-                    ColorPaletteRowView(appColor: color, type: selectedType, showInfo: showInfo)
+            Group {
+                topBar
+                
+                VStack(spacing: 0) {
+                    ForEach(isBlind ? blindPalette.colors : palette.colors) { color in
+                        ColorPaletteRowView(appColor: color, type: selectedType, showInfo: showInfo)
+                    }
                 }
+                .onTapGesture { showInfo.toggle() }
+                .onAppear(perform: onAppear)
             }
-            .onTapGesture { showInfo.toggle() }
-            .onAppear(perform: onAppear)
+            .background(Color(activeColor).opacity(activeColor.alpha))
             
             ColorTypePickerView(selectedType: $selectedType)
                 .padding(.top, 10)
@@ -61,19 +65,16 @@ struct ColorPaletteView: View {
 
 private extension ColorPaletteView {
     var topBar: some View {
-        ZStack {
-            Color(isBlind ? blindPalette.colors[0] : palette.colors[0])
-            HStack(spacing: 25) {
-                backButton
-                Spacer()
-                blindButton
-                shareButton
-                favoriteButton
-            }
-            .padding(20)
+        HStack(spacing: 25) {
+            backButton
+            Spacer()
+            blindButton
+            shareButton
+            favoriteButton
         }
-        .frame(height: 25)
-        .padding([.top, .bottom])
+        .padding([.top, .leading, .trailing], 20)
+        .padding(.bottom, 15)
+        .background(Color(activeColor).opacity(activeColor.alpha))
     }
     
     var backButton: some View {
@@ -164,7 +165,7 @@ private extension ColorPaletteView {
 
 struct ColorPaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        let palette = ColorPalette.getTestPalettes(20)[1]
+        let palette = ColorPalette.getTestPalettes(20)[2]
         ColorPaletteView(viewModel: ColorPaletteInfoViewModel(palette: palette), palette: palette)
     }
 }

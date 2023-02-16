@@ -33,6 +33,7 @@ private extension SimilarColorsView {
             }
             
             Color(color.complement)
+                .opacity(color.alphaValue)
                 .frame(height: 30)
                 .cornerRadius(10)
         }
@@ -48,6 +49,7 @@ private extension SimilarColorsView {
          
             ForEach(color.getSplitComplementColors()) {
                 Color($0)
+                    .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
             }
@@ -64,6 +66,7 @@ private extension SimilarColorsView {
             
             ForEach(color.getTriadicColors()) {
                 Color($0)
+                    .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
             }
@@ -80,6 +83,7 @@ private extension SimilarColorsView {
             
             ForEach(color.getTetradicColors()) {
                 Color($0)
+                    .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
             }
@@ -96,6 +100,7 @@ private extension SimilarColorsView {
             
             ForEach(color.getAnalagousColors()) {
                 Color($0)
+                    .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
             }

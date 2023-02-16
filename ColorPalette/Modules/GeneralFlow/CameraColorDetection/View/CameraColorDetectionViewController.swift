@@ -39,8 +39,9 @@ final class CameraColorDetectionViewController: UIViewController {
         let btn = UIButton(
             frame: .zero,
             primaryAction: UIAction(handler: { [weak self] _ in
-                guard let hex = self?.view.backgroundColor?.hexValue else { return }
-                self?.viewModel?.input.addTap.send(hex)
+                guard let hex = self?.view.backgroundColor?.hexValue,
+                      let alpha = self?.view.backgroundColor?.cgColor.alpha else { return }
+                self?.viewModel?.input.addTap.send((hex, alpha))
             })
         )
         btn.setImage(UIImage(systemName: "plus"), for: .normal)

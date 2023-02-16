@@ -84,11 +84,11 @@ private extension EditPaletteViewModel {
 }
 
 extension EditPaletteViewModel {
-    func sliderChangeHSB(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat = 1) {
+    func sliderChangeHSB(hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         DispatchQueue.global().async { [weak self] in
             let colors = self?.output.initPaletteColors.map { $0.uiColor } ?? []
             
-            let newColors = colors.map { AppColor(uiColor: $0.add(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)) }
+            let newColors = colors.map { AppColor(uiColor: $0.add(hue: hue, saturation: saturation, brightness: brightness, alpha: $0.alphaValue)) }
             
             DispatchQueue.main.async {
                 self?.output.resultPaletteColors = newColors

@@ -47,7 +47,7 @@ private extension AddNewColorToFavoritesViewModel {
         Publishers.CombineLatest(input.selectedColor, input.colorName)
             .combineLatest(favoritesManager.$colors)
             .sink { [weak self] data in
-                let color = AppColor(name: data.0.1, hex: data.0.0.hex)
+                let color = AppColor(name: data.0.1, hex: data.0.0.hex, alpha: data.0.0.alpha)
                 
                 self?.output.color = color
                 self?.output.isFavorite = data.1.contains(where: { $0 == color }) ? true : false

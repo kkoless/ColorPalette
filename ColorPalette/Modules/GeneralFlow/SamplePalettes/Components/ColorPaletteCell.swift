@@ -13,7 +13,7 @@ struct ColorPaletteCell: View {
     var body: some View {
         HStack(spacing: .zero) {
             ForEach(palette.colors) { color in
-                Color(color)
+                Color(color).opacity(color.alpha)
             }
         }
         .frame(height: 35)

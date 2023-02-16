@@ -16,18 +16,21 @@ struct ColorInfoView: View {
     
     let appColor: AppColor
     
+    private var activeColor: AppColor {
+        isBlind ? blindColor : appColor
+    }
+    
     private var invertedColor: Color {
-        if isBlind {
-            return Color(UIColor(blindColor).invertColor())
-        } else {
-            return Color(UIColor(appColor).invertColor())
-        }
+         Color(activeColor.uiColor.invertColor()).opacity(1)
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            topBar
-            ColorPreview(color: isBlind ? blindColor : appColor)
+            Group {
+                topBar
+                ColorPreview(color: activeColor)
+            }
+            .background(Color(activeColor).opacity(activeColor.alpha))
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear { viewModel.input.onAppear.send() }
@@ -42,20 +45,17 @@ struct ColorInfoView: View {
 
 private extension ColorInfoView {
     var topBar: some View {
-        ZStack {
-            Color(isBlind ? blindColor : appColor)
-            HStack(spacing: 25) {
-                backButton
-                Spacer()
-                blindButton
-                copyButton
-                shareButton
-                favoriteButton
-            }
-            .padding(20)
+        HStack(spacing: 25) {
+            backButton
+            Spacer()
+            blindButton
+            copyButton
+            shareButton
+            favoriteButton
         }
-        .frame(height: 25)
-        .padding([.top, .bottom])
+        .padding([.top, .leading, .trailing], 20)
+        .padding(.bottom, 15)
+        .background(Color(activeColor).opacity(activeColor.alpha))
     }
     
     var favoriteButton: some View {
@@ -156,7 +156,7 @@ private extension ColorInfoView {
 
 struct ColorInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        let color = AppColor.getRandomColor()
-        ColorInfoView(viewModel: ColorInfoViewModel(color: color), appColor: color)
+        let appColor = AppColor(name: "African Violet", hex: "#B284BE", alpha: 0.95)
+        ColorInfoView(viewModel: ColorInfoViewModel(color: appColor), appColor: appColor)
     }
 }

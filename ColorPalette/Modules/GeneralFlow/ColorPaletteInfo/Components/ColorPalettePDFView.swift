@@ -23,7 +23,7 @@ struct ColorPalettePDFView: View {
 private extension ColorPalettePDFView {
     func makeColorRow(_ color: AppColor) -> some View {
         ZStack {
-            Color(color)
+            Color(color).opacity(color.alpha)
             getColorInfo(color: color.uiColor)
         }
     }
@@ -37,7 +37,7 @@ private extension ColorPalettePDFView {
                     Text(color.getTypeInfo(type: type, isExtended: true))
                         .font(.title3)
                 }
-                .foregroundColor(Color(color.invertColor()))
+                .foregroundColor(Color(color.invertColor()).opacity(1))
                 .minimumScaleFactor(0.1)
                 
                 Spacer()
