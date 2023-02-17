@@ -145,17 +145,9 @@ private extension FavoriteViewModel {
     }
 }
 
-extension FavoriteViewModel {
-    func removePalette(from index: Int) {
-        let paletteForDelete = output.palettes[index]
-        
-        let isGuest = Just(CredentialsManager.shared.isGuest)
-        
-        isGuest
-            .filter { !$0 }
-            .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-                self.service.deletePalette(paletteId: paletteForDelete.id)
-            }
+private extension FavoriteViewModel {
+    func removeServerPalette(_ palette: ColorPalette) {
+        self.service.deletePalette(paletteId: palette.id)
             .sink { response in
                 switch response {
                     case.failure(let apiError):
@@ -164,47 +156,54 @@ extension FavoriteViewModel {
                         print("finished")
                 }
             } receiveValue: { [weak self] _ in
-                self?.favoriteManager.removePalette(paletteForDelete)
+                self?.favoriteManager.removePalette(palette)
             }
             .store(in: &cancellable)
-        
-        isGuest
-            .filter { $0 }
-            .sink { [weak self] _ in
-                self?.favoriteManager.removePalette(paletteForDelete)
+    }
+    
+    func removeServerColor(_ color: AppColor) {
+        self.service.deleteColor(colorId: color.id)
+            .sink { response in
+                switch response {
+                    case.failure(let apiError):
+                        print(apiError.localizedDescription)
+                    case .finished:
+                        print("finished")
+                }
+            } receiveValue: { [weak self] _ in
+                self?.favoriteManager.removeColor(color)
             }
             .store(in: &cancellable)
+    }
+    
+    func removeLocalPalette(_ palette: ColorPalette) {
+        self.favoriteManager.removePalette(palette)
+    }
+    
+    func removeLocalColor(_ color: AppColor) {
+        self.favoriteManager.removeColor(color)
+    }
+}
+
+extension FavoriteViewModel {
+    func removePalette(from index: Int) {
+        let paletteForDelete = output.palettes[index]
         
+        if CredentialsManager.shared.isGuest {
+            removeLocalPalette(paletteForDelete)
+        } else {
+            removeServerPalette(paletteForDelete)
+        }
     }
     
     func removeColor(from index: Int) {
         let colorForDelete = output.colors[index]
         
-        let isGuest = Just(CredentialsManager.shared.isGuest)
-        
-        isGuest
-            .filter { !$0 }
-            .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-                self.service.deleteColor(colorId: colorForDelete.id)
-            }
-            .sink { response in
-                switch response {
-                    case.failure(let apiError):
-                        print(apiError.localizedDescription)
-                    case .finished:
-                        print("finished")
-                }
-            } receiveValue: { [weak self] _ in
-                self?.favoriteManager.removeColor(colorForDelete)
-            }
-            .store(in: &cancellable)
-        
-        isGuest
-            .filter { $0 }
-            .sink { [weak self] _ in
-                self?.favoriteManager.removeColor(colorForDelete)
-            }
-            .store(in: &cancellable)
+        if CredentialsManager.shared.isGuest {
+            removeLocalColor(colorForDelete)
+        } else {
+            removeServerColor(colorForDelete)
+        }
     }
 }
 

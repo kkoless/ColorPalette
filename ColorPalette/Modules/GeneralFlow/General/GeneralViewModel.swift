@@ -122,7 +122,7 @@ extension GeneralViewModel: ViewModelErrorHandleProtocol {
     }
     
     struct Output {
-        let samplePalettes: [ColorPalette] = Array(PopularPalettesManager.shared.palettes.prefix(5))
-        let sampleColors: [AppColor] = Array(ColorManager.shared.colors.prefix(5))
+        let samplePalettes: [ColorPalette] = Array(PopularPalettesManager.shared.palettes.shuffled().prefix(5))
+        let sampleColors: [AppColor] = Array(ColorManager.shared.colors.shuffled().prefix(5))
     }
 }

@@ -15,13 +15,29 @@ struct PopularPaletteJSON: Codable {
         self.data = try container.decode([PopularPalette].self, forKey: .data)
     }
     
-    struct PopularPalette: Codable {
+    struct PopularPalette: Codable, Hashable {
         let colors: [String]
         let saves: Int
+        
+        var id: Int {
+            hashValue
+        }
         
         var colorPalette: ColorPalette {
             let colors = colors.map { AppColor(hex: "#" + $0) }
             return ColorPalette(colors: colors)
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(colors)
+        }
+        
+        var hashValue: Int {
+            colors.map { $0 }.reduce("", +).hash
+        }
+        
+        static func == (lhs: PopularPalette, rhs: PopularPalette) -> Bool {
+            return lhs.id == rhs.id
         }
     }
 }

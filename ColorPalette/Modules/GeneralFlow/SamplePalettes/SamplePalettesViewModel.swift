@@ -39,7 +39,7 @@ private extension SamplePalettesViewModel {
         input.onAppear
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.output.palettes = Array(PopularPalettesManager.shared.palettes
+                self.output.palettes = Array(PopularPalettesManager.shared.palettes.shuffled()
                     .prefix(self.checkLimit()))
             }
             .store(in: &cancellable)

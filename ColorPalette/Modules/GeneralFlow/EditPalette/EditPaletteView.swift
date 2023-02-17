@@ -42,7 +42,7 @@ private extension EditPaletteView {
             resultPalettePreview
         }
         .cornerRadius(10)
-        .padding([.top, .bottom])
+        .padding()
     }
     
     var initPalettePreview: some View {

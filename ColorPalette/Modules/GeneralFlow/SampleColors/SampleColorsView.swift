@@ -56,7 +56,7 @@ private extension SampleColorsView {
     }
     
     var colorsBlock: some View {
-        ForEach(viewModel.output.colors) { appColor in
+        ForEach(viewModel.output.colors, id: \.self) { appColor in
             ColorRowView(appColor: appColor, type: selectedType)
                 .environmentObject(viewModel)
                 .onTapGesture {

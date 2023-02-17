@@ -12,9 +12,12 @@ final class PopularPalettesManager {
     static let shared = PopularPalettesManager()
     
     private init() {
-        let popularPalettes = PopularPaletteJSON.parse(jsonFile: "popular_color_pallets")?.data ?? []
+        let popularPalettes = (PopularPaletteJSON
+            .parse(jsonFile: "popular_color_pallets")?.data ?? [])
+            .removingDuplicates(byKey: { $0.colors })
+        
         self.palettes = popularPalettes
-            .sorted(by: { $0.saves > $1.saves })
+            .filter { $0.colors.count <= 5 }
             .map { $0.colorPalette }
         
         print("\(self) INIT")

@@ -51,6 +51,8 @@ private extension CreateColorPaletteView {
                             .resizable()
                             .frame(width: 18, height: 18)
                     }
+                    .disabled(viewModel.output.colors.count <= 1)
+                    .foregroundColor(viewModel.output.colors.count <= 1 ? .gray : .primary)
                 }
             }
         }

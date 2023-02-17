@@ -12,7 +12,7 @@ final class ColorManager {
     static let shared = ColorManager()
     
     private init() {
-        colors = [AppColor].parse(jsonFile: "colors") ?? []
+        colors = ([AppColor].parse(jsonFile: "colors") ?? []).removingDuplicates(byKey: { $0.hex })
         print("\(self) INIT")
     }
     
