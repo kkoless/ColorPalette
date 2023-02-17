@@ -232,6 +232,7 @@ private extension EditPaletteView {
             saturationValue = 0
             brightnessValue = 0
         }
+        viewModel.input.resetTap.send()
     }
 }
 

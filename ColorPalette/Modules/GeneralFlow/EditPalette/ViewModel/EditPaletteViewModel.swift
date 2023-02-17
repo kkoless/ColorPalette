@@ -77,6 +77,15 @@ private extension EditPaletteViewModel {
             }
             .store(in: &cancellable)
         
+        input.resetTap
+            .sink { [weak self] _ in
+                if let colors = self?.initPalette.colors {
+                    self?.output.initPaletteColors = colors
+                    self?.output.resultPaletteColors = colors
+                }
+            }
+            .store(in: &cancellable)
+        
         input.backTap
             .sink { [weak self] _ in self?.router?.pop() }
             .store(in: &cancellable)
@@ -101,6 +110,7 @@ extension EditPaletteViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let backTap: PassthroughSubject<Void, Never> = .init()
         let updateTap: PassthroughSubject<Void, Never> = .init()
+        let resetTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
