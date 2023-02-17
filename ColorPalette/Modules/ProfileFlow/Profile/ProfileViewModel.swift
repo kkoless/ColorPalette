@@ -44,10 +44,13 @@ private extension ProfileViewModel {
             .flatMap { [unowned self] _ -> AnyPublisher<Profile, ApiError>  in
                 self.service.fetchProfile()
             }
-            .sink { response in
+            .sink { [weak self] response in
                 switch response {
                     case.failure(let apiError):
                         print(apiError.localizedDescription)
+                        self?.profileManager.logOut()
+                        self?.output.email = ""
+                        self?.output.role = .free
                     case .finished:
                         print("finished")
                 }
@@ -57,13 +60,16 @@ private extension ProfileViewModel {
             .store(in: &cancellable)
         
         profileManager.$profile
-            .sink { [weak self] profile in self?.output.profile = profile }
+            .sink { [weak self] profile in
+                self?.output.email = profile?.email ?? ""
+                self?.output.role = profile?.role ?? .free
+            }
             .store(in: &cancellable)
     }
     
     func bindTaps() {
-        input.settingsTap
-            .sink { [weak self] _ in self?.router?.navigateToSettingsScreen() }
+        input.languageTap
+            .sink { language in LocalizationService.shared.language = language }
             .store(in: &cancellable)
         
         input.signInTap
@@ -79,12 +85,14 @@ private extension ProfileViewModel {
 extension ProfileViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
-        let settingsTap: PassthroughSubject<Void, Never> = .init()
+        let languageTap: PassthroughSubject<Language, Never> = .init()
         let signInTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
-        var profile: Profile?
+        var email: String = ""
+        var role: Role = .free
+        var language: Language = LocalizationService.shared.language
     }
 }

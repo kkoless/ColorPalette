@@ -36,7 +36,6 @@ enum Strings: String {
     case addColor
     case createColor
     case chooseImage
-    case changeLanguage
     
     case favoritesEmptyState
     
@@ -52,6 +51,14 @@ enum Strings: String {
     case showMore
     case reset
     case apply
+    case language
+    case aboutApp
+    case socialNetworks
+    case guest
+
+    case freePlan
+    case paidPlan
+    case changeSubscriptionPlan
     
     case hue
     case saturation

@@ -91,8 +91,9 @@
 		E5A72A7E2997EFC900670202 /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A7D2997EFC900670202 /* LocalizationService.swift */; };
 		E5A72A812997F29600670202 /* Text+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A802997F29600670202 /* Text+Extensions.swift */; };
 		E5A72A832997F2CB00670202 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A822997F2CB00670202 /* Strings.swift */; };
-		E5A72A862997FB6600670202 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A852997FB6600670202 /* SettingsView.swift */; };
 		E5AA78A72994E5A8004C5FD8 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA78A62994E5A8004C5FD8 /* RegistrationViewModel.swift */; };
+		E5B5940A299FC91E00C8783F /* SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B59409299FC91E00C8783F /* SocialNetwork.swift */; };
+		E5B5940C299FCF1F00C8783F /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B5940B299FCF1F00C8783F /* Bundle+Extensions.swift */; };
 		E5B6C70929584A77007E6158 /* CreateColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70829584A77007E6158 /* CreateColorPaletteView.swift */; };
 		E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70A2958602C007E6158 /* ColorPaletteRowView.swift */; };
 		E5B6C70E29587622007E6158 /* TemplatePaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C70D29587622007E6158 /* TemplatePaletteManager.swift */; };
@@ -203,8 +204,9 @@
 		E5A72A7F2997F11F00670202 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5A72A802997F29600670202 /* Text+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extensions.swift"; sourceTree = "<group>"; };
 		E5A72A822997F2CB00670202 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		E5A72A852997FB6600670202 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E5AA78A62994E5A8004C5FD8 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		E5B59409299FC91E00C8783F /* SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetwork.swift; sourceTree = "<group>"; };
+		E5B5940B299FCF1F00C8783F /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		E5B6C70829584A77007E6158 /* CreateColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateColorPaletteView.swift; sourceTree = "<group>"; };
 		E5B6C70A2958602C007E6158 /* ColorPaletteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteRowView.swift; sourceTree = "<group>"; };
 		E5B6C70D29587622007E6158 /* TemplatePaletteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePaletteManager.swift; sourceTree = "<group>"; };
@@ -310,7 +312,6 @@
 		E52D433B29588FB2002B11B8 /* ProfileFlow */ = {
 			isa = PBXGroup;
 			children = (
-				E5A72A842997FB5800670202 /* Settings */,
 				E56C0E2C29376E2A00A878CB /* Profile */,
 			);
 			path = ProfileFlow;
@@ -672,6 +673,7 @@
 				E525DCA62996A314005C2A04 /* SwiftUI+Extensions */,
 				E59345C229953CBE007B55F1 /* MoyaError+Extensions.swift */,
 				E54CC9E0299F7B5C0066DD6D /* Array+Extensions.swift */,
+				E5B5940B299FCF1F00C8783F /* Bundle+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -709,14 +711,6 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		E5A72A842997FB5800670202 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				E5A72A852997FB6600670202 /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		E5B6C70729584A63007E6158 /* CreateColorPalette */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +746,7 @@
 				E588B91E2960828800D45F7C /* Profile.swift */,
 				E5446F1D29717216004EC2B5 /* InclusiveColor.swift */,
 				E5A72A7B2997EF3E00670202 /* Language.swift */,
+				E5B59409299FC91E00C8783F /* SocialNetwork.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -1037,7 +1032,6 @@
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
 				E5F3C482295F5403000DDD36 /* CoreDataManager.swift in Sources */,
 				E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */,
-				E5A72A862997FB6600670202 /* SettingsView.swift in Sources */,
 				E56DD258295B5B15003F0D29 /* ColorBlockView.swift in Sources */,
 				E55F6F842955AFBE00A8B935 /* ColorRowView.swift in Sources */,
 				E56DD25B295B5F58003F0D29 /* ColorInfoView.swift in Sources */,
@@ -1065,6 +1059,7 @@
 				E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */,
+				E5B5940A299FC91E00C8783F /* SocialNetwork.swift in Sources */,
 				E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */,
 				E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */,
 				E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */,
@@ -1073,6 +1068,7 @@
 				E55F6F7C295597E000A8B935 /* SampleColorsView.swift in Sources */,
 				E54263E929388614003334FE /* OnboardingManager.swift in Sources */,
 				E508C665299E7B310079E95A /* ColorPalettePDFView.swift in Sources */,
+				E5B5940C299FCF1F00C8783F /* Bundle+Extensions.swift in Sources */,
 				E5BAE91F295413CC005DF70B /* ColorPalette.swift in Sources */,
 				E588B92129608D6200D45F7C /* ProfileViewModel.swift in Sources */,
 				E5446F1E29717216004EC2B5 /* InclusiveColor.swift in Sources */,

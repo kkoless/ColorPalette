@@ -34,7 +34,6 @@ generateFromCamera = "Generate from camera";
 addColor = "Add color";
 createColor = "Create color";
 chooseImage = "Choose image";
-changeLanguage = "Change language";
 
 favoritesEmptyState = "So empty here...";
 
@@ -50,6 +49,14 @@ next = "Next";
 showMore = "Show more";
 reset = "Reset";
 apply = "Apply";
+language = "Language";
+aboutApp = "About app";
+socialNetworks = "Social networks";
+guest = "Guest";
+
+freePlan = "Free plan";
+paidPlan = "Paid plan";
+changeSubscriptionPlan = "Change subscription plan";
 
 hue = "Hue";
 saturation = "Saturation";

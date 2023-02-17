@@ -11,16 +11,27 @@ struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject private var localizationService: LocalizationService
     
+    var isGuest: Bool {
+        viewModel.output.email.isEmpty
+    }
+    
     var body: some View {
         VStack {
             header
             
-            if viewModel.output.profile != nil {
-                profileBlock
+            Group {
+                userInfo
+                changeLanguageCell
+                socialNetworksCell
+                
+                if viewModel.output.role == .free {
+                    subcriptionInfoCell
+                }
+                
+                aboutCell
+                appVersion
             }
-            else {
-                guestBlock
-            }
+            .padding([.top, .bottom], 5)
             
             Spacer()
         }
@@ -36,67 +47,130 @@ private extension ProfileView {
                 .bold()
                 .font(.largeTitle)
             Spacer()
-            Button(action: { settingsTap() }) {
-                Image(systemName: "gearshape")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.primary)
-            }
         }
-    }
-    
-    var profileBlock: some View {
-        VStack {
-            userAvatarView
-            
-            userInfo
-            
-            Spacer()
-            
-            Button(action: { logOutTap() }) {
-                Text(.logOut)
-            }
-        }
-        .padding([.leading, .trailing])
-    }
-    
-    var guestBlock: some View {
-        VStack {
-            Spacer()
-            Button(action: { signInTap() }) {
-                Text(.signIn)
-            }
-            .padding(.bottom, 50)
-        }
-    }
-}
-
-private extension ProfileView {
-    var userAvatarView: some View {
-        Circle()
-            .foregroundColor(.gray)
-            .frame(width: 150, height: 150)
-            .shadow(radius: 20)
     }
     
     var userInfo: some View {
-        VStack {
-            Text(viewModel.output.profile?.email ?? "")
-                .padding([.top, .bottom], 15)
-            Text(viewModel.output.profile?.role.title ?? "")
+        HStack {
+            VStack(alignment: .leading, spacing: 10) {
+                if isGuest {
+                    Text(.guest)
+                } else {
+                    Text(viewModel.output.email)
+                }
+                
+                Text(viewModel.output.role.title)
+            }
+            .font(.headline.bold())
+            
+            Spacer()
+            
+            Button(action: { profileButtonTap() }) {
+                Text(isGuest ? .signIn : .logOut)
+            }
         }
-        .font(.subheadline)
+        .padding([.top, .bottom])
+    }
+    
+    var changeLanguageCell: some View {
+        HStack {
+            Image(systemName: "abc")
+            
+            Text(.language)
+            
+            Spacer()
+            
+            Picker(selection: $localizationService.language) {
+                Button(action: { languageTap(.russian) }) {
+                    Text(.russian)
+                }
+                .tag(Language.russian)
+                Button(action: { languageTap(.english) }) {
+                    Text(.english)
+                }
+                .tag(Language.english)
+            } label: {
+                Text(.language)
+            }
+        }
+        .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke()
+                .foregroundColor(.gray)
+        )
+    }
+    
+    var aboutCell: some View {
+        HStack {
+            Image(systemName: "questionmark.circle")
+            Text(.aboutApp)
+            Spacer()
+        }
+        .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke()
+                .foregroundColor(.gray)
+        )
+    }
+    
+    var socialNetworksCell: some View {
+        VStack {
+            HStack {
+                Image(systemName: "network")
+                Text(.socialNetworks)
+                Spacer()
+                
+                ForEach(SocialNetwork.allCases) { type in
+                    Image(type.iconName)
+                        .resizable()
+                        .frame(width: type.iconSize.0,
+                               height: type.iconSize.1)
+                        .foregroundColor(type.foregroundColor)
+                        .padding(.leading, 5)
+                }
+            }
+        }
+        .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke()
+                .foregroundColor(.gray)
+        )
+    }
+    
+    var subcriptionInfoCell: some View {
+        HStack {
+            Image(systemName: "cart")
+            Text(.changeSubscriptionPlan)
+            Spacer()
+        }
+        .padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke()
+                .foregroundColor(.gray)
+        )
+    }
+    
+    var appVersion: some View {
+        Text(Bundle.main.releaseVersionNumberPretty)
+            .font(.subheadline)
+            .padding(.top)
     }
 }
 
 private extension ProfileView {
     func onAppear() { viewModel.input.onAppear.send() }
     
-    func settingsTap() { viewModel.input.settingsTap.send() }
+    func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
+    }
     
-    func signInTap() { viewModel.input.signInTap.send() }
-    
-    func logOutTap() { viewModel.input.logOutTap.send() }
+    func profileButtonTap() {
+        if isGuest { viewModel.input.signInTap.send() }
+        else { viewModel.input.logOutTap.send() }
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {

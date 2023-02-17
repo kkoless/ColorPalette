@@ -30,10 +30,10 @@ enum Role {
         }
     }
     
-    var title: String {
+    var title: Strings {
         switch self {
-            case .free: return "FREE"
-            case .paid: return "PAID"
+            case .free: return .freePlan
+            case .paid: return .paidPlan
         }
     }
 }

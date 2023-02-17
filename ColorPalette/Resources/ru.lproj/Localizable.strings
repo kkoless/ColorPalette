@@ -34,7 +34,6 @@ generateFromCamera = "Сгенерировать из камеры";
 addColor = "Добавить цвет";
 createColor = "Создать цвет";
 chooseImage = "Выбрать изображение";
-changeLanguage = "Изменить язык";
 
 favoritesEmptyState = "Как-то пусто тут...";
 
@@ -50,6 +49,14 @@ next = "Продолжить";
 showMore = "Показать больше";
 reset = "Сбросить";
 apply = "Применить";
+language = "Язык";
+aboutApp = "О приложении";
+socialNetworks = "Социальныке сети";
+guest = "Гость";
+
+freePlan = "Бесплатный план";
+paidPlan = "Платный план";
+changeSubscriptionPlan = "Изменить подписочный план";
 
 hue = "Оттенок";
 saturation = "Насыщенность";
