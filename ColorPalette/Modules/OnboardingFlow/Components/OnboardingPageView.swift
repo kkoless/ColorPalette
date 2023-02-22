@@ -41,10 +41,6 @@ private extension OnboardingPageView {
     @ViewBuilder var buttons: some View {
         if pageType.isLastPage {
             VStack(spacing: 30) {
-                Button(action: { signInTap() }) {
-                    Text(.signIn)
-                }
-                
                 Button(action: { skipTap() }) {
                     Text(.next)
                 }

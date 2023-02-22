@@ -13,6 +13,25 @@ struct ServerProfileModel: Codable {
     let role: Bool?
     let tokenData: ServerTokenData?
     
+    enum CodingKeys: String, CodingKey {
+        case email = "email"
+        case role = "role"
+        case tokenData = "token_data"
+    }
+    
+    init(email: String?, role: Bool?, tokenData: ServerTokenData?) {
+        self.email = email
+        self.role = role
+        self.tokenData = tokenData
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.email = try container.decodeIfPresent(String.self, forKey: .email)
+        self.role = try container.decodeIfPresent(Bool.self, forKey: .role)
+        self.tokenData = try container.decodeIfPresent(ServerTokenData.self, forKey: .tokenData)
+    }
+    
     static func getNullObj() -> ServerProfileModel {
         ServerProfileModel(email: nil, role: nil, tokenData: nil)
     }

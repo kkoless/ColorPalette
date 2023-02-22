@@ -66,13 +66,6 @@ private extension AppCoordinator {
         onboardingCoordinator.start()
     }
     
-    func navigateToAuthorizationFlow() {
-        let loginCoordinator = AuthorizationCoordinator(navigationController)
-        childCoordinators.append(loginCoordinator)
-        loginCoordinator.finishDelegate = self
-        loginCoordinator.start()
-    }
-    
     func navigateToTabBarFlow() {
         let tabBarCoordinator = TabBarCoordinator(navigationController)
         childCoordinators.append(tabBarCoordinator)
@@ -89,13 +82,9 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             case .onboarding:
                 navigationController.viewControllers.removeAll()
                 switch next {
-                    case .login: navigateToAuthorizationFlow()
                     case .tabBar: navigateToTabBarFlow()
                     default: return
                 }
-            case .login:
-                navigationController.viewControllers.removeAll()
-                if next == .tabBar { navigateToTabBarFlow() }
             default:
                 break
         }

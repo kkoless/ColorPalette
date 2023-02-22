@@ -11,8 +11,8 @@ import Combine
 import Moya
 
 protocol AuthServiceProtocol {
-    func login(email: String, password: String) -> AnyPublisher<TokenData, ApiError>
-    func registr(email: String, password: String) -> AnyPublisher<TokenData, ApiError>
+    func login(email: String, password: String) -> AnyPublisher<Profile, ApiError>
+    func registr(email: String, password: String) -> AnyPublisher<Profile, ApiError>
 }
 
 protocol ProfileServiceProtocol {
@@ -35,21 +35,21 @@ final class AuthorizationNetworkService: MoyaErrorParserable {
 }
 
 extension AuthorizationNetworkService: AuthServiceProtocol {
-    func login(email: String, password: String) -> AnyPublisher<TokenData, ApiError> {
+    func login(email: String, password: String) -> AnyPublisher<Profile, ApiError> {
         provider.requestPublisher(.login(email: email, password: password))
             .filterSuccessfulStatusCodes()
-            .map(ServerTokenData.self)
-            .map { TokenMapper.toLocal(from: $0) }
+            .map(ServerProfileModel.self)
+            .map { ProfileMapper.toLocal(from: $0) }
             .mapError(mapError(error:))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
-    func registr(email: String, password: String) -> AnyPublisher<TokenData, ApiError> {
+    func registr(email: String, password: String) -> AnyPublisher<Profile, ApiError> {
         provider.requestPublisher(.register(email: email, password: password))
             .filterSuccessfulStatusCodes()
-            .map(ServerTokenData.self)
-            .map { TokenMapper.toLocal(from: $0) }
+            .map(ServerProfileModel.self)
+            .map { ProfileMapper.toLocal(from: $0) }
             .mapError(mapError(error:))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

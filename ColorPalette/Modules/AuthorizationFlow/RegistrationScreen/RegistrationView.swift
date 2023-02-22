@@ -17,34 +17,43 @@ struct RegistrationView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text(.registration)
-                .bold()
-                .font(.largeTitle)
-            Spacer()
+            header
             registrationForm
-            Spacer()
             Button(action: registerButtonTap) {
                 Text(.createAccount)
             }
-            .padding()
+            .padding([.top, .bottom])
         }
+        .padding()
     }
 }
 
 private extension RegistrationView {
+    var header: some View {
+        HStack {
+            Text(.registration)
+                .bold()
+                .font(.largeTitle)
+            Spacer()
+        }
+    }
+    
     var registrationForm: some View {
         VStack {
-            Group {
-                TextField("email", text: $loginText)
-                SecureField("password", text: $passwordText)
+            VStack(spacing: 20) {
+                Group {
+                    TextField("email", text: $loginText)
+                    SecureField("password", text: $passwordText)
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 1)
+                )
             }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(.blue, lineWidth: 2)
-            )
+            
         }
-        .padding()
+        .padding([.top, .bottom])
     }
 }
 

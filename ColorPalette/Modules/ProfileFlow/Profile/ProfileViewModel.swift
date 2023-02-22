@@ -33,6 +33,9 @@ final class ProfileViewModel: ObservableObject {
     }
     
     deinit {
+        cancellable.forEach { $0.cancel() }
+        cancellable.removeAll()
+        
         print("\(self) DEINIT")
     }
 }
@@ -73,7 +76,7 @@ private extension ProfileViewModel {
             .store(in: &cancellable)
         
         input.signInTap
-            .sink { [weak self] _ in self?.router?.navigateToAuthorizationFlow() }
+            .sink { [weak self] _ in self?.router?.navigateToAuthorizationScreen() }
             .store(in: &cancellable)
         
         input.logOutTap

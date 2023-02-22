@@ -10,19 +10,21 @@ import Combine
 
 final class RegistrationViewModel: ObservableObject {
     
-    private weak var router: AuthorizationRoutable?
+    private weak var router: ProfileRoutable?
     private let service: AuthServiceProtocol
+    private let profileManager: ProfileManager
     
     let input: Input
     @Published var output: Output
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: AuthorizationRoutable? = nil,
+    init(router: ProfileRoutable? = nil,
          service: AuthServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
         self.output = Output()
         self.service = service
+        self.profileManager = .shared
         self.router = router
         
         bindTaps()
@@ -41,7 +43,7 @@ final class RegistrationViewModel: ObservableObject {
 private extension RegistrationViewModel {
     func bindTaps() {
         input.registrTap
-            .flatMap { [unowned self] userData -> AnyPublisher<TokenData, ApiError> in
+            .flatMap { [unowned self] userData -> AnyPublisher<Profile, ApiError> in
                 return self.service.registr(email: userData.0, password: userData.1)
             }
             .sink { response in
@@ -50,10 +52,9 @@ private extension RegistrationViewModel {
                         print(error.localizedDescription)
                     case .finished: print("finished")
                 }
-            } receiveValue: { [weak self] token in
-                CredentialsManager.shared.isGuest = false
-                CredentialsManager.shared.token = token.access_token
-                self?.router?.navigateToTabBarFlow()
+            } receiveValue: { [weak self] data in
+                self?.profileManager.setProfile(data)
+                self?.router?.dismiss()
             }
             .store(in: &cancellable)
     }

@@ -17,40 +17,53 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text(.authorization)
-                .bold()
-                .font(.largeTitle)
-            Spacer()
+            header
             loginForm
-            Spacer()
-            
-            Button(action: registerButtonTap) {
-                Text(.registration)
-            }
-            .padding()
+            buttonsBlock
         }
+        .padding()
     }
 }
 
 private extension LoginView {
+    var header: some View {
+        HStack {
+            Text(.authorization)
+                .bold()
+                .font(.largeTitle)
+            Spacer()
+        }
+    }
+    
     var loginForm: some View {
         VStack {
-            Group {
-                TextField("email", text: $loginText)
-                SecureField("password", text: $passwordText)
+            VStack(spacing: 20) {
+                Group {
+                    TextField("email", text: $loginText)
+                    SecureField("password", text: $passwordText)
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 1)
+                )
+                
             }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(.blue, lineWidth: 2)
-            )
-            
+        }
+        .padding([.top, .bottom])
+    }
+    
+    var buttonsBlock: some View {
+        VStack(spacing: 20) {
             Button(action: loginButtonTap) {
                 Text(.signIn)
             }
-            .padding()
+            
+            Button(action: registerButtonTap) {
+                Text(.registration)
+            }
         }
-        .padding()
+        .padding([.top, .bottom])
     }
 }
 

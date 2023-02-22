@@ -9,8 +9,12 @@ import UIKit
 import SwiftUI
 
 protocol ProfileRoutable: AnyObject {
+    func pop()
+    func dismiss()
+    
     func navigateToProfileScreen()
-    func navigateToAuthorizationFlow()
+    func navigateToAuthorizationScreen()
+    func navigateToRegistrationScreen()
 }
 
 final class ProfileCoordinator: Coordinatable {
@@ -37,6 +41,9 @@ final class ProfileCoordinator: Coordinatable {
 }
 
 extension ProfileCoordinator: ProfileRoutable {
+    func pop() { navigationController.popViewController(animated: true) }
+    func dismiss() { navigationController.dismiss(animated: true) }
+    
     func navigateToProfileScreen() {
         let viewModel = ProfileViewModel(router: self)
         let profileView = ProfileView(viewModel: viewModel)
@@ -45,23 +52,22 @@ extension ProfileCoordinator: ProfileRoutable {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func navigateToAuthorizationFlow() {
-        let authCoordinator = AuthorizationCoordinator(navigationController)
-        authCoordinator.finishDelegate = self
-        childCoordinators.append(authCoordinator)
-        authCoordinator.start()
-    }
-}
-
-extension ProfileCoordinator: CoordinatorFinishDelegate {
-    func coordinatorDidFinish(childCoordinator: Coordinatable, next: CoordinatorType?) {
-        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+    func navigateToAuthorizationScreen() {
+        let viewModel = LoginViewModel(router: self)
+        let view = LoginView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
+        let vc = UIHostingController(rootView: view)
         
-        switch childCoordinator.type {
-            case .login:
-                navigationController.viewControllers.removeAll()
-                if next == .tabBar { navigateToProfileScreen() }
-            default: return
-        }
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToRegistrationScreen() {
+        let viewModel = RegistrationViewModel(router: self)
+        let view = RegistrationView(viewModel: viewModel)
+            .environmentObject(LocalizationService.shared)
+        let vc = UIHostingController(rootView: view)
+        
+        dismiss()
+        navigationController.present(vc, animated: true)
     }
 }

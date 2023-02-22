@@ -30,7 +30,9 @@ final class ProfileManager: ObservableObject {
 
 extension ProfileManager {
     func setProfile(_ newProfile: Profile) {
-        profile = newProfile
+        CredentialsManager.shared.isGuest = false
+        CredentialsManager.shared.token = newProfile.accessTokenData.access_token
+        self.profile = newProfile
     }
     
     func logOut() {
