@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ImageColors
 
 final class ImageColorDetectionManager: ObservableObject {
     @Published private(set) var palette: ColorPalette?
@@ -33,18 +34,7 @@ final class ImageColorDetectionManager: ObservableObject {
 
 private extension ImageColorDetectionManager {
     func getColors(from data: Data) -> [UIColor] {
-        var colors: [UIColor] = .init()
-        
         let image = UIImage(data: data) ?? UIImage()
-        let imageColors = image.getColors()
-        
-        guard let _imageColors = imageColors else { return colors }
-        
-        colors.append(_imageColors.background)
-        colors.append(_imageColors.primary)
-        colors.append(_imageColors.secondary)
-        colors.append(_imageColors.detail)
-        
-        return colors
+        return image.colors(maxCount: 4, scale: 0.1)
     }
 }

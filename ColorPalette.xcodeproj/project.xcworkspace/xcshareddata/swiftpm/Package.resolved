@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "imagecolors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/henzai-apps/ImageColors",
+      "state" : {
+        "revision" : "48a1858e482e6b1839a5dfc47554bf9e42f3d3bb",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya",

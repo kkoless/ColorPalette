@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */; };
 		E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */; };
-		E504B2002954B7C900996662 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FF2954B7C900996662 /* UIImageColors.swift */; };
 		E504B2022954C88100996662 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B2012954C88100996662 /* ImagePicker.swift */; };
 		E5056B72291914E8008C6120 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5056B71291914E8008C6120 /* SnapKit */; };
 		E508C663299E6C4A0079E95A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E508C662299E6C4A0079E95A /* ShareSheet.swift */; };
@@ -77,6 +76,7 @@
 		E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A26BD291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift */; };
 		E57AF3AA2957222F0002FC75 /* SimilarColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */; };
 		E57AF3AC2957315B0002FC75 /* ColorPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57AF3AB2957315B0002FC75 /* ColorPreview.swift */; };
+		E582446129AF6E3C00B8C0F1 /* ImageColors in Frameworks */ = {isa = PBXBuildFile; productRef = E582446029AF6E3C00B8C0F1 /* ImageColors */; };
 		E588B91D2960824900D45F7C /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E588B91C2960824900D45F7C /* ProfileManager.swift */; };
 		E588B91F2960828800D45F7C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E588B91E2960828800D45F7C /* Profile.swift */; };
 		E588B92129608D6200D45F7C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E588B92029608D6200D45F7C /* ProfileViewModel.swift */; };
@@ -121,7 +121,6 @@
 /* Begin PBXFileReference section */
 		E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorDetectionView.swift; sourceTree = "<group>"; };
-		E504B1FF2954B7C900996662 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		E504B2012954C88100996662 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E508C662299E6C4A0079E95A /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		E508C664299E7B310079E95A /* ColorPalettePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettePDFView.swift; sourceTree = "<group>"; };
@@ -237,6 +236,7 @@
 			files = (
 				E55BAD8D2919119D00B3E233 /* RxMoya in Frameworks */,
 				E5056B72291914E8008C6120 /* SnapKit in Frameworks */,
+				E582446129AF6E3C00B8C0F1 /* ImageColors in Frameworks */,
 				E55BAD8B2919119D00B3E233 /* Moya in Frameworks */,
 				E55BAD892919119D00B3E233 /* CombineMoya in Frameworks */,
 			);
@@ -547,14 +547,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		E55F6F8A2955CD9600A8B935 /* UIImage+UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				E504B1FF2954B7C900996662 /* UIImageColors.swift */,
-			);
-			path = "UIImage+UIColor";
-			sourceTree = "<group>";
-		};
 		E56C0E20293765B200A878CB /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -652,7 +644,6 @@
 			isa = PBXGroup;
 			children = (
 				E596B244295F033D00B64BA8 /* CoreData */,
-				E55F6F8A2955CD9600A8B935 /* UIImage+UIColor */,
 				E57A26AB291EA2C40027FAC8 /* String+Extensions.swift */,
 				E56C829D29202B1C0096EB9F /* CALayer+Extensions.swift */,
 				E50BF9622953563200534E82 /* UIColor+Extensions.swift */,
@@ -899,6 +890,7 @@
 				E55BAD8A2919119D00B3E233 /* Moya */,
 				E55BAD8C2919119D00B3E233 /* RxMoya */,
 				E5056B71291914E8008C6120 /* SnapKit */,
+				E582446029AF6E3C00B8C0F1 /* ImageColors */,
 			);
 			productName = ColorPalette;
 			productReference = E55BAD6629190B5700B3E233 /* ColorPalette.app */;
@@ -932,6 +924,7 @@
 			packageReferences = (
 				E55BAD872919119D00B3E233 /* XCRemoteSwiftPackageReference "Moya" */,
 				E5056B70291914E8008C6120 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E582445F29AF6E3C00B8C0F1 /* XCRemoteSwiftPackageReference "ImageColors" */,
 			);
 			productRefGroup = E55BAD6729190B5700B3E233 /* Products */;
 			projectDirPath = "";
@@ -998,7 +991,6 @@
 				E5C2AEB12937476600508DF4 /* RegistrationView.swift in Sources */,
 				E5F9C13129961D9D009B9D66 /* FavoritesNetworkService.swift in Sources */,
 				E53C65DD2980F8A000F5C4C0 /* TabBarController.swift in Sources */,
-				E504B2002954B7C900996662 /* UIImageColors.swift in Sources */,
 				E5A72A812997F29600670202 /* Text+Extensions.swift in Sources */,
 				E57AF3AC2957315B0002FC75 /* ColorPreview.swift in Sources */,
 				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
@@ -1308,6 +1300,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		E582445F29AF6E3C00B8C0F1 /* XCRemoteSwiftPackageReference "ImageColors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/henzai-apps/ImageColors";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1330,6 +1330,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E55BAD872919119D00B3E233 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = RxMoya;
+		};
+		E582446029AF6E3C00B8C0F1 /* ImageColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E582445F29AF6E3C00B8C0F1 /* XCRemoteSwiftPackageReference "ImageColors" */;
+			productName = ImageColors;
 		};
 /* End XCSwiftPackageProductDependency section */
 
