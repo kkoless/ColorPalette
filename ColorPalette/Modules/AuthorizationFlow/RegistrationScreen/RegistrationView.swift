@@ -16,7 +16,6 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack {
-            Spacer()
             header
             registrationForm
             Button(action: registerButtonTap) {

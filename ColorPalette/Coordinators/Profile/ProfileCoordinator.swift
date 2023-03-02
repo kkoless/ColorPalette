@@ -58,6 +58,10 @@ extension ProfileCoordinator: ProfileRoutable {
             .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: view)
         
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
         navigationController.present(vc, animated: true)
     }
     
@@ -68,6 +72,11 @@ extension ProfileCoordinator: ProfileRoutable {
         let vc = UIHostingController(rootView: view)
         
         dismiss()
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
         navigationController.present(vc, animated: true)
     }
 }
