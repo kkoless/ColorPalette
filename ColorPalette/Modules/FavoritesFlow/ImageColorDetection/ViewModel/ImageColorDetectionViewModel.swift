@@ -9,17 +9,19 @@ import Foundation
 import Combine
 
 final class ImageColorDetectionViewModel: ObservableObject {
+    typealias Routable = DetectionRoutable & PopRoutable & InfoRoutable
+    
     let input: Input
     @Published var output: Output
     
-    weak private var router: FavoritesRoutable?
+    weak private var router: Routable?
     private let manager: ImageColorDetectionManager
     private let favoriteManager: FavoriteManager
     private let service: FavoritesAddServiceProtocol
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil,
+    init(router: Routable? = nil,
          service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.manager = ImageColorDetectionManager()
         self.favoriteManager = FavoriteManager.shared

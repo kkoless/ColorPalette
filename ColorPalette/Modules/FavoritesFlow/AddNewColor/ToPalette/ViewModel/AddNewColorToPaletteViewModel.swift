@@ -9,16 +9,18 @@ import Foundation
 import Combine
 
 final class AddNewColorToPaletteViewModel: ObservableObject {
+    typealias Routable = DismissRoutable
+    
     let input: Input
     @Published var output: Output
     
     private var templatePaletteManager: TemplatePaletteManager
-    weak private var router: FavoritesRoutable?
+    weak private var router: Routable?
     
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(templatePaletteManager: TemplatePaletteManager,
-         router: FavoritesRoutable? = nil) {
+         router: Routable? = nil) {
         self.templatePaletteManager = templatePaletteManager
         self.input = Input()
         self.output = Output()

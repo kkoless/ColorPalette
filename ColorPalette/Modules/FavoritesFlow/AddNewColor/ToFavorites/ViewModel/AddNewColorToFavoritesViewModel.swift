@@ -9,17 +9,18 @@ import Foundation
 import Combine
 
 final class AddNewColorToFavoritesViewModel: ObservableObject {
+    typealias Routable = PopRoutable
     
     let input: Input
     @Published var output: Output
     
-    private weak var router: FavoritesRoutable?
+    private weak var router: Routable?
     private let service: FavoritesAddServiceProtocol
     private let favoritesManager: FavoriteManager
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil,
+    init(router: Routable? = nil,
          service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.input = Input()
         self.output = Output()

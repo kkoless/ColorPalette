@@ -8,19 +8,17 @@
 import UIKit
 import SwiftUI
 
-protocol GeneralRoutable: AnyObject {
-    func pop()
-    func popToRoot()
-    
-    func navigateToGeneralScreen()
-    
+protocol SamplesRoutable: AnyObject {
     func navigateToSamplePalettes()
     func navigateToSampleColors()
-    
-    func navigateToColorPalette(palette: ColorPalette)
-    
+}
+
+protocol SimilarsRoutable: AnyObject {
     func navigateToSimilarColors(color: AppColor)
-    func navigateToColorInfo(color: AppColor)
+}
+
+protocol GeneralRoutable: AnyObject {
+    func navigateToGeneralScreen()
 }
 
 final class GeneralCoordinator: Coordinatable {
@@ -46,7 +44,7 @@ final class GeneralCoordinator: Coordinatable {
 #endif
 }
 
-extension GeneralCoordinator: GeneralRoutable {
+extension GeneralCoordinator {
     func pop() { navigationController.popViewController(animated: true) }
     func popToRoot() { navigationController.popToRootViewController(animated: true) }
     
@@ -99,4 +97,29 @@ extension GeneralCoordinator: GeneralRoutable {
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }
+    
+    func navigateToImageColorDetection() {
+        let viewModel = ImageColorDetectionViewModel(router: self)
+        let view = ImageColorDetectionView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToCameraColorDetection() {
+    #if IOS_SIMULATOR
+    #else
+        let vc = CameraColorDetectionViewController()
+        let viewModel = CameraColorDetectionViewModel(router: self)
+        vc.injectViewModel(viewModel)
+        navigationController.pushViewController(vc, animated: true)
+    #endif
+    }
 }
+
+extension GeneralCoordinator: PopRoutable {}
+extension GeneralCoordinator: PopToRootRoutable {}
+extension GeneralCoordinator: DetectionRoutable {}
+extension GeneralCoordinator: InfoRoutable {}
+extension GeneralCoordinator: SamplesRoutable {}
+extension GeneralCoordinator: SimilarsRoutable {}
+extension GeneralCoordinator: GeneralRoutable {}

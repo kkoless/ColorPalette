@@ -8,25 +8,37 @@
 import UIKit
 import SwiftUI
 
-protocol FavoritesRoutable: AnyObject {
-    func pop()
-    func dismiss()
-    
-    func navigateToFavoritesScreen()
-    func navigateToEditPalette(palette: ColorPalette)
-    
-    func navigateToColorPalette(palette: ColorPalette)
-    func navigateToColorInfo(color: AppColor)
-    
-    func navigateToAddNewColorToPalette(templateManager: TemplatePaletteManager)
-    func navigateToAddNewColorToFavorites()
-    
-    func navigateToImageColorDetection()
-    func navigateToCameraColorDetection()
-    func navigateToCreatePalette()
-    
+protocol PopRoutable: AnyObject { func pop() }
+protocol PopToRootRoutable: AnyObject { func popToRoot() }
+protocol DismissRoutable: AnyObject { func dismiss() }
+
+protocol LibraryRoutable: AnyObject {
     func navigateToPaletteLibrary()
     func navigateToColorLibrary()
+}
+
+protocol DetectionRoutable: AnyObject {
+    func navigateToImageColorDetection()
+    func navigateToCameraColorDetection()
+}
+
+protocol InfoRoutable: AnyObject {
+    func navigateToColorPalette(palette: ColorPalette)
+    func navigateToColorInfo(color: AppColor)
+}
+
+protocol EditRoutable: AnyObject {
+    func navigateToEditPalette(palette: ColorPalette)
+}
+
+protocol AddRoutable: AnyObject {
+    func navigateToCreatePalette()
+    func navigateToAddNewColorToPalette(templateManager: TemplatePaletteManager)
+    func navigateToAddNewColorToFavorites()
+}
+
+protocol FavoriteRoutable: AnyObject {
+    func navigateToFavoritesScreen()
 }
 
 final class FavoritesCoordinator: Coordinatable {
@@ -53,7 +65,7 @@ final class FavoritesCoordinator: Coordinatable {
 #endif
 }
 
-extension FavoritesCoordinator: FavoritesRoutable {
+extension FavoritesCoordinator {
     func pop() {
         navigationController.popViewController(animated: true)
     }
@@ -139,3 +151,13 @@ extension FavoritesCoordinator: FavoritesRoutable {
         tabBarDelegate?.getGeneralRouter()?.navigateToSampleColors()
     }
 }
+
+extension FavoritesCoordinator: PopRoutable {}
+extension FavoritesCoordinator: DismissRoutable {}
+extension FavoritesCoordinator: LibraryRoutable {}
+extension FavoritesCoordinator: DetectionRoutable {}
+extension FavoritesCoordinator: InfoRoutable {}
+extension FavoritesCoordinator: EditRoutable {}
+extension FavoritesCoordinator: AddRoutable {}
+extension FavoritesCoordinator: FavoriteRoutable {}
+

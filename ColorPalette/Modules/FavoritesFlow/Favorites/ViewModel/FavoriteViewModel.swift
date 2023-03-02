@@ -10,16 +10,17 @@ import Combine
 
 final class FavoriteViewModel: ObservableObject {
     typealias FavoriteService = FavoritesFetchServiceProtocol & FavoritesAddServiceProtocol & FavoritesDeleteServiceProtocol
+    typealias Routable = EditRoutable & AddRoutable & DetectionRoutable & LibraryRoutable & InfoRoutable
     
     let input: Input
     @Published var output: Output
     
     private let favoriteManager: FavoriteManager
     private let service: FavoriteService
-    weak private var router: FavoritesRoutable?
+    weak private var router: Routable?
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil,
+    init(router: Routable? = nil,
          service: FavoriteService = FavoritesNetworkService.shared) {
         self.favoriteManager = FavoriteManager.shared
         self.service = service

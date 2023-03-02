@@ -9,14 +9,16 @@ import Foundation
 import Combine
 
 final class SampleColorsViewModel: ObservableObject {
+    typealias Routable = PopToRootRoutable & SimilarsRoutable & InfoRoutable
+    
     let input: Input
     @Published var output: Output
     
-    private weak var router: GeneralRoutable?
+    private weak var router: Routable?
     private let colors = ColorManager.shared.colors
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: GeneralRoutable? = nil) {
+    init(router: Routable? = nil) {
         self.router = router
         self.input = Input()
         self.output = Output()

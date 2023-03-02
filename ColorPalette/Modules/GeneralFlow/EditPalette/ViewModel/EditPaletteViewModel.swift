@@ -9,19 +9,20 @@ import Foundation
 import Combine
 
 final class EditPaletteViewModel: ObservableObject {
+    typealias Routable = PopRoutable
     let initPalette: ColorPalette
     
     let input: Input
     @Published var output: Output
     
-    private weak var router: FavoritesRoutable?
+    private weak var router: Routable?
     private let service: FavoritesUpdateServiceProtocol
     private let favoriteManager: FavoriteManager
     
     private var cancellable: Set<AnyCancellable> = .init()
     
     init(service: FavoritesUpdateServiceProtocol = FavoritesNetworkService.shared,
-         router: FavoritesRoutable? = nil,
+         router: Routable? = nil,
          palette: ColorPalette) {
         self.initPalette = palette
         

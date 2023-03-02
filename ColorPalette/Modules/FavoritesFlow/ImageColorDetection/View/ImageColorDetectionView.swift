@@ -48,9 +48,9 @@ private extension ImageColorDetectionView {
             .trailingItems {
                 if viewModel.output.palette != nil {
                     Button(action: { addToFavorite() }) {
-                        Image(systemName: "checkmark")
+                        Image(systemName: "plus.circle")
                             .resizable()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 25, height: 25)
                     }
                     .disabled(viewModel.output.isLimit || viewModel.output.isFavorire)
                     .foregroundColor((viewModel.output.isLimit || viewModel.output.isFavorire) ? .gray : .primary)

@@ -31,8 +31,29 @@ private extension GeneralView {
                 .bold()
                 .font(.largeTitle)
             Spacer()
+            headerButtons
+            
         }
         .padding([.leading, .trailing])
+    }
+    
+    var headerButtons: some View {
+        HStack {
+            Button(action: { navigateToCameraDetection() }) {
+                Image(systemName: "camera")
+                    .resizable()
+                    .frame(width: 25, height: 20)
+            }
+            .padding(.trailing, 25)
+            
+            Button(action: { navigateToImageDetection() }) {
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 25, height: 20)
+            }
+        }
+        .padding(.trailing)
+        .foregroundColor(.primary)
     }
     
     var paletteCells: some View {
@@ -101,6 +122,14 @@ private extension GeneralView {
     
     func navigateToColorInfo(_ color: AppColor) {
         viewModel.input.colorTap.send(color)
+    }
+    
+    func navigateToCameraDetection() {
+        viewModel.input.cameraDetectionTap.send()
+    }
+    
+    func navigateToImageDetection() {
+        viewModel.input.imageDetectionTap.send()
     }
 }
 

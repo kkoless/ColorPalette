@@ -8,6 +8,10 @@
 import UIKit
 import SwiftUI
 
+internal typealias FavoriteRoutableProtocol = FavoriteRoutable
+internal typealias GeneralRoutableProtocol = GeneralRoutable & SamplesRoutable
+internal typealias ProfileRoutableProtocol = ProfileRoutable
+
 protocol TabBarCoordinatorProtocol: Coordinatable {
     var tabBarController: UITabBarController { get set }
     
@@ -16,9 +20,9 @@ protocol TabBarCoordinatorProtocol: Coordinatable {
     
     func currentPage() -> TabBarPage?
     
-    func getGeneralRouter() -> GeneralRoutable?
-    func getFavoriteRouter() -> FavoritesRoutable?
-    func getProfileRouter() -> ProfileRoutable?
+    func getGeneralRouter() -> GeneralRoutableProtocol?
+    func getFavoriteRouter() -> FavoriteRoutableProtocol?
+    func getProfileRouter() -> ProfileRoutableProtocol?
 }
 
 final class TabBarCoordinator: Coordinatable {
@@ -88,16 +92,16 @@ private extension TabBarCoordinator {
 }
 
 extension TabBarCoordinator: TabBarCoordinatorProtocol {
-    func getGeneralRouter() -> GeneralRoutable? {
-        return childCoordinators.filter({ $0.type == .general }).first as? GeneralRoutable
+    func getGeneralRouter() -> GeneralRoutableProtocol? {
+        return childCoordinators.filter({ $0.type == .general }).first as? GeneralRoutableProtocol
     }
     
-    func getFavoriteRouter() -> FavoritesRoutable? {
-        return childCoordinators.filter({ $0.type == .favorites }).first as? FavoritesRoutable
+    func getFavoriteRouter() -> FavoriteRoutableProtocol? {
+        return childCoordinators.filter({ $0.type == .favorites }).first as? FavoriteRoutableProtocol
     }
     
-    func getProfileRouter() -> ProfileRoutable? {
-        return childCoordinators.filter({ $0.type == .profile }).first as? ProfileRoutable
+    func getProfileRouter() -> ProfileRoutableProtocol? {
+        return childCoordinators.filter({ $0.type == .profile }).first as? ProfileRoutableProtocol
     }
     
     func selectPage(_ page: TabBarPage) {

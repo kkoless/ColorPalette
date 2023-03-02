@@ -9,10 +9,12 @@ import Foundation
 import Combine
 
 final class CameraColorDetectionViewModel: ObservableObject {
+    typealias Routable = DetectionRoutable & PopRoutable
+    
     let input: Input
     @Published var output: Output
     
-    private weak var router: FavoritesRoutable?
+    private weak var router: Routable?
     private let favoriteManager: FavoriteManager
     private let service: FavoritesAddServiceProtocol
     
@@ -20,7 +22,7 @@ final class CameraColorDetectionViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil,
+    init(router: Routable? = nil,
          service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.input = Input()
         self.output = Output()

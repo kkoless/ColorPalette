@@ -24,10 +24,12 @@ extension ViewModelErrorHandleProtocol {
 }
 
 final class GeneralViewModel: ObservableObject {
+    typealias Routable = SamplesRoutable & InfoRoutable & DetectionRoutable
+    
     let input: Input
     @Published var output: Output
     
-    private weak var router: GeneralRoutable?
+    private weak var router: Routable?
     
     private let favoritesService: FavoritesFetchServiceProtocol
     private let profileService: ProfileServiceProtocol
@@ -37,7 +39,7 @@ final class GeneralViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: GeneralRoutable? = nil,
+    init(router: Routable? = nil,
          favoritesService: FavoritesFetchServiceProtocol = FavoritesNetworkService.shared,
          profileService: ProfileServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
@@ -109,16 +111,29 @@ private extension GeneralViewModel {
         input.colorTap
             .sink { [weak self] in self?.router?.navigateToColorInfo(color: $0) }
             .store(in: &cancellable)
+        
+        input.imageDetectionTap
+            .sink { [weak self] in self?.router?.navigateToImageColorDetection() }
+            .store(in: &cancellable)
+        
+        input.cameraDetectionTap
+            .sink { [weak self] in self?.router?.navigateToCameraColorDetection() }
+            .store(in: &cancellable)
     }
 }
 
 extension GeneralViewModel: ViewModelErrorHandleProtocol {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
+        
         let showMorePalettesTap: PassthroughSubject<Void, Never> = .init()
         let showMoreColorsTap: PassthroughSubject<Void, Never> = .init()
+        
         let paletteTap: PassthroughSubject<ColorPalette, Never> = .init()
         let colorTap: PassthroughSubject<AppColor, Never> = .init()
+        
+        let imageDetectionTap: PassthroughSubject<Void, Never> = .init()
+        let cameraDetectionTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {

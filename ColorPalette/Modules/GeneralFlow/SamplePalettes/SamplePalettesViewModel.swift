@@ -9,13 +9,15 @@ import Foundation
 import Combine
 
 final class SamplePalettesViewModel: ObservableObject {
+    typealias Routable = PopToRootRoutable & InfoRoutable
+    
     let input: Input
     @Published var output: Output
     
-    private weak var router: GeneralRoutable?
+    private weak var router: Routable?
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: GeneralRoutable? = nil) {
+    init(router: Routable? = nil) {
         self.router = router
         self.input = Input()
         self.output = Output()

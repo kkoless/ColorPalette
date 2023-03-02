@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 final class CreateColorPaletteViewModel: ObservableObject {
+    typealias Routable = PopRoutable & AddRoutable
+     
     let input: Input
     @Published var output: Output
     
@@ -16,10 +18,10 @@ final class CreateColorPaletteViewModel: ObservableObject {
     private let favoriteManager: FavoriteManager
     private let service: FavoritesAddServiceProtocol
     
-    weak private var router: FavoritesRoutable?
+    weak private var router: Routable?
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: FavoritesRoutable? = nil,
+    init(router: Routable? = nil,
          service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
         self.templatePaletteManager = .init()
         self.favoriteManager = FavoriteManager.shared
