@@ -30,7 +30,7 @@ final class ColorInfoViewModel: ObservableObject {
         
         bindRequests()
         
-        print("\(self) DEINIT")
+        print("\(self) INIT")
     }
     
     deinit {

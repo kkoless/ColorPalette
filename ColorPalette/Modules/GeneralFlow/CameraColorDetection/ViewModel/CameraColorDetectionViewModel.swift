@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class CameraColorDetectionViewModel: ObservableObject {
-    typealias Routable = DetectionRoutable & PopRoutable
+    typealias Routable = PopRoutable & InfoRoutable
     
     let input: Input
     @Published var output: Output
@@ -17,8 +17,6 @@ final class CameraColorDetectionViewModel: ObservableObject {
     private weak var router: Routable?
     private let favoriteManager: FavoriteManager
     private let service: FavoritesAddServiceProtocol
-    
-    private var color: AppColor = .getClear()
     
     private var cancellable: Set<AnyCancellable> = .init()
     
@@ -51,29 +49,10 @@ private extension CameraColorDetectionViewModel {
             .store(in: &cancellable)
         
         input.addTap
-            .filter { _ in CredentialsManager.shared.isGuest }
             .sink { [weak self] data in
-                self?.color = AppColor(hex: data.0, alpha: data.1)
-                if let color = self?.color {
-                    self?.favoriteManager.addColor(color)
-                    self?.router?.pop()
-                }
+                let color = AppColor(hex: data.0, alpha: data.1)
+                self?.router?.navigateToColorInfo(color: color)
             }
-            .store(in: &cancellable)
-        
-        input.addTap
-            .filter { _ in !CredentialsManager.shared.isGuest }
-            .flatMap { [unowned self] data in
-                color = AppColor(hex: data.0, alpha: data.1)
-                return service.addColor(color: color)
-            }
-            .sink(receiveCompletion: { [weak self] response in self?.handleError(response) },
-                  receiveValue: { [weak self] _ in
-                if let color = self?.color {
-                    self?.favoriteManager.addColor(color)
-                    self?.router?.pop()
-                }
-            })
             .store(in: &cancellable)
     }
 }
