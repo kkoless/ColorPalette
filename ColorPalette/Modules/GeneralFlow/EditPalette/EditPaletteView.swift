@@ -32,7 +32,7 @@ private extension EditPaletteView {
     var navigationBarView: some View {
         CustomNavigationBarView(
             backAction: { backTap() },
-            titleText: "Palette Editor"
+            titleText: .paletteEditor
         )
     }
     

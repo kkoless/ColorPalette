@@ -8,6 +8,9 @@
 import Foundation
 
 enum Strings: String {
+    case none
+    case paletteEditor
+    
     case firstOnboardingText
     case secondOnboardingText
     case thirdOnboardingText

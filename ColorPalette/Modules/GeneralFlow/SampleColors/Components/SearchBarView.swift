@@ -16,8 +16,18 @@ struct SearchBarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             
-            TextField(String(.search).localized(localizationService.language), text: $searchText)
-                .font(.system(size: 16))
+            ZStack {
+                if searchText.isEmpty {
+                    HStack {
+                        Text(.search)
+                            .foregroundColor(.gray)
+                        Spacer()
+                    }
+                }
+                
+                TextField("", text: $searchText)
+                    .font(.system(size: 16))
+            }
             
             if !searchText.isEmpty {
                 Button(action: { searchText = "" }) {

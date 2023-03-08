@@ -32,10 +32,10 @@ struct CustomNavigationBarTitleAppearance: ViewModifier {
 }
 
 struct CustomNavigationBarView: View {
-    @State private var titleText: String
+    @State private var titleText: Strings
     private var backAction: () -> Void
     
-    init(backAction: @escaping () -> Void, titleText: String = "") {
+    init(backAction: @escaping () -> Void, titleText: Strings = .none) {
         self.backAction = backAction
         self.titleText = titleText
     }
@@ -67,7 +67,7 @@ private extension CustomNavigationBarView {
 }
 
 extension CustomNavigationBarView {
-    func setTitleText(_ text: String) {
+    func setTitleText(_ text: Strings) {
         self.titleText = text
     }
 }
@@ -89,7 +89,7 @@ extension CustomNavigationBarView {
 struct CustomNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            CustomNavigationBarView(backAction: {}, titleText: "Test")
+            CustomNavigationBarView(backAction: {}, titleText: .palettes)
                 .trailingItems {
                     Button(action: {}) {
                         Image(systemName: "plus")

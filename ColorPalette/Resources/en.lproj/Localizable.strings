@@ -6,6 +6,9 @@
   
 */
 
+none = "";
+paletteEditor = "Palette editor";
+
 firstOnboardingText = "First Onboarding";
 secondOnboardingText = "Second Onboarding";
 thirdOnboardingText = "Third Onboarding";
