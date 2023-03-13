@@ -73,46 +73,43 @@ private extension ProfileView {
     }
     
     var changeLanguageCell: some View {
-        HStack {
-            Image(systemName: "abc")
-            
-            Text(.language)
-            
-            Spacer()
-            
-            Picker(selection: $localizationService.language) {
-                Button(action: { languageTap(.russian) }) {
-                    Text(.russian)
-                }
-                .tag(Language.russian)
-                Button(action: { languageTap(.english) }) {
-                    Text(.english)
-                }
-                .tag(Language.english)
-            } label: {
+        VStack {
+            HStack {
+                Image(systemName: "abc")
+                
                 Text(.language)
+                
+                Spacer()
+                
+                Picker(selection: $localizationService.language) {
+                    Button(action: { languageTap(.russian) }) {
+                        Text(.russian)
+                    }
+                    .tag(Language.russian)
+                    Button(action: { languageTap(.english) }) {
+                        Text(.english)
+                    }
+                    .tag(Language.english)
+                } label: {
+                    Text(.language)
+                }
             }
+            
+            Color.gray
+                .frame(height: 1)
         }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke()
-                .foregroundColor(.gray)
-        )
+        .padding(.bottom, 10)
+        
     }
     
     var aboutCell: some View {
-        HStack {
-            Image(systemName: "questionmark.circle")
-            Text(.aboutApp)
-            Spacer()
+        VStack {
+            HStack {
+                Image(systemName: "questionmark.circle")
+                Text(.aboutApp)
+                Spacer()
+            }
         }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke()
-                .foregroundColor(.gray)
-        )
     }
     
     var socialNetworksCell: some View {
@@ -131,27 +128,26 @@ private extension ProfileView {
                         .padding(.leading, 5)
                 }
             }
+            
+            Color.gray
+                .frame(height: 1)
         }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke()
-                .foregroundColor(.gray)
-        )
+        .padding(.bottom, 10)
     }
     
     var subcriptionInfoCell: some View {
-        HStack {
-            Image(systemName: "cart")
-            Text(.changeSubscriptionPlan)
-            Spacer()
+        VStack {
+            HStack {
+                Image(systemName: "cart")
+                Text(.changeSubscriptionPlan)
+                Spacer()
+            }
+            
+            Color.gray
+                .frame(height: 1)
         }
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke()
-                .foregroundColor(.gray)
-        )
+        .padding(.bottom, 10)
+        
     }
     
     var appVersion: some View {

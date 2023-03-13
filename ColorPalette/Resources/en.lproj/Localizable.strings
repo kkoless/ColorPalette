@@ -35,6 +35,7 @@ chooseFromLibrary = "Choose from library";
 generateFromImage = "Generate from image";
 generateFromCamera = "Generate from camera";
 addColor = "Add color";
+colorName = "Color name";
 createColor = "Create color";
 chooseImage = "Choose image";
 
@@ -45,6 +46,7 @@ password = "Password";
 search = "Search";
 
 cancel = "Cancel";
+edit = "Edit";
 logOut = "Log out";
 signIn = "Sign in";
 signUp = "Sign up";

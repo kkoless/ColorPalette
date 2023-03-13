@@ -37,6 +37,7 @@ enum Strings: String {
     case generateFromImage
     case generateFromCamera
     case addColor
+    case colorName
     case createColor
     case chooseImage
     
@@ -47,6 +48,7 @@ enum Strings: String {
     case search
     
     case cancel
+    case edit
     case logOut
     case signIn
     case signUp

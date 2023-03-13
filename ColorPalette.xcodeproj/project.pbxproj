@@ -107,6 +107,7 @@
 		E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF202F29575C6000143582 /* AddNewColorView.swift */; };
 		E5D068A32955F12000E0BBE2 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D068A22955F12000E0BBE2 /* CGFloat+Extensions.swift */; };
 		E5DCBC8129365C46000C1B4E /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DCBC8029365C46000C1B4E /* AppRouter.swift */; };
+		E5DE73C629BF6ACB00F148D2 /* AddColorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE73C529BF6ACB00F148D2 /* AddColorTextField.swift */; };
 		E5DF3A0F29785ABC008100E8 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DF3A0E29785ABC008100E8 /* PermissionsManager.swift */; };
 		E5E6F61329780057000AC4A2 /* CameraColorDetectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */; };
 		E5EBC207295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EBC206295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift */; };
@@ -218,6 +219,7 @@
 		E5CF202F29575C6000143582 /* AddNewColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewColorView.swift; sourceTree = "<group>"; };
 		E5D068A22955F12000E0BBE2 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		E5DCBC8029365C46000C1B4E /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		E5DE73C529BF6ACB00F148D2 /* AddColorTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddColorTextField.swift; sourceTree = "<group>"; };
 		E5DF3A0E29785ABC008100E8 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraColorDetectionViewModel.swift; sourceTree = "<group>"; };
 		E5EBC206295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewColorToPaletteViewModel.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		E56C0E20293765B200A878CB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E5DE73C429BF6AB400F148D2 /* TextField */,
 				E55AD0242959DB0C00E60984 /* NavigationBar */,
 				E56C0E21293765BB00A878CB /* TabBar */,
 				E504B2012954C88100996662 /* ImagePicker.swift */,
@@ -783,6 +786,14 @@
 				E5F2DB8129978AC2009CF20B /* ToFavorites */,
 			);
 			path = AddNewColor;
+			sourceTree = "<group>";
+		};
+		E5DE73C429BF6AB400F148D2 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				E5DE73C529BF6ACB00F148D2 /* AddColorTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		E5DF3A1029786F0B008100E8 /* ViewModel */ = {
@@ -1038,6 +1049,7 @@
 				E525DCA02996363B005C2A04 /* ColorInfoViewModel.swift in Sources */,
 				E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
+				E5DE73C629BF6ACB00F148D2 /* AddColorTextField.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */,
 				E5B5940A299FC91E00C8783F /* SocialNetwork.swift in Sources */,
 				E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */,

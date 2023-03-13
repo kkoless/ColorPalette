@@ -13,8 +13,12 @@ struct CreateColorPaletteView: View {
     var body: some View {
         VStack {
             navBar
-            palettePreview
-                .padding([.top, .bottom])
+            if !viewModel.output.colors.isEmpty {
+                palettePreview
+                    .padding([.top, .bottom])
+            } else {
+                emptyStateView
+            }
         }
         .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
             Button(role: .cancel, action: { stayAlertTap() }) {
@@ -55,6 +59,15 @@ private extension CreateColorPaletteView {
                     .foregroundColor(viewModel.output.colors.count <= 1 ? .gray : .primary)
                 }
             }
+        }
+    }
+    
+    var emptyStateView: some View {
+        VStack {
+            Spacer()
+            Text(.favoritesEmptyState)
+                .font(.headline).bold()
+            Spacer()
         }
     }
     

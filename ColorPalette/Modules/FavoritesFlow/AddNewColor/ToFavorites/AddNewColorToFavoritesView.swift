@@ -13,6 +13,11 @@ struct AddNewColorToFavoritesView: View {
     @State private var colorName = ""
     @State private var selectedColor: Color = .primary
     
+    var isDisabled: Bool {
+        viewModel.output.isFavorite ||
+        viewModel.output.color == AppColor.getClear()
+    }
+    
     var body: some View {
         VStack(spacing: 15) {
             navigationBarView
@@ -31,31 +36,30 @@ private extension AddNewColorToFavoritesView {
         CustomNavigationBarView(backAction: { backTap() })
             .trailingItems {
                 Button(action: { addToFavorites() }) {
-                    Image(systemName: "checkmark")
+                    Image(systemName: "plus")
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
-                .disabled(viewModel.output.isFavorite)
-                .foregroundColor(viewModel.output.isFavorite ? .gray : .primary)
+                .disabled(isDisabled)
+                .foregroundColor(isDisabled ? .gray : .primary)
             }
     }
     
     var configureBlock: some View {
         HStack(spacing: 15) {
-            TextField("Color name", text: $colorName)
-                .padding([.leading, .trailing])
+            AddColorTextField(text: $colorName)
+                .environmentObject(LocalizationService.shared)
                 .padding([.bottom, .top], 10)
-                .textFieldStyle(.plain)
                 .onChange(of: colorName) { newValue in
                     viewModel.input.colorName.send(newValue)
                 }
             
             ColorPicker("", selection: $selectedColor)
-                .font(.subheadline)
                 .onChange(of: selectedColor) { newValue in
                     let appColor = AppColor(uiColor: newValue.uiColor)
                     viewModel.input.selectedColor.send(appColor)
                 }
+                .frame(width: 50, height: 40, alignment: .center)
         }
         .padding([.leading, .trailing])
     }

@@ -31,20 +31,19 @@ struct AddNewColorToPaletteView: View {
 private extension AddNewColorToPaletteView {
     var configureBlock: some View {
         HStack(spacing: 15) {
-            TextField("Color name", text: $colorName)
-                .padding([.leading, .trailing])
+            AddColorTextField(text: $colorName)
+                .environmentObject(LocalizationService.shared)
                 .padding([.bottom, .top], 10)
-                .textFieldStyle(.plain)
                 .onChange(of: colorName) { newValue in
                     viewModel.input.colorName.send(newValue)
                 }
             
             ColorPicker("", selection: $selectedColor)
-                .font(.subheadline)
                 .onChange(of: selectedColor) { newValue in
                     let appColor = AppColor(uiColor: newValue.uiColor)
                     viewModel.input.selectedColor.send(appColor)
                 }
+                .frame(width: 50, height: 40, alignment: .center)
         }
     }
     

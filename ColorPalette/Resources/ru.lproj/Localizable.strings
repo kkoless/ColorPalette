@@ -35,6 +35,7 @@ chooseFromLibrary = "Выбрать из библиотеки";
 generateFromImage = "Сгенерировать из изображения";
 generateFromCamera = "Сгенерировать из камеры";
 addColor = "Добавить цвет";
+colorName = "Наименование цвета";
 createColor = "Создать цвет";
 chooseImage = "Выбрать изображение";
 
@@ -45,6 +46,7 @@ password = "Пароль";
 search = "Поиск";
 
 cancel = "Закрыть";
+edit = "Изменить";
 logOut = "Выйти";
 signIn = "Войти";
 signUp = "Регистрация";
@@ -54,7 +56,7 @@ reset = "Сбросить";
 apply = "Применить";
 language = "Язык";
 aboutApp = "О приложении";
-socialNetworks = "Социальныке сети";
+socialNetworks = "Социальные сети";
 guest = "Гость";
 
 freePlan = "Бесплатный план";

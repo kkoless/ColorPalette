@@ -11,6 +11,8 @@ struct FavoritesView: View {
     @StateObject var viewModel: FavoriteViewModel
     @EnvironmentObject private var localizationService: LocalizationService
     
+    @State private var isEdit: Bool = false
+    
     var body: some View {
         VStack(spacing: 10) {
             header
@@ -103,7 +105,14 @@ private extension FavoritesView {
         if !viewModel.output.palettes.isEmpty {
             HStack {
                 getHeaderText(text: .palettes)
+                
                 Spacer()
+                
+                Button(action: { editStateTap() }) {
+                    Text(!isEdit ? .edit : .cancel)
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(isEdit ? Color.red : Color.blue)
             }
             
             paletteCells
@@ -123,6 +132,7 @@ private extension FavoritesView {
         }
     }
     
+    @ViewBuilder
     var paletteCells: some View {
         ForEach(viewModel.output.palettes) { palette in
             HStack(alignment: .center) {
@@ -130,11 +140,13 @@ private extension FavoritesView {
                     .padding(.trailing, 5)
                     .onTapGesture { showPaletteInfoTap(palette) }
                 
-                Button(action: { editPalette(palette) }) {
-                    Image(systemName: "slider.horizontal.3")
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .foregroundColor(.primary)
+                if isEdit {
+                    Button(action: { editPalette(palette) }) {
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                            .foregroundColor(.primary)
+                    }
                 }
             }
             .padding([.leading, .trailing])
@@ -151,8 +163,12 @@ private extension FavoritesView {
         ForEach(viewModel.output.colors) { color in
             Color(color)
                 .opacity(color.alpha)
-                .listRowSeparator(.hidden)
+                .frame(height: 35)
                 .cornerRadius(10)
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init())
+                .padding([.top, .bottom], 10)
+                .padding([.leading, .trailing])
                 .onTapGesture { showColorInfoTap(color) }
         }
         .onDelete { indexSet in
@@ -177,6 +193,12 @@ private extension FavoritesView {
 private extension FavoritesView {
     func onAppear() {
         viewModel.input.onAppear.send(())
+    }
+    
+    func editStateTap() {
+        withAnimation {
+            isEdit.toggle()
+        }
     }
     
     func addPaletteTap(_ type: FavoriteAddType) {
