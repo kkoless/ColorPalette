@@ -39,6 +39,8 @@
 		E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263F429389DCD003334FE /* CredentialsManager.swift */; };
 		E5446F1E29717216004EC2B5 /* InclusiveColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5446F1D29717216004EC2B5 /* InclusiveColor.swift */; };
 		E54CC9E1299F7B5C0066DD6D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54CC9E0299F7B5C0066DD6D /* Array+Extensions.swift */; };
+		E54D10E829CF612700D1C9BC /* GoogleSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54D10E729CF612700D1C9BC /* GoogleSearchAPI.swift */; };
+		E54D10EB29CF6AFA00D1C9BC /* GoogleSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54D10EA29CF6AFA00D1C9BC /* GoogleSearchRequest.swift */; };
 		E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */; };
 		E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48FB29349C3E0078B12B /* AppCoordinator.swift */; };
 		E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55031C229577BB80052F544 /* FavoriteManager.swift */; };
@@ -151,6 +153,8 @@
 		E54263F429389DCD003334FE /* CredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsManager.swift; sourceTree = "<group>"; };
 		E5446F1D29717216004EC2B5 /* InclusiveColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InclusiveColor.swift; sourceTree = "<group>"; };
 		E54CC9E0299F7B5C0066DD6D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		E54D10E729CF612700D1C9BC /* GoogleSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchAPI.swift; sourceTree = "<group>"; };
+		E54D10EA29CF6AFA00D1C9BC /* GoogleSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchRequest.swift; sourceTree = "<group>"; };
 		E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		E54E48FB29349C3E0078B12B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E55031C229577BB80052F544 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
@@ -397,6 +401,7 @@
 		E54263EC29389802003334FE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E54D10E629CF611100D1C9BC /* GoogleSearch */,
 				E5F9C12D299616DE009B9D66 /* Favorites */,
 				E54263F129389CBE003334FE /* Authorization */,
 				E54263F229389CD4003334FE /* Provider.swift */,
@@ -411,6 +416,22 @@
 				E516748229914E9E00667979 /* AuthorizationNetworkService.swift */,
 			);
 			path = Authorization;
+			sourceTree = "<group>";
+		};
+		E54D10E629CF611100D1C9BC /* GoogleSearch */ = {
+			isa = PBXGroup;
+			children = (
+				E54D10E729CF612700D1C9BC /* GoogleSearchAPI.swift */,
+			);
+			path = GoogleSearch;
+			sourceTree = "<group>";
+		};
+		E54D10E929CF6AE300D1C9BC /* GoogleSearch */ = {
+			isa = PBXGroup;
+			children = (
+				E54D10EA29CF6AFA00D1C9BC /* GoogleSearchRequest.swift */,
+			);
+			path = GoogleSearch;
 			sourceTree = "<group>";
 		};
 		E54E48F829348FD50078B12B /* AuthorizationFlow */ = {
@@ -724,6 +745,7 @@
 		E5BAE91C295413B4005DF70B /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				E54D10E929CF6AE300D1C9BC /* GoogleSearch */,
 				E55F6F7F2955A02400A8B935 /* AppColor.swift */,
 				E5BAE91E295413CC005DF70B /* ColorPalette.swift */,
 				E588B91E2960828800D45F7C /* Profile.swift */,
@@ -1002,6 +1024,7 @@
 				E5C2AEB12937476600508DF4 /* RegistrationView.swift in Sources */,
 				E5F9C13129961D9D009B9D66 /* FavoritesNetworkService.swift in Sources */,
 				E53C65DD2980F8A000F5C4C0 /* TabBarController.swift in Sources */,
+				E54D10EB29CF6AFA00D1C9BC /* GoogleSearchRequest.swift in Sources */,
 				E5A72A812997F29600670202 /* Text+Extensions.swift in Sources */,
 				E57AF3AC2957315B0002FC75 /* ColorPreview.swift in Sources */,
 				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
@@ -1048,6 +1071,7 @@
 				E5BC2D5329937B5D00EBFFAB /* APIError.swift in Sources */,
 				E525DCA02996363B005C2A04 /* ColorInfoViewModel.swift in Sources */,
 				E55BAD6C29190B5800B3E233 /* SceneDelegate.swift in Sources */,
+				E54D10E829CF612700D1C9BC /* GoogleSearchAPI.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E5DE73C629BF6ACB00F148D2 /* AddColorTextField.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */,
