@@ -8,30 +8,30 @@
 import Foundation
 
 struct GoogleSearchRequest {
-    enum ColorType: Codable {
+    enum ColorType: String, Codable {
         case imgColorTypeUndefined
         case mono, gray, color, trans
     }
     
-    enum DominantColor: Codable {
+    enum DominantColor: String, Codable, CaseIterable {
         case imgDominantColorUndefined
         case black, blue, brown, gray, green,
              orange, pink, purple, red, teal, white, yellow
     }
     
-    enum ImageSize: Codable {
+    enum ImageSize: String, Codable {
         case imgSizeUndefined
         case HUGE, ICON, LARGE, MEDIUM,
              SMALL, XLARGE, XXLARGE
     }
     
-    enum ImageType: Codable {
+    enum ImageType: String, Codable {
         case imgTypeUndefined
         case clipart, face, lineart,
              stock, photo, animated
     }
     
-    enum SearchType: Codable {
+    enum SearchType: String, Codable {
         case searchTypeUndefined
         case image
     }

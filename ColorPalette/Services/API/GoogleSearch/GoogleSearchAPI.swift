@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum GoogleSearchAPI {
-    case search
+    case search(dominantColor: AppColor)
 }
 
 extension GoogleSearchAPI: TargetType {
@@ -31,28 +31,24 @@ extension GoogleSearchAPI: TargetType {
     
     var task: Moya.Task {
         var params = [String: Any]()
-        params["key"] = Consts.API.googleSearchAPIKey
-        params["cx"] = "549275d6ab61f4ead"
-        params["q"] = ""
         
         switch self {
-            case .search:
-            
-                
-                
-                return .requestCompositeParameters(bodyParameters: [:],
-                                                   bodyEncoding: JSONEncoding.default,
-                                                   urlParameters: params)
+            case .search(let dominantColor):
+                params["key"] = Consts.API.googleSearchAPIKey
+                params["cx"] = "549275d6ab61f4ead"
+                params["q"] = "\(dominantColor.uiColor.accessibilityName.capitalized) color aesthetics"
+                params["imgColorType"] = "color"
+                params["imgType"] = "photo"
+                params["imgSize"] = "xxlarge"
+                params["num"] = 10
+                params["siteSearch"] = "https://ru.pinterest.com/"
+                params["siteSearchFilter"] = "i"
+//                params["imgDominantColor"] = dominantColor.googleDominantColor.rawValue
+                return .requestParameters(parameters: params, encoding: URLEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-        var params: [String: String] = .init()
-        
-        if let token = CredentialsManager.shared.token, !token.isEmpty {
-            params[Consts.API.tokenHeader] = "Bearer \(token)"
-        }
-        
-        return params
+        nil
     }
 }

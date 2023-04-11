@@ -59,6 +59,21 @@ extension AppColor {
     }
 }
 
+extension AppColor {
+    var googleDominantColor: GoogleSearchRequest.DominantColor {
+        let strColors = GoogleSearchRequest.DominantColor.allCases.map { $0.rawValue }
+        var resColor: GoogleSearchRequest.DominantColor = .imgDominantColorUndefined
+                
+//        strColors.forEach {
+//            if self.uiColor.accessibilityName.localized(.english).lowercased().contains($0) {
+//                resColor = .init(rawValue: $0)!
+//            }
+//        }
+        
+        return resColor
+    }
+}
+
 extension AppColor: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(hex.lowercased())
