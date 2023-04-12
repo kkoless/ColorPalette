@@ -67,6 +67,7 @@ final class FavoritesCoordinator: Coordinatable {
 
 extension FavoritesCoordinator {
     func pop() {
+        setTabBarAppearance(isHidden: false)
         navigationController.popViewController(animated: true)
     }
     
@@ -121,6 +122,9 @@ extension FavoritesCoordinator {
         let viewModel = ImageColorDetectionViewModel(router: self)
         let view = ImageColorDetectionView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
+        
+        setTabBarAppearance(isHidden: true)
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -149,6 +153,13 @@ extension FavoritesCoordinator {
     func navigateToColorLibrary() {
         tabBarDelegate?.selectPage(.general)
         tabBarDelegate?.getGeneralRouter()?.navigateToSampleColors()
+    }
+}
+
+private extension FavoritesCoordinator {
+    func setTabBarAppearance(isHidden: Bool) {
+        navigationController.tabBarController?.tabBar.isTranslucent = isHidden
+        navigationController.tabBarController?.tabBar.isHidden = isHidden
     }
 }
 

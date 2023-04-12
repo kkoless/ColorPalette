@@ -12,15 +12,10 @@ struct AdditionalColorInfoView: View {
     
     let color: AppColor
     
-    private var colorName: String {
-        color.name.localized().capitalized
-    }
-    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text(color.name.capitalized)
-                    .font(.title2.bold())
+                Text(color.name.capitalized).font(.headline)
             }
             .padding(.top, 25)
             
@@ -35,29 +30,67 @@ struct AdditionalColorInfoView: View {
 private extension AdditionalColorInfoView {
     var navBar: some View {
         CustomNavigationBarView(
-            backAction: { viewModel.input.backTap.send() },
-            titleText: colorName
+            backAction: { viewModel.input.backTap.send() }
         )
     }
     
     var content: some View {
         ScrollView {
-            LazyVGrid(columns: [
-                GridItem(.fixed(130), spacing: 50),
-                GridItem(.fixed(130), spacing: 50)
-            ], alignment: .center) {
-                Group {
-                    ForEach(viewModel.output.imageUrls) { url in
-                        AsyncImage(url: url)
-                            .frame(width: 130, height: 130)
-                            .cornerRadius(10)
-                            .padding(.top, 20)
-                    }
-                }
+            similarsColors
+            
+            if !viewModel.output.imageUrls.isEmpty {
+                images
             }
             
             SimilarColorsView(color: color.uiColor)
         }
+    }
+    
+    var similarsColors: some View {
+        VStack {
+            HStack {
+                Text("Similars colors").font(.headline)
+                Spacer()
+            }
+            
+            LazyHGrid(rows: [
+                GridItem(.fixed(60), spacing: 20),
+                GridItem(.fixed(60), spacing: 20)], spacing: 15) {
+                ForEach(color.uiColor.getSimilarColors(threshold: 0.1)) { color in
+                    Color(uiColor: color)
+                        .frame(width: 60, height: 60)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                }
+            }
+        }
+        .padding(.horizontal)
+        .padding(.bottom, 15)
+    }
+    
+    var images: some View {
+        VStack {
+            HStack {
+                Text("Images").font(.headline)
+                Spacer()
+            }
+            
+            LazyVGrid(columns: [
+                GridItem(.fixed(110), spacing: 15),
+                GridItem(.fixed(110), spacing: 15),
+                GridItem(.fixed(110), spacing: 15)
+            ], alignment: .center) {
+                Group {
+                    ForEach(viewModel.output.imageUrls) { url in
+                        AsyncImage(url: url)
+                            .frame(width: 110, height: 110)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                    }
+                }
+            }
+        }
+        .padding(.horizontal)
     }
 }
 
