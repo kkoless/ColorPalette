@@ -45,8 +45,15 @@ final class GeneralCoordinator: Coordinatable {
 }
 
 extension GeneralCoordinator {
-    func pop() { navigationController.popViewController(animated: true) }
-    func popToRoot() { navigationController.popToRootViewController(animated: true) }
+    func pop() {
+        setTabBarAppearance(isHidden: false)
+        navigationController.popViewController(animated: true)
+    }
+    
+    func popToRoot() {
+        setTabBarAppearance(isHidden: false)
+        navigationController.popToRootViewController(animated: true)
+    }
     
     func navigateToGeneralScreen() {
         let viewModel = GeneralViewModel(router: self)
@@ -102,6 +109,9 @@ extension GeneralCoordinator {
         let viewModel = ImageColorDetectionViewModel(router: self)
         let view = ImageColorDetectionView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
+        
+        setTabBarAppearance(isHidden: true)
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -113,6 +123,13 @@ extension GeneralCoordinator {
         vc.injectViewModel(viewModel)
         navigationController.pushViewController(vc, animated: true)
     #endif
+    }
+}
+
+private extension GeneralCoordinator {
+    func setTabBarAppearance(isHidden: Bool) {
+        navigationController.tabBarController?.tabBar.isTranslucent = isHidden
+        navigationController.tabBarController?.tabBar.isHidden = isHidden
     }
 }
 

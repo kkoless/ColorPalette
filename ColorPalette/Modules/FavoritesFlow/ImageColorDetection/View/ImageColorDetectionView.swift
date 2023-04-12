@@ -12,6 +12,17 @@ struct ImageColorDetectionView: View {
     @State private var selection: UIImage = .init()
     @State private var showPopover = false
     @State private var showSettingsAlert = false
+    @State private var avarageColorOfImage: Color = {
+        let uiColor = UIColor(named: "systemBackground") ?? .clear
+        return Color(uiColor: uiColor)
+    }()
+    
+    private var foregroundColor: Color {
+        Color(uiColor: avarageColorOfImage.uiColor.invertColor())
+    }
+    private var isAddDisabled: Bool {
+        viewModel.output.isLimit || viewModel.output.isFavorire
+    }
     
     @ObservedObject var viewModel: ImageColorDetectionViewModel
     
@@ -34,10 +45,15 @@ struct ImageColorDetectionView: View {
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
+        .background(avarageColorOfImage)
+        .foregroundColor(foregroundColor)
         .onChange(of: selection) { newValue in
             let jpegData = newValue
                 .jpegData(compressionQuality: 1)
             viewModel.input.imageAppear.send(jpegData)
+            if let uiColor = newValue.averageColor {
+                avarageColorOfImage = Color(uiColor: uiColor)
+            }
         }
     }
 }
@@ -52,8 +68,8 @@ private extension ImageColorDetectionView {
                             .resizable()
                             .frame(width: 25, height: 25)
                     }
-                    .disabled(viewModel.output.isLimit || viewModel.output.isFavorire)
-                    .foregroundColor((viewModel.output.isLimit || viewModel.output.isFavorire) ? .gray : .primary)
+                    .disabled(isAddDisabled)
+                    .foregroundColor(isAddDisabled ? .gray : foregroundColor)
                 }
             }
     }
@@ -65,19 +81,18 @@ private extension ImageColorDetectionView {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 
-        } else {
-            Color.gray
-        }
+        } else { Color.gray }
     }
     
     @ViewBuilder
     var palette: some View {
         if let palette = viewModel.output.palette {
             ColorPaletteCell(palette: palette)
-                .padding([.leading, .trailing])
+                .padding()
                 .onTapGesture {
                     viewModel.input.showPaletteTap.send(palette)
                 }
+                .shadow(radius: 20)
         }
     }
     

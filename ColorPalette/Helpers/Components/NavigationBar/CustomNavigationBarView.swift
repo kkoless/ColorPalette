@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import Combine
 
 struct CustomNavigationBarAppearance: ViewModifier {
@@ -14,7 +15,6 @@ struct CustomNavigationBarAppearance: ViewModifier {
             .padding([.leading, .trailing], 16)
             .padding(.top, Consts.Constraints.top + 45)
             .padding(.bottom)
-            .foregroundColor(.primary)
     }
 }
 
@@ -27,17 +27,26 @@ struct CustomNavigationBarTitleAppearance: ViewModifier {
         content
             .font(isBold ? font.bold() : font)
             .opacity(opacity)
-            .foregroundColor(.primary)
     }
 }
 
 struct CustomNavigationBarView: View {
-    @State private var titleText: Strings
-    private var backAction: () -> Void
+    let backgroundColor: Color
     
-    init(backAction: @escaping () -> Void, titleText: Strings = .none) {
+    @State private var titleText: Strings
+    
+    private var backAction: () -> Void
+    private var foregroundColor: Color {
+        Color(uiColor: backgroundColor.uiColor.invertColor())
+    }
+    
+    init(backAction: @escaping () -> Void,
+         titleText: Strings = .none,
+         backgroundColor: Color = .init(uiColor: UIColor(named: "systemBackground") ?? .systemBackground)
+    ) {
         self.backAction = backAction
         self.titleText = titleText
+        self.backgroundColor = backgroundColor
     }
     
     var body: some View {
@@ -47,6 +56,8 @@ struct CustomNavigationBarView: View {
             title
             Spacer()
         }
+        .background(backgroundColor)
+        .foregroundColor(foregroundColor)
         .setCustomNavigationBarAppearance()
     }
 }

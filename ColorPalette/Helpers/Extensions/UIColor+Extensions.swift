@@ -300,3 +300,39 @@ extension UIColor {
         return (red: Int(redLiteral * 255), green: Int(greenLiteral * 255), blue: Int(blueLiteral * 255), alpha: Int(alphaLiteral) * 255)
     }
 }
+
+extension UIColor {
+    func hsb() -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        
+        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
+        
+        return (hue: hue, saturation: saturation, brightness: brightness)
+    }
+    
+    func getSimilarColors(threshold: CGFloat) -> [UIColor] {
+        let referenceHSB = self.hsb()
+        var similarColors = [UIColor]()
+        
+        let minHue = referenceHSB.hue - threshold
+        let maxHue = referenceHSB.hue + threshold
+        
+        let minSaturation = max(0, referenceHSB.saturation - threshold)
+        let maxSaturation = min(1, referenceHSB.saturation + threshold)
+        let minBrightness = max(0, referenceHSB.brightness - threshold)
+        let maxBrightness = min(1, referenceHSB.brightness + threshold)
+        
+        for hue in stride(from: minHue, through: maxHue, by: threshold/2) {
+            for saturation in stride(from: minSaturation, through: maxSaturation, by: threshold/2) {
+                for brightness in stride(from: minBrightness, through: maxBrightness, by: threshold/2) {
+                    let color = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+                    similarColors.append(color)
+                }
+            }
+        }
+        
+        return Array(similarColors.prefix(4))
+    }
+}
