@@ -59,6 +59,16 @@ extension AppColor {
     }
 }
 
+extension AppColor {
+    func generatePalette(size: UInt) -> ColorPalette {
+        let appColors = self.uiColor
+            .generateColorPalette(numberOfColors: size)
+            .map { AppColor(uiColor: $0) }
+        
+        return ColorPalette(colors: appColors)
+    }
+}
+
 extension AppColor: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(hex.lowercased())

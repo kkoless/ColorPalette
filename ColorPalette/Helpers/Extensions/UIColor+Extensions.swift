@@ -302,14 +302,15 @@ extension UIColor {
 }
 
 extension UIColor {
-    func hsb() -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+    func hsb() -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
+        var alpha: CGFloat = 0.0
         
-        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
+        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         
-        return (hue: hue, saturation: saturation, brightness: brightness)
+        return (hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
     
     func getSimilarColors(threshold: CGFloat) -> [UIColor] {
@@ -324,9 +325,9 @@ extension UIColor {
         let minBrightness = max(0, referenceHSB.brightness - threshold)
         let maxBrightness = min(1, referenceHSB.brightness + threshold)
         
-        for hue in stride(from: minHue, through: maxHue, by: threshold/2) {
-            for saturation in stride(from: minSaturation, through: maxSaturation, by: threshold/2) {
-                for brightness in stride(from: minBrightness, through: maxBrightness, by: threshold/2) {
+        for hue in stride(from: minHue, through: maxHue, by: threshold / 2) {
+            for saturation in stride(from: minSaturation, through: maxSaturation, by: threshold / 2) {
+                for brightness in stride(from: minBrightness, through: maxBrightness, by: threshold / 2) {
                     let color = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
                     similarColors.append(color)
                 }
@@ -334,5 +335,22 @@ extension UIColor {
         }
         
         return Array(similarColors.prefix(4))
+    }
+    
+    func generateColorPalette(numberOfColors: UInt) -> [UIColor] {
+        let baseComponents = self.hsb()
+        
+        var colors: [UIColor] = [self]
+        
+        for _ in 0 ..< numberOfColors - 1 {
+            let newHue = baseComponents.hue + CGFloat.random(in: -0.2...0.2)
+            let newSaturation = baseComponents.saturation + CGFloat.random(in: -0.2...0.2)
+            let newBrightness = baseComponents.brightness + CGFloat.random(in: -0.2...0.2)
+            let newColor = UIColor(hue: newHue, saturation: newSaturation, brightness: newBrightness, alpha: baseComponents.alpha)
+            
+            colors.append(newColor)
+        }
+        
+        return colors
     }
 }

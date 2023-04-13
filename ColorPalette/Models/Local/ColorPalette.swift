@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct PopularPaletteJSON: Codable {
     let data: [PopularPalette]
@@ -51,6 +52,68 @@ struct ColorPalette: Identifiable {
 }
 
 extension ColorPalette {
+    private func calculateColorBalance() -> CGFloat {
+        let colors = self.colors.map { $0.uiColor }
+        
+        var rSum: CGFloat = 0.0
+        var gSum: CGFloat = 0.0
+        var bSum: CGFloat = 0.0
+        
+        for color in colors {
+            var r: CGFloat = 0.0
+            var g: CGFloat = 0.0
+            var b: CGFloat = 0.0
+            var a: CGFloat = 0.0
+            
+            color.getRed(&r, green: &g, blue: &b, alpha: &a)
+            rSum += r
+            gSum += g
+            bSum += b
+        }
+        
+        let rAvg = rSum / CGFloat(colors.count)
+        let gAvg = gSum / CGFloat(colors.count)
+        let bAvg = bSum / CGFloat(colors.count)
+        
+        let balance = (rAvg + gAvg + bAvg) / 3.0
+        
+        return balance
+    }
+    
+    func adjustColorBalance() -> ColorPalette {
+        let uiColors = self.colors.map { $0.uiColor }
+        let balance = calculateColorBalance()
+        
+        if balance == 0.5 {
+            return ColorPalette(colors: self.colors)
+        }
+        
+        var adjustedColors: [UIColor] = []
+        
+        for color in uiColors {
+            var r: CGFloat = 0.0
+            var g: CGFloat = 0.0
+            var b: CGFloat = 0.0
+            var a: CGFloat = 0.0
+            
+            color.getRed(&r, green: &g, blue: &b, alpha: &a)
+            
+            let newR = r + (0.5 - balance)
+            let newG = g + (0.5 - balance)
+            let newB = b + (0.5 - balance)
+            
+            let adjustedColor = UIColor(red: newR, green: newG, blue: newB, alpha: a)
+            adjustedColors.append(adjustedColor)
+        }
+        
+        let appColors = adjustedColors.map { AppColor(uiColor: $0) }
+        let palette = ColorPalette(colors: appColors)
+        
+        return palette
+    }
+}
+
+extension ColorPalette {
     static func getTestPalettes(_ size: UInt) -> [ColorPalette] {
         var result = [ColorPalette]()
         
@@ -64,6 +127,12 @@ extension ColorPalette {
         }
         
         return result
+    }
+    
+    static func getRandomPalette(size: UInt) -> ColorPalette {
+        let randomUIColor = AppColor.getRandomColor().uiColor
+        let appColors = randomUIColor.generateColorPalette(numberOfColors: size).map { AppColor(uiColor: $0) }
+        return ColorPalette(colors: appColors)
     }
 }
 
