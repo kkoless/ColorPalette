@@ -21,6 +21,7 @@ struct ProfileView: View {
             
             Group {
                 userInfo
+                colorPsychologyCell
                 changeLanguageCell
                 socialNetworksCell
                 
@@ -70,6 +71,20 @@ private extension ProfileView {
             }
         }
         .padding([.top, .bottom])
+    }
+    
+    var colorPsychologyCell: some View {
+        VStack {
+            HStack {
+                Image(systemName: "eye")
+                Text("Color Psychology")
+                Spacer()
+            }
+            
+            Color.gray
+                .frame(height: 1)
+        }
+        .onTapGesture { colorPsychoTap() }
     }
     
     var changeLanguageCell: some View {
@@ -159,6 +174,10 @@ private extension ProfileView {
 
 private extension ProfileView {
     func onAppear() { viewModel.input.onAppear.send() }
+    
+    func colorPsychoTap() {
+        viewModel.input.colorPsychologyTap.send()
+    }
     
     func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
     }

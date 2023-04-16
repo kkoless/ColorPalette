@@ -9,6 +9,23 @@ import Foundation
 
 final class ColorManager {
     let colors: [AppColor]
+    
+    lazy var moodColors: [String : [AppColor]] = {
+        var dist = [String: [AppColor]]()
+        
+        MoodType.allCases.forEach { type in
+            dist[type.rawValue] = colors.filter { appColor in
+                if !type.associationColors.filter({ appColor.name.lowercased().contains($0) }).isEmpty {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        
+        return dist
+    }()
+    
     static let shared = ColorManager()
     
     private init() {

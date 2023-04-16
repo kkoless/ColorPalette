@@ -9,8 +9,9 @@ import Foundation
 import Combine
 
 final class RegistrationViewModel: ObservableObject {
+    typealias Routable = DismissRoutable & AuthorizationRoutable
     
-    private weak var router: ProfileRoutable?
+    private weak var router: Routable?
     private let service: AuthServiceProtocol
     private let profileManager: ProfileManager
     
@@ -19,7 +20,7 @@ final class RegistrationViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: ProfileRoutable? = nil,
+    init(router: Routable? = nil,
          service: AuthServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
         self.output = Output()
