@@ -13,8 +13,8 @@ protocol SamplesRoutable: AnyObject {
     func navigateToSampleColors()
 }
 
-protocol SimilarsRoutable: AnyObject {
-    func navigateToSimilarColors(color: AppColor)
+protocol AdditionalColorInfoRoutable: AnyObject {
+    func navigateToAdditionalColorInfo(color: AppColor)
 }
 
 protocol GeneralRoutable: AnyObject {
@@ -86,15 +86,10 @@ extension GeneralCoordinator {
         navigationController.present(vc, animated: true)
     }
     
-    func navigateToSimilarColors(color: AppColor) {
-        let view = SimilarColorsView(color: UIColor(hexString: color.hex))
+    func navigateToAdditionalColorInfo(color: AppColor) {
+        let viewModel = AdditionalColorInfoViewModel(color: color, router: self)
+        let view = AdditionalColorInfoView(viewModel: viewModel, color: color)
         let vc = UIHostingController(rootView: view)
-        
-        if let sheet = vc.sheetPresentationController {
-            sheet.detents = [ .medium(), .large() ]
-            sheet.prefersGrabberVisible = true
-        }
-         
         navigationController.present(vc, animated: true)
     }
     
@@ -138,5 +133,5 @@ extension GeneralCoordinator: PopToRootRoutable {}
 extension GeneralCoordinator: DetectionRoutable {}
 extension GeneralCoordinator: InfoRoutable {}
 extension GeneralCoordinator: SamplesRoutable {}
-extension GeneralCoordinator: SimilarsRoutable {}
+extension GeneralCoordinator: AdditionalColorInfoRoutable {}
 extension GeneralCoordinator: GeneralRoutable {}

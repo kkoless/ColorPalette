@@ -11,7 +11,9 @@ import UIKit
 struct Consts {
     struct API {
         static let baseUrl = URL(string: "http://127.0.0.1:8000/api")!
+        static let googleUrl = URL(string: "https://customsearch.googleapis.com/")!
         static let tokenHeader = "Authorization"
+        static let googleSearchAPIKey = "AIzaSyChm0R0hmc0bDP-wQcn7tLrWMPRGa1kRiw"
     }
     
     struct Constraints {
