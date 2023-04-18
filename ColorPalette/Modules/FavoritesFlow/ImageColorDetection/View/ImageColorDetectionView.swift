@@ -13,12 +13,15 @@ struct ImageColorDetectionView: View {
     @State private var showPopover = false
     @State private var showSettingsAlert = false
     @State private var avarageColorOfImage: Color = {
-        let uiColor = UIColor(named: "systemBackground") ?? .clear
-        return Color(uiColor: uiColor)
+        .systemCustomBackground
     }()
     
     private var foregroundColor: Color {
-        Color(uiColor: avarageColorOfImage.uiColor.invertColor())
+        if avarageColorOfImage == .systemCustomBackground {
+            return .invertedSystemCustomBackground
+        } else {
+            return Color(uiColor: avarageColorOfImage.uiColor.invertColor())
+        }
     }
     private var isAddDisabled: Bool {
         viewModel.output.isLimit || viewModel.output.isFavorire
