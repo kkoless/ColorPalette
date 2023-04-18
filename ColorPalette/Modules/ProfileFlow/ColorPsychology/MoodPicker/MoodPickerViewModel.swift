@@ -31,28 +31,32 @@ enum MoodType: String, Identifiable, CaseIterable {
         }
     }
     
+    var buttonText: Strings {
+        switch self {
+            case .calm: return .calm
+            case .energetic: return .energetic
+            case .romantic: return .romantic
+            case .playful: return .playful
+        }
+    }
+    
     var id: Int { hashValue }
 }
 
 final class MoodPickerViewModel: ObservableObject {
-    typealias Router = PopRoutable
-    
     let input: Input
     @Published var output: Output
     
     private let colorManager: ColorManager
-    private weak var router: Router?
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: Router? = nil) {
+    init() {
         self.input = Input()
         self.output = Output()
         
         self.colorManager = .shared
-        self.router = router
         
-        bindTaps()
         bindMood()
         
         print("\(self) INIT")
@@ -67,12 +71,6 @@ final class MoodPickerViewModel: ObservableObject {
 }
 
 private extension MoodPickerViewModel {
-    func bindTaps() {
-        input.backTap
-            .sink { [weak self] _ in self?.router?.pop() }
-            .store(in: &cancellable)
-    }
-    
     func bindMood() {
         input.moodSelected
             .sink { [weak self] moodType in
@@ -89,7 +87,6 @@ private extension MoodPickerViewModel {
 extension MoodPickerViewModel {
     struct Input {
         let moodSelected: PassthroughSubject<MoodType, Never> = .init()
-        let backTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {

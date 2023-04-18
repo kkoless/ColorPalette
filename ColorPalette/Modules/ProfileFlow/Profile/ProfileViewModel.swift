@@ -78,7 +78,7 @@ private extension ProfileViewModel {
             .store(in: &cancellable)
         
         input.colorPsychologyTap
-            .sink { [weak self] _ in self?.router?.navigateToMoodPickerScreen() }
+            .sink { [weak self] _ in self?.router?.navigateToColorPsychologyScreen() }
             .store(in: &cancellable)
         
         input.signInTap

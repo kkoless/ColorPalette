@@ -67,6 +67,13 @@ extension AppColor {
         
         return ColorPalette(colors: appColors)
     }
+    
+    func getSimilarPalette() -> ColorPalette {
+        let appColors = Array(self.uiColor.getSimilarColors(threshold: 0.04).prefix(4))
+            .map { AppColor(uiColor: $0) }
+        
+        return ColorPalette(colors: appColors)
+    }
 }
 
 extension AppColor: Hashable {

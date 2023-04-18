@@ -18,7 +18,7 @@ protocol AuthorizationRoutable: AnyObject {
 }
 
 protocol ColorPsychologyRoutable: AnyObject {
-    func navigateToMoodPickerScreen()
+    func navigateToColorPsychologyScreen()
 }
 
 final class ProfileCoordinator: Coordinatable {
@@ -56,9 +56,23 @@ extension ProfileCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func navigateToMoodPickerScreen() {
-        let viewModel = MoodPickerViewModel(router: self)
-        let view = MoodPickerView(viewModel: viewModel)
+    func navigateToColorPalette(palette: ColorPalette) {
+        let viewModel = ColorPaletteInfoViewModel(palette: palette)
+        let view = ColorPaletteView(viewModel: viewModel, palette: palette)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToColorInfo(color: AppColor) {
+        let viewModel = ColorInfoViewModel(color: color)
+        let view = ColorInfoView(viewModel: viewModel, appColor: color)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToColorPsychologyScreen() {
+        let viewModel = ColorPsychologyViewModel(router: self)
+        let view = ColorPsychologyView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -97,3 +111,4 @@ extension ProfileCoordinator: DismissRoutable {}
 extension ProfileCoordinator: ProfileRoutable {}
 extension ProfileCoordinator: AuthorizationRoutable {}
 extension ProfileCoordinator: ColorPsychologyRoutable {}
+extension ProfileCoordinator: InfoRoutable {}

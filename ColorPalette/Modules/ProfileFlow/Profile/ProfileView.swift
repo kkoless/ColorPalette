@@ -77,7 +77,7 @@ private extension ProfileView {
         VStack {
             HStack {
                 Image(systemName: "eye")
-                Text("Color Psychology")
+                Text(.colorPsychology)
                 Spacer()
             }
             

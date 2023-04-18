@@ -84,4 +84,24 @@ enum Strings: String {
     case tritanomaly
     case achromatopsia
     case achromatomaly
+    
+    case colorPsychology
+    case moods
+    
+    case calm
+    case romantic
+    case playful
+    case energetic
+    
+    case colorPsychologyTitle
+    case colorPsychologyText1
+    case colorPsychologyText2
+    case colorPsychologyHeadline1
+    case colorPsychologyText3
+    case colorPsychologyText4
+    case colorPsychologyHeadline2
+    case colorPsychologyText5
+    case colorPsychologyText6
+    case colorPsychologyHeadline3
+    case colorPsychologyText7
 }
