@@ -36,14 +36,18 @@ struct CustomNavigationBarView: View {
     @State private var titleText: Strings
     
     private var backAction: () -> Void
+    
     private var foregroundColor: Color {
-        Color(uiColor: backgroundColor.uiColor.invertColor())
+        if backgroundColor == .systemCustomBackground {
+            return .invertedSystemCustomBackground
+        } else {
+            return Color(uiColor: backgroundColor.uiColor.invertColor())
+        }
     }
     
     init(backAction: @escaping () -> Void,
          titleText: Strings = .none,
-         backgroundColor: Color = .init(uiColor: UIColor(named: "systemBackground") ?? .systemBackground)
-    ) {
+         backgroundColor: Color = .systemCustomBackground) {
         self.backAction = backAction
         self.titleText = titleText
         self.backgroundColor = backgroundColor

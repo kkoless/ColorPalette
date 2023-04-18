@@ -9,12 +9,16 @@ import UIKit
 import SwiftUI
 
 protocol ProfileRoutable: AnyObject {
-    func pop()
-    func dismiss()
-    
     func navigateToProfileScreen()
+}
+
+protocol AuthorizationRoutable: AnyObject {
     func navigateToAuthorizationScreen()
     func navigateToRegistrationScreen()
+}
+
+protocol ColorPsychologyRoutable: AnyObject {
+    func navigateToColorPsychologyScreen()
 }
 
 final class ProfileCoordinator: Coordinatable {
@@ -40,7 +44,7 @@ final class ProfileCoordinator: Coordinatable {
 #endif
 }
 
-extension ProfileCoordinator: ProfileRoutable {
+extension ProfileCoordinator {
     func pop() { navigationController.popViewController(animated: true) }
     func dismiss() { navigationController.dismiss(animated: true) }
     
@@ -49,6 +53,27 @@ extension ProfileCoordinator: ProfileRoutable {
         let profileView = ProfileView(viewModel: viewModel)
             .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: profileView)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToColorPalette(palette: ColorPalette) {
+        let viewModel = ColorPaletteInfoViewModel(palette: palette)
+        let view = ColorPaletteView(viewModel: viewModel, palette: palette)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToColorInfo(color: AppColor) {
+        let viewModel = ColorInfoViewModel(color: color)
+        let view = ColorInfoView(viewModel: viewModel, appColor: color)
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToColorPsychologyScreen() {
+        let viewModel = ColorPsychologyViewModel(router: self)
+        let view = ColorPsychologyView(viewModel: viewModel)
+        let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -80,3 +105,10 @@ extension ProfileCoordinator: ProfileRoutable {
         navigationController.present(vc, animated: true)
     }
 }
+
+extension ProfileCoordinator: PopRoutable {}
+extension ProfileCoordinator: DismissRoutable {}
+extension ProfileCoordinator: ProfileRoutable {}
+extension ProfileCoordinator: AuthorizationRoutable {}
+extension ProfileCoordinator: ColorPsychologyRoutable {}
+extension ProfileCoordinator: InfoRoutable {}

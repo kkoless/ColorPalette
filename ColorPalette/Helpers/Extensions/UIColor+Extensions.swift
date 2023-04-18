@@ -19,6 +19,14 @@ extension Color {
     var uiColor: UIColor {
         return UIColor(self)
     }
+    
+    static var systemCustomBackground: Color {
+        .init(.systemCustomBackground)
+    }
+    
+    static var invertedSystemCustomBackground: Color {
+        .init(.invertedSystemCustomBackground)
+    }
 }
 
 extension UIColor {
@@ -42,6 +50,14 @@ extension UIColor {
     
     convenience init(_ appColor: AppColor) {
         self.init(hexString: appColor.hex, alpha: appColor.alpha)
+    }
+    
+    static var systemCustomBackground: UIColor {
+        .init(named: "systemBackground")!
+    }
+    
+    static var invertedSystemCustomBackground: UIColor {
+        .init(named: "invertedSystemBackground")!
     }
 }
 

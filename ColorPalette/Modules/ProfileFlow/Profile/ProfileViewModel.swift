@@ -9,16 +9,18 @@ import Foundation
 import Combine
 
 final class ProfileViewModel: ObservableObject {
+    typealias Routable = AuthorizationRoutable & ColorPsychologyRoutable
+    
     let input: Input
     @Published var output: Output
     
     private let profileManager: ProfileManager
     private let service: ProfileServiceProtocol
-    private weak var router: ProfileRoutable?
+    private weak var router: Routable?
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: ProfileRoutable? = nil,
+    init(router: Routable? = nil,
          service: ProfileServiceProtocol = AuthorizationNetworkService.shared) {
         self.input = Input()
         self.output = Output()
@@ -75,6 +77,10 @@ private extension ProfileViewModel {
             .sink { language in LocalizationService.shared.language = language }
             .store(in: &cancellable)
         
+        input.colorPsychologyTap
+            .sink { [weak self] _ in self?.router?.navigateToColorPsychologyScreen() }
+            .store(in: &cancellable)
+        
         input.signInTap
             .sink { [weak self] _ in self?.router?.navigateToAuthorizationScreen() }
             .store(in: &cancellable)
@@ -88,7 +94,10 @@ private extension ProfileViewModel {
 extension ProfileViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
+        
         let languageTap: PassthroughSubject<Language, Never> = .init()
+        let colorPsychologyTap: PassthroughSubject<Void, Never> = .init()
+        
         let signInTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()
     }

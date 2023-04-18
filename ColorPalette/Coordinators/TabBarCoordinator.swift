@@ -119,6 +119,6 @@ extension TabBarCoordinator: TabBarCoordinatorProtocol {
 
 private extension TabBarCoordinator {
     func configureTabBar() {
-        tabBarController.tabBar.backgroundColor = UIColor(named: "systemBackground")
+        tabBarController.tabBar.backgroundColor = .systemCustomBackground
     }
 }

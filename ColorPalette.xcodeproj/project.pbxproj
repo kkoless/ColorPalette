@@ -41,12 +41,16 @@
 		E54263F329389CD4003334FE /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263F229389CD4003334FE /* Provider.swift */; };
 		E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54263F429389DCD003334FE /* CredentialsManager.swift */; };
 		E5446F1E29717216004EC2B5 /* InclusiveColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5446F1D29717216004EC2B5 /* InclusiveColor.swift */; };
+		E54C553D29EF0F1F006B68A1 /* ColorPsychologyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54C553C29EF0F1F006B68A1 /* ColorPsychologyViewModel.swift */; };
 		E54CC9E1299F7B5C0066DD6D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54CC9E0299F7B5C0066DD6D /* Array+Extensions.swift */; };
 		E54D10E829CF612700D1C9BC /* GoogleSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54D10E729CF612700D1C9BC /* GoogleSearchAPI.swift */; };
 		E54D10EB29CF6AFA00D1C9BC /* GoogleSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54D10EA29CF6AFA00D1C9BC /* GoogleSearchRequest.swift */; };
 		E54E48F529347D1F0078B12B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */; };
 		E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54E48FB29349C3E0078B12B /* AppCoordinator.swift */; };
 		E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55031C229577BB80052F544 /* FavoriteManager.swift */; };
+		E553B3C329EC31F1008EC16C /* ColorPsychologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E553B3C229EC31F1008EC16C /* ColorPsychologyView.swift */; };
+		E553B3C529EC3614008EC16C /* MoodPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E553B3C429EC3614008EC16C /* MoodPickerView.swift */; };
+		E553B3C829EC3666008EC16C /* MoodPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E553B3C729EC3666008EC16C /* MoodPickerViewModel.swift */; };
 		E5571C4C291E5925003EBAB0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5571C4B291E5925003EBAB0 /* OnboardingView.swift */; };
 		E55AD0262959DB2400E60984 /* CustomNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55AD0252959DB2400E60984 /* CustomNavigationBarView.swift */; };
 		E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BAD6929190B5700B3E233 /* AppDelegate.swift */; };
@@ -160,12 +164,16 @@
 		E54263F229389CD4003334FE /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		E54263F429389DCD003334FE /* CredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsManager.swift; sourceTree = "<group>"; };
 		E5446F1D29717216004EC2B5 /* InclusiveColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InclusiveColor.swift; sourceTree = "<group>"; };
+		E54C553C29EF0F1F006B68A1 /* ColorPsychologyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPsychologyViewModel.swift; sourceTree = "<group>"; };
 		E54CC9E0299F7B5C0066DD6D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		E54D10E729CF612700D1C9BC /* GoogleSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchAPI.swift; sourceTree = "<group>"; };
 		E54D10EA29CF6AFA00D1C9BC /* GoogleSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchRequest.swift; sourceTree = "<group>"; };
 		E54E48F429347D1F0078B12B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		E54E48FB29349C3E0078B12B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E55031C229577BB80052F544 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
+		E553B3C229EC31F1008EC16C /* ColorPsychologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPsychologyView.swift; sourceTree = "<group>"; };
+		E553B3C429EC3614008EC16C /* MoodPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodPickerView.swift; sourceTree = "<group>"; };
+		E553B3C729EC3666008EC16C /* MoodPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodPickerViewModel.swift; sourceTree = "<group>"; };
 		E5571C4B291E5925003EBAB0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E55AD0252959DB2400E60984 /* CustomNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarView.swift; sourceTree = "<group>"; };
 		E55BAD6629190B5700B3E233 /* ColorPalette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorPalette.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,6 +351,7 @@
 		E52D433B29588FB2002B11B8 /* ProfileFlow */ = {
 			isa = PBXGroup;
 			children = (
+				E553B3C129EC31D6008EC16C /* ColorPsychology */,
 				E56C0E2C29376E2A00A878CB /* Profile */,
 			);
 			path = ProfileFlow;
@@ -471,6 +480,25 @@
 				E5C2AEAD2937401D00508DF4 /* RegistrationScreen */,
 			);
 			path = AuthorizationFlow;
+			sourceTree = "<group>";
+		};
+		E553B3C129EC31D6008EC16C /* ColorPsychology */ = {
+			isa = PBXGroup;
+			children = (
+				E553B3C229EC31F1008EC16C /* ColorPsychologyView.swift */,
+				E553B3C629EC3654008EC16C /* MoodPicker */,
+				E54C553C29EF0F1F006B68A1 /* ColorPsychologyViewModel.swift */,
+			);
+			path = ColorPsychology;
+			sourceTree = "<group>";
+		};
+		E553B3C629EC3654008EC16C /* MoodPicker */ = {
+			isa = PBXGroup;
+			children = (
+				E553B3C429EC3614008EC16C /* MoodPickerView.swift */,
+				E553B3C729EC3666008EC16C /* MoodPickerViewModel.swift */,
+			);
+			path = MoodPicker;
 			sourceTree = "<group>";
 		};
 		E55AD0242959DB0C00E60984 /* NavigationBar */ = {
@@ -1022,6 +1050,7 @@
 				E504B2022954C88100996662 /* ImagePicker.swift in Sources */,
 				E54263EB29388B0B003334FE /* UserDefaultsKey.swift in Sources */,
 				E5BC2D562993860C00EBFFAB /* ProfileMapper.swift in Sources */,
+				E553B3C529EC3614008EC16C /* MoodPickerView.swift in Sources */,
 				E55BAD6A29190B5700B3E233 /* AppDelegate.swift in Sources */,
 				E55F6F892955C23700A8B935 /* Decodable+Extensions.swift in Sources */,
 				E52D434029589011002B11B8 /* FavoritesView.swift in Sources */,
@@ -1033,6 +1062,7 @@
 				E56C0E3129376E6400A878CB /* GeneralView.swift in Sources */,
 				E5B64A8329E4323B00D5A082 /* GoogleSearchNetworkService.swift in Sources */,
 				E596B249295F0FAF00B64BA8 /* ColorPalette.xcdatamodeld in Sources */,
+				E553B3C329EC31F1008EC16C /* ColorPsychologyView.swift in Sources */,
 				E5F2DB86299790AD009CF20B /* AddNewColorToFavoritesViewModel.swift in Sources */,
 				E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */,
 				E5F9C12F299616EC009B9D66 /* FavoritesAPI.swift in Sources */,
@@ -1067,6 +1097,7 @@
 				E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */,
 				E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */,
 				E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */,
+				E553B3C829EC3666008EC16C /* MoodPickerViewModel.swift in Sources */,
 				E5AA78A72994E5A8004C5FD8 /* RegistrationViewModel.swift in Sources */,
 				E588B91F2960828800D45F7C /* Profile.swift in Sources */,
 				E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */,
@@ -1103,6 +1134,7 @@
 				E5EBC207295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift in Sources */,
 				E525DCA529964C63005C2A04 /* ColorPaletteInfoViewModel.swift in Sources */,
 				E54263F529389DCD003334FE /* CredentialsManager.swift in Sources */,
+				E54C553D29EF0F1F006B68A1 /* ColorPsychologyViewModel.swift in Sources */,
 				E54263EE29389820003334FE /* AuthorizationAPI.swift in Sources */,
 				E5BC2D5329937B5D00EBFFAB /* APIError.swift in Sources */,
 				E525DCA02996363B005C2A04 /* ColorInfoViewModel.swift in Sources */,

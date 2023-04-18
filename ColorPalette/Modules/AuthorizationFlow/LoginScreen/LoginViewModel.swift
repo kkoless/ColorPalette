@@ -8,8 +8,9 @@
 import Combine
 
 final class LoginViewModel: ObservableObject {
+    typealias Routable = DismissRoutable & AuthorizationRoutable
     
-    private weak var router: ProfileRoutable?
+    private weak var router: Routable?
     private let service: AuthServiceProtocol
     private let profileManager: ProfileManager
     
@@ -18,7 +19,7 @@ final class LoginViewModel: ObservableObject {
     
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(router: ProfileRoutable? = nil,
+    init(router: Routable? = nil,
          service: AuthServiceProtocol = AuthorizationNetworkService.shared) {
         self.router = router
         self.service = service
