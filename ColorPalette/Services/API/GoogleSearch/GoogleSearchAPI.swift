@@ -34,16 +34,32 @@ extension GoogleSearchAPI: TargetType {
         
         switch self {
             case .search(let dominantColor):
+                let startIndexes: [UInt] = [1, 11, 22, 33]
+                var googleDominantColor: GoogleSearchRequest.DominantColor = .imgDominantColorUndefined
+                
                 params["key"] = Consts.API.googleSearchAPIKey
                 params["cx"] = "549275d6ab61f4ead"
-                params["q"] = "\(dominantColor.uiColor.accessibilityName.capitalized) color aesthetics"
-                params["imgColorType"] = "color"
-                params["imgType"] = "photo"
-                params["imgSize"] = "xxlarge"
-                params["num"] = 10
+                params["imgColorType"] = GoogleSearchRequest.ColorType.color.rawValue
+                params["imgType"] = GoogleSearchRequest.ImageType.photo.rawValue
+                params["imgSize"] = GoogleSearchRequest.ImageSize.XXLARGE.rawValue
                 params["siteSearch"] = "https://ru.pinterest.com/"
                 params["siteSearchFilter"] = "i"
-//                params["imgDominantColor"] = dominantColor.googleDominantColor.rawValue
+                params["start"] = startIndexes.randomElement() ?? 1
+                
+                GoogleSearchRequest.DominantColor.allCases.forEach { googleColor in
+                    if dominantColor.name.lowercased().contains(googleColor.rawValue) {
+                        googleDominantColor = googleColor
+                        print(googleColor.rawValue)
+                    }
+                }
+                
+                if googleDominantColor == .imgDominantColorUndefined {
+                    params["q"] = "\(dominantColor.uiColor.accessibilityName.capitalized) aesthetics"
+                } else {
+                    params["q"] = "\(googleDominantColor.rawValue) color aesthetics"
+                    params["imgDominantColor"] = googleDominantColor.rawValue
+                }
+                
                 return .requestParameters(parameters: params, encoding: URLEncoding.default)
         }
     }
