@@ -11,15 +11,12 @@ struct SimilarColorsView: View {
     let color: UIColor
     
     var body: some View {
-        ScrollView {
-            VStack {
-                complementColor
-                splitComplementColors
-                triadicColors
-                tetradicColors
-                analagousColors
-            }
-            .padding()
+        VStack {
+            complementColor
+            splitComplementColors
+            triadicColors
+            tetradicColors
+            analagousColors
         }
     }
 }
@@ -36,6 +33,7 @@ private extension SimilarColorsView {
                 .opacity(color.alphaValue)
                 .frame(height: 30)
                 .cornerRadius(10)
+                .shadow(radius: 7)
         }
         .padding()
     }
@@ -52,6 +50,7 @@ private extension SimilarColorsView {
                     .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
+                    .shadow(radius: 7)
             }
         }
         .padding()
@@ -69,6 +68,7 @@ private extension SimilarColorsView {
                     .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
+                    .shadow(radius: 7)
             }
         }
         .padding()
@@ -86,6 +86,7 @@ private extension SimilarColorsView {
                     .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
+                    .shadow(radius: 7)
             }
         }
         .padding()
@@ -103,6 +104,7 @@ private extension SimilarColorsView {
                     .opacity($0.alphaValue)
                     .frame(height: 30)
                     .cornerRadius(10)
+                    .shadow(radius: 7)
             }
         }
         .padding()

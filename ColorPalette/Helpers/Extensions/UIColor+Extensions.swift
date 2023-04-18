@@ -334,7 +334,7 @@ extension UIColor {
             }
         }
         
-        return Array(similarColors.prefix(4))
+        return Array(similarColors.prefix(10))
     }
     
     func generateColorPalette(numberOfColors: UInt) -> [UIColor] {

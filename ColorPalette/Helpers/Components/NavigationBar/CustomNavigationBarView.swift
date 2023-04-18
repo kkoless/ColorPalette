@@ -100,7 +100,7 @@ extension CustomNavigationBarView {
 struct CustomNavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            CustomNavigationBarView(backAction: {}, titleText: .palettes)
+            CustomNavigationBarView(backAction: {})
                 .trailingItems {
                     Button(action: {}) {
                         Image(systemName: "plus")
