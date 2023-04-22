@@ -17,6 +17,8 @@
 		E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF960295353E200534E82 /* ColorPaletteCell.swift */; };
 		E50BF9632953563200534E82 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF9622953563200534E82 /* UIColor+Extensions.swift */; };
 		E50CDA782961ABF30002F468 /* SamplePalettesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */; };
+		E512A34329F3F79700F5BAF3 /* ApplyPaletteToImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A34229F3F79700F5BAF3 /* ApplyPaletteToImageView.swift */; };
+		E512A34529F3F8AB00F5BAF3 /* ApplyPaletteToImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A34429F3F8AB00F5BAF3 /* ApplyPaletteToImageViewModel.swift */; };
 		E516748329914E9E00667979 /* AuthorizationNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516748229914E9E00667979 /* AuthorizationNetworkService.swift */; };
 		E51674852991543100667979 /* ServerProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51674842991543100667979 /* ServerProfileModel.swift */; };
 		E51C00BA29E5719500CFED24 /* AdditionalColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C00B929E5719500CFED24 /* AdditionalColorInfoView.swift */; };
@@ -124,6 +126,7 @@
 		E5DF3A0F29785ABC008100E8 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DF3A0E29785ABC008100E8 /* PermissionsManager.swift */; };
 		E5E6F61329780057000AC4A2 /* CameraColorDetectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6F61229780057000AC4A2 /* CameraColorDetectionViewModel.swift */; };
 		E5EBC207295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EBC206295CB05E00467A6D /* AddNewColorToPaletteViewModel.swift */; };
+		E5EF426729F41E74009CEACC /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = E5EF426629F41E74009CEACC /* CombineExt */; };
 		E5F2DB8329978AF3009CF20B /* AddNewColorToFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F2DB8229978AF3009CF20B /* AddNewColorToFavoritesView.swift */; };
 		E5F2DB86299790AD009CF20B /* AddNewColorToFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F2DB85299790AD009CF20B /* AddNewColorToFavoritesViewModel.swift */; };
 		E5F3C482295F5403000DDD36 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3C481295F5403000DDD36 /* CoreDataManager.swift */; };
@@ -142,6 +145,8 @@
 		E50BF960295353E200534E82 /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
 		E50BF9622953563200534E82 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E50CDA772961ABF30002F468 /* SamplePalettesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesViewModel.swift; sourceTree = "<group>"; };
+		E512A34229F3F79700F5BAF3 /* ApplyPaletteToImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPaletteToImageView.swift; sourceTree = "<group>"; };
+		E512A34429F3F8AB00F5BAF3 /* ApplyPaletteToImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPaletteToImageViewModel.swift; sourceTree = "<group>"; };
 		E516748229914E9E00667979 /* AuthorizationNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationNetworkService.swift; sourceTree = "<group>"; };
 		E51674842991543100667979 /* ServerProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProfileModel.swift; sourceTree = "<group>"; };
 		E51C00B929E5719500CFED24 /* AdditionalColorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalColorInfoView.swift; sourceTree = "<group>"; };
@@ -266,6 +271,7 @@
 				E5056B72291914E8008C6120 /* SnapKit in Frameworks */,
 				E582446129AF6E3C00B8C0F1 /* ImageColors in Frameworks */,
 				E55BAD8B2919119D00B3E233 /* Moya in Frameworks */,
+				E5EF426729F41E74009CEACC /* CombineExt in Frameworks */,
 				E55BAD892919119D00B3E233 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +305,23 @@
 				E50BF960295353E200534E82 /* ColorPaletteCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E512A34029F3F76000F5BAF3 /* ApplyPaletteToImage */ = {
+			isa = PBXGroup;
+			children = (
+				E512A34129F3F77900F5BAF3 /* ViewModel */,
+				E512A34229F3F79700F5BAF3 /* ApplyPaletteToImageView.swift */,
+			);
+			path = ApplyPaletteToImage;
+			sourceTree = "<group>";
+		};
+		E512A34129F3F77900F5BAF3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E512A34429F3F8AB00F5BAF3 /* ApplyPaletteToImageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E51C00B729E5717D00CFED24 /* AdditionalColorInfo */ = {
@@ -364,6 +387,7 @@
 		E52D433C29588FE8002B11B8 /* GeneralFlow */ = {
 			isa = PBXGroup;
 			children = (
+				E512A34029F3F76000F5BAF3 /* ApplyPaletteToImage */,
 				E51C00B729E5717D00CFED24 /* AdditionalColorInfo */,
 				E528434629753F56005102D5 /* EditPalette */,
 				E56DD259295B5F3A003F0D29 /* ColorInfo */,
@@ -997,6 +1021,7 @@
 				E55BAD8C2919119D00B3E233 /* RxMoya */,
 				E5056B71291914E8008C6120 /* SnapKit */,
 				E582446029AF6E3C00B8C0F1 /* ImageColors */,
+				E5EF426629F41E74009CEACC /* CombineExt */,
 			);
 			productName = ColorPalette;
 			productReference = E55BAD6629190B5700B3E233 /* ColorPalette.app */;
@@ -1031,6 +1056,7 @@
 				E55BAD872919119D00B3E233 /* XCRemoteSwiftPackageReference "Moya" */,
 				E5056B70291914E8008C6120 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E582445F29AF6E3C00B8C0F1 /* XCRemoteSwiftPackageReference "ImageColors" */,
+				E5EF426529F41E74009CEACC /* XCRemoteSwiftPackageReference "CombineExt" */,
 			);
 			productRefGroup = E55BAD6729190B5700B3E233 /* Products */;
 			projectDirPath = "";
@@ -1085,6 +1111,7 @@
 				E54E48FC29349C3E0078B12B /* AppCoordinator.swift in Sources */,
 				E5C2AEAF2937416300508DF4 /* LoginView.swift in Sources */,
 				E59345C329953CBE007B55F1 /* MoyaError+Extensions.swift in Sources */,
+				E512A34529F3F8AB00F5BAF3 /* ApplyPaletteToImageViewModel.swift in Sources */,
 				E57AF3AA2957222F0002FC75 /* SimilarColorsView.swift in Sources */,
 				E54263F02938998D003334FE /* Consts.swift in Sources */,
 				E5A72A7C2997EF3E00670202 /* Language.swift in Sources */,
@@ -1105,6 +1132,7 @@
 				E5F9C13129961D9D009B9D66 /* FavoritesNetworkService.swift in Sources */,
 				E53C65DD2980F8A000F5C4C0 /* TabBarController.swift in Sources */,
 				E54D10EB29CF6AFA00D1C9BC /* GoogleSearchRequest.swift in Sources */,
+				E512A34329F3F79700F5BAF3 /* ApplyPaletteToImageView.swift in Sources */,
 				E5A72A812997F29600670202 /* Text+Extensions.swift in Sources */,
 				E57AF3AC2957315B0002FC75 /* ColorPreview.swift in Sources */,
 				E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */,
@@ -1428,6 +1456,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E5EF426529F41E74009CEACC /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1455,6 +1491,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E582445F29AF6E3C00B8C0F1 /* XCRemoteSwiftPackageReference "ImageColors" */;
 			productName = ImageColors;
+		};
+		E5EF426629F41E74009CEACC /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5EF426529F41E74009CEACC /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
 		};
 /* End XCSwiftPackageProductDependency section */
 

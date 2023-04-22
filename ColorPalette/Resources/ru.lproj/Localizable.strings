@@ -83,6 +83,9 @@ tritanomaly = "Тританомалия";
 achromatopsia = "Ахроматопсия";
 achromatomaly = "Ахроматомия";
 
+before = "До";
+after = "После";
+
 colorPsychology = "Психология цвета";
 moods = "Настроения";
 

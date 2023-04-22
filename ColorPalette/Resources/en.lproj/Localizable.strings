@@ -83,6 +83,9 @@ tritanomaly = "Tritanomaly";
 achromatopsia = "Achromatopsia";
 achromatomaly = "Achromatomaly";
 
+before = "Before";
+after = "After";
+
 colorPsychology = "Color Psychology";
 moods = "Moods";
 

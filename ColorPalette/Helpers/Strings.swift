@@ -85,6 +85,9 @@ enum Strings: String {
     case achromatopsia
     case achromatomaly
     
+    case before
+    case after
+    
     case colorPsychology
     case moods
     

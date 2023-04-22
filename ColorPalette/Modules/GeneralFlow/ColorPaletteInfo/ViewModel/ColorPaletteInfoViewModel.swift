@@ -10,6 +10,7 @@ import Combine
 
 final class ColorPaletteInfoViewModel: ObservableObject {
     typealias FavoriteService = FavoritesAddServiceProtocol & FavoritesDeleteServiceProtocol
+    typealias Routable = ApplyPaletteToImageRoutable
 
     let input: Input
     @Published var output: Output
@@ -18,17 +19,22 @@ final class ColorPaletteInfoViewModel: ObservableObject {
     private let service: FavoriteService
     private let favoritesManager: FavoriteManager
     
+    private weak var router: Routable?
+    
     private var cancellable: Set<AnyCancellable> = .init()
     
-    init(palette: ColorPalette,
+    init(router: Routable? = nil,
+         palette: ColorPalette,
          service: FavoriteService = FavoritesNetworkService.shared) {
         self.input = Input()
         self.output = Output()
         
+        self.router = router
         self.palette = palette
         self.favoritesManager = .shared
         self.service = service
         
+        bindTaps()
         bindRequests()
         
         print("\(self) INIT")
@@ -43,6 +49,15 @@ final class ColorPaletteInfoViewModel: ObservableObject {
 }
 
 private extension ColorPaletteInfoViewModel {
+    func bindTaps() {
+        input.applyToImageTap
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.router?.navigateToApplyToImage(palette: self.palette)
+            }
+            .store(in: &cancellable)
+    }
+    
     func bindRequests() {
         input.onAppear
             .map { [weak self] _ -> Bool in
@@ -119,11 +134,13 @@ extension ColorPaletteInfoViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
         let favTap: PassthroughSubject<Void, Never> = .init()
+        let applyToImageTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
         var isFavorite: Bool = false
         var pdfURL: URL?
         var showShareSheet: Bool = false
+        var isFreeProfile: Bool = !ProfileManager.shared.profile.role.boolValue
     }
 }

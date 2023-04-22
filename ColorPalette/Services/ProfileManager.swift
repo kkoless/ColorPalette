@@ -8,7 +8,7 @@
 import Combine
 
 final class ProfileManager: ObservableObject {
-    @Published private(set) var profile: Profile? = nil
+    @Published private(set) var profile: Profile = .getEmptyProfile()
     
     static let shared = ProfileManager()
     
@@ -38,6 +38,6 @@ extension ProfileManager {
     func logOut() {
         CredentialsManager.shared.isGuest = true
         CredentialsManager.shared.token = nil
-        self.profile = nil
+        self.profile = .getEmptyProfile()
     }
 }

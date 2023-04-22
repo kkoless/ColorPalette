@@ -13,8 +13,8 @@ final class DefaultAlamofireSession: Alamofire.Session {
     static let shared: DefaultAlamofireSession = {
         let configuration = URLSessionConfiguration.default
         configuration.headers = .default
-        configuration.timeoutIntervalForRequest = 120 // as seconds, you can set your request timeout
-        configuration.timeoutIntervalForResource = 120 // as seconds, you can set your resource timeout
+        configuration.timeoutIntervalForRequest = 180 // as seconds, you can set your request timeout
+        configuration.timeoutIntervalForResource = 180 // as seconds, you can set your resource timeout
         configuration.requestCachePolicy = .useProtocolCachePolicy
         return DefaultAlamofireSession(configuration: configuration)
     }()
