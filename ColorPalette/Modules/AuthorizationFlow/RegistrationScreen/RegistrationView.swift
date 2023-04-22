@@ -9,13 +9,14 @@ import SwiftUI
 
 struct RegistrationView: View {
     @StateObject var viewModel: RegistrationViewModel
-    @EnvironmentObject private var localizationService: LocalizationService
+    @Environment(\.dismiss) private var dismiss: DismissAction
     
     @State private var loginText = ""
     @State private var passwordText = ""
     
     var body: some View {
         VStack {
+            topBar
             header
             registrationForm
             Button(action: registerButtonTap) {
@@ -28,6 +29,49 @@ struct RegistrationView: View {
 }
 
 private extension RegistrationView {
+    var topBar: some View {
+        HStack {
+            backButton
+            Spacer()
+        }
+        .padding(.bottom)
+    }
+    
+    var emailTextField: some View {
+        ZStack {
+            TextField("", text: $loginText)
+            if loginText.isEmpty {
+                HStack {
+                    Text(.email).foregroundColor(.gray)
+                    Spacer()
+                }
+                .allowsHitTesting(false)
+            }
+        }
+    }
+    
+    var passwordTextField: some View {
+        ZStack {
+            SecureField("", text: $passwordText)
+            if passwordText.isEmpty {
+                HStack {
+                    Text(.password).foregroundColor(.gray)
+                    Spacer()
+                }
+                .allowsHitTesting(false)
+            }
+        }
+    }
+    
+    var backButton: some View {
+        Button(action: { dismiss() }) {
+            Image(systemName: "multiply")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.invertedSystemCustomBackground)
+        }
+    }
+    
     var header: some View {
         HStack {
             Text(.registration)
@@ -41,13 +85,13 @@ private extension RegistrationView {
         VStack {
             VStack(spacing: 20) {
                 Group {
-                    TextField("email", text: $loginText)
-                    SecureField("password", text: $passwordText)
+                    emailTextField
+                    passwordTextField
                 }
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 1)
+                        .stroke(Color.invertedSystemCustomBackground, lineWidth: 1)
                 )
             }
             
@@ -65,6 +109,5 @@ private extension RegistrationView {
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView(viewModel: RegistrationViewModel())
-            .environmentObject(LocalizationService.shared)
     }
 }

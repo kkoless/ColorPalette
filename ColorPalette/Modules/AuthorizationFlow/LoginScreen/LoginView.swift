@@ -9,13 +9,14 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
-    @EnvironmentObject private var localizationService: LocalizationService
+    @Environment(\.dismiss) private var dismiss: DismissAction
     
     @State private var loginText = ""
     @State private var passwordText = ""
     
     var body: some View {
         VStack {
+            topBar
             header
             loginForm
             buttonsBlock
@@ -25,6 +26,23 @@ struct LoginView: View {
 }
 
 private extension LoginView {
+    var topBar: some View {
+        HStack {
+            backButton
+            Spacer()
+        }
+        .padding(.bottom)
+    }
+    
+    var backButton: some View {
+        Button(action: { dismiss() }) {
+            Image(systemName: "multiply")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.invertedSystemCustomBackground)
+        }
+    }
+    
     var header: some View {
         HStack {
             Text(.authorization)
@@ -38,18 +56,44 @@ private extension LoginView {
         VStack {
             VStack(spacing: 20) {
                 Group {
-                    TextField("email", text: $loginText)
-                    SecureField("password", text: $passwordText)
+                    emailTextField
+                    passwordTextField
                 }
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 1)
+                        .stroke(Color.invertedSystemCustomBackground, lineWidth: 1)
                 )
                 
             }
         }
         .padding([.top, .bottom])
+    }
+    
+    var emailTextField: some View {
+        ZStack {
+            TextField("", text: $loginText)
+            if loginText.isEmpty {
+                HStack {
+                    Text(.email).foregroundColor(.gray)
+                    Spacer()
+                }
+                .allowsHitTesting(false)
+            }
+        }
+    }
+    
+    var passwordTextField: some View {
+        ZStack {
+            SecureField("", text: $passwordText)
+            if passwordText.isEmpty {
+                HStack {
+                    Text(.password).foregroundColor(.gray)
+                    Spacer()
+                }
+                .allowsHitTesting(false)
+            }
+        }
     }
     
     var buttonsBlock: some View {
@@ -79,6 +123,5 @@ private extension LoginView {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(viewModel: LoginViewModel(router: nil))
-            .environmentObject(LocalizationService.shared)
     }
 }

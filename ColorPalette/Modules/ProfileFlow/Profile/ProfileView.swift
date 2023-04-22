@@ -140,7 +140,7 @@ private extension ProfileView {
                         .frame(width: type.iconSize.0,
                                height: type.iconSize.1)
                         .foregroundColor(type.foregroundColor)
-                        .padding(.leading, 5)
+                        .padding(.trailing)
                 }
             }
             
@@ -162,7 +162,7 @@ private extension ProfileView {
                 .frame(height: 1)
         }
         .padding(.bottom, 10)
-        
+        .onTapGesture { changeSubscriptionPlanTap() }
     }
     
     var appVersion: some View {
@@ -177,6 +177,12 @@ private extension ProfileView {
     
     func colorPsychoTap() {
         viewModel.input.colorPsychologyTap.send()
+    }
+    
+    func changeSubscriptionPlanTap() {
+        if CredentialsManager.shared.isGuest {
+            viewModel.input.signInTap.send()
+        }
     }
     
     func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
