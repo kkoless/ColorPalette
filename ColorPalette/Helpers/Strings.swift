@@ -47,6 +47,7 @@ enum Strings: String {
     case password
     case search
     
+    case skip
     case cancel
     case edit
     case logOut

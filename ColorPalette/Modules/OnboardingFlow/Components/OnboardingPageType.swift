@@ -7,55 +7,50 @@
 
 import UIKit
 
-enum OnboardingPageType: CaseIterable, Hashable, Identifiable {
+enum OnboardingPageType: Int, CaseIterable, Identifiable {
     case firstPage
     case secondPage
     case thirdPage
     
     var id: Int {
         switch self {
-            case .firstPage:
-                return 0
-            case .secondPage:
-                return 1
-            case .thirdPage:
-                return 2
+            case .firstPage: return 0
+            case .secondPage: return 1
+            case .thirdPage: return 2
         }
     }
-    
 }
 
 extension OnboardingPageType {
-    var text: String {
+    var text: Strings {
         switch self {
-            case .firstPage:
-                return String(.firstOnboardingText)
-            case .secondPage:
-                return String(.secondOnboardingText)
-            case .thirdPage:
-                return String(.thirdOnboardingText)
+            case .firstPage: return .firstOnboardingText
+            case .secondPage: return .secondOnboardingText
+            case .thirdPage: return .thirdOnboardingText
         }
     }
     
-    var image: UIImage? {
+    var image: UIImage {
         switch self {
-            case .firstPage:
-                return UIImage(named: "firstOnboarding")
-            case .secondPage:
-                return UIImage(named: "secondOnboarding")
-            case .thirdPage:
-                return UIImage(named: "thirdOnboarding")
+            case .firstPage: return UIImage(named: "firstOnboarding")!
+            case .secondPage: return UIImage(named: "secondOnboarding")!
+            case .thirdPage: return UIImage(named: "thirdOnboarding")!
+        }
+    }
+    
+    var backgroundColor: UIColor {
+        switch self {
+            case .firstPage: return .onboardingColor1
+            case .secondPage: return .onboardingColor2
+            case .thirdPage: return .onboardingColor3
         }
     }
     
     var foregroundColor: UIColor {
         switch self {
-            case .firstPage:
-                return .systemPink
-            case .secondPage:
-                return .systemRed
-            case .thirdPage:
-                return .systemBlue
+            case .firstPage: return .onboardingColor1.invertColor()
+            case .secondPage: return .onboardingColor2.invertColor()
+            case .thirdPage: return .onboardingColor3.invertColor()
         }
     }
 }

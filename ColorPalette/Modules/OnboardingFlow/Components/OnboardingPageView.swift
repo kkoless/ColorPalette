@@ -10,59 +10,36 @@ import Combine
 
 struct OnboardingPageView: View {
     @ObservedObject var viewModel: OnboardingViewModel
-    @EnvironmentObject private var localizationService: LocalizationService
     
     let pageType: OnboardingPageType
     
     var body: some View {
         VStack {
-            Spacer()
             mainImage
-            Spacer()
-            Text(pageType.text)
-            Spacer()
-            buttons
-            Spacer()
+            textView
         }
-        .frame(maxWidth: .infinity)
-        .foregroundColor(Color(pageType.foregroundColor))
-    }
-    
-}
-
-private extension OnboardingPageView {
-    @ViewBuilder var mainImage: some View {
-        if let image = pageType.image {
-            Image(uiImage: image)
-                .padding()
-        }
-    }
-    
-    @ViewBuilder var buttons: some View {
-        if pageType.isLastPage {
-            VStack(spacing: 30) {
-                Button(action: { skipTap() }) {
-                    Text(.next)
-                }
-            }
-            .padding()
-        }
+        .padding()
     }
 }
 
 private extension OnboardingPageView {
-    func signInTap() {
-        viewModel.input.signInTap.send()
+    var mainImage: some View {
+        Image(uiImage: pageType.image)
+            .resizable()
+            .frame(width: 250, height: 250)
+            .padding(.bottom, 20)
     }
     
-    func skipTap() {
-        viewModel.input.skipTap.send()
+    var textView: some View {
+        Text(pageType.text)
+            .multilineTextAlignment(.center)
+            .font(.headline)
     }
 }
 
 struct OnboardingPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingPageView(viewModel: OnboardingViewModel(), pageType: .thirdPage)
-            .environmentObject(LocalizationService.shared)
+        OnboardingPageView(viewModel: OnboardingViewModel(),
+                           pageType: .firstPage)
     }
 }

@@ -51,14 +51,14 @@ extension UIColor {
     convenience init(_ appColor: AppColor) {
         self.init(hexString: appColor.hex, alpha: appColor.alpha)
     }
-    
-    static var systemCustomBackground: UIColor {
-        .init(named: "systemBackground")!
-    }
-    
-    static var invertedSystemCustomBackground: UIColor {
-        .init(named: "invertedSystemBackground")!
-    }
+}
+
+extension UIColor {
+    static var systemCustomBackground: UIColor { .init(named: "systemBackground")! }
+    static var invertedSystemCustomBackground: UIColor { .init(named: "invertedSystemBackground")! }
+    static var onboardingColor1: UIColor { .init(named: "onboardingColor1")! }
+    static var onboardingColor2: UIColor { .init(named: "onboardingColor2")! }
+    static var onboardingColor3: UIColor { .init(named: "onboardingColor3")! }
 }
 
 extension UIColor {

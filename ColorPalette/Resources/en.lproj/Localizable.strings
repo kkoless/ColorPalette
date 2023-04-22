@@ -9,9 +9,9 @@
 none = "";
 paletteEditor = "Palette editor";
 
-firstOnboardingText = "First Onboarding";
-secondOnboardingText = "Second Onboarding";
-thirdOnboardingText = "Third Onboarding";
+firstOnboardingText = "Welcome to Triad!\n\nDiscover a world of colors and palettes for your design needs with our app. Our extensive library offers the perfect shades for any project, be it for personal or professional use.";
+secondOnboardingText = "Capture colors in two ways:\n\nBy detecting colors on an image or by pointing your camera at an object. Get accurate color information instantly and use it for your creative needs.";
+thirdOnboardingText = "We offer both free and paid subscription plans in our app\n\nChoose the plan that suits your needs and enjoy all the benefits of our app!";
 
 russian = "Russian";
 english = "English";
@@ -45,6 +45,7 @@ email = "Email";
 password = "Password";
 search = "Search";
 
+skip = "Skip";
 cancel = "Cancel";
 edit = "Edit";
 logOut = "Log out";

@@ -44,19 +44,11 @@ private extension OnboardingViewModel {
                 self?.router?.navigateToGeneralFlow()
             }
             .store(in: &cancellable)
-        
-        input.signInTap
-            .sink { [weak self] _ in
-                OnboardingManager.shared.isOnboarding = true
-                self?.router?.navigateToAuthorizationFlow()
-            }
-            .store(in: &cancellable)
     }
 }
 
 extension OnboardingViewModel {
     struct Input {
-        let signInTap: PassthroughSubject<Void, Never> = .init()
         let skipTap: PassthroughSubject<Void, Never> = .init()
     }
     

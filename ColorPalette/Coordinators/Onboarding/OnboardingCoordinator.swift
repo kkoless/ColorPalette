@@ -10,7 +10,6 @@ import SwiftUI
 
 protocol OnboardingRoutable: AnyObject {
     func navigateToOnboarding()
-    func navigateToAuthorizationFlow()
     func navigateToGeneralFlow()
 }
 
@@ -44,10 +43,6 @@ extension OnboardingCoordinator: OnboardingRoutable {
             .environmentObject(LocalizationService.shared)
         let vc = UIHostingController(rootView: view)
         navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func navigateToAuthorizationFlow() {
-        finishDelegate?.coordinatorDidFinish(childCoordinator: self, next: .login)
     }
     
     func navigateToGeneralFlow() {
