@@ -17,12 +17,14 @@ struct RegistrationView: View {
     var body: some View {
         VStack {
             topBar
+            Spacer()
             header
             registrationForm
             Button(action: registerButtonTap) {
                 Text(.createAccount)
             }
             .padding([.top, .bottom])
+            Spacer()
         }
         .padding()
     }

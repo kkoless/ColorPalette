@@ -17,6 +17,7 @@ struct LoginView: View {
     var body: some View {
         VStack {
             topBar
+            Spacer()
             header
             loginForm
             buttonsBlock
