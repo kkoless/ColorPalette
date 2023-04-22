@@ -65,10 +65,11 @@ struct ColorPaletteView: View {
 
 private extension ColorPaletteView {
     var topBar: some View {
-        HStack(spacing: 25) {
+        HStack(spacing: 20) {
             backButton
             Spacer()
             blindButton
+            applyToImageButton
             shareButton
             favoriteButton
         }
@@ -83,6 +84,18 @@ private extension ColorPaletteView {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(invertedColor)
+        }
+    }
+    
+    @ViewBuilder
+    var applyToImageButton: some View {
+        if !viewModel.output.isFreeProfile {
+            Button(action: { applyToImageTap() }, label: {
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 27, height: 22)
+                    .foregroundColor(invertedColor)
+            })
         }
     }
     
@@ -128,6 +141,11 @@ private extension ColorPaletteView {
     
     func changeFavoriteState() {
         viewModel.input.favTap.send()
+    }
+    
+    func applyToImageTap() {
+        dismiss()
+        viewModel.input.applyToImageTap.send()
     }
     
     func copyTap(_ appColor: AppColor, type: ColorType) {

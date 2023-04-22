@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class ImageColorDetectionViewModel: ObservableObject {
-    typealias Routable = DetectionRoutable & PopRoutable & InfoRoutable
+    typealias Routable = PopRoutable & InfoRoutable
     
     let input: Input
     @Published var output: Output

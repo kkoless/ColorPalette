@@ -84,10 +84,17 @@ extension FavoritesCoordinator {
     }
     
     func navigateToColorPalette(palette: ColorPalette) {
-        let viewModel = ColorPaletteInfoViewModel(palette: palette)
+        let viewModel = ColorPaletteInfoViewModel(router: self, palette: palette)
         let view = ColorPaletteView(viewModel: viewModel, palette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
+    }
+    
+    func navigateToApplyToImage(palette: ColorPalette) {
+        let viewModel = ApplyPaletteToImageViewModel(router: self, palette: palette)
+        let view = ApplyPaletteToImageView(viewModel: viewModel, palette: palette)
+        let vc = UIHostingController(rootView: view)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToColorInfo(color: AppColor) {
@@ -168,6 +175,7 @@ extension FavoritesCoordinator: DismissRoutable {}
 extension FavoritesCoordinator: LibraryRoutable {}
 extension FavoritesCoordinator: DetectionRoutable {}
 extension FavoritesCoordinator: InfoRoutable {}
+extension FavoritesCoordinator: ApplyPaletteToImageRoutable {}
 extension FavoritesCoordinator: EditRoutable {}
 extension FavoritesCoordinator: AddRoutable {}
 extension FavoritesCoordinator: FavoriteRoutable {}

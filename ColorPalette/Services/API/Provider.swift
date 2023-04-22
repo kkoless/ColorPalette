@@ -7,9 +7,21 @@
 
 import Foundation
 import Moya
+import Alamofire
+
+final class DefaultAlamofireSession: Alamofire.Session {
+    static let shared: DefaultAlamofireSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.headers = .default
+        configuration.timeoutIntervalForRequest = 180 // as seconds, you can set your request timeout
+        configuration.timeoutIntervalForResource = 180 // as seconds, you can set your resource timeout
+        configuration.requestCachePolicy = .useProtocolCachePolicy
+        return DefaultAlamofireSession(configuration: configuration)
+    }()
+}
 
 final class Provider<P>: MoyaProvider<P> where P: TargetType {
-    convenience init() {
+    convenience init(session: Alamofire.Session = .default) {
         let endpointClosure = { (target: P) -> Endpoint in
             let defaultEndpointMapping = MoyaProvider
                 .defaultEndpointMapping(for: target)
@@ -21,6 +33,7 @@ final class Provider<P>: MoyaProvider<P> where P: TargetType {
         let plugins: [PluginType] = [logger]
         
         self.init(endpointClosure: endpointClosure,
+                  session: session,
                   plugins: plugins)
     }
 }

@@ -66,8 +66,8 @@ private extension ProfileViewModel {
         
         profileManager.$profile
             .sink { [weak self] profile in
-                self?.output.email = profile?.email ?? ""
-                self?.output.role = profile?.role ?? .free
+                self?.output.email = profile.email
+                self?.output.role = profile.role
             }
             .store(in: &cancellable)
     }

@@ -8,15 +8,27 @@
 import Foundation
 
 
-struct Profile {
+struct Profile: Equatable {
     let email: String
     let role: Role
     let accessTokenData: TokenData
+    
+    static func == (lhs: Profile, rhs: Profile) -> Bool {
+        lhs.email == rhs.email && lhs.accessTokenData.access_token == rhs.accessTokenData.access_token
+    }
+    
+    static func getEmptyProfile() -> Profile {
+        Profile(email: "", role: .free, accessTokenData: TokenData.getEmptyTokenData())
+    }
 }
 
-struct TokenData {
+struct TokenData: Equatable {
     let access_token: String
     let expire_time: String
+    
+    static func getEmptyTokenData() -> TokenData {
+        TokenData(access_token: "", expire_time: "")
+    }
 }
 
 enum Role {
