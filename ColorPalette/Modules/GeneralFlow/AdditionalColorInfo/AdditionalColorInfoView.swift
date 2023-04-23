@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdditionalColorInfoView: View {
-    @StateObject var viewModel: AdditionalColorInfoViewModel
+    @ObservedObject var viewModel: AdditionalColorInfoViewModel
     
     let color: AppColor
     
@@ -28,12 +28,6 @@ struct AdditionalColorInfoView: View {
 }
 
 private extension AdditionalColorInfoView {
-    var navBar: some View {
-        CustomNavigationBarView(
-            backAction: { viewModel.input.backTap.send() }
-        )
-    }
-    
     var content: some View {
         ScrollView {
             similarsColors

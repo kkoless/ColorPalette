@@ -98,8 +98,12 @@ extension FavoritesCoordinator {
     }
     
     func navigateToColorInfo(color: AppColor) {
-        let viewModel = ColorInfoViewModel(color: color)
-        let view = ColorInfoView(viewModel: viewModel, appColor: color)
+        let colorInfoViewModel = ColorInfoViewModel(color: color)
+        let additionalColorInfoViewModel = AdditionalColorInfoViewModel(color: color)
+        let view = ColorInfoPagesView(colorInfoViewModel: colorInfoViewModel,
+                                      additionalColorInfoViewModel: additionalColorInfoViewModel,
+                                      appColor: color)
+        
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
     }

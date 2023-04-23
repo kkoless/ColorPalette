@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class SampleColorsViewModel: ObservableObject {
-    typealias Routable = PopToRootRoutable & AdditionalColorInfoRoutable & InfoRoutable
+    typealias Routable = PopToRootRoutable & InfoRoutable
     
     let input: Input
     @Published var output: Output
@@ -49,12 +49,6 @@ private extension SampleColorsViewModel {
     }
     
     func bindTaps() {
-        input.infoTap
-            .sink { [weak self] appColor in
-                self?.router?.navigateToAdditionalColorInfo(color: appColor)
-            }
-            .store(in: &cancellable)
-        
         input.colorTap
             .sink { [weak self] appColor in
                 self?.router?.navigateToColorInfo(color: appColor)
@@ -78,7 +72,6 @@ private extension SampleColorsViewModel {
 extension SampleColorsViewModel {
     struct Input {
         let searchText: CurrentValueSubject<String, Never> = .init("")
-        let infoTap: PassthroughSubject<AppColor, Never> = .init()
         let colorTap: PassthroughSubject<AppColor, Never> = .init()
         let popTap: PassthroughSubject<Void, Never> = .init()
     }

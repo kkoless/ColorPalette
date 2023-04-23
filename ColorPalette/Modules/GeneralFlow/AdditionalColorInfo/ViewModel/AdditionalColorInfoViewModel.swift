@@ -33,22 +33,22 @@ final class AdditionalColorInfoViewModel: ObservableObject {
         self.service = service
         
         bindAppear()
-        bindTaps()
         
-        print("INIT \(self)")
+        print("\(self) INIT")
     }
     
     deinit {
         cancellable.forEach { $0.cancel() }
         cancellable.removeAll()
         
-        print("DEINIT \(self)")
+        print("\(self) DEINIT")
     }
 }
 
 private extension AdditionalColorInfoViewModel {
     func bindAppear() {
         input.onAppear
+            .first()
             .flatMap { [unowned self] _ -> AnyPublisher<GoogleSearchResponse, ApiError> in
                 self.service.search(dominantColor: self.color)
             }
@@ -68,18 +68,11 @@ private extension AdditionalColorInfoViewModel {
             }
             .store(in: &cancellable)
     }
-    
-    func bindTaps() {
-        input.backTap
-            .sink { [weak self] _ in self?.router?.pop() }
-            .store(in: &cancellable)
-    }
 }
 
 extension AdditionalColorInfoViewModel {
     struct Input {
         let onAppear: PassthroughSubject<Void, Never> = .init()
-        let backTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {

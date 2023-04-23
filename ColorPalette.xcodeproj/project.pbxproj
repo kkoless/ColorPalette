@@ -29,6 +29,7 @@
 		E525DCA22996402F005C2A04 /* GeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525DCA12996402F005C2A04 /* GeneralViewModel.swift */; };
 		E525DCA529964C63005C2A04 /* ColorPaletteInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525DCA429964C63005C2A04 /* ColorPaletteInfoViewModel.swift */; };
 		E528434829753F6E005102D5 /* EditPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E528434729753F6E005102D5 /* EditPaletteView.swift */; };
+		E52AFC5329F5578E00BB281C /* ColorInfoPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52AFC5229F5578E00BB281C /* ColorInfoPagesView.swift */; };
 		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
 		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */; };
@@ -157,6 +158,7 @@
 		E525DCA12996402F005C2A04 /* GeneralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewModel.swift; sourceTree = "<group>"; };
 		E525DCA429964C63005C2A04 /* ColorPaletteInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteInfoViewModel.swift; sourceTree = "<group>"; };
 		E528434729753F6E005102D5 /* EditPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaletteView.swift; sourceTree = "<group>"; };
+		E52AFC5229F5578E00BB281C /* ColorInfoPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoPagesView.swift; sourceTree = "<group>"; };
 		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -365,6 +367,14 @@
 				E528434729753F6E005102D5 /* EditPaletteView.swift */,
 			);
 			path = EditPalette;
+			sourceTree = "<group>";
+		};
+		E52AFC5129F5576900BB281C /* PageTab */ = {
+			isa = PBXGroup;
+			children = (
+				E52AFC5229F5578E00BB281C /* ColorInfoPagesView.swift */,
+			);
+			path = PageTab;
 			sourceTree = "<group>";
 		};
 		E52D433829588E34002B11B8 /* Favorites */ = {
@@ -723,6 +733,7 @@
 		E56DD259295B5F3A003F0D29 /* ColorInfo */ = {
 			isa = PBXGroup;
 			children = (
+				E52AFC5129F5576900BB281C /* PageTab */,
 				E56DD25A295B5F58003F0D29 /* ColorInfoView.swift */,
 				E525DC9F2996363B005C2A04 /* ColorInfoViewModel.swift */,
 			);
@@ -1122,6 +1133,7 @@
 				E57A26AE291EA5C00027FAC8 /* OnboardingPageView.swift in Sources */,
 				E5DF3A0F29785ABC008100E8 /* PermissionsManager.swift in Sources */,
 				E5974FBE295C36DA00830B49 /* ImageColorDetectionViewModel.swift in Sources */,
+				E52AFC5329F5578E00BB281C /* ColorInfoPagesView.swift in Sources */,
 				E5B64A8529E43C0900D5A082 /* GoogleSearchResponse.swift in Sources */,
 				E54CC9E1299F7B5C0066DD6D /* Array+Extensions.swift in Sources */,
 				E5571C4C291E5925003EBAB0 /* OnboardingView.swift in Sources */,
