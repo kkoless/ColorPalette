@@ -49,14 +49,12 @@ private extension AdditionalColorInfoView {
     var similarsColors: some View {
         VStack {
             HStack {
-                Text("Similars colors").font(.headline)
+                Text(.similarColors).font(.headline)
                 Spacer()
             }
             
-            LazyHGrid(rows: [
-                GridItem(.fixed(60), spacing: 20),
-                GridItem(.fixed(60), spacing: 20)], spacing: 15) {
-                ForEach(color.uiColor.getSimilarColors(threshold: 0.1)) { color in
+            HStack(spacing: 15) {
+                ForEach(Array(color.uiColor.getSimilarColors(threshold: 0.1).prefix(4))) { color in
                     Color(uiColor: color)
                         .frame(width: 60, height: 60)
                         .cornerRadius(10)
@@ -71,7 +69,7 @@ private extension AdditionalColorInfoView {
     var images: some View {
         VStack {
             HStack {
-                Text("Images").font(.headline)
+                Text(.images).font(.headline)
                 Spacer()
             }
             

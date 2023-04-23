@@ -41,6 +41,9 @@ enum Strings: String {
     case createColor
     case chooseImage
     
+    case similarColors
+    case images
+    
     case favoritesEmptyState
     
     case email

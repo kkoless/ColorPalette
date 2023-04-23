@@ -39,6 +39,9 @@ colorName = "Color name";
 createColor = "Create color";
 chooseImage = "Choose image";
 
+similarColors = "Similar colors";
+images = "Images";
+
 favoritesEmptyState = "So empty here...";
 
 email = "Email";

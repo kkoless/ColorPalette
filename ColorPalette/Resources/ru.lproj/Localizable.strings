@@ -39,6 +39,9 @@ colorName = "Наименование цвета";
 createColor = "Создать цвет";
 chooseImage = "Выбрать изображение";
 
+similarColors = "Похожие цвета";
+images = "Изображения";
+
 favoritesEmptyState = "Как-то пусто тут...";
 
 email = "Почта";
