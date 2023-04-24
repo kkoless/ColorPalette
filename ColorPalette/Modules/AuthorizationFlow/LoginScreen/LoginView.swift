@@ -22,6 +22,7 @@ struct LoginView: View {
             loginForm
             buttonsBlock
         }
+        .foregroundColor(.primary)
         .padding()
     }
 }
@@ -40,7 +41,6 @@ private extension LoginView {
             Image(systemName: "multiply")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(.invertedSystemCustomBackground)
         }
     }
     
@@ -63,7 +63,7 @@ private extension LoginView {
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.invertedSystemCustomBackground, lineWidth: 1)
+                        .stroke(.primary, lineWidth: 1)
                 )
                 
             }

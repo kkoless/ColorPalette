@@ -25,6 +25,7 @@ struct EditPaletteView: View {
             buttonsBlock
         }
         .edgesIgnoringSafeArea(.top)
+        .foregroundColor(.primary)
     }
 }
 
@@ -88,7 +89,6 @@ private extension EditPaletteView {
             brightnessSliderBlock
         }
         .padding()
-        .foregroundColor(.primary)
     }
     
     var hueSliderBlock: some View {

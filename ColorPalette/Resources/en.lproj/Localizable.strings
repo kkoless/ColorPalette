@@ -19,6 +19,11 @@ english = "English";
 error = "Error";
 cameraAccessDenied = "Camera access is denied";
 
+createPaletteAlertTitle = "Are you sure?";
+createPaletteAlertMessage = "Before you go, maybe you want save this template?";
+createPaletteAlertCancel = "Stay";
+createPaletteAlertOK = "Don't save";
+
 general = "General";
 palettes = "Palettes";
 colors = "Colors";

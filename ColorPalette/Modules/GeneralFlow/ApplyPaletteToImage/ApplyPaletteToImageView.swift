@@ -40,6 +40,7 @@ struct ApplyPaletteToImageView: View {
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
+        .foregroundColor(.primary)
         .onChange(of: selection) { newValue in
             let jpegData = newValue
                 .jpegData(compressionQuality: 1)

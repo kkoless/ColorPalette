@@ -27,6 +27,7 @@ struct SubscribtionPlansInfoView: View {
             Spacer()
             subscribeButton
         }
+        .frame(maxWidth: .infinity)
         .padding()
         .background(backgroundColor)
         .foregroundColor(foregroundColor)

@@ -26,6 +26,7 @@ struct RegistrationView: View {
             .padding([.top, .bottom])
             Spacer()
         }
+        .foregroundColor(.primary)
         .padding()
     }
 }
@@ -70,7 +71,6 @@ private extension RegistrationView {
             Image(systemName: "multiply")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(.invertedSystemCustomBackground)
         }
     }
     
@@ -93,7 +93,7 @@ private extension RegistrationView {
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.invertedSystemCustomBackground, lineWidth: 1)
+                        .stroke(.primary, lineWidth: 1)
                 )
             }
             

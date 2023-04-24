@@ -24,6 +24,7 @@ struct AddNewColorToPaletteView: View {
                 Spacer()
             }
         }
+        .foregroundColor(.primary)
         .padding()
     }
 }

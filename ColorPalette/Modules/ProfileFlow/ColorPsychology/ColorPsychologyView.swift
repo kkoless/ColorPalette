@@ -19,6 +19,7 @@ struct ColorPsychologyView: View {
             }
             Spacer()
         }
+        .foregroundColor(.primary)
         .edgesIgnoringSafeArea(.top)
     }
 }

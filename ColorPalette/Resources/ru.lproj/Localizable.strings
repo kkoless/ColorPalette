@@ -19,6 +19,11 @@ english = "Английский";
 error = "Ошибка";
 cameraAccessDenied = "Доступ к камере запрещен";
 
+createPaletteAlertTitle = "Вы уверены?";
+createPaletteAlertMessage = "Прежде чем уйти, может быть, вы хотите сохранить этот шаблон?";
+createPaletteAlertCancel = "Остаться";
+createPaletteAlertOK = "Не сохранять";
+
 general = "Главная";
 palettes = "Палитры";
 colors = "Цвета";

@@ -27,6 +27,7 @@ struct AddNewColorToFavoritesView: View {
             }
             Spacer()
         }
+        .foregroundColor(.primary)
         .edgesIgnoringSafeArea(.top)
     }
 }

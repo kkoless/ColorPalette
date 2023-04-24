@@ -21,6 +21,7 @@ struct GeneralView: View {
         }
         .onAppear(perform: onAppear)
         .padding([.top, .bottom])
+        .foregroundColor(.primary)
     }
 }
 
@@ -53,7 +54,6 @@ private extension GeneralView {
             }
         }
         .padding(.trailing)
-        .foregroundColor(.primary)
     }
     
     var paletteCells: some View {

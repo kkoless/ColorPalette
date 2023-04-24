@@ -35,6 +35,7 @@ struct ProfileView: View {
             
             Spacer()
         }
+        .foregroundColor(.primary)
         .padding([.leading, .trailing])
         .onAppear(perform: onAppear)
     }

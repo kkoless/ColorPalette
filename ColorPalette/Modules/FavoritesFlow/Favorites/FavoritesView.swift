@@ -26,6 +26,7 @@ struct FavoritesView: View {
                 favoriteList
             }
         }
+        .foregroundColor(.primary)
         .onAppear(perform: onAppear)
     }
 }
@@ -145,7 +146,6 @@ private extension FavoritesView {
                         Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .frame(width: 18, height: 18)
-                            .foregroundColor(.primary)
                     }
                 }
             }

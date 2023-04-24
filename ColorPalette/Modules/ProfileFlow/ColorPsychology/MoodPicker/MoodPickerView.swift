@@ -41,6 +41,7 @@ private extension MoodPickerView {
             ForEach(viewModel.output.moods) { mood in
                 Button(action: { moodTap(with: mood) }) {
                     Text(mood.buttonText)
+                        .bold()
                 }
                 .padding(.horizontal)
             }

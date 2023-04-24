@@ -21,6 +21,11 @@ enum Strings: String {
     case error
     case cameraAccessDenied
     
+    case createPaletteAlertTitle
+    case createPaletteAlertMessage
+    case createPaletteAlertCancel
+    case createPaletteAlertOK
+    
     case general
     case palettes
     case colors

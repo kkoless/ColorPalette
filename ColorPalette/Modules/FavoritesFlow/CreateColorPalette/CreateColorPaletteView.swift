@@ -20,16 +20,17 @@ struct CreateColorPaletteView: View {
                 emptyStateView
             }
         }
-        .alert(Text("Are you sure?"), isPresented: $viewModel.output.showSaveAlert, actions: {
+        .alert(Text(.createPaletteAlertTitle), isPresented: $viewModel.output.showSaveAlert, actions: {
             Button(role: .cancel, action: { stayAlertTap() }) {
-                Text("Stay")
+                Text(.createPaletteAlertCancel)
             }
             Button(role: .destructive, action: { backAlertTap() }) {
-                Text("Don't save")
+                Text(.createPaletteAlertOK)
             }
         }, message: {
-            Text("Before you go, maybe you want save this template?")
+            Text(.createPaletteAlertMessage)
         })
+        .foregroundColor(.primary)
         .edgesIgnoringSafeArea(.top)
     }
 }
