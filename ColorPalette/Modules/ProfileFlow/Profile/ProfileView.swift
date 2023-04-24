@@ -23,7 +23,6 @@ struct ProfileView: View {
                 userInfo
                 colorPsychologyCell
                 changeLanguageCell
-                socialNetworksCell
                 
                 if viewModel.output.role == .free {
                     subcriptionInfoCell
@@ -127,29 +126,6 @@ private extension ProfileView {
         }
     }
     
-    var socialNetworksCell: some View {
-        VStack {
-            HStack {
-                Image(systemName: "network")
-                Text(.socialNetworks)
-                Spacer()
-                
-                ForEach(SocialNetwork.allCases) { type in
-                    Image(type.iconName)
-                        .resizable()
-                        .frame(width: type.iconSize.0,
-                               height: type.iconSize.1)
-                        .foregroundColor(type.foregroundColor)
-                        .padding(.trailing)
-                }
-            }
-            
-            Color.gray
-                .frame(height: 1)
-        }
-        .padding(.bottom, 10)
-    }
-    
     var subcriptionInfoCell: some View {
         VStack {
             HStack {
@@ -182,6 +158,8 @@ private extension ProfileView {
     func changeSubscriptionPlanTap() {
         if CredentialsManager.shared.isGuest {
             viewModel.input.signInTap.send()
+        } else {
+            viewModel.input.showSubscribtionPlansTap.send()
         }
     }
     

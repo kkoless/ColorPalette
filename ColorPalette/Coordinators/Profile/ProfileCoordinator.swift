@@ -21,6 +21,10 @@ protocol ColorPsychologyRoutable: AnyObject {
     func navigateToColorPsychologyScreen()
 }
 
+protocol SubscribtionsPlanInfoRoutable: AnyObject {
+    func navigateToSubscribtionsPlanInfoScreen()
+}
+
 final class ProfileCoordinator: Coordinatable {
     var childCoordinators = [Coordinatable]()
     let navigationController: UINavigationController
@@ -108,6 +112,12 @@ extension ProfileCoordinator {
         
         navigationController.present(vc, animated: true)
     }
+    
+    func navigateToSubscribtionsPlanInfoScreen() {
+        let view = SubscribtionPlansInfoView()
+        let vc = UIHostingController(rootView: view)
+        navigationController.present(vc, animated: true)
+    }
 }
 
 extension ProfileCoordinator: PopRoutable {}
@@ -116,3 +126,4 @@ extension ProfileCoordinator: ProfileRoutable {}
 extension ProfileCoordinator: AuthorizationRoutable {}
 extension ProfileCoordinator: ColorPsychologyRoutable {}
 extension ProfileCoordinator: InfoRoutable {}
+extension ProfileCoordinator: SubscribtionsPlanInfoRoutable {}

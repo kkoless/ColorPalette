@@ -9,7 +9,7 @@
 none = "";
 paletteEditor = "Palette editor";
 
-firstOnboardingText = "Welcome to Triad!\n\nDiscover a world of colors and palettes for your design needs with our app. Our extensive library offers the perfect shades for any project, be it for personal or professional use.";
+firstOnboardingText = "Welcome to Triad!\n\nDiscover a world of colors and palettes for your design needs with our app.";
 secondOnboardingText = "Capture colors in two ways:\n\nBy detecting colors on an image or by pointing your camera at an object. Get accurate color information instantly and use it for your creative needs.";
 thirdOnboardingText = "We offer both free and paid subscription plans in our app\n\nChoose the plan that suits your needs and enjoy all the benefits of our app!";
 
@@ -117,3 +117,10 @@ colorPsychologyHeadline3 = "Conclusion";
 
 colorPsychologyText7 = "Color is an integral part of our lives, and understanding its effect on our moods and emotions can help us make informed choices in our personal and professional lives. Whether you're designing a logo, decorating your home, or simply choosing what to wear, being aware of color psychology can help you make choices that reflect your personality and values, and create the mood and atmosphere you desire.";
 
+subscribe = "Subscribe";
+paidSubscribtionInfoText = "Upgrade to our premium version and unlock even more features to take your color exploration to the next level.";
+paidSubscribtionInfo1Point = "Create color palettes with up to 5 colors";
+paidSubscribtionInfo2Point = "Choose from up to 100 pre-made color palettes";
+paidSubscribtionInfo3Point = "Save an unlimited number of color palettes";
+paidSubscribtionInfo4Point = "Save an unlimited number of colors";
+paidSubscribtionInfo5Point = "Apply your chosen palette to any image";

@@ -111,4 +111,12 @@ enum Strings: String {
     case colorPsychologyText6
     case colorPsychologyHeadline3
     case colorPsychologyText7
+    
+    case subscribe
+    case paidSubscribtionInfoText
+    case paidSubscribtionInfo1Point
+    case paidSubscribtionInfo2Point
+    case paidSubscribtionInfo3Point
+    case paidSubscribtionInfo4Point
+    case paidSubscribtionInfo5Point
 }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class ProfileViewModel: ObservableObject {
-    typealias Routable = AuthorizationRoutable & ColorPsychologyRoutable
+    typealias Routable = AuthorizationRoutable & ColorPsychologyRoutable & SubscribtionsPlanInfoRoutable
     
     let input: Input
     @Published var output: Output
@@ -81,6 +81,10 @@ private extension ProfileViewModel {
             .sink { [weak self] _ in self?.router?.navigateToColorPsychologyScreen() }
             .store(in: &cancellable)
         
+        input.showSubscribtionPlansTap
+            .sink { [weak self] _ in self?.router?.navigateToSubscribtionsPlanInfoScreen() }
+            .store(in: &cancellable)
+        
         input.signInTap
             .sink { [weak self] _ in self?.router?.navigateToAuthorizationScreen() }
             .store(in: &cancellable)
@@ -97,6 +101,7 @@ extension ProfileViewModel {
         
         let languageTap: PassthroughSubject<Language, Never> = .init()
         let colorPsychologyTap: PassthroughSubject<Void, Never> = .init()
+        let showSubscribtionPlansTap: PassthroughSubject<Void, Never> = .init()
         
         let signInTap: PassthroughSubject<Void, Never> = .init()
         let logOutTap: PassthroughSubject<Void, Never> = .init()

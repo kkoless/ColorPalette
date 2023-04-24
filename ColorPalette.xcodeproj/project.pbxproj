@@ -30,6 +30,7 @@
 		E525DCA529964C63005C2A04 /* ColorPaletteInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525DCA429964C63005C2A04 /* ColorPaletteInfoViewModel.swift */; };
 		E528434829753F6E005102D5 /* EditPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E528434729753F6E005102D5 /* EditPaletteView.swift */; };
 		E52AFC5329F5578E00BB281C /* ColorInfoPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52AFC5229F5578E00BB281C /* ColorInfoPagesView.swift */; };
+		E52AFC5729F568B500BB281C /* SubscribtionPlansInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52AFC5629F568B500BB281C /* SubscribtionPlansInfoView.swift */; };
 		E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */; };
 		E52D434029589011002B11B8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52D433F29589011002B11B8 /* FavoritesView.swift */; };
 		E5360BBE295B25A900785CA3 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */; };
@@ -103,7 +104,6 @@
 		E5A72A812997F29600670202 /* Text+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A802997F29600670202 /* Text+Extensions.swift */; };
 		E5A72A832997F2CB00670202 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A72A822997F2CB00670202 /* Strings.swift */; };
 		E5AA78A72994E5A8004C5FD8 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA78A62994E5A8004C5FD8 /* RegistrationViewModel.swift */; };
-		E5B5940A299FC91E00C8783F /* SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B59409299FC91E00C8783F /* SocialNetwork.swift */; };
 		E5B5940C299FCF1F00C8783F /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B5940B299FCF1F00C8783F /* Bundle+Extensions.swift */; };
 		E5B64A8329E4323B00D5A082 /* GoogleSearchNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B64A8229E4323B00D5A082 /* GoogleSearchNetworkService.swift */; };
 		E5B64A8529E43C0900D5A082 /* GoogleSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B64A8429E43C0900D5A082 /* GoogleSearchResponse.swift */; };
@@ -159,6 +159,7 @@
 		E525DCA429964C63005C2A04 /* ColorPaletteInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteInfoViewModel.swift; sourceTree = "<group>"; };
 		E528434729753F6E005102D5 /* EditPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaletteView.swift; sourceTree = "<group>"; };
 		E52AFC5229F5578E00BB281C /* ColorInfoPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInfoPagesView.swift; sourceTree = "<group>"; };
+		E52AFC5629F568B500BB281C /* SubscribtionPlansInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribtionPlansInfoView.swift; sourceTree = "<group>"; };
 		E52D433929588E55002B11B8 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
 		E52D433F29589011002B11B8 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E5360BBD295B25A900785CA3 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -232,7 +233,6 @@
 		E5A72A802997F29600670202 /* Text+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extensions.swift"; sourceTree = "<group>"; };
 		E5A72A822997F2CB00670202 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		E5AA78A62994E5A8004C5FD8 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
-		E5B59409299FC91E00C8783F /* SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetwork.swift; sourceTree = "<group>"; };
 		E5B5940B299FCF1F00C8783F /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		E5B64A8229E4323B00D5A082 /* GoogleSearchNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchNetworkService.swift; sourceTree = "<group>"; };
 		E5B64A8429E43C0900D5A082 /* GoogleSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchResponse.swift; sourceTree = "<group>"; };
@@ -326,21 +326,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		E51C00B729E5717D00CFED24 /* AdditionalColorInfo */ = {
-			isa = PBXGroup;
-			children = (
-				E51C00B829E5718600CFED24 /* ViewModel */,
-				E51C00B929E5719500CFED24 /* AdditionalColorInfoView.swift */,
-			);
-			path = AdditionalColorInfo;
-			sourceTree = "<group>";
-		};
-		E51C00B829E5718600CFED24 /* ViewModel */ = {
+		E51C00B729E5717D00CFED24 /* AdditionalColorInfoView */ = {
 			isa = PBXGroup;
 			children = (
 				E51C00BB29E5762600CFED24 /* AdditionalColorInfoViewModel.swift */,
+				E51C00B929E5719500CFED24 /* AdditionalColorInfoView.swift */,
 			);
-			path = ViewModel;
+			path = AdditionalColorInfoView;
 			sourceTree = "<group>";
 		};
 		E525DCA329964C54005C2A04 /* ViewModel */ = {
@@ -377,6 +369,23 @@
 			path = PageTab;
 			sourceTree = "<group>";
 		};
+		E52AFC5429F5655C00BB281C /* ColorInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				E56DD25A295B5F58003F0D29 /* ColorInfoView.swift */,
+				E525DC9F2996363B005C2A04 /* ColorInfoViewModel.swift */,
+			);
+			path = ColorInfoView;
+			sourceTree = "<group>";
+		};
+		E52AFC5529F568A000BB281C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E52AFC5629F568B500BB281C /* SubscribtionPlansInfoView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E52D433829588E34002B11B8 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,7 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				E512A34029F3F76000F5BAF3 /* ApplyPaletteToImage */,
-				E51C00B729E5717D00CFED24 /* AdditionalColorInfo */,
 				E528434629753F56005102D5 /* EditPalette */,
 				E56DD259295B5F3A003F0D29 /* ColorInfo */,
 				E55F6F7A295597C400A8B935 /* SampleColors */,
@@ -715,6 +723,7 @@
 		E56C0E2C29376E2A00A878CB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E52AFC5529F568A000BB281C /* Components */,
 				E56C0E2D29376E3600A878CB /* ProfileView.swift */,
 				E588B92029608D6200D45F7C /* ProfileViewModel.swift */,
 			);
@@ -734,8 +743,8 @@
 			isa = PBXGroup;
 			children = (
 				E52AFC5129F5576900BB281C /* PageTab */,
-				E56DD25A295B5F58003F0D29 /* ColorInfoView.swift */,
-				E525DC9F2996363B005C2A04 /* ColorInfoViewModel.swift */,
+				E51C00B729E5717D00CFED24 /* AdditionalColorInfoView */,
+				E52AFC5429F5655C00BB281C /* ColorInfoView */,
 			);
 			path = ColorInfo;
 			sourceTree = "<group>";
@@ -850,7 +859,6 @@
 				E588B91E2960828800D45F7C /* Profile.swift */,
 				E5446F1D29717216004EC2B5 /* InclusiveColor.swift */,
 				E5A72A7B2997EF3E00670202 /* Language.swift */,
-				E5B59409299FC91E00C8783F /* SocialNetwork.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -1198,8 +1206,8 @@
 				E54D10E829CF612700D1C9BC /* GoogleSearchAPI.swift in Sources */,
 				E56C0E2E29376E3600A878CB /* ProfileView.swift in Sources */,
 				E5DE73C629BF6ACB00F148D2 /* AddColorTextField.swift in Sources */,
+				E52AFC5729F568B500BB281C /* SubscribtionPlansInfoView.swift in Sources */,
 				E57A26BE291ECB0A0027FAC8 /* CameraColorDetectionViewController.swift in Sources */,
-				E5B5940A299FC91E00C8783F /* SocialNetwork.swift in Sources */,
 				E5B6C70B2958602C007E6158 /* ColorPaletteRowView.swift in Sources */,
 				E5BAE92429542C54005DF70B /* ColorTypePickerView.swift in Sources */,
 				E55031C329577BB80052F544 /* FavoriteManager.swift in Sources */,
