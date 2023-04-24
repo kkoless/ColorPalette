@@ -1,2 +1,2 @@
 # ColorPalette
-Current on "development" branch
+Currently on "development" branch
