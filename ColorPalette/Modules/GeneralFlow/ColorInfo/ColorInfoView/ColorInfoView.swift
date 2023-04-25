@@ -11,8 +11,8 @@ struct ColorInfoView: View {
     @ObservedObject var viewModel: ColorInfoViewModel
     @Environment(\.dismiss) private var dismiss: DismissAction
     
-    @State private var isBlind: Bool = false
-    @State private var blindColor: AppColor = .getClear()
+    @Binding var isBlind: Bool
+    @Binding var blindColor: AppColor
     
     let appColor: AppColor
     
@@ -157,6 +157,11 @@ private extension ColorInfoView {
 struct ColorInfoView_Previews: PreviewProvider {
     static var previews: some View {
         let appColor = AppColor(name: "African Violet", hex: "#B284BE", alpha: 0.95)
-        ColorInfoView(viewModel: ColorInfoViewModel(color: appColor), appColor: appColor)
+        ColorInfoView(
+            viewModel: ColorInfoViewModel(color: appColor),
+            isBlind: .constant(false),
+            blindColor: .constant(appColor),
+            appColor: appColor
+        )
     }
 }
