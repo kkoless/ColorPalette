@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -23,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let navigationController = UINavigationController()
-        coordinator = MainCoordinator(navigationController: navigationController)
+        coordinator = AppCoordinator(navigationController)
         coordinator?.start()
         
         window.rootViewController = navigationController

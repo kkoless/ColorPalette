@@ -1,0 +1,131 @@
+/* 
+  Localizable.strings
+  ColorPalette
+
+  Created by Кирилл Колесников on 11.11.2022.
+  
+*/
+
+none = "";
+paletteEditor = "Palette editor";
+
+firstOnboardingText = "Welcome to Triad!\n\nDiscover a world of colors and palettes for your design needs with our app.";
+secondOnboardingText = "Capture colors in two ways:\n\nBy detecting colors on an image or by pointing your camera at an object. Get accurate color information instantly and use it for your creative needs.";
+thirdOnboardingText = "We offer both free and paid subscription plans in our app\n\nChoose the plan that suits your needs and enjoy all the benefits of our app!";
+
+russian = "Russian";
+english = "English";
+
+error = "Error";
+cameraAccessDenied = "Camera access is denied";
+
+createPaletteAlertTitle = "Are you sure?";
+createPaletteAlertMessage = "Before you go, maybe you want save this template?";
+createPaletteAlertCancel = "Stay";
+createPaletteAlertOK = "Don't save";
+
+general = "General";
+palettes = "Palettes";
+colors = "Colors";
+favorites = "Favorites";
+profile = "Profile";
+settings = "Settings";
+registration = "Registration";
+authorization = "Authorization";
+
+createAccount = "Create account";
+addPalette = "Add palette";
+createPalette = "Create palette";
+chooseFromLibrary = "Choose from library";
+generateFromImage = "Generate from image";
+generateFromCamera = "Generate from camera";
+addColor = "Add color";
+colorName = "Color name";
+createColor = "Create color";
+chooseImage = "Choose image";
+
+similarColors = "Similar colors";
+images = "Images";
+
+favoritesEmptyState = "So empty here...";
+
+email = "Email";
+password = "Password";
+search = "Search";
+
+skip = "Skip";
+cancel = "Cancel";
+edit = "Edit";
+logOut = "Log out";
+signIn = "Sign in";
+signUp = "Sign up";
+next = "Next";
+showMore = "Show more";
+reset = "Reset";
+apply = "Apply";
+language = "Language";
+aboutApp = "About app";
+socialNetworks = "Social networks";
+guest = "Guest";
+
+freePlan = "Free plan";
+paidPlan = "Paid plan";
+changeSubscriptionPlan = "Change subscription plan";
+
+hue = "Hue";
+saturation = "Saturation";
+brightness = "Brightness";
+
+complement = "Complement";
+splitComplement = "Split Complement";
+triadic = "Triadic";
+tetradic = "Tetradic";
+analagous = "Analagous";
+
+normal = "Normal";
+protanopia = "Protanopia";
+protanomaly = "Protanomaly";
+deuteranopia = "Deuteranopia";
+deuteranomaly = "Deuteranomaly";
+tritanopia = "Tritanopia";
+tritanomaly = "Tritanomaly";
+achromatopsia = "Achromatopsia";
+achromatomaly = "Achromatomaly";
+
+before = "Before";
+after = "After";
+
+colorPsychology = "Color Psychology";
+moods = "Moods";
+
+calm = "Calm";
+romantic = "Romantic";
+playful = "Playful";
+energetic = "Energetic";
+
+colorPsychologyTitle = "Color Psychology: How Color Affects Our Moods and Feelings";
+
+colorPsychologyText1 = "Color is all around us. We see it in nature, in the clothes we wear, in the products we buy, and in the spaces we inhabit. But did you know that color can also affect our moods and emotions?";
+colorPsychologyText2 = "Color psychology is the study of how colors affect our perception, mood, and behavior. It explores how the colors we see can influence the way we feel and act, and how different colors can evoke different emotional responses.";
+
+colorPsychologyHeadline1 = "The Power of Color";
+
+colorPsychologyText3 = "Color is a powerful tool in the world of marketing, branding, and design. Companies use color to convey specific messages, create emotional connections with customers, and influence purchasing decisions.";
+colorPsychologyText4 = "For example, blue is often associated with trust, stability, and reliability. That's why many financial institutions use shades of blue in their logos and branding. Red, on the other hand, is associated with energy, excitement, and passion, which is why it's often used in advertising for food and drinks.";
+
+colorPsychologyHeadline2 = "The Effect of Color on Our Moods";
+
+colorPsychologyText5 = "Colors can also affect our moods and emotions on a personal level. For example, yellow is often associated with happiness, optimism, and positivity. Green is associated with nature, growth, and balance. Red can evoke feelings of excitement and passion, but also aggression and anger.";
+colorPsychologyText6 = "The way we perceive color can also be influenced by our cultural and personal experiences. In some cultures, white is associated with purity and innocence, while in others it can be a symbol of mourning.";
+
+colorPsychologyHeadline3 = "Conclusion";
+
+colorPsychologyText7 = "Color is an integral part of our lives, and understanding its effect on our moods and emotions can help us make informed choices in our personal and professional lives. Whether you're designing a logo, decorating your home, or simply choosing what to wear, being aware of color psychology can help you make choices that reflect your personality and values, and create the mood and atmosphere you desire.";
+
+subscribe = "Subscribe";
+paidSubscribtionInfoText = "Upgrade to our premium version and unlock even more features to take your color exploration to the next level.";
+paidSubscribtionInfo1Point = "Create color palettes with up to 5 colors";
+paidSubscribtionInfo2Point = "Choose from up to 100 pre-made color palettes";
+paidSubscribtionInfo3Point = "Save an unlimited number of color palettes";
+paidSubscribtionInfo4Point = "Save an unlimited number of colors";
+paidSubscribtionInfo5Point = "Apply your chosen palette to any image";

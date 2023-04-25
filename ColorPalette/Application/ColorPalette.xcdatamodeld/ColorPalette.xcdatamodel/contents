@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AppColorModel" representedClassName="AppColorModel" syncable="YES" codeGenerationType="class">
+        <attribute name="alpha" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="hex" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <entity name="ColorPaletteModel" representedClassName="ColorPaletteModel" syncable="YES" codeGenerationType="class">
+        <attribute name="colors" attributeType="Binary"/>
+    </entity>
+</model>
