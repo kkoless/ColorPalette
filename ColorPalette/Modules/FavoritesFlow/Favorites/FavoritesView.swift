@@ -113,7 +113,7 @@ private extension FavoritesView {
                     Text(!isEdit ? .edit : .cancel)
                 }
                 .buttonStyle(.plain)
-                .foregroundColor(isEdit ? Color.red : Color.blue)
+                .foregroundColor(isEdit ? Color.red : Color.primary)
             }
             
             paletteCells
