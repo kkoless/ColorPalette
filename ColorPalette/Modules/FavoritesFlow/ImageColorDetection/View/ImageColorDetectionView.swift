@@ -11,6 +11,7 @@ struct ImageColorDetectionView: View {
     @State private var isSet: Bool = false
     @State private var selection: UIImage = .init()
     @State private var showPopover = false
+    @State private var imageTap = false
     @State private var showSettingsAlert = false
     @State private var avarageColorOfImage: Color = {
         .systemCustomBackground
@@ -58,6 +59,9 @@ struct ImageColorDetectionView: View {
                 avarageColorOfImage = Color(uiColor: uiColor)
             }
         }
+        .sheet(isPresented: $imageTap, onDismiss: { imageTap = false }) {
+            ImagePreviewerView(image: selection)
+        }
     }
 }
 
@@ -83,6 +87,7 @@ private extension ImageColorDetectionView {
             Image(uiImage: selection)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
+                .onTapGesture { imageTap = true }
                 
         } else { Color.gray }
     }

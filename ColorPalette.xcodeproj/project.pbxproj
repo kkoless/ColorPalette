@@ -71,6 +71,7 @@
 		E55F6F842955AFBE00A8B935 /* ColorRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55F6F832955AFBE00A8B935 /* ColorRowView.swift */; };
 		E55F6F872955B6AC00A8B935 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55F6F862955B6AC00A8B935 /* SearchBarView.swift */; };
 		E55F6F892955C23700A8B935 /* Decodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55F6F882955C23700A8B935 /* Decodable+Extensions.swift */; };
+		E562120A2A0CD80500575BF2 /* ImagePreviewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56212092A0CD80500575BF2 /* ImagePreviewerView.swift */; };
 		E56C0E1F293764ED00A878CB /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E1E293764ED00A878CB /* TabBarCoordinator.swift */; };
 		E56C0E23293765C700A878CB /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E22293765C700A878CB /* TabBarPage.swift */; };
 		E56C0E2529376CD000A878CB /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C0E2429376CD000A878CB /* ProfileCoordinator.swift */; };
@@ -199,6 +200,7 @@
 		E55F6F832955AFBE00A8B935 /* ColorRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowView.swift; sourceTree = "<group>"; };
 		E55F6F862955B6AC00A8B935 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E55F6F882955C23700A8B935 /* Decodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Extensions.swift"; sourceTree = "<group>"; };
+		E56212092A0CD80500575BF2 /* ImagePreviewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewerView.swift; sourceTree = "<group>"; };
 		E56C0E1E293764ED00A878CB /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		E56C0E22293765C700A878CB /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		E56C0E2429376CD000A878CB /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		E504B1FC2954A35300996662 /* ImageColorDetection */ = {
 			isa = PBXGroup;
 			children = (
+				E56212082A0CD7E700575BF2 /* Components */,
 				E5DF3A1129786F19008100E8 /* View */,
 				E5DF3A1029786F0B008100E8 /* ViewModel */,
 				E5974FBF295C3ADF00830B49 /* ImageColorDetectionManager.swift */,
@@ -671,6 +674,14 @@
 				E57AF3A92957222F0002FC75 /* SimilarColorsView.swift */,
 				E57AF3AB2957315B0002FC75 /* ColorPreview.swift */,
 				E56DD257295B5B15003F0D29 /* ColorBlockView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E56212082A0CD7E700575BF2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E56212092A0CD80500575BF2 /* ImagePreviewerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1159,6 +1170,7 @@
 				E525DCA22996402F005C2A04 /* GeneralViewModel.swift in Sources */,
 				E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */,
 				E50BF961295353E200534E82 /* ColorPaletteCell.swift in Sources */,
+				E562120A2A0CD80500575BF2 /* ImagePreviewerView.swift in Sources */,
 				E504B1FB29549FCD00996662 /* UIImage+Extensions.swift in Sources */,
 				E553B3C829EC3666008EC16C /* MoodPickerViewModel.swift in Sources */,
 				E5AA78A72994E5A8004C5FD8 /* RegistrationViewModel.swift in Sources */,

@@ -17,6 +17,7 @@ struct ApplyPaletteToImageView: View {
     @State private var selection: UIImage = .init()
     
     @State private var showPopover = false
+    @State private var imageTap = (image: UIImage(), isShow: false)
     @State private var showSettingsAlert = false
     
     var body: some View {
@@ -46,6 +47,9 @@ struct ApplyPaletteToImageView: View {
                 .jpegData(compressionQuality: 1)
             viewModel.input.imageAppear.send(jpegData)
         }
+        .sheet(isPresented: $imageTap.isShow, onDismiss: { imageTap.isShow = false }) {
+            ImagePreviewerView(image: imageTap.image)
+        }
     }
 }
 
@@ -61,7 +65,7 @@ private extension ApplyPaletteToImageView {
                 Image(uiImage: selection)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                
+                    .onTapGesture { imageTap = (image: selection, isShow: true) }
             } else { Color.gray }
         }
         .frame(width: 200, height: 200)
@@ -77,7 +81,7 @@ private extension ApplyPaletteToImageView {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                
+                    .onTapGesture { imageTap = (image: uiImage, isShow: true) }
             } else {
                 ZStack {
                     Color.gray
