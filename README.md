@@ -2,7 +2,7 @@
 Actual code currently based on "development" branch
 
 ## Onboarding
-<video src="https://user-images.githubusercontent.com/65421720/234251098-8f14caa5-c71d-4237-be6d-1c0400739a48.mp4"></video>
+https://github.com/kkoless/TriadApp/assets/65421720/19c6a2a3-aa39-45a4-b00b-9aceeffc5e43
 
 ## General
 <p float="left">
@@ -12,10 +12,10 @@ Actual code currently based on "development" branch
 </p>
 
 ## Color Info
-<video src="https://user-images.githubusercontent.com/65421720/234254604-86697e11-f3e9-4343-8b92-5deca8367877.mp4"></video>
+https://github.com/kkoless/TriadApp/assets/65421720/9f52857f-21ec-495a-86c6-9b8685a1c030
 
 ## Color Palette Info
-<video src="https://user-images.githubusercontent.com/65421720/234255044-5beeb735-5c18-4f60-977d-54723a05b537.mp4"></video>
+https://user-images.githubusercontent.com/65421720/234255044-5beeb735-5c18-4f60-977d-54723a05b537.mp4
 
 ## Color Detection (Camera and Image)
 <img src="https://user-images.githubusercontent.com/65421720/234255609-e16f82b1-b619-49f8-a707-2d504f4c21f7.png" width="325"/>
