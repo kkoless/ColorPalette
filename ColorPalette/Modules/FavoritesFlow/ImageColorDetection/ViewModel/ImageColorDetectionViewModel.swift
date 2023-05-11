@@ -86,6 +86,10 @@ extension ImageColorDetectionViewModel {
             .sink { [weak self] _ in self?.router?.pop() }
             .store(in: &cancellable)
         
+        input.imageTap
+            .sink { [weak self] imageData in self?.router?.pop() }
+            .store(in: &cancellable)
+        
         input.addToFavoriteTap
             .filter { _ in CredentialsManager.shared.isGuest }
             .sink { [weak self] palette in
@@ -118,6 +122,7 @@ extension ImageColorDetectionViewModel: ViewModelErrorHandleProtocol {
         let addToFavoriteTap: PassthroughSubject<ColorPalette, Never> = .init()
         let showPaletteTap: PassthroughSubject<ColorPalette, Never> = .init()
         let backTap: PassthroughSubject<Void, Never> = .init()
+        let imageTap: PassthroughSubject<Data?, Never> = .init()
     }
     
     struct Output {
