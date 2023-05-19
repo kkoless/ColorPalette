@@ -35,6 +35,6 @@ final class ImageColorDetectionManager: ObservableObject {
 private extension ImageColorDetectionManager {
     func getColors(from data: Data) -> [UIColor] {
         let image = UIImage(data: data) ?? UIImage()
-        return image.colors(maxCount: 4, scale: 0.1)
+        return image.colors(maxCount: 4, scale: 0.05)
     }
 }
