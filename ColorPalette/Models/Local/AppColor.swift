@@ -36,6 +36,14 @@ extension AppColor: Codable {
         self.alpha = uiColor.cgColor.alpha
     }
     
+    init(r: Int, g: Int, b: Int, alpha: CGFloat = 1.0) {
+        let uiColor = UIColor(red: CGFloat(r) / 255.0,
+                              green: CGFloat(g) / 255.0,
+                              blue: CGFloat(b) / 255.0,
+                              alpha: alpha)
+        self.init(uiColor: uiColor)
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)

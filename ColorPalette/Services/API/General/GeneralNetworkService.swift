@@ -11,7 +11,7 @@ import Combine
 import Moya
 
 protocol ReplaceImageColorsServiceProtocol {
-    func replaceColors(imageData: Data, palette: ColorPalette) -> AnyPublisher<Data, ApiError>
+    func replaceColors(imageData: Data, palette: ColorPalette) -> AnyPublisher<([AppColor], Data), ApiError>
 }
 
 final class GeneralNetworkService: MoyaErrorParserable {
@@ -29,10 +29,11 @@ final class GeneralNetworkService: MoyaErrorParserable {
 }
 
 extension GeneralNetworkService: ReplaceImageColorsServiceProtocol {
-    func replaceColors(imageData: Data, palette: ColorPalette) -> AnyPublisher<Data, ApiError> {
+    func replaceColors(imageData: Data, palette: ColorPalette) -> AnyPublisher<([AppColor], Data), ApiError> {
         provider.requestPublisher(.colorsReplace(imageData: imageData, palette: palette))
             .filterSuccessfulStatusCodes()
-            .map { $0.data }
+            .map(ApplyPaletteResponse.self)
+            .map { ApplyPaletteMapper.toLocal(from: $0) }
             .mapError(mapError(error:))
             .eraseToAnyPublisher()
     }
