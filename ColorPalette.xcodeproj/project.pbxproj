@@ -11,6 +11,8 @@
 		E504B1FE2954A37E00996662 /* ImageColorDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */; };
 		E504B2022954C88100996662 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E504B2012954C88100996662 /* ImagePicker.swift */; };
 		E5056B72291914E8008C6120 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E5056B71291914E8008C6120 /* SnapKit */; };
+		E506B0E02A17F57300CCF27C /* ApplyPaletteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506B0DF2A17F57300CCF27C /* ApplyPaletteResponse.swift */; };
+		E506B0E22A17F77A00CCF27C /* ApplyPaletteMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506B0E12A17F77A00CCF27C /* ApplyPaletteMapper.swift */; };
 		E508C663299E6C4A0079E95A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E508C662299E6C4A0079E95A /* ShareSheet.swift */; };
 		E508C665299E7B310079E95A /* ColorPalettePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E508C664299E7B310079E95A /* ColorPalettePDFView.swift */; };
 		E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50BF95D2953528200534E82 /* SamplePalettesView.swift */; };
@@ -141,6 +143,8 @@
 		E504B1FA29549FCD00996662 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		E504B1FD2954A37E00996662 /* ImageColorDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorDetectionView.swift; sourceTree = "<group>"; };
 		E504B2012954C88100996662 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E506B0DF2A17F57300CCF27C /* ApplyPaletteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPaletteResponse.swift; sourceTree = "<group>"; };
+		E506B0E12A17F77A00CCF27C /* ApplyPaletteMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPaletteMapper.swift; sourceTree = "<group>"; };
 		E508C662299E6C4A0079E95A /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		E508C664299E7B310079E95A /* ColorPalettePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettePDFView.swift; sourceTree = "<group>"; };
 		E50BF95D2953528200534E82 /* SamplePalettesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalettesView.swift; sourceTree = "<group>"; };
@@ -878,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				E51674842991543100667979 /* ServerProfileModel.swift */,
+				E506B0DF2A17F57300CCF27C /* ApplyPaletteResponse.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -897,6 +902,7 @@
 			isa = PBXGroup;
 			children = (
 				E5BC2D552993860C00EBFFAB /* ProfileMapper.swift */,
+				E506B0E12A17F77A00CCF27C /* ApplyPaletteMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -1178,6 +1184,7 @@
 				E5CF203029575C6000143582 /* AddNewColorView.swift in Sources */,
 				E53D8520291E35E900E73D90 /* OnboardingPageType.swift in Sources */,
 				E57A26BA291EC7210027FAC8 /* OnboardingViewModel.swift in Sources */,
+				E506B0E22A17F77A00CCF27C /* ApplyPaletteMapper.swift in Sources */,
 				E522D50F296C783B0087BD9F /* PopularPalettesManager.swift in Sources */,
 				E56DD25D295B6270003F0D29 /* View+Extensions.swift in Sources */,
 				E52D433A29588E55002B11B8 /* FavoritesCoordinator.swift in Sources */,
@@ -1186,6 +1193,7 @@
 				E516748329914E9E00667979 /* AuthorizationNetworkService.swift in Sources */,
 				E5C2AEB3293749A900508DF4 /* LoginViewModel.swift in Sources */,
 				E5F3C482295F5403000DDD36 /* CoreDataManager.swift in Sources */,
+				E506B0E02A17F57300CCF27C /* ApplyPaletteResponse.swift in Sources */,
 				E50BF95E2953528200534E82 /* SamplePalettesView.swift in Sources */,
 				E56DD258295B5B15003F0D29 /* ColorBlockView.swift in Sources */,
 				E55F6F842955AFBE00A8B935 /* ColorRowView.swift in Sources */,
