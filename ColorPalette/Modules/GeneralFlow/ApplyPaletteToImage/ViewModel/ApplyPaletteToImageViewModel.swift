@@ -49,7 +49,8 @@ final class ApplyPaletteToImageViewModel: ObservableObject {
 private extension ApplyPaletteToImageViewModel {
     func bindAppear() {
         input.imageAppear
-            .flatMap { [unowned self] data -> AnyPublisher<Data, ApiError> in
+            .merge(with: input.tryAgainTap.combineLatest(input.imageAppear).map { $0.1 })
+            .flatMap { [unowned self] data -> AnyPublisher<([AppColor], Data), ApiError> in
                 self.output.resultImageData = nil
                 self.output.showLoader = true
                 return self.service.replaceColors(imageData: data!, palette: self.palette)
@@ -64,7 +65,8 @@ private extension ApplyPaletteToImageViewModel {
                 }
             } receiveValue: { [weak self] response in
                 self?.output.showLoader = false
-                self?.output.resultImageData = response
+                self?.output.initialPalette = ColorPalette(colors: response.0)
+                self?.output.resultImageData = response.1
             }
             .store(in: &cancellable)
     }
@@ -80,10 +82,12 @@ extension ApplyPaletteToImageViewModel {
     struct Input {
         let imageAppear: PassthroughSubject<Data?, Never> = .init()
         let backTap: PassthroughSubject<Void, Never> = .init()
+        let tryAgainTap: PassthroughSubject<Void, Never> = .init()
     }
     
     struct Output {
         var showLoader: Bool = false
+        var initialPalette: ColorPalette? = nil
         var resultImageData: Data? = nil
     }
 }

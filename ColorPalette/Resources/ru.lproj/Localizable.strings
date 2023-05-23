@@ -53,6 +53,7 @@ email = "Почта";
 password = "Пароль";
 search = "Поиск";
 
+tryAgain = "Еще раз";
 skip = "Пропустить";
 cancel = "Закрыть";
 edit = "Изменить";

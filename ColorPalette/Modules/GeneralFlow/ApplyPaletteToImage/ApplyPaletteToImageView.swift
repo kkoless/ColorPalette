@@ -21,24 +21,11 @@ struct ApplyPaletteToImageView: View {
     @State private var showSettingsAlert = false
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
             navBar
-            
-            Group {
-                Text(.before).font(.headline)
-                selectedImage
+            ScrollView {
+                content
             }
-            
-            chooseButton
-            
-            palettePreview
-            
-            Group {
-                Text(.after).font(.headline)
-                resultImage
-            }
-            
-            Spacer()
         }
         .edgesIgnoringSafeArea(.top)
         .foregroundColor(.primary)
@@ -49,6 +36,35 @@ struct ApplyPaletteToImageView: View {
         }
         .sheet(isPresented: $imageTap.isShow, onDismiss: { imageTap.isShow = false }) {
             ImagePreviewerView(image: imageTap.image)
+        }
+    }
+}
+
+private extension ApplyPaletteToImageView {
+    var content: some View {
+        VStack(spacing: 0) {
+            Group {
+                Text(.before).font(.headline)
+                selectedImage
+            }
+            
+            chooseButton
+            
+            Group {
+                initPalettePreview
+                resultPalettePreview
+            }
+            
+            Group {
+                Text(.after).font(.headline)
+                resultImage
+                
+                if viewModel.output.resultImageData != nil {
+                    tryAgainButton
+                }
+            }
+            
+            Spacer()
         }
     }
 }
@@ -70,7 +86,7 @@ private extension ApplyPaletteToImageView {
         }
         .frame(width: 200, height: 200)
         .cornerRadius(15)
-        .shadow(radius: 20)
+        .shadow(radius: 10)
         .padding()
     }
     
@@ -93,7 +109,7 @@ private extension ApplyPaletteToImageView {
         }
         .frame(width: 200, height: 200)
         .cornerRadius(15)
-        .shadow(radius: 20)
+        .shadow(radius: 10)
         .padding()
     }
     
@@ -115,11 +131,30 @@ private extension ApplyPaletteToImageView {
         } message: {
             Text(.cameraAccessDenied)
         }
-
     }
     
-    var palettePreview: some View {
+    var tryAgainButton: some View {
+        Button(action: { tryAgainTap() }) {
+            Text(.tryAgain)
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    var initPalettePreview: some View {
+        if let resPalette = viewModel.output.initialPalette {
+            VStack {
+                ColorPaletteCell(palette: resPalette)
+                    .shadow(radius: 10)
+                Image(systemName: "arrow.up.arrow.down")
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    var resultPalettePreview: some View {
         ColorPaletteCell(palette: palette)
+            .shadow(radius: 10)
             .padding([.horizontal, .bottom])
     }
 }
@@ -139,6 +174,10 @@ private extension ApplyPaletteToImageView {
                 // Handle
             })
         }
+    }
+    
+    func tryAgainTap() {
+        viewModel.input.tryAgainTap.send()
     }
     
     func backTap() {
