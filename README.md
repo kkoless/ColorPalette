@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/65421720/234255044-5beeb735-5c18-4f60-
 <video src="https://user-images.githubusercontent.com/65421720/234260275-c1d7b1a4-4b69-4110-985d-1b3faf06f919.mp4"></video>
 
 ### Apply Color Palette to image
-<img src="https://user-images.githubusercontent.com/65421720/234261212-b725bffb-4ce3-49dd-b5c6-1bc605b183a7.png" width="325"/>
+<img src="https://github.com/kkoless/TriadApp/assets/65421720/7536817c-3ac2-4d79-8498-e744e7e39c23" width="325"/>
 
 ## Favorites
 <p float="left">
