@@ -1,4 +1,14 @@
 # iOS "Triad" App
+Mobile color characterization and palette app that allows users to use all the tools they need to work with color characterizations and palettes in one place.
+
+- Easy access to viewing color properties / palettes
+- Creating and editing color palettes
+- Defining color properties (image, camera)
+- Applying palettes to images
+- Adding color properties / palettes to favorites
+- Ability to create or log in to a personal account
+- Ability to use the standard / advanced functionality
+
 Actual code currently based on "development" branch
 
 ## Onboarding
