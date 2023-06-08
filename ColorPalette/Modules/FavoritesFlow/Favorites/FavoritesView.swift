@@ -66,6 +66,7 @@ private extension FavoritesView {
             Text(.addPalette)
         }
         .disabled(viewModel.output.palettesLimit)
+        .foregroundColor(viewModel.output.palettesLimit ? .gray : .primary)
     }
     
     var colorMenu: some View {
@@ -83,6 +84,7 @@ private extension FavoritesView {
             Text(.addColor)
         }
         .disabled(viewModel.output.colorsLimit)
+        .foregroundColor(viewModel.output.colorsLimit ? .gray : .primary)
     }
     
     var favoriteList: some View {
