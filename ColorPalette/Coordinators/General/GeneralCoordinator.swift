@@ -13,10 +13,6 @@ protocol SamplesRoutable: AnyObject {
     func navigateToSampleColors()
 }
 
-protocol ApplyPaletteToImageRoutable: AnyObject {
-    func navigateToApplyToImage(palette: ColorPalette)
-}
-
 protocol GeneralRoutable: AnyObject {
     func navigateToGeneralScreen()
 }
@@ -80,17 +76,10 @@ extension GeneralCoordinator {
     }
     
     func navigateToColorPalette(palette: ColorPalette) {
-        let viewModel = ColorPaletteInfoViewModel(router: self, palette: palette)
+        let viewModel = ColorPaletteInfoViewModel(palette: palette)
         let view = ColorPaletteView(viewModel: viewModel, palette: palette)
         let vc = UIHostingController(rootView: view)
         navigationController.present(vc, animated: true)
-    }
-    
-    func navigateToApplyToImage(palette: ColorPalette) {
-        let viewModel = ApplyPaletteToImageViewModel(router: self, palette: palette)
-        let view = ApplyPaletteToImageView(viewModel: viewModel, palette: palette)
-        let vc = UIHostingController(rootView: view)
-        navigationController.pushViewController(vc, animated: true)
     }
     
     func navigateToColorInfo(color: AppColor) {
@@ -136,6 +125,5 @@ extension GeneralCoordinator: PopRoutable {}
 extension GeneralCoordinator: PopToRootRoutable {}
 extension GeneralCoordinator: DetectionRoutable {}
 extension GeneralCoordinator: InfoRoutable {}
-extension GeneralCoordinator: ApplyPaletteToImageRoutable {}
 extension GeneralCoordinator: SamplesRoutable {}
 extension GeneralCoordinator: GeneralRoutable {}
