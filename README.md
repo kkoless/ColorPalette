@@ -4,7 +4,6 @@ Mobile color characterization and palette app that allows users to use all the t
 - Easy access to viewing color properties / palettes
 - Creating and editing color palettes
 - Defining color properties (image, camera)
-- Applying palettes to images
 - Adding color properties / palettes to favorites
 - Ability to create or log in to a personal account
 - Ability to use the standard / advanced functionality
@@ -31,9 +30,6 @@ https://user-images.githubusercontent.com/65421720/234255044-5beeb735-5c18-4f60-
 <img src="https://user-images.githubusercontent.com/65421720/234255609-e16f82b1-b619-49f8-a707-2d504f4c21f7.png" width="325"/>
 <video src="https://user-images.githubusercontent.com/65421720/234259614-421f9f98-658b-4ff7-b61c-9d8ef120fe54.mp4"></video>
 <video src="https://user-images.githubusercontent.com/65421720/234260275-c1d7b1a4-4b69-4110-985d-1b3faf06f919.mp4"></video>
-
-### Apply Color Palette to image
-<img src="https://github.com/kkoless/TriadApp/assets/65421720/7536817c-3ac2-4d79-8498-e744e7e39c23" width="325"/>
 
 ## Favorites
 <p float="left">
