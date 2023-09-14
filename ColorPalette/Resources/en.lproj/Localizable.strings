@@ -53,7 +53,7 @@ email = "Email";
 password = "Password";
 search = "Search";
 
-tryAgain = "Try Again";
+tryAgain = "Choose another option";
 skip = "Skip";
 cancel = "Cancel";
 edit = "Edit";
