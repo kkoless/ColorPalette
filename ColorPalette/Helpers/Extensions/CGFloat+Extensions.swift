@@ -8,8 +8,8 @@
 import Foundation
 
 extension CGFloat {
-    func rounded(toDecimalPlaces n: Int) -> CGFloat {
-        let multiplier = pow(10, CGFloat(n))
-        return (multiplier * self).rounded() / multiplier
-    }
+  func rounded(toDecimalPlaces n: Int) -> CGFloat {
+    let multiplier = pow(10, CGFloat(n))
+    return (multiplier * self).rounded() / multiplier
+  }
 }

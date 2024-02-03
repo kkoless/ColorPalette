@@ -8,8 +8,8 @@
 import Foundation
 
 enum UserDefaultsKey: String {
-    case isOnboarding
-    case isGuest
-    case token
-    case language
+  case isOnboarding
+  case isGuest
+  case token
+  case language
 }

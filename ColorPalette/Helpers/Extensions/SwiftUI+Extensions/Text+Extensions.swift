@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Text {
-    init(_ text: Strings) {
-        self.init(text.rawValue.localized(LocalizationService.shared.language))
-    }
+  init(_ text: Strings) {
+    self.init(text.rawValue.localized(LocalizationService.shared.language))
+  }
 }

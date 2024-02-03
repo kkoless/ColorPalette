@@ -8,12 +8,12 @@
 import Foundation
 
 final class OnboardingManager {
-    static let shared: OnboardingManager = .init()
-    
-    private init() {}
-    
-    var isOnboarding: Bool {
-        get { UserDefaults.standard.bool(forKey: UserDefaultsKey.isOnboarding.rawValue) }
-        set { UserDefaults.standard.setValue(newValue, forKey: UserDefaultsKey.isOnboarding.rawValue) }
-    }
+  static let shared: OnboardingManager = .init()
+  
+  private init() {}
+  
+  var isOnboarding: Bool {
+    get { UserDefaults.standard.bool(forKey: UserDefaultsKey.isOnboarding.rawValue) }
+    set { UserDefaults.standard.setValue(newValue, forKey: UserDefaultsKey.isOnboarding.rawValue) }
+  }
 }
