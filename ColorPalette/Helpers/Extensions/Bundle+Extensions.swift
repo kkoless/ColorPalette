@@ -8,15 +8,15 @@
 import Foundation
 
 extension Bundle {
-    var releaseVersionNumber: String? {
-        return infoDictionary?["CFBundleShortVersionString"] as? String
-    }
-    
-    var buildVersionNumber: String? {
-        return infoDictionary?["CFBundleVersion"] as? String
-    }
-    
-    var releaseVersionNumberPretty: String {
-        return "v \(releaseVersionNumber ?? "") (\(buildVersionNumber ?? ""))"
-    }
+  var releaseVersionNumber: String? {
+    return infoDictionary?["CFBundleShortVersionString"] as? String
+  }
+  
+  var buildVersionNumber: String? {
+    return infoDictionary?["CFBundleVersion"] as? String
+  }
+
+  var releaseVersionNumberPretty: String {
+    return "v \(releaseVersionNumber ?? "") (\(buildVersionNumber ?? ""))"
+  }
 }

@@ -9,37 +9,37 @@ import SwiftUI
 import Combine
 
 struct OnboardingPageView: View {
-    @ObservedObject var viewModel: OnboardingViewModel
-    
-    let pageType: OnboardingPageType
-    
-    var body: some View {
-        VStack {
-            mainImage
-            textView
-        }
-        .padding()
+  @ObservedObject var viewModel: OnboardingViewModel
+  
+  let pageType: OnboardingPageType
+  
+  var body: some View {
+    VStack {
+      mainImage
+      textView
     }
+    .padding()
+  }
 }
 
 private extension OnboardingPageView {
-    var mainImage: some View {
-        Image(uiImage: pageType.image)
-            .resizable()
-            .frame(width: 250, height: 250)
-            .padding(.bottom, 20)
-    }
-    
-    var textView: some View {
-        Text(pageType.text)
-            .multilineTextAlignment(.center)
-            .font(.headline)
-    }
+  var mainImage: some View {
+    Image(uiImage: pageType.image)
+      .resizable()
+      .frame(width: 250, height: 250)
+      .padding(.bottom, 20)
+  }
+  
+  var textView: some View {
+    Text(pageType.text)
+      .multilineTextAlignment(.center)
+      .font(.headline)
+  }
 }
 
 struct OnboardingPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingPageView(viewModel: OnboardingViewModel(),
-                           pageType: .firstPage)
-    }
+  static var previews: some View {
+    OnboardingPageView(viewModel: OnboardingViewModel(),
+                       pageType: .firstPage)
+  }
 }

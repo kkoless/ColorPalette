@@ -8,53 +8,53 @@
 import Foundation
 
 final class TemplatePaletteManager: ObservableObject {
-    @Published private(set) var colors: [AppColor] = .init()
-    @Published private(set) var isLimit: Bool = false
-    
-    init() {
-        print("\(self) INIT")
-    }
-    
-    deinit {
-        print("\(self) DEINIT")
-    }
+  @Published private(set) var colors: [AppColor] = .init()
+  @Published private(set) var isLimit: Bool = false
+
+  init() {
+    print("\(self) INIT")
+  }
+
+  deinit {
+    print("\(self) DEINIT")
+  }
 }
 
 extension TemplatePaletteManager {
-    func addColor(_ newColor: AppColor) {
-        colors.append(newColor)
-        checkLimit()
+  func addColor(_ newColor: AppColor) {
+    colors.append(newColor)
+    checkLimit()
+  }
+
+  func deleteColor(_ colorForDelete: AppColor) {
+    if let index = colors.firstIndex(where: { $0 == colorForDelete }) {
+      colors.remove(at: index)
+      checkLimit()
     }
-    
-    func deleteColor(_ colorForDelete: AppColor) {
-        if let index = colors.firstIndex(where: { $0 == colorForDelete }) {
-            colors.remove(at: index)
-            checkLimit()
-        }
-    }
-    
-    func createPalette() -> ColorPalette {
-        ColorPalette(colors: colors)
-    }
-    
-    func replaceColors(fromOffsets: IndexSet, toOffset: Int) {
-        colors.move(fromOffsets: fromOffsets, toOffset: toOffset)
-    }
+  }
+
+  func createPalette() -> ColorPalette {
+    ColorPalette(colors: colors)
+  }
+
+  func replaceColors(fromOffsets: IndexSet, toOffset: Int) {
+    colors.move(fromOffsets: fromOffsets, toOffset: toOffset)
+  }
 }
 
 private extension TemplatePaletteManager {
-    func checkLimit() {
-        let firstCondition = CredentialsManager.shared.isGuest && colors.count == 3
-        
-        let profileRole = ProfileManager.shared.profile.role.boolValue
-        
-        let secondCondition = !profileRole && colors.count == 3
-        let thirdCondition = profileRole && colors.count == 5
-        
-        let newValue = firstCondition || secondCondition || thirdCondition ? true : false
-        
-        if isLimit != newValue {
-            isLimit = newValue
-        }
+  func checkLimit() {
+    let firstCondition = CredentialsManager.shared.isGuest && colors.count == 3
+
+    let profileRole = ProfileManager.shared.profile.role.boolValue
+
+    let secondCondition = !profileRole && colors.count == 3
+    let thirdCondition = profileRole && colors.count == 5
+
+    let newValue = firstCondition || secondCondition || thirdCondition ? true : false
+
+    if isLimit != newValue {
+      isLimit = newValue
     }
+  }
 }

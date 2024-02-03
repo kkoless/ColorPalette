@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 
 final class TabBarController: UITabBarController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.delegate = self
-        
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.delegate = self
+  }
 }
 
 extension TabBarController: UITabBarControllerDelegate {
-func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+  func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
     return viewController != tabBarController.selectedViewController
-}}
+  }}
