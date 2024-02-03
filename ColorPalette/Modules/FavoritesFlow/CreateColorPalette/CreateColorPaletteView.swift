@@ -36,7 +36,7 @@ struct CreateColorPaletteView: View {
 }
 
 private extension CreateColorPaletteView {
-  var navBar: some View {
+  private var navBar: some View {
     CustomNavigationBarView(backAction: {
       viewModel.input.backTap.send()
     })
@@ -63,7 +63,7 @@ private extension CreateColorPaletteView {
     }
   }
 
-  var emptyStateView: some View {
+  private var emptyStateView: some View {
     VStack {
       Spacer()
       Text(.favoritesEmptyState)
@@ -72,7 +72,7 @@ private extension CreateColorPaletteView {
     }
   }
 
-  var palettePreview: some View {
+  private var palettePreview: some View {
     List {
       ForEach(viewModel.output.colors) { color in
         Color(color)
@@ -95,19 +95,19 @@ private extension CreateColorPaletteView {
 }
 
 private extension CreateColorPaletteView {
-  func savePaletteTap() {
+  private func savePaletteTap() {
     viewModel.input.saveTap.send()
   }
 
-  func addColorTap() {
+  private func addColorTap() {
     viewModel.input.addTaps.addColorTap.send()
   }
 
-  func stayAlertTap() {
+  private func stayAlertTap() {
     viewModel.input.alertTaps.stayTap.send()
   }
 
-  func backAlertTap() {
+  private func backAlertTap() {
     viewModel.input.alertTaps.backTap.send()
   }
 }

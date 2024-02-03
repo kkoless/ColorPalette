@@ -69,7 +69,7 @@ struct ImageColorDetectionView: View {
 }
 
 private extension ImageColorDetectionView {
-  var navBar: some View {
+  private var navBar: some View {
     CustomNavigationBarView(backAction: { viewModel.input.backTap.send() } )
       .trailingItems {
         if viewModel.output.palette != nil {
@@ -85,7 +85,7 @@ private extension ImageColorDetectionView {
   }
 
   @ViewBuilder
-  var selectedImage: some View {
+  private var selectedImage: some View {
     if isSet {
       Image(uiImage: selection)
         .resizable()
@@ -96,7 +96,7 @@ private extension ImageColorDetectionView {
   }
 
   @ViewBuilder
-  var palette: some View {
+  private var palette: some View {
     if let palette = viewModel.output.palette {
       ColorPaletteCell(palette: palette)
         .padding()
@@ -107,7 +107,7 @@ private extension ImageColorDetectionView {
     }
   }
 
-  var chooseButton: some View {
+  private var chooseButton: some View {
     Button(action: { checkPermissions() }) {
       Text(.chooseImage)
     }
@@ -128,7 +128,7 @@ private extension ImageColorDetectionView {
 
   }
 
-  var addToFavoriteButton: some View {
+  private var addToFavoriteButton: some View {
     Button(action: { addToFavorite() }) {
       Text(.addPalette)
     }
@@ -138,13 +138,13 @@ private extension ImageColorDetectionView {
 }
 
 private extension ImageColorDetectionView {
-  func addToFavorite() {
+  private func addToFavorite() {
     if let palette = viewModel.output.palette {
       viewModel.input.addToFavoriteTap.send(palette)
     }
   }
 
-  func checkPermissions() {
+  private func checkPermissions() {
     PermissionsManager
       .checkPhotoLibraryPermission(
         deniedHandler: { showSettingsAlert.toggle() },
@@ -152,7 +152,7 @@ private extension ImageColorDetectionView {
       )
   }
 
-  func settingsTap() {
+  private func settingsTap() {
     if let url = URL(string: UIApplication.openSettingsURLString) {
       UIApplication.shared.open(url, options: [:], completionHandler: { _ in
         // Handle

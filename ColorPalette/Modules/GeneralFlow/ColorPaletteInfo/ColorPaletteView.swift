@@ -64,7 +64,7 @@ struct ColorPaletteView: View {
 }
 
 private extension ColorPaletteView {
-  var topBar: some View {
+  private var topBar: some View {
     HStack(spacing: 20) {
       backButton
       Spacer()
@@ -77,7 +77,7 @@ private extension ColorPaletteView {
     .background(Color(activeColor).opacity(activeColor.alpha))
   }
 
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { dismiss() }) {
       Image(systemName: "multiply")
         .resizable()
@@ -86,7 +86,7 @@ private extension ColorPaletteView {
     }
   }
 
-  var favoriteButton: some View {
+  private var favoriteButton: some View {
     Button(action: { changeFavoriteState() }, label: {
       Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
         .resizable()
@@ -95,7 +95,7 @@ private extension ColorPaletteView {
     })
   }
 
-  var shareButton: some View {
+  private var shareButton: some View {
     Button(action: { shareTap() }, label: {
       Image(systemName: "square.and.arrow.up")
         .resizable()
@@ -104,7 +104,7 @@ private extension ColorPaletteView {
     })
   }
 
-  var blindButton: some View {
+  private var blindButton: some View {
     Menu {
       ForEach(InclusiveColor.BlindnessType.allCases, id: \.rawValue) { type in
         Button(action: { blindTap(type) }) {
@@ -122,15 +122,15 @@ private extension ColorPaletteView {
 }
 
 private extension ColorPaletteView {
-  func onAppear() {
+  private func onAppear() {
     viewModel.input.onAppear.send()
   }
 
-  func changeFavoriteState() {
+  private func changeFavoriteState() {
     viewModel.input.favTap.send()
   }
 
-  func copyTap(_ appColor: AppColor, type: ColorType) {
+  private func copyTap(_ appColor: AppColor, type: ColorType) {
     switch type {
     case .HEX:
       UIPasteboard.general.string = appColor.uiColor.hexValue
@@ -143,7 +143,7 @@ private extension ColorPaletteView {
     }
   }
 
-  func blindTap(_ type: InclusiveColor.BlindnessType) {
+  private func blindTap(_ type: InclusiveColor.BlindnessType) {
     blindPalette = ColorPalette(
       colors: palette.colors.map { AppColor(uiColor: $0.uiColor.inclusiveColor(for: type)) }
     )
@@ -151,7 +151,7 @@ private extension ColorPaletteView {
     isBlind = type != .normal ? true : false
   }
 
-  func shareTap() {
+  private func shareTap() {
     exportPDF(content: {
       ColorPalettePDFView(palette: palette, type: selectedType)
     }) { status, url in

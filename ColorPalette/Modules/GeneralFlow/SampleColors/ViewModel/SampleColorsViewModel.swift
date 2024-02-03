@@ -38,7 +38,7 @@ final class SampleColorsViewModel: ObservableObject {
 }
 
 private extension SampleColorsViewModel {
-  func bindSearch() {
+  private func bindSearch() {
     input.searchText
       .sink { [weak self] searchText in
         if let newColors = self?.getColors(searchText) {
@@ -48,7 +48,7 @@ private extension SampleColorsViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.colorTap
       .sink { [weak self] appColor in
         self?.router?.navigateToColorInfo(color: appColor)
@@ -62,7 +62,7 @@ private extension SampleColorsViewModel {
 }
 
 private extension SampleColorsViewModel {
-  func getColors(_ searchText: String) -> [AppColor] {
+  private func getColors(_ searchText: String) -> [AppColor] {
     return searchText.isEmpty
     ? self.colors
     : self.colors.filter { $0.name.contains(searchText) }

@@ -46,7 +46,7 @@ struct ColorTypePickerView: View {
 
 private extension ColorTypePickerView {
   @ViewBuilder
-  func getblockType(type: ColorType) -> some View {
+  private func getblockType(type: ColorType) -> some View {
     GeometryReader { geomentry in
       VStack {
         Text(type.rawValue)

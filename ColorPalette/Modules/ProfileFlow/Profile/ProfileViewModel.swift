@@ -45,7 +45,7 @@ final class ProfileViewModel: ObservableObject {
 }
 
 private extension ProfileViewModel {
-  func bindProfile() {
+  private func bindProfile() {
     input.onAppear
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ -> AnyPublisher<Profile, ApiError>  in
@@ -74,7 +74,7 @@ private extension ProfileViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.languageTap
       .sink { language in LocalizationService.shared.language = language }
       .store(in: &cancellable)

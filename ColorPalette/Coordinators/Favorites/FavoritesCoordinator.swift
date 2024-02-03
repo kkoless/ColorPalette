@@ -162,7 +162,7 @@ extension FavoritesCoordinator {
 }
 
 private extension FavoritesCoordinator {
-  func setTabBarAppearance(isHidden: Bool) {
+  private func setTabBarAppearance(isHidden: Bool) {
     navigationController.tabBarController?.tabBar.isTranslucent = isHidden
     navigationController.tabBarController?.tabBar.isHidden = isHidden
   }

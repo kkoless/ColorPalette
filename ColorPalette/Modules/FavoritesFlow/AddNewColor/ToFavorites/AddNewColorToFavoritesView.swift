@@ -13,7 +13,7 @@ struct AddNewColorToFavoritesView: View {
   @State private var colorName = ""
   @State private var selectedColor: Color = .primary
   
-  var isDisabled: Bool {
+  private var isDisabled: Bool {
     viewModel.output.isFavorite ||
     viewModel.output.color == AppColor.getClear()
   }
@@ -33,7 +33,7 @@ struct AddNewColorToFavoritesView: View {
 }
 
 private extension AddNewColorToFavoritesView {
-  var navigationBarView: some View {
+  private var navigationBarView: some View {
     CustomNavigationBarView(backAction: { backTap() })
       .trailingItems {
         Button(action: { addToFavorites() }) {
@@ -46,7 +46,7 @@ private extension AddNewColorToFavoritesView {
       }
   }
   
-  var configureBlock: some View {
+  private var configureBlock: some View {
     HStack(spacing: 15) {
       AddColorTextField(text: $colorName)
         .environmentObject(LocalizationService.shared)
@@ -65,7 +65,7 @@ private extension AddNewColorToFavoritesView {
     .padding([.leading, .trailing])
   }
   
-  var preview: some View {
+  private var preview: some View {
     ColorPreview(color: viewModel.output.color)
       .cornerRadius(10)
       .padding([.leading, .trailing])
@@ -73,11 +73,11 @@ private extension AddNewColorToFavoritesView {
 }
 
 private extension AddNewColorToFavoritesView {
-  func addToFavorites() {
+  private func addToFavorites() {
     viewModel.input.addTap.send()
   }
   
-  func backTap() {
+  private func backTap() {
     viewModel.input.backTap.send()
   }
 }

@@ -43,7 +43,7 @@ extension TemplatePaletteManager {
 }
 
 private extension TemplatePaletteManager {
-  func checkLimit() {
+  private func checkLimit() {
     let firstCondition = CredentialsManager.shared.isGuest && colors.count == 3
 
     let profileRole = ProfileManager.shared.profile.role.boolValue

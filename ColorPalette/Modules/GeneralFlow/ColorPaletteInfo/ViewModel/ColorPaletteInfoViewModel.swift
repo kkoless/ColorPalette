@@ -45,7 +45,7 @@ final class ColorPaletteInfoViewModel: ObservableObject {
 }
 
 private extension ColorPaletteInfoViewModel {
-  func bindRequests() {
+  private func bindRequests() {
     input.onAppear
       .map { [weak self] _ -> Bool in
         guard let self = self else { return false }
@@ -99,18 +99,17 @@ private extension ColorPaletteInfoViewModel {
     
   }
   
-  func checkFavorite(palette: ColorPalette) -> Bool {
+  private func checkFavorite(palette: ColorPalette) -> Bool {
     favoritesManager
       .palettes
       .contains(where: { $0.hashValue == palette.hashValue })
   }
   
-  func changeFavoriteState() {
+  private func changeFavoriteState() {
     if output.isFavorite {
       favoritesManager.removePalette(palette)
       output.isFavorite.toggle()
-    }
-    else {
+    } else {
       if !favoritesManager.isPalettesLimit {
         favoritesManager.addPalette(palette)
         output.isFavorite.toggle()

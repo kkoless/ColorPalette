@@ -70,7 +70,7 @@ extension CoreDataManager {
 }
 
 private extension CoreDataManager {
-  func fetchColors() -> [AppColorModel] {
+  private func fetchColors() -> [AppColorModel] {
     let request = NSFetchRequest<AppColorModel>(entityName: "AppColorModel")
 
     do {
@@ -82,7 +82,7 @@ private extension CoreDataManager {
     }
   }
 
-  func fetchPalettes() -> [ColorPaletteModel] {
+  private func fetchPalettes() -> [ColorPaletteModel] {
     let request = NSFetchRequest<ColorPaletteModel>(entityName: "ColorPaletteModel")
 
     do {
@@ -96,7 +96,7 @@ private extension CoreDataManager {
 }
 
 private extension CoreDataManager {
-  func toCoreDataObj(from: AppColor) -> AppColorModel {
+  private func toCoreDataObj(from: AppColor) -> AppColorModel {
     let to = AppColorModel(context: self.context)
     to.name = from.name
     to.hex = from.hex
@@ -104,15 +104,14 @@ private extension CoreDataManager {
     return to
   }
 
-  func toCoreDataObj(from: ColorPalette) -> ColorPaletteModel {
+  private func toCoreDataObj(from: ColorPalette) -> ColorPaletteModel {
     let to = ColorPaletteModel(context: self.context)
 
     do {
       let encoder = JSONEncoder()
       let data = try encoder.encode(from.colors)
       to.colors = data
-    }
-    catch {
+    } catch {
       print("Unable to encode. \(error)")
     }
 

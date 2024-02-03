@@ -10,7 +10,7 @@ import SwiftUI
 struct GeneralView: View {
   @StateObject var viewModel: GeneralViewModel
   @EnvironmentObject private var localizationService: LocalizationService
-  
+
   var body: some View {
     VStack {
       header
@@ -26,19 +26,19 @@ struct GeneralView: View {
 }
 
 private extension GeneralView {
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.general)
         .bold()
         .font(.largeTitle)
       Spacer()
       headerButtons
-      
+
     }
     .padding([.leading, .trailing])
   }
-  
-  var headerButtons: some View {
+
+  private var headerButtons: some View {
     HStack {
       Button(action: { navigateToCameraDetection() }) {
         Image(systemName: "camera")
@@ -46,7 +46,7 @@ private extension GeneralView {
           .frame(width: 25, height: 20)
       }
       .padding(.trailing, 25)
-      
+
       Button(action: { navigateToImageDetection() }) {
         Image(systemName: "photo")
           .resizable()
@@ -55,8 +55,8 @@ private extension GeneralView {
     }
     .padding(.trailing)
   }
-  
-  var paletteCells: some View {
+
+  private var paletteCells: some View {
     VStack(spacing: 0) {
       HStack {
         Text(.palettes)
@@ -64,7 +64,7 @@ private extension GeneralView {
         Spacer()
       }
       .padding(.bottom, 5)
-      
+
       ForEach(viewModel.output.samplePalettes) { palette in
         ColorPaletteCell(palette: palette)
           .onTapGesture { navigateToPaletteInfo(palette) }
@@ -76,15 +76,15 @@ private extension GeneralView {
     }
     .padding([.leading, .trailing])
   }
-  
-  var colorsCells: some View {
+
+  private var colorsCells: some View {
     VStack(spacing: 0) {
       HStack {
         Text(.colors).font(.title3.bold())
         Spacer()
       }
       .padding(.bottom, 5)
-      
+
       ForEach(viewModel.output.sampleColors) { color in
         Color(color)
           .opacity(color.alpha)
@@ -93,7 +93,7 @@ private extension GeneralView {
           .padding([.top, .bottom], 10)
           .onTapGesture { navigateToColorInfo(color) }
       }
-      
+
       Button(action: { navigateToSampleColors() }) {
         Text(.showMore)
       }
@@ -104,31 +104,31 @@ private extension GeneralView {
 }
 
 private extension GeneralView {
-  func onAppear() {
+  private func onAppear() {
     viewModel.input.onAppear.send()
   }
-  
-  func navigateToSamplePalettes() {
+
+  private func navigateToSamplePalettes() {
     viewModel.input.showMorePalettesTap.send()
   }
-  
-  func navigateToSampleColors() {
+
+  private func navigateToSampleColors() {
     viewModel.input.showMoreColorsTap.send()
   }
-  
-  func navigateToPaletteInfo(_ palette: ColorPalette) {
+
+  private func navigateToPaletteInfo(_ palette: ColorPalette) {
     viewModel.input.paletteTap.send(palette)
   }
-  
-  func navigateToColorInfo(_ color: AppColor) {
+
+  private func navigateToColorInfo(_ color: AppColor) {
     viewModel.input.colorTap.send(color)
   }
-  
-  func navigateToCameraDetection() {
+
+  private func navigateToCameraDetection() {
     viewModel.input.cameraDetectionTap.send()
   }
-  
-  func navigateToImageDetection() {
+
+  private func navigateToImageDetection() {
     viewModel.input.imageDetectionTap.send()
   }
 }

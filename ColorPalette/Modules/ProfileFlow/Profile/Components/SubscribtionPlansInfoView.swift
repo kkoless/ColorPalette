@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct SubscribtionPlansInfoView: View {
-  var backgroundColor: Color {
+  private var backgroundColor: Color {
     Color(uiColor: UIColor(hexString: "#E52B50"))
   }
-  var foregroundColor: Color {
+  private var foregroundColor: Color {
     Color(uiColor: backgroundColor.uiColor.invertColor())
   }
-  
   
   var body: some View {
     VStack {
@@ -35,7 +34,7 @@ struct SubscribtionPlansInfoView: View {
 }
 
 private extension SubscribtionPlansInfoView {
-  var infoBlock: some View {
+  private var infoBlock: some View {
     VStack(alignment: .leading) {
       Text(.paidSubscribtionInfoText)
         .padding(.bottom, 15)
@@ -51,14 +50,14 @@ private extension SubscribtionPlansInfoView {
     }
   }
   
-  var subscribeButton: some View {
+  private var subscribeButton: some View {
     Button(action: {  }) { Text(.subscribe).bold() }
       .padding(.bottom)
   }
 }
 
 private extension SubscribtionPlansInfoView {
-  func makeListPoint(with text: Strings) -> some View {
+  private func makeListPoint(with text: Strings) -> some View {
     HStack {
       Image(systemName: "smallcircle.filled.circle")
         .resizable()

@@ -17,16 +17,16 @@ enum MoodType: String, Identifiable, CaseIterable {
   var associationColors: [String] {
     switch self {
     case .calm:
-      //                return ["white", "gray", "blue", "green"]
+      // return ["white", "gray", "blue", "green"]
       return ["light blue", "soft green", "lavender", "pale pink", "light gray"]
     case .energetic:
-      //                return ["red", "orange", "yellow", "pink"]
+      // return ["red", "orange", "yellow", "pink"]
       return ["bright yellow", "orange", "hot pink", "electric blue", "red"]
     case .romantic:
-      //                return ["purple", "pink", "red", "blue"]
+      // return ["purple", "pink", "red", "blue"]
       return ["deep red", "rose pink", "lavender", "soft peach", "champagne"]
     case .playful:
-      //                return ["yellow", "orange", "green", "blue"]
+      // return ["yellow", "orange", "green", "blue"]
       return ["lime green", "turquoise", "bright purple", "sunny yellow", "coral"]
     }
   }
@@ -71,7 +71,7 @@ final class MoodPickerViewModel: ObservableObject {
 }
 
 private extension MoodPickerViewModel {
-  func bindMood() {
+  private func bindMood() {
     input.moodSelected
       .sink { [weak self] moodType in
         guard let associatedColors = self?.colorManager.moodColors[moodType.rawValue] else { return }

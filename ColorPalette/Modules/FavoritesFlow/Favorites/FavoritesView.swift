@@ -32,7 +32,7 @@ struct FavoritesView: View {
 }
 
 private extension FavoritesView {
-  var header: some View {
+  private var header: some View {
     HStack(alignment: .center) {
       Text(.favorites)
         .font(.largeTitle)
@@ -42,7 +42,7 @@ private extension FavoritesView {
     .padding([.leading, .trailing])
   }
 
-  var addButtons: some View {
+  private var addButtons: some View {
     HStack {
       paletteMenu
       Spacer()
@@ -51,7 +51,7 @@ private extension FavoritesView {
     .padding()
   }
 
-  var paletteMenu: some View {
+  private var paletteMenu: some View {
     Menu {
       Button(action: { addPaletteTap(.customPalette) }) {
         Text(.createPalette)
@@ -69,7 +69,7 @@ private extension FavoritesView {
     .foregroundColor(viewModel.output.palettesLimit ? .gray : .primary)
   }
 
-  var colorMenu: some View {
+  private var colorMenu: some View {
     Menu {
       Button(action: { addColorTap(.customColor) }) {
         Text(.createColor)
@@ -87,7 +87,7 @@ private extension FavoritesView {
     .foregroundColor(viewModel.output.colorsLimit ? .gray : .primary)
   }
 
-  var favoriteList: some View {
+  private var favoriteList: some View {
     List {
       palettesBlock
       colorsBlock
@@ -96,7 +96,7 @@ private extension FavoritesView {
     .listSectionSeparator(.hidden)
   }
 
-  func getHeaderText(text: Strings) -> some View {
+  private func getHeaderText(text: Strings) -> some View {
     Text(text)
       .font(.title3.bold())
   }
@@ -104,7 +104,7 @@ private extension FavoritesView {
 
 private extension FavoritesView {
   @ViewBuilder
-  var palettesBlock: some View {
+  private var palettesBlock: some View {
     if !viewModel.output.palettes.isEmpty {
       HStack {
         getHeaderText(text: .palettes)
@@ -123,7 +123,7 @@ private extension FavoritesView {
   }
 
   @ViewBuilder
-  var colorsBlock: some View {
+  private var colorsBlock: some View {
     if !viewModel.output.colors.isEmpty {
       HStack {
         getHeaderText(text: .colors)
@@ -136,7 +136,7 @@ private extension FavoritesView {
   }
 
   @ViewBuilder
-  var paletteCells: some View {
+  private var paletteCells: some View {
     ForEach(viewModel.output.palettes) { palette in
       HStack(alignment: .center) {
         ColorPaletteCell(palette: palette)
@@ -161,7 +161,7 @@ private extension FavoritesView {
     .buttonStyle(.plain)
   }
 
-  var colorCells: some View {
+  private var colorCells: some View {
     ForEach(viewModel.output.colors) { color in
       Color(color)
         .opacity(color.alpha)
@@ -178,7 +178,7 @@ private extension FavoritesView {
     }
   }
 
-  var emptyState: some View {
+  private var emptyState: some View {
     VStack(spacing: 15) {
       Spacer()
       Text(.favoritesEmptyState)
@@ -193,17 +193,17 @@ private extension FavoritesView {
 }
 
 private extension FavoritesView {
-  func onAppear() {
+  private func onAppear() {
     viewModel.input.onAppear.send(())
   }
 
-  func editStateTap() {
+  private func editStateTap() {
     withAnimation {
       isEdit.toggle()
     }
   }
 
-  func addPaletteTap(_ type: FavoriteAddType) {
+  private func addPaletteTap(_ type: FavoriteAddType) {
     switch type {
     case .customPalette:
       viewModel.input.addTaps.createPaletteTap.send()
@@ -216,7 +216,7 @@ private extension FavoritesView {
     }
   }
 
-  func addColorTap(_ type: FavoriteAddType) {
+  private func addColorTap(_ type: FavoriteAddType) {
     switch type {
     case .customColor:
       viewModel.input.addTaps.createColorTap.send()
@@ -229,15 +229,15 @@ private extension FavoritesView {
     }
   }
 
-  func showColorInfoTap(_ appColor: AppColor) {
+  private func showColorInfoTap(_ appColor: AppColor) {
     viewModel.input.showTaps.showColorInfoTap.send(appColor)
   }
 
-  func showPaletteInfoTap(_ palette: ColorPalette) {
+  private func showPaletteInfoTap(_ palette: ColorPalette) {
     viewModel.input.showTaps.showPaletteInfoTap.send(palette)
   }
 
-  func editPalette(_ palette: ColorPalette) {
+  private func editPalette(_ palette: ColorPalette) {
     viewModel.input.editPaletteTap.send(palette)
   }
 }

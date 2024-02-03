@@ -44,7 +44,7 @@ struct ColorInfoView: View {
 }
 
 private extension ColorInfoView {
-  var topBar: some View {
+  private var topBar: some View {
     HStack(spacing: 25) {
       backButton
       Spacer()
@@ -58,7 +58,7 @@ private extension ColorInfoView {
     .background(Color(activeColor).opacity(activeColor.alpha))
   }
 
-  var favoriteButton: some View {
+  private var favoriteButton: some View {
     Button(action: { changeFavoriteState() }, label: {
       Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
         .resizable()
@@ -67,7 +67,7 @@ private extension ColorInfoView {
     })
   }
 
-  var shareButton: some View {
+  private var shareButton: some View {
     Button(action: { shareTap() }, label: {
       Image(systemName: "square.and.arrow.up")
         .resizable()
@@ -76,7 +76,7 @@ private extension ColorInfoView {
     })
   }
 
-  var blindButton: some View {
+  private var blindButton: some View {
     Menu {
       ForEach(InclusiveColor.BlindnessType.allCases, id: \.rawValue) { type in
         Button(action: { blindTap(type) }) {
@@ -92,7 +92,7 @@ private extension ColorInfoView {
 
   }
 
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { dismiss() }) {
       Image(systemName: "multiply")
         .resizable()
@@ -101,7 +101,7 @@ private extension ColorInfoView {
     }
   }
 
-  var copyButton: some View {
+  private var copyButton: some View {
     Menu {
       Button(action: { copyColorInfo(.HEX) }, label: { Text("HEX") })
       Button(action: { copyColorInfo(.RGB) }, label: { Text("RGB") })
@@ -117,15 +117,15 @@ private extension ColorInfoView {
 }
 
 private extension ColorInfoView {
-  func changeFavoriteState() {
+  private func changeFavoriteState() {
     viewModel.input.favTap.send()
   }
 
-  func shareTap() {
+  private func shareTap() {
     exportPDF(content: {
       ColorPreview(color: appColor)
     }) { status, url in
-      if let url = url, status {
+      if let url, status {
         viewModel.output.pdfURL = url
         viewModel.output.showShareSheet.toggle()
       } else {
@@ -134,12 +134,12 @@ private extension ColorInfoView {
     }
   }
 
-  func blindTap(_ type: InclusiveColor.BlindnessType) {
+  private func blindTap(_ type: InclusiveColor.BlindnessType) {
     blindColor = AppColor(uiColor: appColor.uiColor.inclusiveColor(for: type))
     isBlind = type != .normal ? true : false
   }
 
-  func copyColorInfo(_ type: ColorType) {
+  private func copyColorInfo(_ type: ColorType) {
     let color = isBlind ? blindColor : appColor
     switch type {
     case .HEX:

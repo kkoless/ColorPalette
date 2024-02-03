@@ -11,7 +11,7 @@ struct ProfileView: View {
   @ObservedObject var viewModel: ProfileViewModel
   @EnvironmentObject private var localizationService: LocalizationService
   
-  var isGuest: Bool {
+  private var isGuest: Bool {
     viewModel.output.email.isEmpty
   }
   
@@ -42,7 +42,7 @@ struct ProfileView: View {
 }
 
 private extension ProfileView {
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.profile)
         .bold()
@@ -51,7 +51,7 @@ private extension ProfileView {
     }
   }
   
-  var userInfo: some View {
+  private var userInfo: some View {
     HStack {
       VStack(alignment: .leading, spacing: 10) {
         if isGuest {
@@ -73,7 +73,7 @@ private extension ProfileView {
     .padding([.top, .bottom])
   }
   
-  var colorPsychologyCell: some View {
+  private var colorPsychologyCell: some View {
     VStack {
       HStack {
         Image(systemName: "eye")
@@ -87,7 +87,7 @@ private extension ProfileView {
     .onTapGesture { colorPsychoTap() }
   }
   
-  var changeLanguageCell: some View {
+  private var changeLanguageCell: some View {
     VStack {
       HStack {
         Image(systemName: "abc")
@@ -117,7 +117,7 @@ private extension ProfileView {
     
   }
   
-  var aboutCell: some View {
+  private var aboutCell: some View {
     VStack {
       HStack {
         Image(systemName: "questionmark.circle")
@@ -127,7 +127,7 @@ private extension ProfileView {
     }
   }
   
-  var subcriptionInfoCell: some View {
+  private var subcriptionInfoCell: some View {
     VStack {
       HStack {
         Image(systemName: "cart")
@@ -142,7 +142,7 @@ private extension ProfileView {
     .onTapGesture { changeSubscriptionPlanTap() }
   }
   
-  var appVersion: some View {
+  private var appVersion: some View {
     Text(Bundle.main.releaseVersionNumberPretty)
       .font(.subheadline)
       .padding(.top)
@@ -150,13 +150,13 @@ private extension ProfileView {
 }
 
 private extension ProfileView {
-  func onAppear() { viewModel.input.onAppear.send() }
-  
-  func colorPsychoTap() {
+  private func onAppear() { viewModel.input.onAppear.send() }
+
+  private func colorPsychoTap() {
     viewModel.input.colorPsychologyTap.send()
   }
   
-  func changeSubscriptionPlanTap() {
+  private func changeSubscriptionPlanTap() {
     if CredentialsManager.shared.isGuest {
       viewModel.input.signInTap.send()
     } else {
@@ -164,10 +164,10 @@ private extension ProfileView {
     }
   }
   
-  func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
+  private func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
   }
   
-  func profileButtonTap() {
+  private func profileButtonTap() {
     if isGuest { viewModel.input.signInTap.send() }
     else { viewModel.input.logOutTap.send() }
   }

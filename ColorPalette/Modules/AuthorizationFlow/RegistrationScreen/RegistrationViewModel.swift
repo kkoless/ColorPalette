@@ -44,7 +44,7 @@ final class RegistrationViewModel: ObservableObject {
 }
 
 private extension RegistrationViewModel {
-  func bindTaps() {
+  private func bindTaps() {
     input.registrTap
       .flatMap { [unowned self] userData -> AnyPublisher<Profile, ApiError> in
         return self.service.registr(email: userData.0, password: userData.1)

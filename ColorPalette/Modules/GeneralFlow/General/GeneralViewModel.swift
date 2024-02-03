@@ -69,7 +69,7 @@ final class GeneralViewModel: ObservableObject {
 }
 
 private extension GeneralViewModel {
-  func bindRequests() {
+  private func bindRequests() {
     input.onAppear
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ in profileService.fetchProfile() }
@@ -102,7 +102,7 @@ private extension GeneralViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.showMorePalettesTap
       .sink { [weak self] _ in self?.router?.navigateToSamplePalettes() }
       .store(in: &cancellable)

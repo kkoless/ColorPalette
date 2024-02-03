@@ -51,7 +51,7 @@ final class CreateColorPaletteViewModel: ObservableObject {
 }
 
 private extension CreateColorPaletteViewModel {
-  func bindTemplateManager() {
+  private func bindTemplateManager() {
     templatePaletteManager.$colors
       .sink { [weak self] colors in self?.output.colors = colors }
       .store(in: &cancellable)
@@ -61,7 +61,7 @@ private extension CreateColorPaletteViewModel {
       .store(in: &cancellable)
   }
   
-  func bindTaps() {
+  private func bindTaps() {
     input.saveTap
       .sink { [weak self] _ in
         self?.savePalette()
@@ -108,7 +108,7 @@ extension CreateColorPaletteViewModel {
 }
 
 private extension CreateColorPaletteViewModel {
-  func savePalette() {
+  private func savePalette() {
     let palette = templatePaletteManager.createPalette()
     let isGuest = Just(CredentialsManager.shared.isGuest)
     

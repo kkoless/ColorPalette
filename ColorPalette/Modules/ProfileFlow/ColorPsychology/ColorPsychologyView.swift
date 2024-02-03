@@ -25,11 +25,11 @@ struct ColorPsychologyView: View {
 }
 
 private extension ColorPsychologyView {
-  var navBar: some View {
+  private var navBar: some View {
     CustomNavigationBarView(backAction: { backTap() })
   }
   
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.colorPsychology).font(.title.bold())
       Spacer()
@@ -37,7 +37,7 @@ private extension ColorPsychologyView {
     .padding(.horizontal)
   }
   
-  var textView: some View {
+  private var textView: some View {
     VStack(alignment: .leading) {
       Image("colorPsychology1")
         .resizable()
@@ -79,11 +79,11 @@ private extension ColorPsychologyView {
 }
 
 private extension ColorPsychologyView {
-  func backTap() {
+  private func backTap() {
     viewModel.input.backTap.send()
   }
   
-  func colorTap(with color: AppColor) {
+  private func colorTap(with color: AppColor) {
     viewModel.input.colorTap.send(color)
   }
 }

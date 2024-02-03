@@ -14,8 +14,6 @@ final class ProfileManager: ObservableObject {
   
   private var cancellable: Set<AnyCancellable> = .init()
   
-  // Network manager
-  
   private init() {
     print("\(self) INIT")
   }

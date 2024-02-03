@@ -13,10 +13,10 @@ struct ImagePreviewerView: View {
 
   let image: UIImage
 
-  var backgrounColor: Color {
+  private var backgrounColor: Color {
     Color(uiColor: image.averageColor ?? .systemCustomBackground)
   }
-  var foregroundColor: Color {
+  private var foregroundColor: Color {
     Color(
       uiColor: image.averageColor?.invertColor() ?? .invertedSystemCustomBackground
     )
@@ -48,7 +48,7 @@ struct ImagePreviewerView: View {
 }
 
 private extension ImagePreviewerView {
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { dismiss() }) {
       Image(systemName: "multiply")
         .resizable()
@@ -56,7 +56,7 @@ private extension ImagePreviewerView {
     }
   }
 
-  var shareButton: some View {
+  private var shareButton: some View {
     Button(action: { showSheet = true }, label: {
       Image(systemName: "square.and.arrow.up")
         .resizable()
@@ -64,7 +64,7 @@ private extension ImagePreviewerView {
     })
   }
 
-  var preview: some View {
+  private var preview: some View {
     Image(uiImage: image)
       .resizable()
       .aspectRatio(contentMode: .fit)

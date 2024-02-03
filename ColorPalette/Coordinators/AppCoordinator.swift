@@ -59,14 +59,14 @@ final class AppCoordinator: Coordinatable {
 }
 
 private extension AppCoordinator {
-  func navigateToOnboardingFlow() {
+  private func navigateToOnboardingFlow() {
     let onboardingCoordinator = OnboardingCoordinator(navigationController)
     childCoordinators.append(onboardingCoordinator)
     onboardingCoordinator.finishDelegate = self
     onboardingCoordinator.start()
   }
   
-  func navigateToTabBarFlow() {
+  private func navigateToTabBarFlow() {
     let tabBarCoordinator = TabBarCoordinator(navigationController)
     childCoordinators.append(tabBarCoordinator)
     tabBarCoordinator.finishDelegate = self

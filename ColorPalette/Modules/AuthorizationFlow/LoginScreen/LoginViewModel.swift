@@ -43,7 +43,7 @@ final class LoginViewModel: ObservableObject {
 }
 
 private extension LoginViewModel {
-  func bindTaps() {
+  private func bindTaps() {
     input.registerTap
       .sink { [weak self] _ in self?.router?.navigateToRegistrationScreen() }
       .store(in: &cancellable)

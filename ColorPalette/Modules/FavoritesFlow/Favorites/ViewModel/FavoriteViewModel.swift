@@ -53,7 +53,7 @@ final class FavoriteViewModel: ObservableObject {
 }
 
 private extension FavoriteViewModel {
-  func bindRequests() {
+  private func bindRequests() {
     input.onAppear
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ -> AnyPublisher<([AppColor], [ColorPalette]), ApiError> in
@@ -84,7 +84,7 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func bindFavoriteManager() {
+  private func bindFavoriteManager() {
     favoriteManager.$palettes
       .sink { [weak self] palettes in self?.output.palettes = palettes }
       .store(in: &cancellable)
@@ -102,7 +102,7 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     bindAddPaletteTaps()
     bindAddColorTaps()
     bindShowTaps()
@@ -114,7 +114,7 @@ private extension FavoriteViewModel {
 }
 
 private extension FavoriteViewModel {
-  func bindAddPaletteTaps() {
+  private func bindAddPaletteTaps() {
     input.addTaps.createPaletteTap
       .sink { [weak self] _ in self?.router?.navigateToCreatePalette() }
       .store(in: &cancellable)
@@ -128,7 +128,7 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func bindAddColorTaps() {
+  private func bindAddColorTaps() {
     input.addTaps.chooseColorTap
       .sink { [weak self] _ in self?.router?.navigateToColorLibrary() }
       .store(in: &cancellable)
@@ -142,7 +142,7 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func bindShowTaps() {
+  private func bindShowTaps() {
     input.showTaps.showColorInfoTap
       .sink { [weak self] appColor in self?.router?.navigateToColorInfo(color: appColor) }
       .store(in: &cancellable)
@@ -154,7 +154,7 @@ private extension FavoriteViewModel {
 }
 
 private extension FavoriteViewModel {
-  func removeServerPalette(_ palette: ColorPalette) {
+  private func removeServerPalette(_ palette: ColorPalette) {
     self.service.deletePalette(paletteId: palette.id)
       .sink { response in
         switch response {
@@ -169,7 +169,7 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func removeServerColor(_ color: AppColor) {
+  private func removeServerColor(_ color: AppColor) {
     self.service.deleteColor(colorId: color.id)
       .sink { response in
         switch response {
@@ -184,11 +184,11 @@ private extension FavoriteViewModel {
       .store(in: &cancellable)
   }
 
-  func removeLocalPalette(_ palette: ColorPalette) {
+  private func removeLocalPalette(_ palette: ColorPalette) {
     self.favoriteManager.removePalette(palette)
   }
 
-  func removeLocalColor(_ color: AppColor) {
+  private func removeLocalColor(_ color: AppColor) {
     self.favoriteManager.removeColor(color)
   }
 }

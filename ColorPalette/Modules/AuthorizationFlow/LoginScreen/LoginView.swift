@@ -28,7 +28,7 @@ struct LoginView: View {
 }
 
 private extension LoginView {
-  var topBar: some View {
+  private var topBar: some View {
     HStack {
       backButton
       Spacer()
@@ -36,7 +36,7 @@ private extension LoginView {
     .padding(.bottom)
   }
   
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { dismiss() }) {
       Image(systemName: "multiply")
         .resizable()
@@ -44,7 +44,7 @@ private extension LoginView {
     }
   }
   
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.authorization)
         .bold()
@@ -53,7 +53,7 @@ private extension LoginView {
     }
   }
   
-  var loginForm: some View {
+  private var loginForm: some View {
     VStack {
       VStack(spacing: 20) {
         Group {
@@ -71,7 +71,7 @@ private extension LoginView {
     .padding([.top, .bottom])
   }
   
-  var emailTextField: some View {
+  private var emailTextField: some View {
     ZStack {
       TextField("", text: $loginText)
       if loginText.isEmpty {
@@ -84,7 +84,7 @@ private extension LoginView {
     }
   }
   
-  var passwordTextField: some View {
+  private var passwordTextField: some View {
     ZStack {
       SecureField("", text: $passwordText)
       if passwordText.isEmpty {
@@ -97,7 +97,7 @@ private extension LoginView {
     }
   }
   
-  var buttonsBlock: some View {
+  private var buttonsBlock: some View {
     VStack(spacing: 20) {
       Button(action: loginButtonTap) {
         Text(.signIn)
@@ -112,11 +112,11 @@ private extension LoginView {
 }
 
 private extension LoginView {
-  func loginButtonTap() {
+  private func loginButtonTap() {
     viewModel.input.loginTap.send((loginText, passwordText))
   }
   
-  func registerButtonTap() {
+  private func registerButtonTap() {
     viewModel.input.registerTap.send()
   }
 }

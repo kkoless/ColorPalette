@@ -21,14 +21,14 @@ struct ColorPalettePDFView: View {
 }
 
 private extension ColorPalettePDFView {
-  func makeColorRow(_ color: AppColor) -> some View {
+  private func makeColorRow(_ color: AppColor) -> some View {
     ZStack {
       Color(color).opacity(color.alpha)
       getColorInfo(color: color.uiColor)
     }
   }
 
-  func getColorInfo(color: UIColor) -> some View {
+  private func getColorInfo(color: UIColor) -> some View {
     VStack {
       HStack {
         VStack(alignment: .leading) {

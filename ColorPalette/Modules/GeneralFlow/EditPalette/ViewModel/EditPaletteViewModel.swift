@@ -52,7 +52,7 @@ final class EditPaletteViewModel: ObservableObject {
 }
 
 private extension EditPaletteViewModel {
-  func bindTaps() {
+  private func bindTaps() {
     input.updateTap
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in

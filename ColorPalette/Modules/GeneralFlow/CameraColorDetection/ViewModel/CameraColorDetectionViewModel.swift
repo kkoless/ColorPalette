@@ -43,7 +43,7 @@ final class CameraColorDetectionViewModel: ObservableObject {
 }
 
 private extension CameraColorDetectionViewModel {
-  func bindTaps() {
+  private func bindTaps() {
     input.closeTap
       .sink { [weak self] _ in self?.router?.pop() }
       .store(in: &cancellable)

@@ -30,14 +30,14 @@ struct EditPaletteView: View {
 }
 
 private extension EditPaletteView {
-  var navigationBarView: some View {
+  private var navigationBarView: some View {
     CustomNavigationBarView(
       backAction: { backTap() },
       titleText: .paletteEditor
     )
   }
   
-  var palettesPreview: some View {
+  private var palettesPreview: some View {
     HStack(spacing: 0) {
       initPalettePreview
       resultPalettePreview
@@ -46,7 +46,7 @@ private extension EditPaletteView {
     .padding()
   }
   
-  var initPalettePreview: some View {
+  private var initPalettePreview: some View {
     VStack(spacing: 0) {
       ForEach(initPalette.colors) { color in
         ZStack {
@@ -60,7 +60,7 @@ private extension EditPaletteView {
     }
   }
   
-  var resultPalettePreview: some View {
+  private var resultPalettePreview: some View {
     VStack(spacing: 0) {
       ForEach(viewModel.output.resultPaletteColors) { color in
         ZStack {
@@ -88,7 +88,7 @@ private extension EditPaletteView {
 }
 
 private extension EditPaletteView {
-  var slidersBlock: some View {
+  private var slidersBlock: some View {
     VStack(spacing: 15) {
       hueSliderBlock
       saturationSliderBlock
@@ -97,7 +97,7 @@ private extension EditPaletteView {
     .padding()
   }
   
-  var hueSliderBlock: some View {
+  private var hueSliderBlock: some View {
     VStack {
       HStack {
         Text(.hue).bold()
@@ -127,7 +127,7 @@ private extension EditPaletteView {
     }
   }
   
-  var saturationSliderBlock: some View {
+  private var saturationSliderBlock: some View {
     VStack {
       HStack {
         Text(.saturation).bold()
@@ -160,7 +160,7 @@ private extension EditPaletteView {
     }
   }
   
-  var brightnessSliderBlock: some View {
+  private var brightnessSliderBlock: some View {
     VStack {
       HStack {
         Text(.brightness).bold()
@@ -193,7 +193,7 @@ private extension EditPaletteView {
 }
 
 private extension EditPaletteView {
-  var buttonsBlock: some View {
+  private var buttonsBlock: some View {
     HStack {
       Spacer()
       Button(action: { resetValues() }) { Text(.reset) }
@@ -206,15 +206,15 @@ private extension EditPaletteView {
 }
 
 private extension EditPaletteView {
-  func backTap() {
+  private func backTap() {
     viewModel.input.backTap.send()
   }
   
-  func applyTap() {
+  private func applyTap() {
     viewModel.input.updateTap.send()
   }
   
-  func buttonChangeValue(_ newValue: CGFloat, type: ColorPropertyType) {
+  private func buttonChangeValue(_ newValue: CGFloat, type: ColorPropertyType) {
     var check = false
     switch type {
     case .hue:
@@ -251,12 +251,12 @@ private extension EditPaletteView {
     }
   }
   
-  func drugAction(_ color: AppColor) -> NSItemProvider {
+  private func drugAction(_ color: AppColor) -> NSItemProvider {
     self.draggedColor = color
     return NSItemProvider()
   }
   
-  func resetValues() {
+  private func resetValues() {
     withAnimation {
       hueValue = 0
       saturationValue = 0

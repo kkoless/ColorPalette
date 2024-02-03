@@ -28,7 +28,7 @@ struct ColorPaletteRowView: View {
 
 private extension ColorPaletteRowView {
   @ViewBuilder
-  func getColorInfo(color: UIColor) -> some View {
+  private func getColorInfo(color: UIColor) -> some View {
     VStack {
       HStack {
         VStack(alignment: .leading) {
@@ -49,7 +49,7 @@ private extension ColorPaletteRowView {
     }
   }
   
-  var copyButton: some View {
+  private var copyButton: some View {
     Button(action: { copyTap() }) {
       Image(systemName: "clipboard")
         .resizable()
@@ -61,7 +61,7 @@ private extension ColorPaletteRowView {
 }
 
 private extension ColorPaletteRowView {
-  func copyTap() {
+  private func copyTap() {
     switch type {
     case .HEX:
       UIPasteboard.general.string = appColor.uiColor.hexValue

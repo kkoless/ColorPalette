@@ -28,7 +28,7 @@ struct AdditionalColorInfoView: View {
 }
 
 private extension AdditionalColorInfoView {
-  var content: some View {
+  private var content: some View {
     ScrollView {
       similarsColors
       
@@ -40,7 +40,7 @@ private extension AdditionalColorInfoView {
     }
   }
   
-  var similarsColors: some View {
+  private var similarsColors: some View {
     VStack {
       HStack {
         Text(.similarColors).font(.headline)
@@ -60,7 +60,7 @@ private extension AdditionalColorInfoView {
     .padding(.bottom, 15)
   }
   
-  var images: some View {
+  private var images: some View {
     VStack {
       HStack {
         Text(.images).font(.headline)
@@ -87,7 +87,7 @@ private extension AdditionalColorInfoView {
 }
 
 private extension AdditionalColorInfoView {
-  func onAppear() {
+  private func onAppear() {
     viewModel.input.onAppear.send()
   }
 }

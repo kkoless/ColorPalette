@@ -12,15 +12,15 @@ struct OnboardingView: View {
   @StateObject var viewModel: OnboardingViewModel
   @State private var currentTab = 0
   
-  var backgroundColor: Color {
+  private var backgroundColor: Color {
     Color(uiColor: OnboardingPageType(rawValue: currentTab)!.backgroundColor)
   }
   
-  var foregroundColor: Color {
+  private var foregroundColor: Color {
     Color(uiColor: OnboardingPageType(rawValue: currentTab)!.foregroundColor)
   }
   
-  var isLast: Bool {
+  private var isLast: Bool {
     OnboardingPageType(rawValue: currentTab)!.isLastPage
   }
   
@@ -37,7 +37,8 @@ struct OnboardingView: View {
 }
 
 private extension OnboardingView {
-  @ViewBuilder var pages: some View {
+  @ViewBuilder 
+  private var pages: some View {
     ForEach(OnboardingPageType.allCases) { pageType in
       OnboardingPageView(viewModel: viewModel,
                          pageType: pageType)
@@ -46,7 +47,7 @@ private extension OnboardingView {
   }
   
   @ViewBuilder
-  var buttonsView: some View {
+  private var buttonsView: some View {
     VStack(spacing: 0) {
       Spacer()
       
@@ -74,12 +75,12 @@ private extension OnboardingView {
 }
 
 private extension OnboardingView {
-  func nextTap() {
+  private func nextTap() {
     if !isLast { withAnimation { currentTab += 1 } }
     else { viewModel.input.skipTap.send() }
   }
   
-  func skipTap() {
+  private func skipTap() {
     viewModel.input.skipTap.send()
   }
 }

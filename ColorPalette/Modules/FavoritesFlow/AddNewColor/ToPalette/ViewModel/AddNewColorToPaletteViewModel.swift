@@ -43,7 +43,7 @@ final class AddNewColorToPaletteViewModel: ObservableObject {
 }
 
 private extension AddNewColorToPaletteViewModel {
-  func bindColorChanges() {
+  private func bindColorChanges() {
     Publishers.CombineLatest(input.selectedColor, input.colorName)
       .sink { [weak self] data in
         self?.output.color = AppColor(name: data.1, hex: data.0.hex, alpha: data.0.alpha)
@@ -51,7 +51,7 @@ private extension AddNewColorToPaletteViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.addTap
       .sink { [weak self] _ in
         self?.addColorToTemplatePalette()
@@ -62,7 +62,7 @@ private extension AddNewColorToPaletteViewModel {
 }
 
 private extension AddNewColorToPaletteViewModel {
-  func addColorToTemplatePalette() {
+  private func addColorToTemplatePalette() {
     let appColor = output.color
     templatePaletteManager.addColor(appColor)
   }

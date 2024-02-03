@@ -30,7 +30,7 @@ struct ColorPreview: View {
 }
 
 private extension ColorPreview {
-  var infoBlock: some View {
+  private var infoBlock: some View {
     VStack(alignment: .leading) {
       Text(colorName.capitalized)
         .font(.title)
@@ -51,7 +51,7 @@ private extension ColorPreview {
     .minimumScaleFactor(0.1)
   }
   
-  var hexInfo: some View {
+  private var hexInfo: some View {
     VStack(alignment: .leading) {
       Text("HEX")
         .font(.title2)
@@ -61,7 +61,7 @@ private extension ColorPreview {
     }
   }
   
-  var rgbInfo: some View {
+  private var rgbInfo: some View {
     VStack(alignment: .leading) {
       Text("RGB")
         .font(.title2)
@@ -71,7 +71,7 @@ private extension ColorPreview {
     }
   }
   
-  var hsvInfo: some View {
+  private var hsvInfo: some View {
     VStack(alignment: .leading) {
       Text("HSB")
         .font(.title2)
@@ -81,7 +81,7 @@ private extension ColorPreview {
     }
   }
   
-  var cmykInfo: some View {
+  private var cmykInfo: some View {
     VStack(alignment: .leading) {
       Text("CMYK")
         .font(.title2)

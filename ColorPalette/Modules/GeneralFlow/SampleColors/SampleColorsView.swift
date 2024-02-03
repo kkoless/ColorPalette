@@ -41,11 +41,11 @@ struct SampleColorsView: View {
 }
 
 private extension SampleColorsView {
-  var navBar: some View {
+  private var navBar: some View {
     CustomNavigationBarView(backAction: { viewModel.input.popTap.send() })
   }
 
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.colors)
         .font(.largeTitle)
@@ -55,7 +55,7 @@ private extension SampleColorsView {
     .padding([.leading, .trailing])
   }
 
-  var colorsBlock: some View {
+  private var colorsBlock: some View {
     ForEach(viewModel.output.colors, id: \.self) { appColor in
       ColorRowView(appColor: appColor, type: selectedType)
         .environmentObject(viewModel)

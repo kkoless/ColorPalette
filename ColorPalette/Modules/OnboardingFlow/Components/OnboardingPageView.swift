@@ -23,14 +23,14 @@ struct OnboardingPageView: View {
 }
 
 private extension OnboardingPageView {
-  var mainImage: some View {
+  private var mainImage: some View {
     Image(uiImage: pageType.image)
       .resizable()
       .frame(width: 250, height: 250)
       .padding(.bottom, 20)
   }
   
-  var textView: some View {
+  private var textView: some View {
     Text(pageType.text)
       .multilineTextAlignment(.center)
       .font(.headline)

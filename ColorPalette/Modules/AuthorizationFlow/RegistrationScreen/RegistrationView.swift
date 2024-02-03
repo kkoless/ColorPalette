@@ -32,7 +32,7 @@ struct RegistrationView: View {
 }
 
 private extension RegistrationView {
-  var topBar: some View {
+  private var topBar: some View {
     HStack {
       backButton
       Spacer()
@@ -40,7 +40,7 @@ private extension RegistrationView {
     .padding(.bottom)
   }
   
-  var emailTextField: some View {
+  private var emailTextField: some View {
     ZStack {
       TextField("", text: $loginText)
       if loginText.isEmpty {
@@ -53,7 +53,7 @@ private extension RegistrationView {
     }
   }
   
-  var passwordTextField: some View {
+  private var passwordTextField: some View {
     ZStack {
       SecureField("", text: $passwordText)
       if passwordText.isEmpty {
@@ -66,7 +66,7 @@ private extension RegistrationView {
     }
   }
   
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { dismiss() }) {
       Image(systemName: "multiply")
         .resizable()
@@ -74,7 +74,7 @@ private extension RegistrationView {
     }
   }
   
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.registration)
         .bold()
@@ -83,7 +83,7 @@ private extension RegistrationView {
     }
   }
   
-  var registrationForm: some View {
+  private var registrationForm: some View {
     VStack {
       VStack(spacing: 20) {
         Group {
@@ -103,7 +103,7 @@ private extension RegistrationView {
 }
 
 private extension RegistrationView {
-  func registerButtonTap() {
+  private func registerButtonTap() {
     viewModel.input.registrTap.send((loginText, passwordText))
   }
 }

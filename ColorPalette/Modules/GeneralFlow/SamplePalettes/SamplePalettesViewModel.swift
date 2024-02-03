@@ -37,7 +37,7 @@ final class SamplePalettesViewModel: ObservableObject {
 }
 
 private extension SamplePalettesViewModel {
-  func bindActions() {
+  private func bindActions() {
     input.onAppear
       .sink { [weak self] _ in
         guard let self = self else { return }
@@ -47,7 +47,7 @@ private extension SamplePalettesViewModel {
       .store(in: &cancellable)
   }
   
-  func bindTaps() {
+  private func bindTaps() {
     input.backTap
       .sink { [weak self] _ in self?.router?.popToRoot() }
       .store(in: &cancellable)
@@ -61,7 +61,7 @@ private extension SamplePalettesViewModel {
 }
 
 private extension SamplePalettesViewModel {
-  func checkLimit() -> Int {
+  private func checkLimit() -> Int {
     let firstCondition = CredentialsManager.shared.isGuest
     let secondCondition = ProfileManager.shared.profile.role.boolValue
     

@@ -45,7 +45,7 @@ final class ColorInfoViewModel: ObservableObject {
 }
 
 private extension ColorInfoViewModel {
-  func bindRequests() {
+  private func bindRequests() {
     input.onAppear
       .map { [weak self] _ -> Bool in
         guard let self = self else { return false }
@@ -97,7 +97,7 @@ private extension ColorInfoViewModel {
     
   }
   
-  func checkFavorite(color: AppColor) -> Bool {
+  private func checkFavorite(color: AppColor) -> Bool {
     favoritesManager
       .colors
       .contains(where: {
@@ -106,7 +106,7 @@ private extension ColorInfoViewModel {
       })
   }
   
-  func changeFavoriteState() {
+  private func changeFavoriteState() {
     if output.isFavorite {
       favoritesManager.removeColor(color)
       output.isFavorite.toggle()

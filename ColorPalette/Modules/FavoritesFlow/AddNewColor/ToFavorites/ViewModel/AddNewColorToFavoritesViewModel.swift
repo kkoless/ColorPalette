@@ -20,8 +20,10 @@ final class AddNewColorToFavoritesViewModel: ObservableObject {
 
   private var cancellable: Set<AnyCancellable> = .init()
 
-  init(router: Routable? = nil,
-       service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared) {
+  init(
+    router: Routable? = nil,
+    service: FavoritesAddServiceProtocol = FavoritesNetworkService.shared
+  ) {
     self.input = Input()
     self.output = Output()
 
@@ -44,7 +46,7 @@ final class AddNewColorToFavoritesViewModel: ObservableObject {
 }
 
 private extension AddNewColorToFavoritesViewModel {
-  func bindColorChanges() {
+  private func bindColorChanges() {
     Publishers.CombineLatest(input.selectedColor, input.colorName)
       .combineLatest(favoritesManager.$colors)
       .sink { [weak self] data in
@@ -56,7 +58,7 @@ private extension AddNewColorToFavoritesViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.addTap
       .filter { _ in CredentialsManager.shared.isGuest }
       .sink { [weak self] _ in

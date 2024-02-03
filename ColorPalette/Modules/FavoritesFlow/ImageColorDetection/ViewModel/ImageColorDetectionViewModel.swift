@@ -49,8 +49,8 @@ final class ImageColorDetectionViewModel: ObservableObject {
   }
 }
 
-extension ImageColorDetectionViewModel {
-  func bindFavoriteManager() {
+private extension ImageColorDetectionViewModel {
+  private func bindFavoriteManager() {
     favoriteManager.$isPalettesLimit
       .sink { [weak self] flag in self?.output.isLimit = flag }
       .store(in: &cancellable)
@@ -63,7 +63,7 @@ extension ImageColorDetectionViewModel {
       .store(in: &cancellable)
   }
 
-  func bindDetection() {
+  private func bindDetection() {
     input.imageAppear
       .sink { [weak self] imageData in
         guard let data = imageData else { return }
@@ -83,7 +83,7 @@ extension ImageColorDetectionViewModel {
       .store(in: &cancellable)
   }
 
-  func bindTaps() {
+  private func bindTaps() {
     input.backTap
       .sink { [weak self] _ in self?.router?.pop() }
       .store(in: &cancellable)

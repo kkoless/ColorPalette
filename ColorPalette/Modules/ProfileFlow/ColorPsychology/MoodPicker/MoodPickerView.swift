@@ -25,7 +25,7 @@ struct MoodPickerView: View {
 }
 
 private extension MoodPickerView {
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.moods).font(.headline.bold())
       Spacer()
@@ -33,7 +33,7 @@ private extension MoodPickerView {
     .padding(.vertical)
   }
 
-  var buttonsView: some View {
+  private var buttonsView: some View {
     LazyHGrid(rows: [
       GridItem(.fixed(40)),
       GridItem(.fixed(40))
@@ -51,7 +51,7 @@ private extension MoodPickerView {
   }
 
   @ViewBuilder
-  var colorMoodPreview: some View {
+  private var colorMoodPreview: some View {
     if viewModel.output.color != .getClear() {
       VStack {
         HStack {
@@ -71,11 +71,11 @@ private extension MoodPickerView {
 }
 
 private extension MoodPickerView {
-  func moodTap(with mood: MoodType) {
+  private func moodTap(with mood: MoodType) {
     viewModel.input.moodSelected.send(mood)
   }
 
-  func colorTap() {
+  private func colorTap() {
     selectedColorTapped(viewModel.output.color)
   }
 }

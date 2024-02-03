@@ -23,7 +23,7 @@ struct ColorRowView: View {
 }
 
 private extension ColorRowView {
-  func previewTap() {
+  private func previewTap() {
     viewModel.input.colorTap.send(appColor)
   }
 }

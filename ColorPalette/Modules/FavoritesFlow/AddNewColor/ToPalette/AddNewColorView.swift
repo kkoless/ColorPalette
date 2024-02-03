@@ -30,7 +30,7 @@ struct AddNewColorToPaletteView: View {
 }
 
 private extension AddNewColorToPaletteView {
-  var configureBlock: some View {
+  private var configureBlock: some View {
     HStack(spacing: 15) {
       AddColorTextField(text: $colorName)
         .environmentObject(LocalizationService.shared)
@@ -48,12 +48,12 @@ private extension AddNewColorToPaletteView {
     }
   }
 
-  var preview: some View {
+  private var preview: some View {
     ColorPreview(color: viewModel.output.color)
       .cornerRadius(10)
   }
 
-  var buttons: some View {
+  private var buttons: some View {
     HStack(alignment: .center) {
       Spacer()
 

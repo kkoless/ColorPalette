@@ -22,7 +22,7 @@ struct SimilarColorsView: View {
 }
 
 private extension SimilarColorsView {
-  var complementColor: some View {
+  private var complementColor: some View {
     VStack {
       HStack {
         Text(.complement).font(.headline)
@@ -38,7 +38,7 @@ private extension SimilarColorsView {
     .padding()
   }
 
-  var splitComplementColors: some View {
+  private var splitComplementColors: some View {
     VStack {
       HStack {
         Text(.splitComplement).font(.headline)
@@ -56,7 +56,7 @@ private extension SimilarColorsView {
     .padding()
   }
 
-  var triadicColors: some View {
+  private var triadicColors: some View {
     VStack {
       HStack {
         Text(.triadic).font(.headline)
@@ -74,7 +74,7 @@ private extension SimilarColorsView {
     .padding()
   }
 
-  var tetradicColors: some View {
+  private var tetradicColors: some View {
     VStack {
       HStack {
         Text(.tetradic).font(.headline)
@@ -92,7 +92,7 @@ private extension SimilarColorsView {
     .padding()
   }
 
-  var analagousColors: some View {
+  private var analagousColors: some View {
     VStack {
       HStack {
         Text(.analagous).font(.headline)

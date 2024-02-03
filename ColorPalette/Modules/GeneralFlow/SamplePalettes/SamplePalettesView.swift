@@ -28,11 +28,11 @@ struct SamplePalettesView: View {
 }
 
 private extension SamplePalettesView {
-  var navBar: some View {
+  private var navBar: some View {
     CustomNavigationBarView(backAction: { viewModel.input.backTap.send() })
   }
   
-  var header: some View {
+  private var header: some View {
     HStack {
       Text(.palettes)
         .font(.largeTitle)
@@ -43,7 +43,7 @@ private extension SamplePalettesView {
     .padding([.leading, .trailing])
   }
   
-  var cells: some View {
+  private var cells: some View {
     ForEach(viewModel.output.palettes) { palette in
       ColorPaletteCell(palette: palette)
         .padding([.leading, .trailing])
@@ -57,11 +57,11 @@ private extension SamplePalettesView {
 }
 
 private extension SamplePalettesView {
-  func onAppear() {
+  private func onAppear() {
     viewModel.input.onAppear.send()
   }
   
-  func navigateToColorPaletteScreen(_ selectedPalette: ColorPalette) {
+  private func navigateToColorPaletteScreen(_ selectedPalette: ColorPalette) {
     viewModel.input.paletteTap.send(selectedPalette)
   }
 }

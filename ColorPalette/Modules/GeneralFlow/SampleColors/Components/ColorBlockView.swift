@@ -14,7 +14,10 @@ struct ColorBlockView: View {
   private let type: ColorType
   
   init(appColor: AppColor, type: ColorType) {
-    self.uiColor = UIColor(hexString: appColor.hex, alpha: appColor.alpha)
+    self.uiColor = UIColor(
+      hexString: appColor.hex,
+      alpha: appColor.alpha
+    )
     self.colorName = appColor.name
     self.alpha = appColor.alpha
     self.type = type
@@ -31,14 +34,14 @@ struct ColorBlockView: View {
 }
 
 private extension ColorBlockView {
-  var colorPreview: some View {
+  private var colorPreview: some View {
     Color(uiColor)
       .opacity(alpha)
       .frame(width: 80, height: 80)
       .cornerRadius(10)
   }
   
-  var colorInfo: some View {
+  private var colorInfo: some View {
     VStack(alignment: .leading) {
       Text(colorName)
         .font(.headline)

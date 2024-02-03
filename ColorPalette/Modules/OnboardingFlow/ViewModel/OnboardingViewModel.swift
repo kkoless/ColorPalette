@@ -36,7 +36,7 @@ final class OnboardingViewModel: ObservableObject {
 }
 
 private extension OnboardingViewModel {
-  func bindTaps() {
+  private func bindTaps() {
     input.skipTap
       .sink { [weak self] _ in
         OnboardingManager.shared.isOnboarding = true
