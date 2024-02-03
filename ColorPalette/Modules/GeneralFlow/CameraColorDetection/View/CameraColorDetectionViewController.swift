@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 import AVFoundation
 
 final class CameraColorDetectionViewController: UIViewController {
@@ -18,7 +17,10 @@ final class CameraColorDetectionViewController: UIViewController {
   private var viewModel: CameraColorDetectionViewModel?
 
   // Coloring position
-  private var center: CGPoint = CGPoint(x: Consts.Constraints.screenWidth / 2 - 15, y: Consts.Constraints.screenWidth / 2 - 15)
+  private var center: CGPoint = CGPoint(
+    x: Consts.Constraints.screenWidth / 2 - 15,
+    y: Consts.Constraints.screenWidth / 2 - 15
+  )
 
   private let previewLayer = CALayer()
   private let lineShape = CAShapeLayer()
@@ -90,16 +92,19 @@ final class CameraColorDetectionViewController: UIViewController {
 }
 
 private extension CameraColorDetectionViewController {
-  func configureLayers() {
+  private func configureLayers() {
     configurePreviewLayer()
     configureLoopLayer()
     configureDotsLayer()
   }
 
-  func configurePreviewLayer() {
-    previewLayer.bounds = CGRect(x: 0, y: 0,
-                                 width: Consts.Constraints.screenWidth - 80,
-                                 height: Consts.Constraints.screenWidth - 80)
+  private func configurePreviewLayer() {
+    previewLayer.bounds = CGRect(
+      x: 0,
+      y: 0,
+      width: Consts.Constraints.screenWidth - 80,
+      height: Consts.Constraints.screenWidth - 80
+    )
     previewLayer.position = view.center
     previewLayer.cornerRadius = 10
     previewLayer.contentsGravity = CALayerContentsGravity.resizeAspectFill
@@ -110,12 +115,15 @@ private extension CameraColorDetectionViewController {
   }
 
   // Loop
-  func configureLoopLayer() {
+  private func configureLoopLayer() {
     let linePath = UIBezierPath.init(ovalIn: CGRect.init(x: 0, y: 0, width: 40, height: 40))
 
-    lineShape.frame = CGRect.init(x: Consts.Constraints.screenWidth / 2 - 20,
-                                  y: Consts.Constraints.screenHeight / 2 - 20,
-                                  width: 40, height: 40)
+    lineShape.frame = CGRect.init(
+      x: Consts.Constraints.screenWidth / 2 - 20,
+      y: Consts.Constraints.screenHeight / 2 - 20,
+      width: 40,
+      height: 40
+    )
     lineShape.lineWidth = 5
     lineShape.strokeColor = UIColor.red.cgColor
     lineShape.path = linePath.cgPath
@@ -125,12 +133,14 @@ private extension CameraColorDetectionViewController {
   }
 
   // Dots
-  func configureDotsLayer() {
+  private func configureDotsLayer() {
     let linePath1 = UIBezierPath.init(ovalIn: CGRect.init(x: 0, y: 0, width: 8, height: 8))
     let lineShape1 = CAShapeLayer()
-    lineShape1.frame = CGRect.init(x: Consts.Constraints.screenWidth / 2 - 4,
-                                   y: Consts.Constraints.screenHeight / 2 - 4,
-                                   width: 8, height: 8)
+    lineShape1.frame = CGRect.init(
+      x: Consts.Constraints.screenWidth / 2 - 4,
+      y: Consts.Constraints.screenHeight / 2 - 4,
+      width: 8, height: 8
+    )
     lineShape1.path = linePath1.cgPath
     lineShape1.fillColor = UIColor.init(white: 0.7, alpha: 0.5).cgColor
 
@@ -140,30 +150,49 @@ private extension CameraColorDetectionViewController {
 
 private extension CameraColorDetectionViewController {
   func configureViews() {
-    configureButtons()
+    addSubviews()
+    setConstraints()
   }
 
-  func configureButtons() {
+  private func addSubviews() {
     view.addSubview(closeButton)
     view.addSubview(addButton)
+  }
 
-    closeButton.snp.makeConstraints {
-      $0.bottom.equalToSuperview().inset(Consts.Constraints.bottom + 50)
-      $0.leading.equalToSuperview().inset(40)
-      $0.size.equalTo(50)
-    }
+  private func setConstraints() {
+    closeButton.translatesAutoresizingMaskIntoConstraints = false
+    addButton.translatesAutoresizingMaskIntoConstraints = false
 
-    addButton.snp.makeConstraints {
-      $0.bottom.equalToSuperview().inset(Consts.Constraints.bottom + 50)
-      $0.trailing.equalToSuperview().inset(40)
-      $0.size.equalTo(50)
-    }
+    var constraints: [NSLayoutConstraint] = .init()
+
+    constraints.append(contentsOf: getCloseButtonConstraints())
+    constraints.append(contentsOf: getAddButtonConstraints())
+
+    NSLayoutConstraint.activate(constraints)
+  }
+
+  private func getCloseButtonConstraints() -> [NSLayoutConstraint] {
+    return [
+      closeButton.widthAnchor.constraint(equalToConstant: 50),
+      closeButton.heightAnchor.constraint(equalToConstant: 50),
+      closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 5.0),
+      view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: closeButton.bottomAnchor, multiplier: 5.0)
+    ]
+  }
+
+  private func getAddButtonConstraints() -> [NSLayoutConstraint] {
+    return [
+      addButton.widthAnchor.constraint(equalToConstant: 50),
+      addButton.heightAnchor.constraint(equalToConstant: 50),
+      view.trailingAnchor.constraint(equalToSystemSpacingAfter: addButton.trailingAnchor, multiplier: 5.0),
+      view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: addButton.bottomAnchor, multiplier: 5.0)
+    ]
   }
 }
 
 private extension CameraColorDetectionViewController {
   //MARK: - Get the device and create a custom view
-  func fetchDevice() {
+  private func fetchDevice() {
     // Obtain the device
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualWideCamera], mediaType: .video, position: .back)
     backFacingCamera = discoverySession.devices.first
@@ -213,13 +242,14 @@ extension CameraColorDetectionViewController: AVCaptureVideoDataOutputSampleBuff
       CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
     ]
 
-    guard let content = CGContext(data: baseAddr,
-                                  width: width,
-                                  height: height,
-                                  bitsPerComponent: 8,
-                                  bytesPerRow: bytesPerRow,
-                                  space: colorSpace,
-                                  bitmapInfo: bimapInfo.rawValue
+    guard let content = CGContext(
+      data: baseAddr,
+      width: width,
+      height: height,
+      bitsPerComponent: 8,
+      bytesPerRow: bytesPerRow,
+      space: colorSpace,
+      bitmapInfo: bimapInfo.rawValue
     ) else { return }
 
     guard let cgImage = content.makeImage() else { return }
@@ -234,7 +264,7 @@ extension CameraColorDetectionViewController: AVCaptureVideoDataOutputSampleBuff
 }
 
 private extension CameraColorDetectionViewController {
-  func presentCameraSettings() {
+  private func presentCameraSettings() {
     let alertController = UIAlertController(
       title: "Error",
       message: "Camera access is denied",
