@@ -47,7 +47,7 @@ private extension RegistrationViewModel {
   private func bindTaps() {
     input.registrTap
       .flatMap { [unowned self] userData -> AnyPublisher<Profile, ApiError> in
-        self.service.registr(email: userData.0, password: userData.1)
+        service.registr(email: userData.0, password: userData.1)
       }
       .sink { response in
         switch response {
@@ -56,9 +56,9 @@ private extension RegistrationViewModel {
         case .finished: 
           print("finished")
         }
-      } receiveValue: { [weak self] data in
-        self?.profileManager.setProfile(data)
-        self?.router?.dismiss()
+      } receiveValue: { [unowned self] data in
+        profileManager.setProfile(data)
+        router?.dismiss()
       }
       .store(in: &cancellable)
   }

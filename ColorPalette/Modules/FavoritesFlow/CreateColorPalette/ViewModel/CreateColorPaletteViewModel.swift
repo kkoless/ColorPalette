@@ -114,15 +114,19 @@ private extension CreateColorPaletteViewModel {
     
     isGuest
       .filter { $0 }
-      .sink { [weak self] _ in self?.favoriteManager.addPalette(palette) }
+      .sink { [unowned self] _ in favoriteManager.addPalette(palette) }
       .store(in: &cancellable)
     
     isGuest
       .filter { !$0 }
       .flatMap { [unowned self] _ in service.addPalette(palette: palette) }
       .sink(
-        receiveCompletion: { [weak self] response in self?.handleError(response) },
-        receiveValue: { [weak self] _ in self?.favoriteManager.addPalette(palette) }
+        receiveCompletion: { [unowned self]
+          response in handleError(response)
+        },
+        receiveValue: { [unowned self] _ in
+          favoriteManager.addPalette(palette)
+        }
       )
       .store(in: &cancellable)
   }

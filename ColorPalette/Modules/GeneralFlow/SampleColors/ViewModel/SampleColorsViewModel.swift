@@ -40,23 +40,23 @@ final class SampleColorsViewModel: ObservableObject {
 private extension SampleColorsViewModel {
   private func bindSearch() {
     input.searchText
-      .sink { [weak self] searchText in
-        if let newColors = self?.getColors(searchText) {
-          self?.output.colors = newColors
-        }
+      .sink { [unowned self] searchText in
+        output.colors = getColors(searchText)
       }
       .store(in: &cancellable)
   }
 
   private func bindTaps() {
     input.colorTap
-      .sink { [weak self] appColor in
-        self?.router?.navigateToColorInfo(color: appColor)
+      .sink { [unowned self] appColor in
+        router?.navigateToColorInfo(color: appColor)
       }
       .store(in: &cancellable)
 
     input.popTap
-      .sink { [weak self] _ in self?.router?.popToRoot() }
+      .sink { [unowned self] _ in
+        router?.popToRoot()
+      }
       .store(in: &cancellable)
   }
 }

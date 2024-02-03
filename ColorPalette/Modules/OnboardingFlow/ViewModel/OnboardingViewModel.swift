@@ -38,10 +38,10 @@ final class OnboardingViewModel: ObservableObject {
 private extension OnboardingViewModel {
   private func bindTaps() {
     input.skipTap
-      .sink { [weak self] _ in
+      .sink { [unowned self] _ in
         OnboardingManager.shared.isOnboarding = true
         CredentialsManager.shared.isGuest = true
-        self?.router?.navigateToGeneralFlow()
+        router?.navigateToGeneralFlow()
       }
       .store(in: &cancellable)
   }

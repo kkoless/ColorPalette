@@ -39,8 +39,7 @@ final class OnboardingCoordinator: Coordinatable {
 extension OnboardingCoordinator: OnboardingRoutable {
   func navigateToOnboarding() {
     let viewModel = OnboardingViewModel(router: self)
-    let view = OnboardingView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let view = OnboardingView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: view)
     navigationController.pushViewController(vc, animated: true)
   }

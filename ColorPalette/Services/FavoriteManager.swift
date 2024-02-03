@@ -39,13 +39,13 @@ final class FavoriteManager: ObservableObject {
 private extension FavoriteManager {
   func bindProfile() {
     profileManager.$profile
-      .sink { [weak self] _ in
+      .sink { [unowned self] _ in
         if CredentialsManager.shared.isGuest {
-          self?.setItemsFromCoreData()
+          setItemsFromCoreData()
         }
         
-        self?.checkColorsLimit(forceReload: true)
-        self?.checkPalettesLimit(forceReload: true)
+        checkColorsLimit(forceReload: true)
+        checkPalettesLimit(forceReload: true)
       }
       .store(in: &cancellable)
   }

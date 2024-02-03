@@ -47,16 +47,21 @@ final class ColorPaletteInfoViewModel: ObservableObject {
 private extension ColorPaletteInfoViewModel {
   private func bindRequests() {
     input.onAppear
-      .map { [weak self] _ -> Bool in
-        guard let self = self else { return false }
-        return self.checkFavorite(palette: self.palette)
+      .map { [unowned self] _ -> Bool in
+        checkFavorite(palette: self.palette)
       }
-      .sink { [weak self] isFavorite in self?.output.isFavorite = isFavorite }
+      .sink { [unowned self] isFavorite in
+        output.isFavorite = isFavorite
+      }
       .store(in: &cancellable)
     
     input.favTap
-      .filter { [unowned self] _ in !CredentialsManager.shared.isGuest && output.isFavorite }
-      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.deletePalette(paletteId: palette.id) }
+      .filter { [unowned self] _ in
+        !CredentialsManager.shared.isGuest && output.isFavorite
+      }
+      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
+        service.deletePalette(paletteId: palette.id)
+      }
       .sink { response in
         switch response {
         case let .failure(apiError):
@@ -90,7 +95,9 @@ private extension ColorPaletteInfoViewModel {
     
     input.favTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [weak self] _ in self?.changeFavoriteState() }
+      .sink { [unowned self] _ in
+        changeFavoriteState()
+      }
       .store(in: &cancellable)
     
   }

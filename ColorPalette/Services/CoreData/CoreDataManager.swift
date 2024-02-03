@@ -17,17 +17,17 @@ struct CoreDataManager {
 
 extension CoreDataManager {
   func getColors() -> [AppColor] {
-    return fetchColors().map {
+    fetchColors().map {
       AppColor(
         name: $0.name ?? "",
         hex: $0.hex ?? "",
-        alpha: $0.alpha 
+        alpha: $0.alpha
       )
     }
   }
 
   func getPalettes() -> [ColorPalette] {
-    return fetchPalettes()
+    fetchPalettes()
       .compactMap { coreDataPalette -> ColorPalette? in
         guard let data = coreDataPalette.colors else { return nil }
         do {
@@ -62,7 +62,7 @@ extension CoreDataManager {
   }
 
   func removePalette(_ palette: ColorPalette) {
-    if let coreDataModel = fetchPalettes().first(where: { $0.colors == palette.getData() }) {
+    if let coreDataModel = fetchPalettes().first(where: { ColorPalette.getColorsFromData($0.colors) == palette.colors }) {
       context.delete(coreDataModel)
       context.saveContext()
     }
@@ -106,8 +106,7 @@ private extension CoreDataManager {
     let to = ColorPaletteModel(context: self.context)
 
     do {
-      let encoder = JSONEncoder()
-      let data = try encoder.encode(from.colors)
+      let data = try JSONEncoder().encode(from.colors)
       to.colors = data
     } catch {
       print("Unable to encode. \(error)")

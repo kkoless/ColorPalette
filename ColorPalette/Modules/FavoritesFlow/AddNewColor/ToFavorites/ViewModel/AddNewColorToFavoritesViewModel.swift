@@ -49,11 +49,11 @@ private extension AddNewColorToFavoritesViewModel {
   private func bindColorChanges() {
     Publishers.CombineLatest(input.selectedColor, input.colorName)
       .combineLatest(favoritesManager.$colors)
-      .sink { [weak self] data in
+      .sink { [unowned self] data in
         let color = AppColor(name: data.0.1, hex: data.0.0.hex, alpha: data.0.0.alpha)
 
-        self?.output.color = color
-        self?.output.isFavorite = data.1.contains(where: { $0 == color }) ? true : false
+        output.color = color
+        output.isFavorite = data.1.contains(where: { $0 == color }) ? true : false
       }
       .store(in: &cancellable)
   }
@@ -61,12 +61,10 @@ private extension AddNewColorToFavoritesViewModel {
   private func bindTaps() {
     input.addTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [weak self] _ in
-        if let color = self?.output.color {
-          self?.favoritesManager.addColor(color)
-          self?.output.isFavorite = true
-          self?.router?.pop()
-        }
+      .sink { [unowned self] _ in
+        favoritesManager.addColor(output.color)
+        output.isFavorite = true
+        router?.pop()
       }
       .store(in: &cancellable)
 
@@ -74,18 +72,20 @@ private extension AddNewColorToFavoritesViewModel {
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ in service.addColor(color: output.color) }
       .sink(
-        receiveCompletion: { [weak self] response in self?.handleError(response) },
-        receiveValue: { [weak self] _ in
-          if let color = self?.output.color {
-            self?.favoritesManager.addColor(color)
-            self?.output.isFavorite = true
-            self?.router?.pop()
-          }
+        receiveCompletion: { [unowned self] response in
+          handleError(response)
+        },
+        receiveValue: { [unowned self] _ in
+          favoritesManager.addColor(output.color)
+          output.isFavorite = true
+          router?.pop()
         })
       .store(in: &cancellable)
 
     input.backTap
-      .sink { [weak self] _ in self?.router?.pop() }
+      .sink { [unowned self] _ in
+        router?.pop()
+      }
       .store(in: &cancellable)
   }
 }

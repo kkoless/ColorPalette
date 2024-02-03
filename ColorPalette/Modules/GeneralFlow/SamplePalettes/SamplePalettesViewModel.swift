@@ -39,22 +39,23 @@ final class SamplePalettesViewModel: ObservableObject {
 private extension SamplePalettesViewModel {
   private func bindActions() {
     input.onAppear
-      .sink { [weak self] _ in
-        guard let self = self else { return }
-        self.output.palettes = Array(PopularPalettesManager.shared.palettes.shuffled()
-          .prefix(self.checkLimit()))
+      .sink { [unowned self] _ in
+        output.palettes = Array(PopularPalettesManager.shared.palettes.shuffled()
+          .prefix(checkLimit()))
       }
       .store(in: &cancellable)
   }
   
   private func bindTaps() {
     input.backTap
-      .sink { [weak self] _ in self?.router?.popToRoot() }
+      .sink { [unowned self] _ in
+        router?.popToRoot()
+      }
       .store(in: &cancellable)
     
     input.paletteTap
-      .sink { [weak self] palette in
-        self?.router?.navigateToColorPalette(palette: palette)
+      .sink { [unowned self] palette in
+        router?.navigateToColorPalette(palette: palette)
       }
       .store(in: &cancellable)
   }

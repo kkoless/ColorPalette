@@ -52,32 +52,34 @@ final class ImageColorDetectionViewModel: ObservableObject {
 private extension ImageColorDetectionViewModel {
   private func bindFavoriteManager() {
     favoriteManager.$isPalettesLimit
-      .sink { [weak self] flag in self?.output.isLimit = flag }
+      .sink { [unowned self] flag in
+        output.isLimit = flag
+      }
       .store(in: &cancellable)
 
     favoriteManager.$palettes
       .combineLatest(manager.$palette) { (favoritePalettes: $0, palette: $1) }
-      .sink { [weak self] data in
-        self?.output.isFavorire = data.favoritePalettes.contains(where: { $0 == data.palette }) ? true : false
+      .sink { [unowned self] data in
+        output.isFavorire = data.favoritePalettes.contains(where: { $0 == data.palette }) ? true : false
       }
       .store(in: &cancellable)
   }
 
   private func bindDetection() {
     input.imageAppear
-      .sink { [weak self] imageData in
+      .sink { [unowned self] imageData in
         guard let data = imageData else { return }
-        self?.manager.generatePalette(from: data)
+        manager.generatePalette(from: data)
       }
       .store(in: &cancellable)
 
     manager.$palette
       .combineLatest(favoriteManager.$palettes) { (favoritePalettes: $1, palette: $0) }
-      .sink { [weak self] data in
-        self?.output.palette = data.palette
+      .sink { [unowned self] data in
+        output.palette = data.palette
 
         if data.favoritePalettes.contains(where: { $0 == data.palette }) {
-          self?.output.isFavorire = true
+          output.isFavorire = true
         }
       }
       .store(in: &cancellable)
@@ -85,36 +87,46 @@ private extension ImageColorDetectionViewModel {
 
   private func bindTaps() {
     input.backTap
-      .sink { [weak self] _ in self?.router?.pop() }
+      .sink { [unowned self] _ in
+        router?.pop()
+      }
       .store(in: &cancellable)
 
     input.imageTap
-      .sink { [weak self] imageData in self?.router?.pop() }
+      .sink { [unowned self] imageData in
+        router?.pop()
+      }
       .store(in: &cancellable)
 
     input.addToFavoriteTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [weak self] palette in
-        self?.favoriteManager.addPalette(palette)
-        self?.router?.pop()
+      .sink { [unowned self] palette in
+        favoriteManager.addPalette(palette)
+        router?.pop()
       }
       .store(in: &cancellable)
 
     input.addToFavoriteTap
       .filter { _ in !CredentialsManager.shared.isGuest }
-      .flatMap { [unowned self] palette in service.addPalette(palette: palette) }
+      .flatMap { [unowned self] palette in
+        service.addPalette(palette: palette)
+      }
       .sink(
-        receiveCompletion: { [weak self] response in self?.handleError(response) },
-        receiveValue: { [weak self] palette in
-          if let palette = self?.output.palette {
-            self?.favoriteManager.addPalette(palette)
-            self?.router?.pop()
+        receiveCompletion: { [unowned self] response in
+          handleError(response)
+        },
+        receiveValue: { [unowned self] palette in
+          if let palette = output.palette {
+            favoriteManager.addPalette(palette)
+            router?.pop()
           }
         })
       .store(in: &cancellable)
 
     input.showPaletteTap
-      .sink { [weak self] palette in self?.router?.navigateToColorPalette(palette: palette) }
+      .sink { [unowned self] palette in
+        router?.navigateToColorPalette(palette: palette)
+      }
       .store(in: &cancellable)
   }
 }

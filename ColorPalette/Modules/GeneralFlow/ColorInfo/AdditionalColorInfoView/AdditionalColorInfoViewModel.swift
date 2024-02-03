@@ -51,7 +51,7 @@ private extension AdditionalColorInfoViewModel {
     input.onAppear
       .first()
       .flatMap { [unowned self] _ -> AnyPublisher<GoogleSearchResponse, ApiError> in
-        self.service.search(dominantColor: self.color)
+        service.search(dominantColor: color)
       }
       .sink { response in
         switch response {
@@ -60,8 +60,8 @@ private extension AdditionalColorInfoViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [weak self] response in
-        self?.output.imageUrls = response.items?
+      } receiveValue: { [unowned self] response in
+        output.imageUrls = response.items?
           .compactMap { $0.pagemap }
           .compactMap { $0.cseImage }
           .compactMap { $0.compactMap { $0.src }.first }

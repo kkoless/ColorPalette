@@ -45,12 +45,14 @@ final class LoginViewModel: ObservableObject {
 private extension LoginViewModel {
   private func bindTaps() {
     input.registerTap
-      .sink { [weak self] _ in self?.router?.navigateToRegistrationScreen() }
+      .sink { [unowned self] _ in
+        router?.navigateToRegistrationScreen()
+      }
       .store(in: &cancellable)
     
     input.loginTap
       .flatMap { [unowned self] userData -> AnyPublisher<Profile, ApiError> in
-        self.service.login(email: userData.0, password: userData.1)
+        service.login(email: userData.0, password: userData.1)
       }
       .sink { response in
         switch response {
@@ -59,9 +61,9 @@ private extension LoginViewModel {
         case .finished: 
           print("finished")
         }
-      } receiveValue: { [weak self] data in
-        self?.profileManager.setProfile(data)
-        self?.router?.dismiss()
+      } receiveValue: { [unowned self] data in
+        profileManager.setProfile(data)
+        router?.dismiss()
       }
       .store(in: &cancellable)
   }

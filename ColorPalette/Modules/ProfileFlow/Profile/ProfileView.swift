@@ -171,8 +171,11 @@ private extension ProfileView {
   }
   
   private func profileButtonTap() {
-    if isGuest { viewModel.input.signInTap.send() }
-    else { viewModel.input.logOutTap.send() }
+    if isGuest {
+      viewModel.input.signInTap.send()
+    } else {
+      viewModel.input.logOutTap.send()
+    }
   }
 }
 

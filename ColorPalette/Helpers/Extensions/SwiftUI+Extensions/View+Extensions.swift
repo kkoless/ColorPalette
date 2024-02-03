@@ -54,8 +54,7 @@ extension View {
       )
 
       completion(true, outputFileURL)
-    }
-    catch {
+    } catch {
       completion(false, nil)
       print(error.localizedDescription)
     }

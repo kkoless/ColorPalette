@@ -49,27 +49,27 @@ private extension ProfileViewModel {
     input.onAppear
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ -> AnyPublisher<Profile, ApiError>  in
-        self.service.fetchProfile()
+        service.fetchProfile()
       }
-      .sink { [weak self] response in
+      .sink { [unowned self] response in
         switch response {
         case let .failure(apiError):
           print(apiError.localizedDescription)
-          self?.profileManager.logOut()
-          self?.output.email = ""
-          self?.output.role = .free
+          profileManager.logOut()
+          output.email = ""
+          output.role = .free
         case .finished:
           print("finished")
         }
-      } receiveValue: { [weak self] profile in
-        self?.profileManager.setProfile(profile)
+      } receiveValue: { [unowned self] profile in
+        profileManager.setProfile(profile)
       }
       .store(in: &cancellable)
 
     profileManager.$profile
-      .sink { [weak self] profile in
-        self?.output.email = profile.email
-        self?.output.role = profile.role
+      .sink { [unowned self] profile in
+        output.email = profile.email
+        output.role = profile.role
       }
       .store(in: &cancellable)
   }
@@ -80,19 +80,27 @@ private extension ProfileViewModel {
       .store(in: &cancellable)
 
     input.colorPsychologyTap
-      .sink { [weak self] _ in self?.router?.navigateToColorPsychologyScreen() }
+      .sink { [unowned self] _ in
+        router?.navigateToColorPsychologyScreen()
+      }
       .store(in: &cancellable)
 
     input.showSubscribtionPlansTap
-      .sink { [weak self] _ in self?.router?.navigateToSubscribtionsPlanInfoScreen() }
+      .sink { [unowned self] _ in
+        router?.navigateToSubscribtionsPlanInfoScreen()
+      }
       .store(in: &cancellable)
 
     input.signInTap
-      .sink { [weak self] _ in self?.router?.navigateToAuthorizationScreen() }
+      .sink { [unowned self] _ in
+        router?.navigateToAuthorizationScreen()
+      }
       .store(in: &cancellable)
-    
+
     input.logOutTap
-      .sink { [weak self] _ in self?.profileManager.logOut() }
+      .sink { [unowned self] _ in
+        profileManager.logOut()
+      }
       .store(in: &cancellable)
   }
 }

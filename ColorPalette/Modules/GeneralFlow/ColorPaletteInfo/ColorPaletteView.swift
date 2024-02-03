@@ -54,8 +54,10 @@ struct ColorPaletteView: View {
       ColorTypePickerView(selectedType: $selectedType)
         .padding(.top, 10)
     }
-    .sheet(isPresented: $viewModel.output.showShareSheet,
-           onDismiss: { viewModel.output.pdfURL = nil }) {
+    .sheet(
+      isPresented: $viewModel.output.showShareSheet,
+      onDismiss: { viewModel.output.pdfURL = nil }
+    ) {
       if let url = viewModel.output.pdfURL {
         ShareSheet(urls: [url])
       }

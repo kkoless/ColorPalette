@@ -12,7 +12,6 @@ final class ProfileMapper {
     let email = from.email ?? ""
     let role: Role = (from.role ?? false) ? .paid : .free
     let tokenData = TokenMapper.toLocal(from: from.tokenData ?? ServerTokenData.getNullObj())
-    
     return Profile(email: email, role: role, accessTokenData: tokenData)
   }
 }

@@ -56,50 +56,48 @@ private extension EditPaletteViewModel {
     input.updateTap
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-        let newPalette = ColorPalette(colors: self.output.resultPaletteColors)
-        return self.service.updatePalette(
-          paletteId: self.initPalette.id,
+        let newPalette = ColorPalette(colors: output.resultPaletteColors)
+        return service.updatePalette(
+          paletteId: initPalette.id,
           newPalette: newPalette
         )
       }
       .sink(
-        receiveCompletion: { [weak self] response in self?.handleError(response) },
-        receiveValue: { [weak self] _ in
-          if let newColors = self?.output.resultPaletteColors, let initPalette = self?.initPalette {
-            self?.favoriteManager.updatePalette(
-              paletteForDelete: initPalette,
-              newPalette: ColorPalette(colors: newColors)
-            )
-            self?.router?.pop()
-          }
+        receiveCompletion: { [unowned self] response in
+          handleError(response)
+        },
+        receiveValue: { [unowned self] _ in
+          favoriteManager.updatePalette(
+            paletteForDelete: initPalette,
+            newPalette: ColorPalette(colors: output.resultPaletteColors)
+          )
+          router?.pop()
         }
       )
       .store(in: &cancellable)
 
     input.updateTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [weak self] newPalette in
-        if let newColors = self?.output.resultPaletteColors, let initPalette = self?.initPalette {
-          self?.favoriteManager.updatePalette(
-            paletteForDelete: initPalette,
-            newPalette: ColorPalette(colors: newColors)
-          )
-          self?.router?.pop()
-        }
+      .sink { [unowned self] newPalette in
+        favoriteManager.updatePalette(
+          paletteForDelete: initPalette,
+          newPalette: ColorPalette(colors: output.resultPaletteColors)
+        )
+        router?.pop()
       }
       .store(in: &cancellable)
 
     input.resetTap
-      .sink { [weak self] _ in
-        if let colors = self?.initPalette.colors {
-          self?.output.initPaletteColors = colors
-          self?.output.resultPaletteColors = colors
-        }
+      .sink { [unowned self] _ in
+        output.initPaletteColors = output.initPaletteColors
+        output.resultPaletteColors = output.initPaletteColors
       }
       .store(in: &cancellable)
 
     input.backTap
-      .sink { [weak self] _ in self?.router?.pop() }
+      .sink { [unowned self] _ in
+        router?.pop()
+      }
       .store(in: &cancellable)
   }
 }

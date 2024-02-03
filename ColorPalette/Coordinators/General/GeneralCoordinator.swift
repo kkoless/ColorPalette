@@ -53,24 +53,21 @@ extension GeneralCoordinator {
 
   func navigateToGeneralScreen() {
     let viewModel = GeneralViewModel(router: self)
-    let generalView = GeneralView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let generalView = GeneralView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: generalView)
     navigationController.pushViewController(vc, animated: true)
   }
 
   func navigateToSamplePalettes() {
     let viewModel = SamplePalettesViewModel(router: self)
-    let view = SamplePalettesView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let view = SamplePalettesView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: view)
     navigationController.pushViewController(vc, animated: true)
   }
 
   func navigateToSampleColors() {
     let viewModel = SampleColorsViewModel(router: self)
-    let view = SampleColorsView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let view = SampleColorsView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: view)
     navigationController.pushViewController(vc, animated: true)
   }
@@ -98,9 +95,7 @@ extension GeneralCoordinator {
     let viewModel = ImageColorDetectionViewModel(router: self)
     let view = ImageColorDetectionView(viewModel: viewModel)
     let vc = UIHostingController(rootView: view)
-
     setTabBarAppearance(isHidden: true)
-
     navigationController.pushViewController(vc, animated: true)
   }
 

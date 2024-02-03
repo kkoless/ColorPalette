@@ -139,6 +139,16 @@ extension ColorPalette {
     let appColors = randomUIColor.generateColorPalette(numberOfColors: size).map { AppColor(uiColor: $0) }
     return ColorPalette(colors: appColors)
   }
+
+  static func getColorsFromData(_ data: Data?) -> [AppColor] {
+    guard let data else { return [] }
+    do {
+      return try JSONDecoder().decode([AppColor].self, from: data)
+    } catch {
+      NSLog("Unable to encode \(error)")
+      return []
+    }
+  }
 }
 
 extension ColorPalette: Hashable {
