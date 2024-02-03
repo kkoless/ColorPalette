@@ -34,12 +34,13 @@ struct ColorInfoView: View {
     }
     .edgesIgnoringSafeArea(.bottom)
     .onAppear { viewModel.input.onAppear.send() }
-    .sheet(isPresented: $viewModel.output.showShareSheet,
-           onDismiss: { viewModel.output.pdfURL = nil }) {
-      if let pdfUrl = viewModel.output.pdfURL {
-        ShareSheet(urls: [pdfUrl])
+    .sheet(
+      isPresented: $viewModel.output.showShareSheet,
+      onDismiss: { viewModel.output.pdfURL = nil }) {
+        if let pdfUrl = viewModel.output.pdfURL {
+          ShareSheet(urls: [pdfUrl])
+        }
       }
-    }
   }
 }
 
@@ -59,21 +60,27 @@ private extension ColorInfoView {
   }
 
   private var favoriteButton: some View {
-    Button(action: { changeFavoriteState() }, label: {
-      Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
-        .resizable()
-        .frame(width: 25, height: 25)
-        .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
-    })
+    Button(
+      action: { changeFavoriteState() },
+      label: {
+        Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
+          .resizable()
+          .frame(width: 25, height: 25)
+          .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
+      }
+    )
   }
 
   private var shareButton: some View {
-    Button(action: { shareTap() }, label: {
-      Image(systemName: "square.and.arrow.up")
-        .resizable()
-        .frame(width: 20, height: 25)
-        .foregroundColor(invertedColor)
-    })
+    Button(
+      action: { shareTap() },
+      label: {
+        Image(systemName: "square.and.arrow.up")
+          .resizable()
+          .frame(width: 20, height: 25)
+          .foregroundColor(invertedColor)
+      }
+    )
   }
 
   private var blindButton: some View {

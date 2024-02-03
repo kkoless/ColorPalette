@@ -13,17 +13,16 @@ struct ImageColorDetectionView: View {
   @State private var showPopover = false
   @State private var imageTap = false
   @State private var showSettingsAlert = false
-  @State private var avarageColorOfImage: Color = {
-    .systemCustomBackground
-  }()
+  @State private var avarageColorOfImage: Color = .systemCustomBackground
 
   private var foregroundColor: Color {
     if avarageColorOfImage == .systemCustomBackground {
-      return .invertedSystemCustomBackground
+      .invertedSystemCustomBackground
     } else {
-      return Color(uiColor: avarageColorOfImage.uiColor.invertColor())
+      Color(uiColor: avarageColorOfImage.uiColor.invertColor())
     }
   }
+
   private var isAddDisabled: Bool {
     viewModel.output.isLimit || viewModel.output.isFavorire
   }
@@ -92,7 +91,9 @@ private extension ImageColorDetectionView {
         .aspectRatio(contentMode: .fill)
         .onTapGesture { imageTap = true }
 
-    } else { Color.gray }
+    } else {
+      Color.gray
+    }
   }
 
   @ViewBuilder

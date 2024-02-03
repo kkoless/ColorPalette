@@ -17,9 +17,7 @@ struct ImagePreviewerView: View {
     Color(uiColor: image.averageColor ?? .systemCustomBackground)
   }
   private var foregroundColor: Color {
-    Color(
-      uiColor: image.averageColor?.invertColor() ?? .invertedSystemCustomBackground
-    )
+    Color(uiColor: image.averageColor?.invertColor() ?? .invertedSystemCustomBackground)
   }
 
   var body: some View {

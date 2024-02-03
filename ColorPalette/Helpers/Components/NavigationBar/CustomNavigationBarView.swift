@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
-import Combine
 
 struct CustomNavigationBarAppearance: ViewModifier {
   func body(content: Content) -> some View {
@@ -39,9 +37,9 @@ struct CustomNavigationBarView: View {
   
   private var foregroundColor: Color {
     if backgroundColor == .systemCustomBackground {
-      return .invertedSystemCustomBackground
+      .invertedSystemCustomBackground
     } else {
-      return Color(uiColor: backgroundColor.uiColor.invertColor())
+      Color(uiColor: backgroundColor.uiColor.invertColor())
     }
   }
   
@@ -69,7 +67,7 @@ struct CustomNavigationBarView: View {
 }
 
 private extension CustomNavigationBarView {
-  var backButton: some View {
+  private var backButton: some View {
     Button(action: { backAction() }) {
       Image(systemName: "chevron.left")
         .resizable()
@@ -77,7 +75,7 @@ private extension CustomNavigationBarView {
     }
   }
   
-  var title: some View {
+  private var title: some View {
     Text(titleText)
       .setCustomNavigationBarTitleAppearance()
   }
@@ -90,7 +88,9 @@ extension CustomNavigationBarView {
 }
 
 extension CustomNavigationBarView {
-  func trailingItems<Content: View>(@ViewBuilder items: @escaping () -> Content) -> some View {
+  func trailingItems<Content: View>(
+    @ViewBuilder items: @escaping () -> Content
+  ) -> some View {
     HStack {
       backButton
       Spacer()

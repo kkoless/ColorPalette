@@ -55,7 +55,7 @@ private extension AdditionalColorInfoViewModel {
       }
       .sink { response in
         switch response {
-        case.failure(let apiError):
+        case let .failure(apiError):
           print(apiError.localizedDescription)
         case .finished:
           print("finished")

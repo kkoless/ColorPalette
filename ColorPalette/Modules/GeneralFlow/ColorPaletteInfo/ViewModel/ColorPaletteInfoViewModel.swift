@@ -56,12 +56,10 @@ private extension ColorPaletteInfoViewModel {
     
     input.favTap
       .filter { [unowned self] _ in !CredentialsManager.shared.isGuest && output.isFavorite }
-      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-        return service.deletePalette(paletteId: palette.id)
-      }
+      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.deletePalette(paletteId: palette.id) }
       .sink { response in
         switch response {
-        case .failure(let apiError):
+        case let .failure(apiError):
           print("\(apiError.localizedDescription)")
         case .finished:
           print("finished")
@@ -76,12 +74,10 @@ private extension ColorPaletteInfoViewModel {
       .filter { [unowned self] _ in
         !CredentialsManager.shared.isGuest && (!output.isFavorite && !favoritesManager.isPalettesLimit)
       }
-      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-        return service.addPalette(palette: palette)
-      }
+      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.addPalette(palette: palette) }
       .sink { response in
         switch response {
-        case .failure(let apiError):
+        case let .failure(apiError):
           print("\(apiError.localizedDescription)")
         case .finished:
           print("finished")

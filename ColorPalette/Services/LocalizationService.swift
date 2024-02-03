@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class LocalizationService: ObservableObject {
   @Published var language: Language {

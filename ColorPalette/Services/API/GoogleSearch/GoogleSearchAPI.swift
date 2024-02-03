@@ -60,7 +60,10 @@ extension GoogleSearchAPI: TargetType {
         params["imgDominantColor"] = googleDominantColor.rawValue
       }
 
-      return .requestParameters(parameters: params, encoding: URLEncoding.default)
+      return .requestParameters(
+        parameters: params,
+        encoding: URLEncoding.default
+      )
     }
   }
 

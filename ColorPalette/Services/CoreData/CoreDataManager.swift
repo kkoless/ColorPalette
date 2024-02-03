@@ -75,8 +75,7 @@ private extension CoreDataManager {
 
     do {
       return try context.fetch(request)
-    }
-    catch let error {
+    } catch {
       print("Error fetching. \(error)")
       return []
     }
@@ -87,8 +86,7 @@ private extension CoreDataManager {
 
     do {
       return try context.fetch(request)
-    }
-    catch let error {
+    } catch {
       print("Error fetching. \(error)")
       return []
     }

@@ -45,10 +45,13 @@ extension View {
     let render = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: size.width, height: size.height))
 
     do {
-      try render.writePDF(to: outputFileURL, withActions: { context in
-        context.beginPage()
-        pdfView.layer.render(in: context.cgContext)
-      })
+      try render.writePDF(
+        to: outputFileURL,
+        withActions: { context in
+          context.beginPage()
+          pdfView.layer.render(in: context.cgContext)
+        }
+      )
 
       completion(true, outputFileURL)
     }

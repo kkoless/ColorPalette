@@ -45,12 +45,19 @@ extension AuthorizationAPI: TargetType {
     case let .login(email: email, password: password):
       params["email"] = email
       params["password"] = password
-      return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+      return .requestParameters(
+        parameters: params,
+        encoding: JSONEncoding.default
+      )
 
     case let .register(email: email, password: password):
       params["email"] = email
       params["password"] = password
-      return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+      return .requestParameters(
+        parameters: params,
+        encoding: JSONEncoding.default
+      )
+
     case .fetchUser:
       return .requestPlain
     }

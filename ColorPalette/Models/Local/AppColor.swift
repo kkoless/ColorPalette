@@ -19,7 +19,7 @@ struct AppColor: Identifiable {
   }
   
   var uiColor: UIColor {
-    return UIColor(self)
+    UIColor(self)
   }
   
   init(name: String = "", hex: String, alpha: CGFloat = 1) {
@@ -37,10 +37,12 @@ extension AppColor: Codable {
   }
   
   init(r: Int, g: Int, b: Int, alpha: CGFloat = 1.0) {
-    let uiColor = UIColor(red: CGFloat(r) / 255.0,
-                          green: CGFloat(g) / 255.0,
-                          blue: CGFloat(b) / 255.0,
-                          alpha: alpha)
+    let uiColor = UIColor(
+      red: CGFloat(r) / 255.0,
+      green: CGFloat(g) / 255.0,
+      blue: CGFloat(b) / 255.0,
+      alpha: alpha
+    )
     self.init(uiColor: uiColor)
   }
   
@@ -55,15 +57,19 @@ extension AppColor: Codable {
 extension AppColor {
   static func getRandomColor() -> AppColor {
     let uiColor = UIColor.random
-    return AppColor(name: uiColor.accessibilityName, hex: uiColor.hexValue, alpha: uiColor.alphaValue)
+    return AppColor(
+      name: uiColor.accessibilityName,
+      hex: uiColor.hexValue,
+      alpha: uiColor.alphaValue
+    )
   }
   
   static func getClear() -> AppColor {
-    return AppColor(uiColor: UIColor.clear)
+    AppColor(uiColor: UIColor.clear)
   }
   
   static func getPrimary() -> AppColor {
-    return AppColor(uiColor: Color.primary.uiColor)
+    AppColor(uiColor: Color.primary.uiColor)
   }
 }
 
@@ -96,7 +102,7 @@ extension AppColor: Hashable {
   }
   
   static func == (lhs: AppColor, rhs: AppColor) -> Bool {
-    return lhs.id == rhs.id
+    lhs.id == rhs.id
   }
 }
 

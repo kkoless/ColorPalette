@@ -17,7 +17,7 @@ extension Color {
   }
 
   var uiColor: UIColor {
-    return UIColor(self)
+    UIColor(self)
   }
 
   static var systemCustomBackground: Color {
@@ -41,11 +41,12 @@ extension UIColor {
 
   convenience init(hexString: String, alpha: CGFloat = 1) {
     let chars = Array(hexString.dropFirst())
-    self.init(red: .init(strtoul(String(chars[0...1]), nil, 16)) / 255,
-              green: .init(strtoul(String(chars[2...3]), nil, 16)) / 255,
-              blue: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
-              alpha: alpha)
-
+    self.init(
+      red: .init(strtoul(String(chars[0...1]), nil, 16)) / 255,
+      green: .init(strtoul(String(chars[2...3]), nil, 16)) / 255,
+      blue: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
+      alpha: alpha
+    )
   }
 
   convenience init(_ appColor: AppColor) {
@@ -117,22 +118,22 @@ extension UIColor {
 
 extension UIColor {
   var redValue: CGFloat {
-    return (CIColor(color: self).red.rounded(toDecimalPlaces: 3) * 255).rounded()
+    (CIColor(color: self).red.rounded(toDecimalPlaces: 3) * 255).rounded()
   }
 
   var greenValue: CGFloat {
-    return (CIColor(color: self).green.rounded(toDecimalPlaces: 3) * 255).rounded()
+    (CIColor(color: self).green.rounded(toDecimalPlaces: 3) * 255).rounded()
   }
   var blueValue: CGFloat {
-    return (CIColor(color: self).blue.rounded(toDecimalPlaces: 3) * 255).rounded()
+    (CIColor(color: self).blue.rounded(toDecimalPlaces: 3) * 255).rounded()
   }
 
   var hsvValue: (h: CGFloat, s: CGFloat, v: CGFloat) {
-    return hsv(r: redValue, g: greenValue, b: blueValue)
+    hsv(r: redValue, g: greenValue, b: blueValue)
   }
 
   var alphaValue: CGFloat {
-    return self.cgColor.alpha.rounded(toDecimalPlaces: 2)
+    self.cgColor.alpha.rounded(toDecimalPlaces: 2)
   }
 
   var hexValue: String {
@@ -152,28 +153,36 @@ extension UIColor {
 
 extension UIColor {
   var complement: UIColor {
-    return self.withHueOffset(offset: 0.5)
+    self.withHueOffset(offset: 0.5)
   }
 
   func getSplitComplementColors() -> [UIColor] {
-    return [self.withHueOffset(offset: 150 / 360),
-            self.withHueOffset(offset: 210 / 360)]
+    [
+      self.withHueOffset(offset: 150 / 360),
+      self.withHueOffset(offset: 210 / 360)
+    ]
   }
 
   func getTriadicColors() -> [UIColor] {
-    return [self.withHueOffset(offset: 120 / 360),
-            self.withHueOffset(offset: 240 / 360)]
+    [
+      self.withHueOffset(offset: 120 / 360),
+      self.withHueOffset(offset: 240 / 360)
+    ]
   }
 
   func getTetradicColors() -> [UIColor] {
-    return [self.withHueOffset(offset: 0.25),
-            self.complement,
-            self.withHueOffset(offset: 0.75)]
+    [
+      self.withHueOffset(offset: 0.25),
+      self.complement,
+      self.withHueOffset(offset: 0.75)
+    ]
   }
 
   func getAnalagousColors() -> [UIColor] {
-    return [self.withHueOffset(offset: -1 / 12),
-            self.withHueOffset(offset: 1 / 12)]
+    [
+      self.withHueOffset(offset: -1 / 12),
+      self.withHueOffset(offset: 1 / 12)
+    ]
   }
 
   private func withHueOffset(offset: CGFloat) -> UIColor {
@@ -225,11 +234,11 @@ extension UIColor {
 
 extension UIColor {
   func getRGBCopyInfo() -> String {
-    return "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(alphaValue)"
+    "\(Int(redValue)), \(Int(greenValue)), \(Int(blueValue)), \(alphaValue)"
   }
 
   func getHSBCopyInfo() -> String {
-    return "\(hsvValue.h.rounded(toDecimalPlaces: 1)), \(hsvValue.s.rounded(toDecimalPlaces: 1)), \(hsvValue.v.rounded(toDecimalPlaces: 1))"
+    "\(hsvValue.h.rounded(toDecimalPlaces: 1)), \(hsvValue.s.rounded(toDecimalPlaces: 1)), \(hsvValue.v.rounded(toDecimalPlaces: 1))"
   }
 
   func getCMYKCopyInfo() -> String {
@@ -261,7 +270,7 @@ extension UIColor {
 
 extension UIColor: Identifiable {
   public var id: UUID {
-    return .init()
+    .init()
   }
 }
 

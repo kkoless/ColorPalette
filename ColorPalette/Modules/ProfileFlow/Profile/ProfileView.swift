@@ -150,7 +150,9 @@ private extension ProfileView {
 }
 
 private extension ProfileView {
-  private func onAppear() { viewModel.input.onAppear.send() }
+  private func onAppear() {
+    viewModel.input.onAppear.send()
+  }
 
   private func colorPsychoTap() {
     viewModel.input.colorPsychologyTap.send()
@@ -164,7 +166,8 @@ private extension ProfileView {
     }
   }
   
-  private func languageTap(_ language: Language) { viewModel.input.languageTap.send(language)
+  private func languageTap(_ language: Language) {
+    viewModel.input.languageTap.send(language)
   }
   
   private func profileButtonTap() {

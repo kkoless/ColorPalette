@@ -129,8 +129,7 @@ private extension FavoriteManager {
     
     if forceReload {
       isColorsLimit = newValue
-    }
-    else if isColorsLimit != newValue {
+    } else if isColorsLimit != newValue {
       isColorsLimit = newValue
     }
   }
@@ -143,8 +142,7 @@ private extension FavoriteManager {
     
     if forceReload {
       isPalettesLimit = newValue
-    }
-    else if isPalettesLimit != newValue {
+    } else if isPalettesLimit != newValue {
       isPalettesLimit = newValue
     }
   }

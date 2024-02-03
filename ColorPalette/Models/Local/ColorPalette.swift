@@ -38,7 +38,7 @@ struct PopularPaletteJSON: Codable {
     }
 
     static func == (lhs: PopularPalette, rhs: PopularPalette) -> Bool {
-      return lhs.id == rhs.id
+      lhs.id == rhs.id
     }
   }
 }
@@ -66,6 +66,7 @@ extension ColorPalette {
       var a: CGFloat = 0.0
 
       color.getRed(&r, green: &g, blue: &b, alpha: &a)
+
       rSum += r
       gSum += g
       bSum += b
@@ -150,14 +151,15 @@ extension ColorPalette: Hashable {
   }
 
   static func == (lhs: ColorPalette, rhs: ColorPalette) -> Bool {
-    return lhs.id == rhs.id
+    lhs.id == rhs.id
   }
 }
 
 extension ColorPalette: Codable {
   func getData() -> Data {
-    do { return try JSONEncoder().encode(colors) }
-    catch {
+    do {
+      return try JSONEncoder().encode(colors)
+    } catch {
       print("Unable to encode \(error)")
       return Data()
     }

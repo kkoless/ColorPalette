@@ -40,8 +40,10 @@ private extension OnboardingView {
   @ViewBuilder 
   private var pages: some View {
     ForEach(OnboardingPageType.allCases) { pageType in
-      OnboardingPageView(viewModel: viewModel,
-                         pageType: pageType)
+      OnboardingPageView(
+        viewModel: viewModel,
+        pageType: pageType
+      )
       .tag(pageType.id)
     }
   }
@@ -57,8 +59,10 @@ private extension OnboardingView {
             Text(.skip).font(.subheadline.bold())
           }
           .padding(.leading)
-        } else { Spacer() }
-        
+        } else {
+          Spacer()
+        }
+
         Spacer()
         Spacer()
         Spacer()

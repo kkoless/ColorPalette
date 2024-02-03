@@ -54,8 +54,7 @@ extension ProfileCoordinator {
 
   func navigateToProfileScreen() {
     let viewModel = ProfileViewModel(router: self)
-    let profileView = ProfileView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let profileView = ProfileView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: profileView)
     navigationController.pushViewController(vc, animated: true)
   }
@@ -88,8 +87,7 @@ extension ProfileCoordinator {
 
   func navigateToAuthorizationScreen() {
     let viewModel = LoginViewModel(router: self)
-    let view = LoginView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let view = LoginView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: view)
 
     if let sheet = vc.sheetPresentationController {
@@ -101,8 +99,7 @@ extension ProfileCoordinator {
 
   func navigateToRegistrationScreen() {
     let viewModel = RegistrationViewModel(router: self)
-    let view = RegistrationView(viewModel: viewModel)
-      .environmentObject(LocalizationService.shared)
+    let view = RegistrationView(viewModel: viewModel).environmentObject(LocalizationService.shared)
     let vc = UIHostingController(rootView: view)
 
     dismiss()

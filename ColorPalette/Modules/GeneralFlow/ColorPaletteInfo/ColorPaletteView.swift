@@ -24,9 +24,9 @@ struct ColorPaletteView: View {
 
   private var invertedColor: Color {
     if !isBlind {
-      return Color(palette.colors[0].uiColor.invertColor()).opacity(1)
+      Color(palette.colors[0].uiColor.invertColor()).opacity(1)
     } else {
-      return Color(blindPalette.colors[0].uiColor.invertColor()).opacity(1)
+      Color(blindPalette.colors[0].uiColor.invertColor()).opacity(1)
     }
   }
 
@@ -78,30 +78,39 @@ private extension ColorPaletteView {
   }
 
   private var backButton: some View {
-    Button(action: { dismiss() }) {
-      Image(systemName: "multiply")
-        .resizable()
-        .frame(width: 20, height: 20)
-        .foregroundColor(invertedColor)
-    }
+    Button(
+      action: { dismiss() },
+      label: {
+        Image(systemName: "multiply")
+          .resizable()
+          .frame(width: 20, height: 20)
+          .foregroundColor(invertedColor)
+      }
+    )
   }
 
   private var favoriteButton: some View {
-    Button(action: { changeFavoriteState() }, label: {
-      Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
-        .resizable()
-        .frame(width: 25, height: 25)
-        .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
-    })
+    Button(
+      action: { changeFavoriteState() },
+      label: {
+        Image(systemName: viewModel.output.isFavorite ? "heart.fill" : "heart")
+          .resizable()
+          .frame(width: 25, height: 25)
+          .foregroundColor(viewModel.output.isFavorite ? .red : invertedColor)
+      }
+    )
   }
 
   private var shareButton: some View {
-    Button(action: { shareTap() }, label: {
-      Image(systemName: "square.and.arrow.up")
-        .resizable()
-        .frame(width: 20, height: 25)
-        .foregroundColor(invertedColor)
-    })
+    Button(
+      action: { shareTap() },
+      label: {
+        Image(systemName: "square.and.arrow.up")
+          .resizable()
+          .frame(width: 20, height: 25)
+          .foregroundColor(invertedColor)
+      }
+    )
   }
 
   private var blindButton: some View {
@@ -155,7 +164,7 @@ private extension ColorPaletteView {
     exportPDF(content: {
       ColorPalettePDFView(palette: palette, type: selectedType)
     }) { status, url in
-      if let url = url, status {
+      if let url, status {
         viewModel.output.pdfURL = url
         viewModel.output.showShareSheet.toggle()
       } else {

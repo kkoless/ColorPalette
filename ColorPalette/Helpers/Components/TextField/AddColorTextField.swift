@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddColorTextField: View {
   @EnvironmentObject private var localizationService: LocalizationService
+  
   @Binding var text: String
   
   var body: some View {

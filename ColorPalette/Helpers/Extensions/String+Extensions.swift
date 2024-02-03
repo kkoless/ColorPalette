@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
   func localized() -> String {
-    return NSLocalizedString(self, comment: "")
+    NSLocalizedString(self, comment: "")
   }
 
   init(_ localized: Strings) {
@@ -27,7 +27,7 @@ extension String {
   func localized(_ language: Language) -> String {
     let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj")
     let bundle: Bundle
-    if let path = path {
+    if let path {
       bundle = Bundle(path: path) ?? .main
     } else {
       bundle = .main
@@ -38,7 +38,7 @@ extension String {
   func localized(_ language: Language, args arguments: CVarArg...) -> String {
     let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj")
     let bundle: Bundle
-    if let path = path {
+    if let path {
       bundle = Bundle(path: path) ?? .main
     } else {
       bundle = .main
@@ -47,7 +47,7 @@ extension String {
   }
 
   private func localized(bundle: Bundle) -> String {
-    return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+    NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
   }
 }
 

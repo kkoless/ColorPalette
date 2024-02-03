@@ -17,11 +17,11 @@ enum ApiError: Error {
   
   var message: String? {
     switch self {
-    case .badRequest(let message):
+    case let .badRequest(message):
       return message
-    case .network(let message):
+    case let .network(message):
       return message
-    case .notFound(let message):
+    case let .notFound(message):
       return message
     case .internetDisabled:
       return "Вероятно, соединение с интернетом прервано."

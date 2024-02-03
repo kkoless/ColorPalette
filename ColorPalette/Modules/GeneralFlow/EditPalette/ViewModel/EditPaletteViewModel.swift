@@ -65,8 +65,7 @@ private extension EditPaletteViewModel {
       .sink(
         receiveCompletion: { [weak self] response in self?.handleError(response) },
         receiveValue: { [weak self] _ in
-          if let newColors = self?.output.resultPaletteColors,
-             let initPalette = self?.initPalette {
+          if let newColors = self?.output.resultPaletteColors, let initPalette = self?.initPalette {
             self?.favoriteManager.updatePalette(
               paletteForDelete: initPalette,
               newPalette: ColorPalette(colors: newColors)
@@ -80,8 +79,7 @@ private extension EditPaletteViewModel {
     input.updateTap
       .filter { _ in CredentialsManager.shared.isGuest }
       .sink { [weak self] newPalette in
-        if let newColors = self?.output.resultPaletteColors,
-           let initPalette = self?.initPalette {
+        if let newColors = self?.output.resultPaletteColors, let initPalette = self?.initPalette {
           self?.favoriteManager.updatePalette(
             paletteForDelete: initPalette,
             newPalette: ColorPalette(colors: newColors)

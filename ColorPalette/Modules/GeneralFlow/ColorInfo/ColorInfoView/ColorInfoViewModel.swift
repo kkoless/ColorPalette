@@ -56,12 +56,10 @@ private extension ColorInfoViewModel {
     
     input.favTap
       .filter { [unowned self] _ in !CredentialsManager.shared.isGuest && output.isFavorite }
-      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-        return service.deleteColor(colorId: color.id)
-      }
+      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.deleteColor(colorId: color.id) }
       .sink { response in
         switch response {
-        case .failure(let apiError):
+        case let .failure(apiError):
           print("\(apiError.localizedDescription)")
         case .finished:
           print("finished")
@@ -74,12 +72,10 @@ private extension ColorInfoViewModel {
     
     input.favTap
       .filter { [unowned self] _ in !CredentialsManager.shared.isGuest && (!output.isFavorite && !favoritesManager.isColorsLimit) }
-      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
-        return service.addColor(color: color)
-      }
+      .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.addColor(color: color) }
       .sink { response in
         switch response {
-        case .failure(let apiError):
+        case let .failure(apiError):
           print("\(apiError.localizedDescription)")
         case .finished:
           print("finished")
@@ -110,8 +106,7 @@ private extension ColorInfoViewModel {
     if output.isFavorite {
       favoritesManager.removeColor(color)
       output.isFavorite.toggle()
-    }
-    else {
+    } else {
       if !favoritesManager.isColorsLimit {
         favoritesManager.addColor(color)
         output.isFavorite.toggle()

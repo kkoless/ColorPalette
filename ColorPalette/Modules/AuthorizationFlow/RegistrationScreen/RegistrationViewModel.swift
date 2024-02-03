@@ -47,13 +47,14 @@ private extension RegistrationViewModel {
   private func bindTaps() {
     input.registrTap
       .flatMap { [unowned self] userData -> AnyPublisher<Profile, ApiError> in
-        return self.service.registr(email: userData.0, password: userData.1)
+        self.service.registr(email: userData.0, password: userData.1)
       }
       .sink { response in
         switch response {
-        case .failure(let error):
+        case let .failure(error):
           print(error.localizedDescription)
-        case .finished: print("finished")
+        case .finished: 
+          print("finished")
         }
       } receiveValue: { [weak self] data in
         self?.profileManager.setProfile(data)

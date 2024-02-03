@@ -53,7 +53,7 @@ private extension ProfileViewModel {
       }
       .sink { [weak self] response in
         switch response {
-        case.failure(let apiError):
+        case let .failure(apiError):
           print(apiError.localizedDescription)
           self?.profileManager.logOut()
           self?.output.email = ""

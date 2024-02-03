@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 protocol Coordinatable: AnyObject {
   var finishDelegate: CoordinatorFinishDelegate? { get set }

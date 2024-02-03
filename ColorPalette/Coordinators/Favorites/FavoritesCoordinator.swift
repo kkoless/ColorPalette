@@ -127,9 +127,7 @@ extension FavoritesCoordinator {
     let viewModel = ImageColorDetectionViewModel(router: self)
     let view = ImageColorDetectionView(viewModel: viewModel)
     let vc = UIHostingController(rootView: view)
-
     setTabBarAppearance(isHidden: true)
-
     navigationController.pushViewController(vc, animated: true)
   }
 
