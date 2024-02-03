@@ -8,7 +8,7 @@
 import Foundation
 
 extension URL: Identifiable {
-    public var id: Int {
-        hashValue
-    }
+  public var id: Int {
+    hashValue
+  }
 }

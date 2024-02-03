@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ColorPaletteCell: View {
-    let palette: ColorPalette
-    
-    var body: some View {
-        HStack(spacing: .zero) {
-            ForEach(palette.colors) { color in
-                Color(color).opacity(color.alpha)
-            }
-        }
-        .frame(height: 35)
-        .cornerRadius(7)
-        .padding([.top, .bottom], 10)
+  let palette: ColorPalette
+  
+  var body: some View {
+    HStack(spacing: .zero) {
+      ForEach(palette.colors) { color in
+        Color(color).opacity(color.alpha)
+      }
     }
+    .frame(height: 35)
+    .cornerRadius(7)
+    .padding([.top, .bottom], 10)
+  }
 }
 
 struct ColorPaletteCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorPaletteCell(palette: ColorPalette.getTestPalettes(20)[0])
-    }
+  static var previews: some View {
+    ColorPaletteCell(palette: ColorPalette.getTestPalettes(20)[0])
+  }
 }

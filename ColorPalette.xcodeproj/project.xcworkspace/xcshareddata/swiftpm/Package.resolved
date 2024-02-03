@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "combineext",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CombineCommunity/CombineExt",
-      "state" : {
-        "branch" : "main",
-        "revision" : "d7b896fa9ca8b47fa7bcde6b43ef9b70bf8c1f56"
-      }
-    },
-    {
       "identity" : "imagecolors",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/henzai-apps/ImageColors",
@@ -52,15 +43,6 @@
       "state" : {
         "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
         "version" : "6.6.0"
-      }
-    },
-    {
-      "identity" : "snapkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SnapKit/SnapKit",
-      "state" : {
-        "revision" : "f222cbdf325885926566172f6f5f06af95473158",
-        "version" : "5.6.0"
       }
     }
   ],

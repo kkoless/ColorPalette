@@ -8,6 +8,6 @@
 import Foundation
 
 enum Language: String {
-    case russian = "ru"
-    case english = "en"
+  case russian = "ru"
+  case english = "en"
 }
