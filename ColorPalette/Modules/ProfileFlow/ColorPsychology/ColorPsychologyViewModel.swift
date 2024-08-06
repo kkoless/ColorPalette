@@ -40,14 +40,14 @@ final class ColorPsychologyViewModel: ObservableObject {
 private extension ColorPsychologyViewModel {
   private func bindTaps() {
     input.backTap
-      .sink { [unowned self] _ in
-        router?.pop()
+      .sink { [weak self] _ in
+        self?.router?.pop()
       }
       .store(in: &cancellable)
 
     input.colorTap
-      .sink { [unowned self] color in
-        router?.navigateToColorInfo(color: color)
+      .sink { [weak self] color in
+        self?.router?.navigateToColorInfo(color: color)
       }
       .store(in: &cancellable)
   }

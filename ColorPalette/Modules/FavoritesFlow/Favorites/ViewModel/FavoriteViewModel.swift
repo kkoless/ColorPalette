@@ -70,8 +70,8 @@ private extension FavoriteViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] items in
-        favoriteManager.setItemsFromServer(
+      } receiveValue: { [weak self] items in
+        self?.favoriteManager.setItemsFromServer(
           colors: items.0,
           palettes: items.1
         )
@@ -80,34 +80,34 @@ private extension FavoriteViewModel {
 
     input.onAppear
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [unowned self] _ in
-        favoriteManager.setItemsFromCoreData()
+      .sink { [weak self] _ in
+        self?.favoriteManager.setItemsFromCoreData()
       }
       .store(in: &cancellable)
   }
 
   private func bindFavoriteManager() {
     favoriteManager.$palettes
-      .sink { [unowned self] palettes in
-        output.palettes = palettes
+      .sink { [weak self] palettes in
+        self?.output.palettes = palettes
       }
       .store(in: &cancellable)
 
     favoriteManager.$colors
-      .sink { [unowned self] colors in
-        output.colors = colors
+      .sink { [weak self] colors in
+        self?.output.colors = colors
       }
       .store(in: &cancellable)
 
     favoriteManager.$isColorsLimit
-      .sink { [unowned self] flag in
-        output.colorsLimit = flag
+      .sink { [weak self] flag in
+        self?.output.colorsLimit = flag
       }
       .store(in: &cancellable)
 
     favoriteManager.$isPalettesLimit
-      .sink { [unowned self] flag in
-        output.palettesLimit = flag
+      .sink { [weak self] flag in
+        self?.output.palettesLimit = flag
       }
       .store(in: &cancellable)
   }
@@ -118,8 +118,8 @@ private extension FavoriteViewModel {
     bindShowTaps()
 
     input.editPaletteTap
-      .sink { [unowned self] palette in
-        router?.navigateToEditPalette(palette: palette)
+      .sink { [weak self] palette in
+        self?.router?.navigateToEditPalette(palette: palette)
       }
       .store(in: &cancellable)
   }
@@ -128,54 +128,54 @@ private extension FavoriteViewModel {
 private extension FavoriteViewModel {
   private func bindAddPaletteTaps() {
     input.addTaps.createPaletteTap
-      .sink { [unowned self] _ in
-        router?.navigateToCreatePalette()
+      .sink { [weak self] _ in
+        self?.router?.navigateToCreatePalette()
       }
       .store(in: &cancellable)
 
     input.addTaps.choosePaletteTap
-      .sink { [unowned self] _ in
-        router?.navigateToPaletteLibrary()
+      .sink { [weak self] _ in
+        self?.router?.navigateToPaletteLibrary()
       }
       .store(in: &cancellable)
 
     input.addTaps.generatePaletteFromImageTap
-      .sink { [unowned self] _ in
-        router?.navigateToImageColorDetection()
+      .sink { [weak self] _ in
+        self?.router?.navigateToImageColorDetection()
       }
       .store(in: &cancellable)
   }
 
   private func bindAddColorTaps() {
     input.addTaps.chooseColorTap
-      .sink { [unowned self] _ in
-        router?.navigateToColorLibrary()
+      .sink { [weak self] _ in
+        self?.router?.navigateToColorLibrary()
       }
       .store(in: &cancellable)
 
     input.addTaps.generateColorFromCameraTap
-      .sink { [unowned self] _ in
-        router?.navigateToCameraColorDetection()
+      .sink { [weak self] _ in
+        self?.router?.navigateToCameraColorDetection()
       }
       .store(in: &cancellable)
 
     input.addTaps.createColorTap
-      .sink { [unowned self] _ in
-        router?.navigateToAddNewColorToFavorites()
+      .sink { [weak self] _ in
+        self?.router?.navigateToAddNewColorToFavorites()
       }
       .store(in: &cancellable)
   }
 
   private func bindShowTaps() {
     input.showTaps.showColorInfoTap
-      .sink { [unowned self] appColor in
-        router?.navigateToColorInfo(color: appColor)
+      .sink { [weak self] appColor in
+        self?.router?.navigateToColorInfo(color: appColor)
       }
       .store(in: &cancellable)
 
     input.showTaps.showPaletteInfoTap
-      .sink { [unowned self] palette in
-        router?.navigateToColorPalette(palette: palette)
+      .sink { [weak self] palette in
+        self?.router?.navigateToColorPalette(palette: palette)
       }
       .store(in: &cancellable)
   }
@@ -191,8 +191,8 @@ private extension FavoriteViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] _ in
-        favoriteManager.removePalette(palette)
+      } receiveValue: { [weak self] _ in
+        self?.favoriteManager.removePalette(palette)
       }
       .store(in: &cancellable)
   }
@@ -206,18 +206,18 @@ private extension FavoriteViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] _ in
-        favoriteManager.removeColor(color)
+      } receiveValue: { [weak self] _ in
+        self?.favoriteManager.removeColor(color)
       }
       .store(in: &cancellable)
   }
 
   private func removeLocalPalette(_ palette: ColorPalette) {
-    self.favoriteManager.removePalette(palette)
+    favoriteManager.removePalette(palette)
   }
 
   private func removeLocalColor(_ color: AppColor) {
-    self.favoriteManager.removeColor(color)
+    favoriteManager.removeColor(color)
   }
 }
 

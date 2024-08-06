@@ -73,11 +73,11 @@ final class MoodPickerViewModel: ObservableObject {
 private extension MoodPickerViewModel {
   private func bindMood() {
     input.moodSelected
-      .sink { [unowned self] moodType in
-        guard let associatedColors = colorManager.moodColors[moodType.rawValue] else { return }
+      .sink { [weak self] moodType in
+        guard let associatedColors = self?.colorManager.moodColors[moodType.rawValue] else { return }
 
         if let color = associatedColors.randomElement() {
-          output.color = color
+          self?.output.color = color
         }
       }
       .store(in: &cancellable)

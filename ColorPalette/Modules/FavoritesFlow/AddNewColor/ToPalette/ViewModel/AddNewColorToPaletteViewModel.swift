@@ -45,17 +45,17 @@ final class AddNewColorToPaletteViewModel: ObservableObject {
 private extension AddNewColorToPaletteViewModel {
   private func bindColorChanges() {
     Publishers.CombineLatest(input.selectedColor, input.colorName)
-      .sink { [unowned self] data in
-        output.color = AppColor(name: data.1, hex: data.0.hex, alpha: data.0.alpha)
+      .sink { [weak self] data in
+          self?.output.color = AppColor(name: data.1, hex: data.0.hex, alpha: data.0.alpha)
       }
       .store(in: &cancellable)
   }
 
   private func bindTaps() {
     input.addTap
-      .sink { [unowned self] _ in
-        addColorToTemplatePalette()
-        router?.dismiss()
+      .sink { [weak self] _ in
+        self?.addColorToTemplatePalette()
+        self?.router?.dismiss()
       }
       .store(in: &cancellable)
   }

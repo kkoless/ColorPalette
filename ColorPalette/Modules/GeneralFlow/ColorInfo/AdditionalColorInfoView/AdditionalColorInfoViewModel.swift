@@ -60,8 +60,8 @@ private extension AdditionalColorInfoViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] response in
-        output.imageUrls = response.items?
+      } receiveValue: { [weak self] response in
+        self?.output.imageUrls = response.items?
           .compactMap { $0.pagemap }
           .compactMap { $0.cseImage }
           .compactMap { $0.compactMap { $0.src }.first }

@@ -63,10 +63,11 @@ private extension EditPaletteViewModel {
         )
       }
       .sink(
-        receiveCompletion: { [unowned self] response in
-          handleError(response)
+        receiveCompletion: { [weak self] response in
+          self?.handleError(response)
         },
-        receiveValue: { [unowned self] _ in
+        receiveValue: { [weak self] _ in
+          guard let self else { return }
           favoriteManager.updatePalette(
             paletteForDelete: initPalette,
             newPalette: ColorPalette(colors: output.resultPaletteColors)
@@ -78,7 +79,8 @@ private extension EditPaletteViewModel {
 
     input.updateTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [unowned self] newPalette in
+      .sink { [weak self] newPalette in
+        guard let self else { return }
         favoriteManager.updatePalette(
           paletteForDelete: initPalette,
           newPalette: ColorPalette(colors: output.resultPaletteColors)
@@ -88,15 +90,16 @@ private extension EditPaletteViewModel {
       .store(in: &cancellable)
 
     input.resetTap
-      .sink { [unowned self] _ in
+      .sink { [weak self] _ in
+        guard var output = self?.output else { return }
         output.initPaletteColors = output.initPaletteColors
         output.resultPaletteColors = output.initPaletteColors
       }
       .store(in: &cancellable)
 
     input.backTap
-      .sink { [unowned self] _ in
-        router?.pop()
+      .sink { [weak self] _ in
+        self?.router?.pop()
       }
       .store(in: &cancellable)
   }

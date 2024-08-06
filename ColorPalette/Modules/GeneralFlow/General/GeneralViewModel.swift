@@ -76,11 +76,11 @@ private extension GeneralViewModel {
         profileService.fetchProfile()
       }
       .sink(
-        receiveCompletion: { [unowned self] response in
-          handleError(response)
+        receiveCompletion: { [weak self] response in
+          self?.handleError(response)
         },
-        receiveValue: { [unowned self] profile in
-          profileManager.setProfile(profile)
+        receiveValue: { [weak self] profile in
+          self?.profileManager.setProfile(profile)
         }
       )
       .store(in: &cancellable)
@@ -96,56 +96,56 @@ private extension GeneralViewModel {
           .eraseToAnyPublisher()
       }
       .sink(
-        receiveCompletion: { [unowned self] response in
-          handleError(response)
+        receiveCompletion: { [weak self] response in
+          self?.handleError(response)
         },
-        receiveValue: { [unowned self] items in
-          favoritesManager.setItemsFromServer(colors: items.0, palettes: items.1)}
+        receiveValue: { [weak self] items in
+          self?.favoritesManager.setItemsFromServer(colors: items.0, palettes: items.1)}
       )
       .store(in: &cancellable)
 
     input.onAppear
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [unowned self] _ in
-        favoritesManager.setItemsFromCoreData()
+      .sink { [weak self] _ in
+        self?.favoritesManager.setItemsFromCoreData()
       }
       .store(in: &cancellable)
   }
 
   private func bindTaps() {
     input.showMorePalettesTap
-      .sink { [unowned self] _ in
-        router?.navigateToSamplePalettes()
+      .sink { [weak self] _ in
+        self?.router?.navigateToSamplePalettes()
       }
       .store(in: &cancellable)
 
     input.showMoreColorsTap
-      .sink { [unowned self] _ in
-        router?.navigateToSampleColors()
+      .sink { [weak self] _ in
+        self?.router?.navigateToSampleColors()
       }
       .store(in: &cancellable)
 
     input.paletteTap
-      .sink { [unowned self] in
-        router?.navigateToColorPalette(palette: $0)
+      .sink { [weak self] in
+        self?.router?.navigateToColorPalette(palette: $0)
       }
       .store(in: &cancellable)
 
     input.colorTap
-      .sink { [unowned self] in
-        router?.navigateToColorInfo(color: $0)
+      .sink { [weak self] in
+        self?.router?.navigateToColorInfo(color: $0)
       }
       .store(in: &cancellable)
 
     input.imageDetectionTap
-      .sink { [unowned self] in
-        router?.navigateToImageColorDetection()
+      .sink { [weak self] in
+        self?.router?.navigateToImageColorDetection()
       }
       .store(in: &cancellable)
 
     input.cameraDetectionTap
-      .sink { [unowned self] in
-        router?.navigateToCameraColorDetection()
+      .sink { [weak self] in
+        self?.router?.navigateToCameraColorDetection()
       }
       .store(in: &cancellable)
   }

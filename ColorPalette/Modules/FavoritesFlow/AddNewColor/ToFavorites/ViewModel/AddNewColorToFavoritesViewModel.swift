@@ -49,11 +49,11 @@ private extension AddNewColorToFavoritesViewModel {
   private func bindColorChanges() {
     Publishers.CombineLatest(input.selectedColor, input.colorName)
       .combineLatest(favoritesManager.$colors)
-      .sink { [unowned self] data in
+      .sink { [weak self] data in
         let color = AppColor(name: data.0.1, hex: data.0.0.hex, alpha: data.0.0.alpha)
 
-        output.color = color
-        output.isFavorite = data.1.contains(where: { $0 == color }) ? true : false
+        self?.output.color = color
+        self?.output.isFavorite = data.1.contains(where: { $0 == color }) ? true : false
       }
       .store(in: &cancellable)
   }
@@ -61,7 +61,8 @@ private extension AddNewColorToFavoritesViewModel {
   private func bindTaps() {
     input.addTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [unowned self] _ in
+      .sink { [weak self] _ in
+        guard let self else { return }
         favoritesManager.addColor(output.color)
         output.isFavorite = true
         router?.pop()
@@ -72,10 +73,11 @@ private extension AddNewColorToFavoritesViewModel {
       .filter { _ in !CredentialsManager.shared.isGuest }
       .flatMap { [unowned self] _ in service.addColor(color: output.color) }
       .sink(
-        receiveCompletion: { [unowned self] response in
-          handleError(response)
+        receiveCompletion: { [weak self] response in
+          self?.handleError(response)
         },
-        receiveValue: { [unowned self] _ in
+        receiveValue: { [weak self] _ in
+          guard let self else { return }
           favoritesManager.addColor(output.color)
           output.isFavorite = true
           router?.pop()
@@ -83,8 +85,8 @@ private extension AddNewColorToFavoritesViewModel {
       .store(in: &cancellable)
 
     input.backTap
-      .sink { [unowned self] _ in
-        router?.pop()
+      .sink { [weak self] _ in
+        self?.router?.pop()
       }
       .store(in: &cancellable)
   }
