@@ -45,15 +45,15 @@ final class CameraColorDetectionViewModel: ObservableObject {
 private extension CameraColorDetectionViewModel {
   private func bindTaps() {
     input.closeTap
-      .sink { [unowned self] _ in
-        router?.pop()
+      .sink { [weak self] _ in
+        self?.router?.pop()
       }
       .store(in: &cancellable)
     
     input.addTap
-      .sink { [unowned self] data in
+      .sink { [weak self] data in
         let color = AppColor(hex: data.0, alpha: data.1)
-        router?.navigateToColorInfo(color: color)
+        self?.router?.navigateToColorInfo(color: color)
       }
       .store(in: &cancellable)
   }

@@ -45,8 +45,8 @@ final class LoginViewModel: ObservableObject {
 private extension LoginViewModel {
   private func bindTaps() {
     input.registerTap
-      .sink { [unowned self] _ in
-        router?.navigateToRegistrationScreen()
+      .sink { [weak self] _ in
+        self?.router?.navigateToRegistrationScreen()
       }
       .store(in: &cancellable)
     
@@ -61,9 +61,9 @@ private extension LoginViewModel {
         case .finished: 
           print("finished")
         }
-      } receiveValue: { [unowned self] data in
-        profileManager.setProfile(data)
-        router?.dismiss()
+      } receiveValue: { [weak self] data in
+        self?.profileManager.setProfile(data)
+        self?.router?.dismiss()
       }
       .store(in: &cancellable)
   }

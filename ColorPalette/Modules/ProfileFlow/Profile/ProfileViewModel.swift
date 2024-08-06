@@ -51,25 +51,25 @@ private extension ProfileViewModel {
       .flatMap { [unowned self] _ -> AnyPublisher<Profile, ApiError>  in
         service.fetchProfile()
       }
-      .sink { [unowned self] response in
+      .sink { [weak self] response in
         switch response {
         case let .failure(apiError):
           print(apiError.localizedDescription)
-          profileManager.logOut()
-          output.email = ""
-          output.role = .free
+          self?.profileManager.logOut()
+          self?.output.email = ""
+          self?.output.role = .free
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] profile in
-        profileManager.setProfile(profile)
+      } receiveValue: { [weak self] profile in
+        self?.profileManager.setProfile(profile)
       }
       .store(in: &cancellable)
 
     profileManager.$profile
-      .sink { [unowned self] profile in
-        output.email = profile.email
-        output.role = profile.role
+      .sink { [weak self] profile in
+        self?.output.email = profile.email
+        self?.output.role = profile.role
       }
       .store(in: &cancellable)
   }
@@ -80,26 +80,26 @@ private extension ProfileViewModel {
       .store(in: &cancellable)
 
     input.colorPsychologyTap
-      .sink { [unowned self] _ in
-        router?.navigateToColorPsychologyScreen()
+      .sink { [weak self] _ in
+        self?.router?.navigateToColorPsychologyScreen()
       }
       .store(in: &cancellable)
 
     input.showSubscribtionPlansTap
-      .sink { [unowned self] _ in
-        router?.navigateToSubscribtionsPlanInfoScreen()
+      .sink { [weak self] _ in
+        self?.router?.navigateToSubscribtionsPlanInfoScreen()
       }
       .store(in: &cancellable)
 
     input.signInTap
-      .sink { [unowned self] _ in
-        router?.navigateToAuthorizationScreen()
+      .sink { [weak self] _ in
+        self?.router?.navigateToAuthorizationScreen()
       }
       .store(in: &cancellable)
 
     input.logOutTap
-      .sink { [unowned self] _ in
-        profileManager.logOut()
+      .sink { [weak self] _ in
+        self?.profileManager.logOut()
       }
       .store(in: &cancellable)
   }

@@ -47,17 +47,19 @@ final class ColorPaletteInfoViewModel: ObservableObject {
 private extension ColorPaletteInfoViewModel {
   private func bindRequests() {
     input.onAppear
-      .map { [unowned self] _ -> Bool in
-        checkFavorite(palette: self.palette)
+      .map { [weak self] _ -> Bool in
+        guard let self else { return false }
+        return checkFavorite(palette: palette)
       }
-      .sink { [unowned self] isFavorite in
-        output.isFavorite = isFavorite
+      .sink { [weak self] isFavorite in
+        self?.output.isFavorite = isFavorite
       }
       .store(in: &cancellable)
     
     input.favTap
-      .filter { [unowned self] _ in
-        !CredentialsManager.shared.isGuest && output.isFavorite
+      .filter { [weak self] _ in
+        guard let output = self?.output else { return false }
+        return !CredentialsManager.shared.isGuest && output.isFavorite
       }
       .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in
         service.deletePalette(paletteId: palette.id)
@@ -69,15 +71,17 @@ private extension ColorPaletteInfoViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] _ in
+      } receiveValue: { [weak self] _ in
+        guard let self else { return }
         favoritesManager.removePalette(palette)
         output.isFavorite.toggle()
       }
       .store(in: &cancellable)
     
     input.favTap
-      .filter { [unowned self] _ in
-        !CredentialsManager.shared.isGuest && (!output.isFavorite && !favoritesManager.isPalettesLimit)
+      .filter { [weak self] _ in
+        guard let self else { return false }
+        return !CredentialsManager.shared.isGuest && (!output.isFavorite && !favoritesManager.isPalettesLimit)
       }
       .flatMap { [unowned self] _ -> AnyPublisher<Void, ApiError> in service.addPalette(palette: palette) }
       .sink { response in
@@ -87,7 +91,8 @@ private extension ColorPaletteInfoViewModel {
         case .finished:
           print("finished")
         }
-      } receiveValue: { [unowned self] _ in
+      } receiveValue: { [weak self] _ in
+        guard let self else { return }
         favoritesManager.addPalette(palette)
         output.isFavorite.toggle()
       }
@@ -95,8 +100,8 @@ private extension ColorPaletteInfoViewModel {
     
     input.favTap
       .filter { _ in CredentialsManager.shared.isGuest }
-      .sink { [unowned self] _ in
-        changeFavoriteState()
+      .sink { [weak self] _ in
+        self?.changeFavoriteState()
       }
       .store(in: &cancellable)
     

@@ -56,9 +56,9 @@ private extension RegistrationViewModel {
         case .finished: 
           print("finished")
         }
-      } receiveValue: { [unowned self] data in
-        profileManager.setProfile(data)
-        router?.dismiss()
+      } receiveValue: { [weak self] data in
+        self?.profileManager.setProfile(data)
+        self?.router?.dismiss()
       }
       .store(in: &cancellable)
   }
